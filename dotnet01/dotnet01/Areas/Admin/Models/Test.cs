@@ -11,7 +11,7 @@ namespace dotnet01.Areas.Admin.Models
         public void start()
         {
 
-            using (AccountContext db = new AccountContext())
+          /*  using (AccountContext db = new AccountContext())
             {
                 var accounts = db.Account.ToList();
            
@@ -31,7 +31,7 @@ namespace dotnet01.Areas.Admin.Models
                 db.Account.Add(newAcc);
                 db.SaveChanges();
             }
-
+            */
         }
     }
 }
