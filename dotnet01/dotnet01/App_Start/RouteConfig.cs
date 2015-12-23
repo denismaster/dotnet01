@@ -4,6 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Data.Entity;
+using dotnet01.Areas.Admin.Models;
+using dotnet01.Areas.Admin.Controllers;
+
+
 
 namespace dotnet01
 {
@@ -11,6 +16,8 @@ namespace dotnet01
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            Test test = new Test();
+            test.start();
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
