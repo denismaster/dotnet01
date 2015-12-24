@@ -10,13 +10,13 @@ namespace dotnet01.Areas.Admin.Models
             {
             IEnumerable<Account> Get(int page,int pageSize);
             Account GetById(int id);
-            IEnumerable<Account> Get(Func<Account, bool> func, int page,int pageSize);
+            IEnumerable<Account> Get(Func<Account, bool> predicate, int page,int pageSize);
             void Add(Account account);
             void Edit(Account account);
             void Delete(Account account);
             void SaveChanges();
             }
-    public class AccountRepository :IAccountRepository
+    public class AccountRepository : IAccountRepository
     {
         AccountContext database;
         IEnumerable<Account> accounts;
@@ -27,16 +27,22 @@ namespace dotnet01.Areas.Admin.Models
         }
         #region pagination
       public  IEnumerable<Account> Get(int page = 1,int pageSize =3)
-        {
-            
-            accounts = database.Account.Select(item => item).ToList().AsEnumerable();
-            IEnumerable<Account> accountsPerPages = accounts.Skip((page - 1) * pageSize).Take(pageSize);
+        { 
+            IEnumerable<Account> accountsPerPages = database.Account.
+                Select(item => item).
+                Skip((page - 1) * pageSize).
+                Take(pageSize).
+                AsEnumerable();
             return accountsPerPages;
         }
-      public IEnumerable<Account> Get(Func<Account, bool> func, int page = 1, int pageSize = 3)
+      public IEnumerable<Account> Get(Func<Account, bool> predicate, int page = 1, int pageSize = 3)
         {
-            accounts = database.Account.Select(item => item).Where(func).ToList().AsEnumerable();
-            IEnumerable<Account> accountsPerPages = accounts.Skip((page - 1) * pageSize).Take(pageSize);
+            IEnumerable<Account> accountsPerPages = database.Account.
+                Select(item => item).
+                Where(predicate).
+                Skip((page - 1) * pageSize).
+                Take(pageSize).
+                AsEnumerable();
             return accountsPerPages;
         }
     #endregion
@@ -69,8 +75,7 @@ namespace dotnet01.Areas.Admin.Models
             Account accToDelete = GetById(account.Id);
             if(accToDelete!=null)
             {
-                database.Account.Remove(accToDelete);
-                SaveChanges();
+                database.Account.Remove(accToDelete); 
             }
         }
         #endregion
