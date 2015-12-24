@@ -175,10 +175,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Models\AccountIndexViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Account.cs" />
     <Compile Include="Areas\Admin\Models\AccountRepository.cs" />
     <Compile Include="Areas\Admin\Models\PageInfo.cs" />
     <Compile Include="Areas\Admin\Models\Test.cs" />
+    <Compile Include="Areas\Helpers\PagingHelpers.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

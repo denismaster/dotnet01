@@ -1,4 +1,35 @@
-﻿@{
+﻿
+@model dotnet01.Areas.Admin.Models.AccountIndexViewModel
+@using dotnet01.Areas.Helpers
+@*@{
+    ViewBag.Title = "Home Page";
+}*@
+<table class="table">
+    <tr>
+        <td>Логин</td>
+        <td>Пароль</td>
+    </tr>
+
+    @foreach (var item in Model.Accounts)
+    {
+        <tr>
+            <td>@item.Login</td>
+            <td>@item.Password</td>
+        </tr>
+    }
+
+</table>
+<br />
+<div class="btn-group">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+</div>
+
+
+
+
+
+
+@*@{
     ViewBag.Title = "Home Page";
 }
 
@@ -28,4 +59,39 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
-</div>
+</div>*@
+
+@*@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Аккаунты</title>
+</head>
+<body>
+    <div>Просмотр аккаунтов</h3>
+        <table>
+            <tr>
+                <td><p>Название книги</p></td>
+                <td><p>Автор</p></td>
+                <td><p>Цена</p></td>
+                <td></td>
+            </tr>
+            @foreach (var acc in ViewBag.Accounts)
+            {
+                <tr>
+                    <td><p>@acc.Login</p></td>
+                    <td><p>@acc.Password</p></td>
+                    <td><p>@acc.Mail</p></td>
+                    <td><p><a href="/Home/Buy/@b.Id">Купить</a></p></td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
+*@

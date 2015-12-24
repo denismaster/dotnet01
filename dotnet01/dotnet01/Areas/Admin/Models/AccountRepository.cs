@@ -12,10 +12,12 @@ namespace dotnet01.Areas.Admin.Models
             Account Get(int id);
             IEnumerable<Account> Get(Func<Account, bool> predicate, int page,int pageSize);
             void Add(Account account);
+            int Count();
             void Edit(Account account);
             void Delete(Account account);
             void SaveChanges();
             }
+
     public class AccountRepository : IAccountRepository
     {
         AccountContext database = new AccountContext();
@@ -25,7 +27,7 @@ namespace dotnet01.Areas.Admin.Models
         public  IEnumerable<Account> Get(int page = 1,int pageSize =3)
         {
             try {
-                accountsPerPages = database.Account.
+                accountsPerPages = database.Account.OrderBy(acc=>acc.Id).
                     Select(item => item).
                     Skip((page - 1) * pageSize).
                     Take(pageSize).
@@ -41,6 +43,7 @@ namespace dotnet01.Areas.Admin.Models
         {
             try {
                 accountsPerPages = database.Account.
+                OrderBy(acc => acc.Id).
                 Select(item => item).
                 Where(predicate).
                 Skip((page - 1) * pageSize).
@@ -68,7 +71,11 @@ namespace dotnet01.Areas.Admin.Models
                 Log.Write(e); 
             }
             return acc;
-
+           
+        }
+        public int Count()
+        {
+            return database.Account.Count();
         }
       public void Add(Account account)
         {
