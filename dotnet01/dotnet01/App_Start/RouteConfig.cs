@@ -16,8 +16,7 @@ namespace dotnet01
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            Test test = new Test();
-            test.start();
+         
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
