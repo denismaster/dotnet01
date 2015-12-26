@@ -7,13 +7,13 @@ using System.IO;
 using NUnit.Framework;
 namespace dotnet01.Areas.Admin.Models
 {
-    public  class Test
+    public class Test
     {
         //fnc<Account, bool> predicate;
         IEnumerable<Account> accounts;
         IAccountRepository repository;
 
-      
+
         public Test()
         {
             repository = new AccountRepository();
@@ -35,10 +35,10 @@ namespace dotnet01.Areas.Admin.Models
         }
         public void start()
         {
-            accounts =  repository.Get(func, 1, 3);
+      
             WriteInLogFile(accounts);
         }
-   
+
         [Test]
         public void DeleteTest()
         {
@@ -46,6 +46,23 @@ namespace dotnet01.Areas.Admin.Models
             repository.Delete(ToDelete);
             var result = repository.Get(1);
             Assert.Null(result);
+        }
+        [Test]
+        public void PaginationTest()
+        {
+            List<Account> page = repository.Get(1, 3, item => item.Id == 3).ToList();
+            page.ForEach(item => Log.Write(item.Login));
+            Assert.NotNull(page);
+        }
+        [Test]
+        public void EditTest()
+        {
+            Account acc = repository.Get(3);
+
+            acc.Login = "testEdit";
+            repository.Edit(acc);
+            repository.SaveChanges();
+           
         }
     }
 }
