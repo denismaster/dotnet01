@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Linq.Expressions;
+
 namespace dotnet01.Areas.Admin.Models
 {
     
@@ -10,7 +12,7 @@ namespace dotnet01.Areas.Admin.Models
             {
             IEnumerable<Account> Get(int page,int pageSize);
             Account Get(int id);
-            IEnumerable<Account> Get(Func<Account, bool> predicate, int page,int pageSize);
+            IEnumerable<Account> Get(int page,int pageSize,Expression<Func<Account, bool>> predicate);
             void Add(Account account);
             int Count();
             void Edit(Account account);
@@ -24,7 +26,7 @@ namespace dotnet01.Areas.Admin.Models
         IEnumerable<Account> accountsPerPages;
 
         #region pagination
-        public  IEnumerable<Account> Get(int page = 1,int pageSize =3)
+        public  IEnumerable<Account> Get(int page,int pageSize)
         {
             try {
                 accountsPerPages = database.Account.OrderBy(acc=>acc.Id).
@@ -39,9 +41,10 @@ namespace dotnet01.Areas.Admin.Models
             }
             return accountsPerPages;
         }
-      public IEnumerable<Account> Get(Func<Account, bool> predicate, int page = 1, int pageSize = 3)
+      public IEnumerable<Account> Get(int page, int pageSize, Expression<Func<Account, bool>> predicate)
         {
             try {
+                
                 accountsPerPages = database.Account.
                 OrderBy(acc => acc.Id).
                 Select(item => item).
