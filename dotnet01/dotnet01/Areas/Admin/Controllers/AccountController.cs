@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using dotnet01.Areas.Admin.Models;
 using System.Data.Entity;
 using dotnet01.Areas.Admin.Controllers;
+using System.Data;
 
 namespace dotnet01.Areas.Admin.Controllers
 {
@@ -19,13 +20,27 @@ namespace dotnet01.Areas.Admin.Controllers
             repository = new AccountRepository(); 
         }
         public ActionResult New()
-        {
-
+        {           
             //Create AccountNewViewModel and send it to View via parameter
             return View();
         }
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Account account)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    repository.Edit(account);
+                    repository.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Write(e);
+                ModelState.AddModelError("", "Unable to save changes");              
+            }
+
             //Create AccountEditViewModel and send it to View via parameter
             //Actions are similar, can use only one model
             return View();
