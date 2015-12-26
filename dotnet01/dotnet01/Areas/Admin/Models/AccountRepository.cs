@@ -114,8 +114,14 @@ namespace dotnet01.Areas.Admin.Models
       }
         #endregion
       public void SaveChanges() 
-        { 
-            database.SaveChanges();
+        {
+            try {
+                database.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                Log.Write(e);
+            }
         }
 
     }

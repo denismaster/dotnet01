@@ -14,8 +14,8 @@ namespace dotnet01
     {
         protected void Application_Start()
         {
-            /*Test test = new Test();
-            test.PaginationTest();*/
+            Test test = new Test();
+            test.EditTest();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

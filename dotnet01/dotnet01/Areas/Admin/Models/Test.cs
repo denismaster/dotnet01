@@ -54,5 +54,15 @@ namespace dotnet01.Areas.Admin.Models
             page.ForEach(item => Log.Write(item.Login));
             Assert.NotNull(page);
         }
+        [Test]
+        public void EditTest()
+        {
+            Account acc = repository.Get(3);
+
+            acc.Login = "testEdit";
+            repository.Edit(acc);
+            repository.SaveChanges();
+           
+        }
     }
 }
