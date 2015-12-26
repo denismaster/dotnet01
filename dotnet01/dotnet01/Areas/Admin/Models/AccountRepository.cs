@@ -12,20 +12,17 @@ namespace dotnet01.Areas.Admin.Models
             {
         /// <summary>
         /// Возвращает из БД страницу по заданному номеру и размеру страницы, упорядоченную по возрастанию id. 
-        /// Для сохранения изменений в БД использовать SaveChanges()
         /// </summary>
         /// <param name="page"> номер страницы, нумерация с 1</param>
         /// <param name="pageSize"> размер страницы</param>
         IEnumerable<Account> Get(int page,int pageSize);
         /// <summary>
         /// Возвращает из БД информацию о заданном аккаунте по id. При отсутствии аккаунта возвращает null.
-        /// Для сохранения изменений в БД использовать SaveChanges()
         /// </summary>
         /// <param name="id"> id требуемого аккаунта</param>
         Account Get(int id);
         /// <summary>
         /// Возвращает из БД страницу по заданному номеру и размеру страницы, упорядоченную по возрастанию id, с использованием фильтрации.
-        ///  Для сохранения изменений в БД использовать SaveChanges()
         /// </summary>
         /// <param name="page"> номер страницы, нумерация с 1</param>
         /// <param name="pageSize"> размер страницы</param>
