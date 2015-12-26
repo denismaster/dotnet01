@@ -61,5 +61,85 @@ namespace dotnet01.Areas.Admin.Controllers
          
             return View(ivm);
         }
+
+        public ActionResult IndexSort(int page = 1, String sorting = "LogIn")
+        {
+            int pageSize = 3;
+            int totalAccounts = repository.Count();
+            IEnumerable<Account> sortedAccountsPerPage = repository.Get(page, pageSize);
+            PageInfo pageInfo = new PageInfo
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = totalAccounts
+            };
+
+            switch (sorting)
+            {
+                case "LogIn":
+                    sortedAccountsPerPage.OrderBy(acc => acc.Login);
+                    break;
+                case "LogInDesc":
+                    sortedAccountsPerPage.OrderByDescending(acc => acc.Login);
+                    break;
+                case "Mail":
+                    sortedAccountsPerPage.OrderBy(acc => acc.Mail);
+                    break;
+                case "MailDesc":
+                    sortedAccountsPerPage.OrderByDescending(acc => acc.Mail);
+                    break;
+                case "Role":
+                    sortedAccountsPerPage.OrderBy(acc => acc.Role);
+                    break;
+                case "RoleDesc":
+                    sortedAccountsPerPage.OrderByDescending(acc => acc.Role);
+                    break;
+            }
+
+            AccountIndexViewModel accountIndexViewModel = new AccountIndexViewModel()
+            {
+                PageInfo = pageInfo,
+                Accounts = sortedAccountsPerPage
+            };
+            return View(accountIndexViewModel);
+        }
+
+        public  ActionResult IndexFilter(int page = 1, String filterField = "Role", String filterValue = "")
+        {
+            int pageSize = 3;
+            int totalAccounts = repository.Count();
+            IEnumerable<Account> filteredAccountsPerPage;
+
+            switch (filterField)
+            {
+                case "LogIn":
+                    filteredAccountsPerPage = repository.Get(page, pageSize, acc => acc.Login == filterValue);
+                    break;
+                case "Role":
+                    filteredAccountsPerPage = repository.Get(page, pageSize, acc => acc.Role == filterValue);
+                    break;
+                case "Mail":
+                    filteredAccountsPerPage = repository.Get(page, pageSize, acc => acc.Mail == filterValue);
+                    break;
+                default:
+                    filteredAccountsPerPage = repository.Get(page, pageSize);
+                    break;
+            }
+
+            PageInfo pageInfo = new PageInfo
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = totalAccounts
+            };
+            AccountIndexViewModel accountIndexViewModel = new AccountIndexViewModel()
+            {
+                PageInfo = pageInfo,
+                Accounts = filteredAccountsPerPage
+            };
+            return View(accountIndexViewModel);
+        }
+
+        
     }
 }
