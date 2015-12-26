@@ -10,14 +10,56 @@ namespace dotnet01.Areas.Admin.Models
     
     public interface IAccountRepository
             {
-            IEnumerable<Account> Get(int page,int pageSize);
-            Account Get(int id);
-            IEnumerable<Account> Get(int page,int pageSize,Expression<Func<Account, bool>> predicate);
-            void Add(Account account);
-            int Count();
-            void Edit(Account account);
-            void Delete(Account account);
-            void SaveChanges();
+        /// <summary>
+        /// Возвращает из БД страницу по заданному номеру и размеру страницы, упорядоченную по возрастанию id. 
+        /// Для сохранения изменений в БД использовать SaveChanges()
+        /// </summary>
+        /// <param name="page"> номер страницы, нумерация с 1</param>
+        /// <param name="pageSize"> размер страницы</param>
+        IEnumerable<Account> Get(int page,int pageSize);
+        /// <summary>
+        /// Возвращает из БД информацию о заданном аккаунте по id. При отсутствии аккаунта возвращает null.
+        /// Для сохранения изменений в БД использовать SaveChanges()
+        /// </summary>
+        /// <param name="id"> id требуемого аккаунта</param>
+        Account Get(int id);
+        /// <summary>
+        /// Возвращает из БД страницу по заданному номеру и размеру страницы, упорядоченную по возрастанию id, с использованием фильтрации.
+        ///  Для сохранения изменений в БД использовать SaveChanges()
+        /// </summary>
+        /// <param name="page"> номер страницы, нумерация с 1</param>
+        /// <param name="pageSize"> размер страницы</param>
+        /// <param name="predicate"> лямбда-выражение для поиска страницы по заданному фильтру</param>
+        IEnumerable<Account> Get(int page,int pageSize,Expression<Func<Account, bool>> predicate);
+        /// <summary>
+        /// Добавляет аккаунт в БД.
+        ///  Для сохранения изменений в БД использовать SaveChanges()
+        /// </summary>
+        /// <param name="account"> объект сущности для добавления</param>
+        void Add(Account account);
+        /// <summary>
+        /// Возвращает количество аккаунтов, находящихся в БД.
+        ///  Для сохранения изменений в БД использовать SaveChanges()
+        /// </summary>
+        int Count();
+        /// <summary>
+        /// Редактирует аккаунт в БД. Ищет вхождение данного аккаунта в базе и изменяет его.
+        /// Передавать только существующую в базе сущность, которая была изменена.
+        /// </summary>
+        /// <param name="account"> объект измененной сущности</param>
+        void Edit(Account account);
+        /// <summary>
+        ///Удаляет сущность из БД. Работает только с существующей в базе сущностью.
+        ///  Для сохранения изменений в БД использовать SaveChanges()
+        /// </summary>
+        /// <param name="account"> объект сущности для удаления</param>
+        void Delete(Account account);
+        /// <summary>
+        ///Не обрабатывает исключения. При вызове нужно перехватывать DataException. 
+        /// Сохраняет изменения в БД. 
+        /// </summary>
+        void SaveChanges();
+
             }
 
     public class AccountRepository : IAccountRepository
@@ -26,7 +68,9 @@ namespace dotnet01.Areas.Admin.Models
         IEnumerable<Account> accountsPerPages;
 
         #region pagination
-        public  IEnumerable<Account> Get(int page,int pageSize)
+
+
+        public IEnumerable<Account> Get(int page,int pageSize)
         {
             try {
                 accountsPerPages = database.Account.OrderBy(acc=>acc.Id).
@@ -41,7 +85,8 @@ namespace dotnet01.Areas.Admin.Models
             }
             return accountsPerPages;
         }
-      public IEnumerable<Account> Get(int page, int pageSize, Expression<Func<Account, bool>> predicate)
+
+        public IEnumerable<Account> Get(int page, int pageSize, Expression<Func<Account, bool>> predicate)
         {
             try {
                 
@@ -59,10 +104,11 @@ namespace dotnet01.Areas.Admin.Models
             }
             return accountsPerPages;
         }
-    #endregion
+        #endregion
 
         #region CRUD operations
-      public Account Get(int id)
+
+        public Account Get(int id)
         {
             Account acc = null;
             try
@@ -76,11 +122,14 @@ namespace dotnet01.Areas.Admin.Models
             return acc;
            
         }
+ 
         public int Count()
         {
             return database.Account.Count();
         }
-      public void Add(Account account)
+
+    
+        public void Add(Account account)
         {
             try {
                 database.Account.Add(account);
@@ -90,7 +139,8 @@ namespace dotnet01.Areas.Admin.Models
                 Log.Write(e);
             }
         }
-      public void Edit(Account account) 
+  
+        public void Edit(Account account) 
         {
             try {
                 database.Entry(account).State = EntityState.Modified;
@@ -101,7 +151,9 @@ namespace dotnet01.Areas.Admin.Models
             }
             
         }
-      public void Delete(Account account)
+   
+ 
+        public void Delete(Account account)
       {
             try {
                 database.Entry(account).State = EntityState.Deleted;
@@ -113,7 +165,8 @@ namespace dotnet01.Areas.Admin.Models
             
       }
         #endregion
-      public void SaveChanges() 
+ 
+        public void SaveChanges() 
         {
            database.SaveChanges();            
         }

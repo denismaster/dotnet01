@@ -58,9 +58,7 @@ namespace dotnet01.Areas.Admin.Controllers
             //класс PageLinks в файле PagingHelpers.cs на основании инфы и AccountIndexViewModel формирует ссылки между страницами на View
 
             AccountIndexViewModel ivm = new AccountIndexViewModel() { PageInfo = pageInfo, Accounts = accountsPerPages };
-           
-            
-            
+         
             return View(ivm);
         }
     }
