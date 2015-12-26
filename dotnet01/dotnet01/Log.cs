@@ -10,7 +10,12 @@ namespace dotnet01
     public static class Log
     {
         private static object sync = new object();
-       
+
+        /// <summary>
+        /// папка с логами %Репозиторий%\dotnet01\dotnet01\Log
+        /// создается по одному логу в день, если было что-то внесено
+        /// </summary>
+        /// <param name="ex"> информация об исключении записывается в лог</param>
         public static void Write(Exception ex)
         {
             try
@@ -32,6 +37,11 @@ namespace dotnet01
                 // Перехватываем все и ничего не делаем
             }
         }
+        /// <summary>
+        /// папка с логами %Репозиторий%\dotnet01\dotnet01\Log
+        /// создается по одному логу в день, если было что-то внесено
+        /// </summary>
+        /// <param name="text"> текст, записываемый в лог</param>
         public static void Write(string  text)
         {
             try
