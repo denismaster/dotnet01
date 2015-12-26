@@ -31,7 +31,7 @@ namespace dotnet01.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     repository.Edit(account);
-                    repository.SaveChanges();
+                    repository.SaveChanges();                    
                     return RedirectToAction("Index");
                 }
             }
@@ -40,10 +40,9 @@ namespace dotnet01.Areas.Admin.Controllers
                 Log.Write(e);
                 ModelState.AddModelError("", "Unable to save changes");              
             }
-
-            //Create AccountEditViewModel and send it to View via parameter
-            //Actions are similar, can use only one model
-            return View();
+            
+            AccountEditViewModel evm = new AccountEditViewModel() { Account = account };
+            return View(evm);
         }
         public ActionResult Index(int page = 1)
         {
