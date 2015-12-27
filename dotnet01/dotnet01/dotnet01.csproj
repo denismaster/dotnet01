@@ -178,6 +178,7 @@
     <Compile Include="Areas\Admin\Models\AccountEditViewModel.cs" />
     <Compile Include="Areas\Admin\Models\AccountIndexViewModel.cs" />
     <Compile Include="Areas\Admin\Models\Account.cs" />
+    <Compile Include="Areas\Admin\Models\AccountNewViewModel.cs" />
     <Compile Include="Areas\Admin\Models\AccountRepository.cs" />
     <Compile Include="Areas\Admin\Models\PageInfo.cs" />
     <Compile Include="Areas\Admin\Models\Test.cs" />

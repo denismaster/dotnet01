@@ -19,21 +19,48 @@ namespace dotnet01.Areas.Admin.Controllers
         {
             repository = new AccountRepository();
         }
+
+        [HttpGet]
         public ActionResult New()
         {
-            //Create AccountNewViewModel and send it to View via parameter
-            return View();
+            Account account = new Account();
+            AccountNewViewModel model = new AccountNewViewModel() { Account = account };
+            return View(model);
         }
+
+        [HttpPost]
+        public ActionResult New(Account account)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    repository.Add(account);
+                    repository.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Write(e);
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            AccountNewViewModel nvm = new AccountNewViewModel() { Account = account };
+            return View(nvm);            
+        }
+
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var account = repository.Get(id.Value);
+            Account account = repository.Get(id.Value);
             if (account == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            var model = new AccountEditViewModel() { Account = account };
+            AccountEditViewModel model = new AccountEditViewModel() { Account = account };
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Edit(Account account)
         {
