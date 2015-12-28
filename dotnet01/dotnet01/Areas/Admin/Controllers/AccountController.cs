@@ -6,8 +6,6 @@ using System.Web.Mvc;
 using dotnet01.Areas.Admin.Models;
 using System.Data.Entity;
 using dotnet01.Areas.Admin.Controllers;
-using System.Data;
-
 namespace dotnet01.Areas.Admin.Controllers
 {
 
@@ -32,14 +30,18 @@ namespace dotnet01.Areas.Admin.Controllers
         public ActionResult New(Account account)
         {
             try
-            {
-                if (ModelState.IsValid)
+            
                 {
-                    repository.Add(account);
-                    repository.SaveChanges();
-                    return RedirectToAction("Index");
+
+                    if (ModelState.IsValid)
+                    {
+                        repository.Add(account);
+                        repository.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
-            }
+             
+            
             catch (Exception e)
             {
                 Log.Write(e);
@@ -82,6 +84,19 @@ namespace dotnet01.Areas.Admin.Controllers
             AccountEditViewModel evm = new AccountEditViewModel() { Account = account };
             return View(evm);
         }
+
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            Account account = repository.Get(id.Value);
+            if (account == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            AccountEditViewModel model = new AccountEditViewModel() { Account = account };
+            return View(model);
+        }
+
         public ActionResult Index(int page = 1)
         {
 
@@ -114,9 +129,6 @@ namespace dotnet01.Areas.Admin.Controllers
 
             switch (sorting)
             {
-                case "LogIn":
-                    sortedAccountsPerPage.OrderBy(acc => acc.Login);
-                    break;
                 case "LogInDesc":
                     sortedAccountsPerPage.OrderByDescending(acc => acc.Login);
                     break;
@@ -132,6 +144,10 @@ namespace dotnet01.Areas.Admin.Controllers
                 case "RoleDesc":
                     sortedAccountsPerPage.OrderByDescending(acc => acc.Role);
                     break;
+                default: 
+                    sortedAccountsPerPage.OrderBy(acc => acc.Login);
+                    break;
+               
             }
 
             AccountIndexViewModel accountIndexViewModel = new AccountIndexViewModel()
