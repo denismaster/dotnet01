@@ -6,8 +6,6 @@ using System.Web.Mvc;
 using dotnet01.Areas.Admin.Models;
 using System.Data.Entity;
 using dotnet01.Areas.Admin.Controllers;
-using System.Data;
-using dotnet01.Validation;
 namespace dotnet01.Areas.Admin.Controllers
 {
 
@@ -31,7 +29,6 @@ namespace dotnet01.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult New(Account account)
         {
-            AccountValidation valid = new AccountValidation();
             try
             
                 {
