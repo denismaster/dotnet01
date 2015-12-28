@@ -15,8 +15,11 @@ namespace dotnet01.Areas.Helpers
             PageInfo pageInfo, System.Func<int, string> pageUrl)
         {
             StringBuilder result = new StringBuilder();
+            
+            
             for (int i = 1; i <= pageInfo.TotalPages; i++)
             {
+                TagBuilder liBuilder = new TagBuilder("li");
                 TagBuilder tag = new TagBuilder("a");
                 tag.MergeAttribute("href", pageUrl(i));
                 tag.InnerHtml = i.ToString();
@@ -24,11 +27,10 @@ namespace dotnet01.Areas.Helpers
                 // например, добавляя класс
                 if (i == pageInfo.PageNumber)
                 {
-                    tag.AddCssClass("selected");
-                    tag.AddCssClass("btn-primary");
+                    liBuilder.AddCssClass("active");
                 }
-                tag.AddCssClass("btn btn-default");
-                result.Append(tag.ToString());
+                liBuilder.InnerHtml += tag.ToString();
+                result.Append(liBuilder.ToString());
             }
             return MvcHtmlString.Create(result.ToString());
         }

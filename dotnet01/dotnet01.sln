@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet01", "dotnet01\dotnet01.csproj", "{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.GUI.Admin", "dotnet01\Courses.GUI.Admin.csproj", "{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.DAL", "Courses.DAL\Courses.DAL.csproj", "{811D53D2-0687-44E8-855D-020F629227FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cources.Models", "Cources.Models\Cources.Models.csproj", "{1496FB44-C419-4EAE-95C7-49A068DC2E78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Courses.GUI", "Courses.GUI", "{CA264FC3-6998-46A4-A848-9A33C92AA808}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +21,19 @@ Global
 		{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{811D53D2-0687-44E8-855D-020F629227FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{811D53D2-0687-44E8-855D-020F629227FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{811D53D2-0687-44E8-855D-020F629227FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{811D53D2-0687-44E8-855D-020F629227FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1496FB44-C419-4EAE-95C7-49A068DC2E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1496FB44-C419-4EAE-95C7-49A068DC2E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1496FB44-C419-4EAE-95C7-49A068DC2E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1496FB44-C419-4EAE-95C7-49A068DC2E78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1} = {CA264FC3-6998-46A4-A848-9A33C92AA808}
 	EndGlobalSection
 EndGlobal
