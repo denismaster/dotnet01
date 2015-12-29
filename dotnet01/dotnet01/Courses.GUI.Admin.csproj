@@ -180,7 +180,9 @@
     <Compile Include="Areas\Admin\Models\Account.cs" />
     <Compile Include="Areas\Admin\Models\AccountNewViewModel.cs" />
     <Compile Include="Areas\Admin\Models\AccountRepository.cs" />
+    <Compile Include="Areas\Admin\Models\FieldFilter.cs" />
     <Compile Include="Areas\Admin\Models\PageInfo.cs" />
+    <Compile Include="Areas\Admin\Models\SortFilter.cs" />
     <Compile Include="Areas\Admin\Models\Test.cs" />
     <Compile Include="Areas\Helpers\PagingHelpers.cs" />
     <Compile Include="Areas\Manager\Controllers\ManagersController.cs" />

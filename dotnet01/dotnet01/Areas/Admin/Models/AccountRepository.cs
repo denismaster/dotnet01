@@ -57,6 +57,10 @@ namespace dotnet01.Areas.Admin.Models
         /// Сохраняет изменения в БД. 
         /// </summary>
         void SaveChanges();
+        /// <summary>
+        ///Осуществляет выборку страницы по заданным фильтрам и заданной сортировке.
+        /// </summary>
+        IEnumerable<Account> Get(int page, int pageSize, List<FieldFilter> fieldFilter, SortFilter sortFilter);
 
             }
 
@@ -102,6 +106,63 @@ namespace dotnet01.Areas.Admin.Models
             }
             return accountsPerPages;
         }
+        public IEnumerable<Account> Get(int page, int pageSize, List<FieldFilter> fieldFilter, SortFilter sortFilter)
+        { 
+            Func<Account,bool> fieldExp = CreateLabmdaFieldFilter(fieldFilter);
+            try
+            {
+                accountsPerPages = database.Account.
+                Select(item => item).
+                Where(fieldExp).
+                Skip((page - 1) * pageSize).
+                Take(pageSize).
+                AsEnumerable();
+
+                accountsPerPages = GetSorted(sortFilter);
+            }
+            catch (Exception e)
+            {
+                Log.Write(e);
+            }
+            return accountsPerPages;
+        }
+
+        private IEnumerable<Account> GetSorted(SortFilter sortFilter)
+       {
+            if(String.IsNullOrWhiteSpace(sortFilter.SortOrder))
+            {
+                accountsPerPages.OrderBy(acc => acc.Id);
+                return accountsPerPages;
+            }
+
+            switch (sortFilter.SortOrder)
+            {
+                case "LogIn":
+                    accountsPerPages = accountsPerPages.OrderBy(acc => acc.Login);
+                    break;
+                case "LogInDesc":
+                    accountsPerPages = accountsPerPages.OrderByDescending(acc => acc.Login);
+                    break;
+                case "Mail":
+                    accountsPerPages = accountsPerPages.OrderBy(acc => acc.Mail);
+                    break;
+                case "MailDesc":
+                    accountsPerPages = accountsPerPages.OrderByDescending(acc => acc.Mail);
+                    break;
+                case "Role":
+                    accountsPerPages = accountsPerPages.OrderBy(acc => acc.Role);
+                    break;
+                case "RoleDesc":
+                    accountsPerPages = accountsPerPages.OrderByDescending(acc => acc.Role);
+                    break;
+                default:
+                    accountsPerPages = accountsPerPages.OrderBy(acc => acc.Id);
+                    break;
+
+            }
+            return accountsPerPages;
+        }
+
         #endregion
 
         #region CRUD operations
@@ -168,6 +229,31 @@ namespace dotnet01.Areas.Admin.Models
         {
            database.SaveChanges();            
         }
+
+        public Func<Account,bool> CreateLabmdaFieldFilter(List<FieldFilter> fieldFilterList)
+        {
+            Func<Account,bool> filterExp = acc=>acc.Id>=0;
+            foreach (FieldFilter fieldFilter in fieldFilterList)
+            {
+                switch (fieldFilter.Name)
+                {
+                    case "LogIn":
+                        filterExp += acc => acc.Login.Trim().ToUpper().Contains(fieldFilter.Value.Trim().ToUpper());
+                        break;
+                    case "Role":
+                        filterExp += acc => acc.Role.Trim().ToUpper().Contains(fieldFilter.Value.Trim().ToUpper());
+                        break;
+                    case "Mail":
+                        filterExp += acc => acc.Mail.Trim().ToUpper().Contains(fieldFilter.Value.Trim().ToUpper());
+                        break;
+                    default:
+                        filterExp += acc => acc.Id >= 0;
+                        break;
+                }
+            }
+            return filterExp; 
+        }
+     
 
     }
 }

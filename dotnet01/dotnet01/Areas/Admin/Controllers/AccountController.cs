@@ -100,6 +100,13 @@ namespace dotnet01.Areas.Admin.Controllers
         public ActionResult Index(int page = 1)
         {
 
+        //TODO : добавить два аргумента List<FieldFilter> и SortFilter, реализовать вызов перегруженного метода Get из репозитория
+        //который осуществляет выборку из БД по заданным фильтрам
+        //сигнатуру метода и его реализацию можно посмотреть в файле AccountRepository.cs
+        //перегрузка Get с фильтрами не была тщательно протестирована, возможны ошибки
+        //отредактировать представление для возможности переключения фильтров.
+        //информация о передаче сложных аргументов типа List, Array в контроллер http://metanit.com/sharp/mvc5/5.11.php
+
             int pageSize = 3;
             int Total = repository.Count();
             //получаем страницу, заданную в параметре из базы данных 
@@ -114,86 +121,6 @@ namespace dotnet01.Areas.Admin.Controllers
 
             return View(ivm);
         }
-
-        public ActionResult IndexSort(int page = 1, String sorting = "LogIn")
-        {
-            int pageSize = 3;
-            int totalAccounts = repository.Count();
-            IEnumerable<Account> sortedAccountsPerPage = repository.Get(page, pageSize);
-            PageInfo pageInfo = new PageInfo
-            {
-                PageNumber = page,
-                PageSize = pageSize,
-                TotalItems = totalAccounts
-            };
-
-            switch (sorting)
-            {
-                case "LogInDesc":
-                    sortedAccountsPerPage.OrderByDescending(acc => acc.Login);
-                    break;
-                case "Mail":
-                    sortedAccountsPerPage.OrderBy(acc => acc.Mail);
-                    break;
-                case "MailDesc":
-                    sortedAccountsPerPage.OrderByDescending(acc => acc.Mail);
-                    break;
-                case "Role":
-                    sortedAccountsPerPage.OrderBy(acc => acc.Role);
-                    break;
-                case "RoleDesc":
-                    sortedAccountsPerPage.OrderByDescending(acc => acc.Role);
-                    break;
-                default: 
-                    sortedAccountsPerPage.OrderBy(acc => acc.Login);
-                    break;
-               
-            }
-
-            AccountIndexViewModel accountIndexViewModel = new AccountIndexViewModel()
-            {
-                PageInfo = pageInfo,
-                Accounts = sortedAccountsPerPage
-            };
-            return View(accountIndexViewModel);
-        }
-
-        public ActionResult IndexFilter(int page = 1, String filterField = "Role", String filterValue = "")
-        {
-            int pageSize = 3;
-            int totalAccounts = repository.Count();
-            IEnumerable<Account> filteredAccountsPerPage;
-
-            switch (filterField)
-            {
-                case "LogIn":
-                    filteredAccountsPerPage = repository.Get(page, pageSize, acc => acc.Login == filterValue);
-                    break;
-                case "Role":
-                    filteredAccountsPerPage = repository.Get(page, pageSize, acc => acc.Role == filterValue);
-                    break;
-                case "Mail":
-                    filteredAccountsPerPage = repository.Get(page, pageSize, acc => acc.Mail == filterValue);
-                    break;
-                default:
-                    filteredAccountsPerPage = repository.Get(page, pageSize);
-                    break;
-            }
-
-            PageInfo pageInfo = new PageInfo
-            {
-                PageNumber = page,
-                PageSize = pageSize,
-                TotalItems = totalAccounts
-            };
-            AccountIndexViewModel accountIndexViewModel = new AccountIndexViewModel()
-            {
-                PageInfo = pageInfo,
-                Accounts = filteredAccountsPerPage
-            };
-            return View(accountIndexViewModel);
-        }
-
 
     }
 }

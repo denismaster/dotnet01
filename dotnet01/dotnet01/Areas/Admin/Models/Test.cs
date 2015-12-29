@@ -64,5 +64,29 @@ namespace dotnet01.Areas.Admin.Models
             repository.SaveChanges();
            
         }
+        [Test]
+        public void FilterTest()
+        {
+            FieldFilter fieldFilter1 = new FieldFilter();
+            fieldFilter1.Name = "LogIn";
+            fieldFilter1.Value = "te";
+            FieldFilter fieldFilter2 = new FieldFilter();
+            fieldFilter2.Name = "LogIn";
+            fieldFilter2.Value = "cool";
+            FieldFilter fieldFilter3 = new FieldFilter();
+            fieldFilter2.Name = "LogIn";
+            fieldFilter2.Value = "14";
+            SortFilter sortFilter = new SortFilter();
+            sortFilter.SortOrder = "LogIn";
+            List<FieldFilter> list = new List<FieldFilter>();
+            list.Add(fieldFilter1);
+            list.Add(fieldFilter2);
+            list.Add(fieldFilter3);
+           IEnumerable<Account> l = repository.Get(1, 3, list,sortFilter);
+            foreach(Account acc in l)
+            {
+                Log.Write(acc.Login);
+            }
+        }
     }
 }
