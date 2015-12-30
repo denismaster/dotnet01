@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.GUI.Admin", "dotnet
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.DAL", "Courses.DAL\Courses.DAL.csproj", "{811D53D2-0687-44E8-855D-020F629227FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cources.Models", "Cources.Models\Cources.Models.csproj", "{1496FB44-C419-4EAE-95C7-49A068DC2E78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Models", "Cources.Models\Courses.Models.csproj", "{1496FB44-C419-4EAE-95C7-49A068DC2E78}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Courses.GUI", "Courses.GUI", "{CA264FC3-6998-46A4-A848-9A33C92AA808}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Buisness", "Courses.Buisness\Courses.Buisness.csproj", "{95BFAC8F-52BC-4841-893A-1E894CE785B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{1496FB44-C419-4EAE-95C7-49A068DC2E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1496FB44-C419-4EAE-95C7-49A068DC2E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1496FB44-C419-4EAE-95C7-49A068DC2E78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95BFAC8F-52BC-4841-893A-1E894CE785B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95BFAC8F-52BC-4841-893A-1E894CE785B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95BFAC8F-52BC-4841-893A-1E894CE785B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95BFAC8F-52BC-4841-893A-1E894CE785B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
