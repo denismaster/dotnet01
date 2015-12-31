@@ -9,6 +9,5 @@ namespace dotnet01.Areas.Admin.Models
     {
         public String Name { get; set; }
         public String Value { get; set; }
-        
     }
 }

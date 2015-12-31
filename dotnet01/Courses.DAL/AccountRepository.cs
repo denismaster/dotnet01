@@ -21,12 +21,16 @@ namespace Courses.DAL
         {
             return context.Account.AsEnumerable();
         }
-
+        /// <summary>
+        /// <see cref="IAccountRepository.Get()"/>
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
         public IEnumerable<Models.Account> Get(Func<Models.Account, bool> expression)
         {
             return context.Account.Where(expression).AsEnumerable();
         }
-
+        
         public Models.Account Get(int id)
         {
             return context.Account.Find(id);
