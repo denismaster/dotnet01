@@ -62,6 +62,10 @@
       <Project>{1496fb44-c419-4eae-95c7-49a068dc2e78}</Project>
       <Name>Courses.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Courses.Buisness\Courses.Buisness.csproj">
+      <Project>{95bfac8f-52bc-4841-893a-1e894ce785b4}</Project>
+      <Name>Courses.Buisness</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Courses.DAL\Courses.DAL.csproj">
       <Project>{811d53d2-0687-44e8-855d-020f629227fa}</Project>
       <Name>Courses.DAL</Name>

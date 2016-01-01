@@ -26,9 +26,9 @@ namespace Courses.DAL
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        public IEnumerable<Models.Account> Get(Func<Models.Account, bool> expression)
+        public IEnumerable<Models.Account> Get(int page, int pageSize, Func<Models.Account, bool> expression)
         {
-            return context.Account.Where(expression).AsEnumerable();
+            return context.Account.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
         }
         
         public Models.Account Get(int id)
@@ -56,5 +56,8 @@ namespace Courses.DAL
         {
             context.SaveChanges();
         }
+
+
+        
     }
 }

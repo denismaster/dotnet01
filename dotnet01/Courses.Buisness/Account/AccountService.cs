@@ -15,27 +15,39 @@ namespace Courses.Buisness.Account
     public class AccountService : IAccountService
     {
         /// <summary>
-        /// Неизменяемое поле
+        /// Репозиторий, используемый сервисом
         /// </summary>
         private readonly IAccountRepository repository;
+        /// <summary>
+        /// Фабрика фильтров
+        /// </summary>
+        private readonly Filtering.IFilterFactory<Models.Account> filterFactory;
         /// <summary>
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public AccountService(Models.Repositories.IAccountRepository repository)
+        public AccountService(Models.Repositories.IAccountRepository repository, Filtering.IFilterFactory<Models.Account> filterFactory)
         {
             ///Guard Condition
-            if (repository != null)
-            {
-                this.repository = repository;
-            }
-            else
-                throw new ArgumentNullException();
+            if (repository == null)
+                throw new ArgumentNullException("Repository is null!");
+            if (filterFactory == null)
+                throw new ArgumentNullException("Filtering Factory is null!");
+            this.repository = repository;
+            this.filterFactory = filterFactory;
         }
-
-        public IEnumerable<Models.Account> GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilter, Filtering.SortFilter sortFilter)
+        /// <summary>
+        /// Получение аккаунтов на заданной странице с заданными фильтрами.
+        /// </summary>
+        /// <param name="page">Номер страницы</param>
+        /// <param name="pageSize">Размер страницы</param>
+        /// <param name="fieldFilters">Список фильтров</param>
+        /// <param name="sortFilter">Порядок сортировки</param>
+        /// <returns></returns>
+        public IEnumerable<Models.Account> GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters, Filtering.SortFilter sortFilter)
         {
-            throw new NotImplementedException();
+            var expression = filterFactory.GetFilterExpression(fieldFilters, sortFilter);
+            return repository.Get(page, pageSize, expression);
         }
     }
 }

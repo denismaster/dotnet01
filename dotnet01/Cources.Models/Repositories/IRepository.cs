@@ -22,7 +22,7 @@ namespace Courses.Models.Repositories
         /// </summary>
         /// <param name="expression">Лямбда-выражение, описывающее условие поиска</param>
         /// <returns></returns>
-        IEnumerable<T> Get(Func<T, bool> expression);
+        IEnumerable<T> Get(int page, int pageSize, Func<T, bool> expression);
         /// <summary>
         /// Получение единственной сущности по значению ключевого поля
         /// </summary>

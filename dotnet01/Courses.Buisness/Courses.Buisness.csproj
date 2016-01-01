@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Filtering\FieldFilter.cs" />
+    <Compile Include="Filtering\AccountFilterFactory.cs" />
+    <Compile Include="Filtering\IFilterFactory.cs" />
     <Compile Include="Filtering\SortFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
