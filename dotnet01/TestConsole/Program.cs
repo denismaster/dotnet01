@@ -33,16 +33,15 @@ namespace TestConsole
         {
             IAccountRepository repository = new AccountRepository();
             Courses.Buisness.Account.IAccountService accountService = new Courses.Buisness.Account.AccountService
-                (repository,new Courses.Buisness.Filtering.AccountFilterFactory());
-            var accounts = accountService.GetAccounts(2,2,new List<Courses.Buisness.Filtering.FieldFilter>(),new Courses.Buisness.Filtering.SortFilter()
+                (repository, new Courses.Buisness.Filtering.AccountFilterFactory());
+            var accounts = accountService.GetAccounts(2, 2, new List<Courses.Buisness.Filtering.FieldFilter>(), new Courses.Buisness.Filtering.SortFilter()
                 {
-                    SortOrder ="ASC"
+                    SortOrder = "ASC"
                 });
             foreach (var account in accounts)
             {
                 Console.WriteLine("{0},{1}", account.Id, account.Login);
             }
-            Console.ReadLine();
         }
     }
 }

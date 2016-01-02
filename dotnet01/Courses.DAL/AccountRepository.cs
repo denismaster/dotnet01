@@ -21,11 +21,7 @@ namespace Courses.DAL
         {
             return context.Account.AsEnumerable();
         }
-        /// <summary>
-        /// <see cref="IAccountRepository.Get()"/>
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <returns></returns>
+
         public IEnumerable<Models.Account> Get(int page, int pageSize, Func<Models.Account, bool> expression)
         {
             return context.Account.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
