@@ -9,7 +9,16 @@ namespace Courses.Buisness.Account
 {
     public interface IAccountService
     {
-        IEnumerable<Models.Account> GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilter, Filtering.SortFilter sortFilter);
+        /// <summary>
+        /// Возвращает список аккаунтов. 
+        /// TODO:Желательно возвращать готовые ViewModels, но это пока неважно.
+        /// </summary>
+        IEnumerable<Models.Account> GetAccounts(int page, int pageSize,
+            List<Filtering.FieldFilter> fieldFilter=null, Filtering.SortFilter sortFilter=null);
+
+        void Add(Models.Account account);
+        void Edit(Models.Account account);
+        void Delete(Models.Account account);
 
     }
     public class AccountService : IAccountService
@@ -44,10 +53,31 @@ namespace Courses.Buisness.Account
         /// <param name="fieldFilters">Список фильтров</param>
         /// <param name="sortFilter">Порядок сортировки</param>
         /// <returns></returns>
-        public IEnumerable<Models.Account> GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters, Filtering.SortFilter sortFilter)
+        public IEnumerable<Models.Account> GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters=null, 
+            Filtering.SortFilter sortFilter=null)
         {
-            var expression = filterFactory.GetFilterExpression(fieldFilters, sortFilter);
-            return repository.Get(page, pageSize, expression);
+            if (fieldFilters != null && sortFilter != null)
+            {
+                var expression = filterFactory.GetFilterExpression(fieldFilters, sortFilter);
+                return repository.Get(page, pageSize, expression);
+            }
+            return repository.Get(page, pageSize, x => true);
+        }
+
+
+        public void Add(Models.Account account)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Models.Account account)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Models.Account account)
+        {
+            throw new NotImplementedException();
         }
     }
 }
