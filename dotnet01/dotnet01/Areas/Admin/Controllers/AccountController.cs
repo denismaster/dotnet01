@@ -40,6 +40,14 @@ namespace dotnet01.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (account.Mail == null)
+                    {
+                        account.Mail = "";
+                    }
+                    if (account.Role == null)
+                    {
+                        account.Role = "";
+                    }
                     repository.Add(account);
                     repository.SaveChanges();
                     return RedirectToAction("Index");

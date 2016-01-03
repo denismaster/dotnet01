@@ -15,16 +15,19 @@
             @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
             @Html.HiddenFor(m => m.Account.Id)
             <div class="form-group">
-                <label>Имя пользователя</label>
+                <label>Логин*</label>
                 @Html.TextBoxFor(m => m.Account.Login, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Account.Login)
+            </div>
+            <div class="form-group">
+                <label>Пароль*</label>
+                @Html.TextBoxFor(m => m.Account.Password, new { @class = "form-control", @type = "password" })
+                @Html.ValidationMessageFor(m => m.Account.Password)
             </div>
             <div class="form-group">
                 <label>Адрес электронной почты</label>
                 @Html.TextBoxFor(m => m.Account.Mail, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                <label>Пароль</label>
-                @Html.TextBoxFor(m => m.Account.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Account.Mail)
             </div>
             <div class="form-group">
                 <label>Роль</label>
