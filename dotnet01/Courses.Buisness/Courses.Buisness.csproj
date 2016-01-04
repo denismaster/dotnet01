@@ -51,6 +51,10 @@
       <Project>{1496fb44-c419-4eae-95c7-49a068dc2e78}</Project>
       <Name>Courses.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Courses.ViewModels\Courses.ViewModels.csproj">
+      <Project>{def79d34-00e6-4658-b8a9-12798a36e88b}</Project>
+      <Name>Courses.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
