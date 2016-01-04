@@ -26,5 +26,12 @@ namespace dotnet01.Controllers
 
             return View();
         }
+
+        public ActionResult LearnMore()
+        {
+            ViewBag.Message = "another useless page.";
+
+            return View();
+        }
     }
 }
