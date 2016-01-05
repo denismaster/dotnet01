@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using dotnet01.Areas.Manager.Models;
 
 namespace dotnet01.Areas.Admin.Models
 {
@@ -28,10 +29,9 @@ namespace dotnet01.Areas.Admin.Models
 
     public class AccountContext : DbContext
     {
-        public AccountContext() :
-            base("AccountsDatabase")
-        { }
- 
+        public AccountContext() : base("AccountsDatabase") { }
+
+        public DbSet<Course> Courses { get; set; }
         public DbSet<Account> Account { get; set; }
     }
 }
