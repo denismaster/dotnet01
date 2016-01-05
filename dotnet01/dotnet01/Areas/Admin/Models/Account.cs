@@ -33,5 +33,9 @@ namespace dotnet01.Areas.Admin.Models
 
         public DbSet<Course> Courses { get; set; }
         public DbSet<Account> Account { get; set; }
+        public DbSet<ManagerAccount> ManagerAccounts { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+
     }
 }

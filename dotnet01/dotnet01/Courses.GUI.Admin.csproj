@@ -206,6 +206,9 @@
     <Compile Include="Areas\Manager\Controllers\ManagersController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Models\Course.cs" />
+    <Compile Include="Areas\Manager\Models\ManagerAccount.cs" />
+    <Compile Include="Areas\Manager\Models\Rating.cs" />
+    <Compile Include="Areas\Manager\Models\Teacher.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
