@@ -24,6 +24,11 @@ namespace dotnet01.Areas.Manager.Controllers
             return View();
         }
 
-
+        public ActionResult ManagerPage()
+        {
+            IEnumerable<Course> courses = db.Courses;
+            ViewBag.Courses = courses;
+            return View();
+        }
     }
 }
