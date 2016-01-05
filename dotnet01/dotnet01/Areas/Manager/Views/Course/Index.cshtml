@@ -14,26 +14,30 @@
 <body>
     <div>
         <h3>Courses</h3>
-        <table class="table table-striped">
-            <tr>
-                <td><p>Title</p></td>
-                <td><p>Price</p></td>
-                <td><p>Length</p></td>
-                <td></td>
-            </tr>
-            @foreach (var b in ViewBag.Courses)
-            {
-                <tr>
-                    <td width="33%"><p>@b.Title</p></td>
-                    <td width="33%"><p>@b.Cost</p></td>
-                    <td width="33%"><p>@b.Length</p></td>
-                    <td>
-                        <div class="btn-group">
-                            @Html.ActionLink("Купить", "Index", new { @class = "btn btn-default" })
-                        </div>
-                    </td>
+        <table class="table table-hover">
+            <thead>
+                <tr class="alert-danger">
+                    <td><p>Title</p></td>
+                    <td><p>Price</p></td>
+                    <td><p>Length</p></td>
+                    <td></td>
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var b in ViewBag.Courses)
+                {
+                    <tr>
+                        <td width="33%"><p>@b.Title</p></td>
+                        <td width="33%"><p>@b.Cost</p></td>
+                        <td width="33%"><p>@b.Length</p></td>
+                        <td>
+                            <div class="btn-group">
+                                @Html.ActionLink("Купить", "Index", new { @class = "btn btn-default" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
       
     </div>
