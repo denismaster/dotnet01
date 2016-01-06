@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Ninject;
-using Ninject.Injection;
-using Ninject.Infrastructure;
-using Ninject.Modules;
 using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
 
-namespace dotnet01
+namespace Courses.Gui.Admin
 {
     /// <summary>
     /// Фабрика, которая будет управлять нашим AdminController
@@ -23,7 +17,7 @@ namespace dotnet01
         /// Ядро Ninject
         /// </summary>
         IKernel kernel;
-        
+
         public AdminControllerFactory()
         {
             kernel = new StandardKernel();

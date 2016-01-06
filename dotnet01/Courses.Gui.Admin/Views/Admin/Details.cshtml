@@ -1,0 +1,39 @@
+﻿@model Courses.ViewModels.AccountViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Детальная информация: аккаунт № @Model.Id
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class= "panel-body">
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label> Логин : </label>
+                @Html.Label(Model.Login)
+            </div>
+            <div class="form-group">
+                <label>Пароль : </label>
+                @Html.Label(Model.Password)
+            </div>
+            <div class="form-group">
+                <label>Адрес электронной почты : </label>
+                @Html.Label(Model.Mail)
+            </div>
+            <div class="form-group">
+                <label>Роль : </label>
+                @Html.Label(Model.Role);
+            </div>
+        </div>
+        <div class= "panel-footer">
+            @Html.ActionLink("Назад к списку", "Index", new { @class = "btn btn-default" })
+           
+        </div>
+    }
+</div>

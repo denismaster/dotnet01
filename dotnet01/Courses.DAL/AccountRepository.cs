@@ -24,6 +24,7 @@ namespace Courses.DAL
 
         public IEnumerable<Models.Account> Get(int page, int pageSize, Func<Models.Account, bool> expression)
         {
+            //временное решение
             return context.Account.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
         }
         
@@ -54,6 +55,9 @@ namespace Courses.DAL
         }
 
 
-        
+        public int Count(Func<Models.Account, bool> expression)
+        {
+            return context.Account.Where(expression).Count();
+        }
     }
 }

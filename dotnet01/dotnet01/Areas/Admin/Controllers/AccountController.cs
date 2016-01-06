@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using dotnet01.Areas.Admin.Models;
 using System.Data.Entity;
 using dotnet01.Areas.Admin.Controllers;
-using Courses.Buisness.Account;
+using Courses.Buisness;
 using Models2 = Courses.Models;
 namespace dotnet01.Areas.Admin.Controllers
 {
@@ -122,7 +122,7 @@ namespace dotnet01.Areas.Admin.Controllers
             int Total = repository.Count();
             //получаем страницу, заданную в параметре из базы данных 
             //IEnumerable<Account> accountsPerPages = repository.Get(page, pageSize);
-            IEnumerable<Models2.Account> accounts = accountService.GetAccounts(page,pageSize);
+            var accounts = accountService.GetAccounts(page,pageSize);
             //определяем информацию о номере, размере и общем количестве страниц для отображения на View
             PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = Total };
             //создаем объект модели, с которым будет связан файл Index.cshtml (в этом файле @model = bla bla AccountIndexViewModel) по этой информации будет генерироваться View

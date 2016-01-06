@@ -12,6 +12,13 @@ namespace Courses.Models.Repositories
     /// <typeparam name="T">Класс доменной модели</typeparam>
     public interface IRepository<T> where T:DomainObject
     {
+        //Осторожно, следующий метод является ЖУТКИМ костылем.
+        /// <summary>
+        /// Получает количество записей в БД по заданному условию.
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        int Count(Func<T, bool> expression);
         /// <summary>
         /// Получает все сущности с БД
         /// </summary>

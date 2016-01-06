@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Courses.Models;
 using Courses.Models.Repositories;
-namespace Courses.Buisness.Account
+using Courses.ViewModels;
+namespace Courses.Buisness
 {
     public interface IAccountService
     {
@@ -13,13 +14,33 @@ namespace Courses.Buisness.Account
         /// Возвращает список аккаунтов. 
         /// TODO:Желательно возвращать готовые ViewModels, но это пока неважно.
         /// </summary>
-        IEnumerable<Models.Account> GetAccounts(int page, int pageSize,
-            List<Filtering.FieldFilter> fieldFilter=null, Filtering.SortFilter sortFilter=null);
-
-        void Add(Models.Account account);
-        void Edit(Models.Account account);
-        void Delete(Models.Account account);
-
+        AccountCollectionViewModel GetAccounts(int page, int pageSize,
+            List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
+        /// <summary>
+        /// Получение одного аккаунта
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        AccountViewModel GetByID(int id);
+        /// <summary>
+        /// Добавление аккаунта. 
+        /// </summary>
+        /// <param name="account"></param>
+        void Add(AccountViewModel account);
+        /// <summary>
+        /// Обновление данных аккаунта
+        /// </summary>
+        /// <param name="account"></param>
+        void Edit(AccountViewModel account);
+        /// <summary>
+        /// Удаление аккаунта
+        /// </summary>
+        /// <param name="account"></param>
+        void Delete(AccountViewModel account);
+        /// <summary>
+        /// Сохранение изменений в репозитории
+        /// </summary>
+        void SaveChanges();
     }
     public class AccountService : IAccountService
     {
@@ -53,31 +74,95 @@ namespace Courses.Buisness.Account
         /// <param name="fieldFilters">Список фильтров</param>
         /// <param name="sortFilter">Порядок сортировки</param>
         /// <returns></returns>
-        public IEnumerable<Models.Account> GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters=null, 
-            Filtering.SortFilter sortFilter=null)
+        public AccountCollectionViewModel GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters = null,
+            Filtering.SortFilter sortFilter = null)
         {
+            IEnumerable<AccountViewModel> accounts;
+            int total;
             if (fieldFilters != null && sortFilter != null)
             {
                 var expression = filterFactory.GetFilterExpression(fieldFilters, sortFilter);
-                return repository.Get(page, pageSize, expression);
+                accounts =  repository.Get(page, pageSize, expression).Select(Convert);
+                total = repository.Count(expression);
             }
-            return repository.Get(page, pageSize, x => true);
+            else
+            {
+            accounts =  repository.Get(page, pageSize, x => true).Select(Convert);
+                total = repository.Count(x=>true);
+            }
+            var pageInfo = new PageInfo()
+            {
+                PageNumber = page,
+                PageSize = pageSize,
+                TotalItems = total
+            };
+            return new AccountCollectionViewModel(){Accounts = accounts, PageInfo = pageInfo};
         }
-
-
-        public void Add(Models.Account account)
+        /// <summary>
+        /// Получение информации об аккаунте по его идентификатору
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public AccountViewModel GetByID(int id)
         {
-            throw new NotImplementedException();
+            var account = repository.Get(id);
+            return (account == null) ? null : Convert(account);
         }
-
-        public void Edit(Models.Account account)
+        /// <summary>
+        /// Добавление аккаунта в репозиторий
+        /// </summary>
+        /// <param name="account"></param>
+        public void Add(AccountViewModel account)
         {
-            throw new NotImplementedException();
+            repository.Add(Convert(account));
         }
-
-        public void Delete(Models.Account account)
+        /// <summary>
+        /// Обновление аккаунта
+        /// </summary>
+        /// <param name="account"></param>
+        public void Edit(AccountViewModel account)
         {
-            throw new NotImplementedException();
+            repository.Update(Convert(account));
+        }
+        /// <summary>
+        /// Удаление аккаунта
+        /// </summary>
+        /// <param name="account"></param>
+        public void Delete(AccountViewModel account)
+        {
+            repository.Delete(Convert(account));
+        }
+        /// <summary>
+        /// Сохранение изменений
+        /// </summary>
+        public void SaveChanges()
+        {
+            repository.SaveChanges();
+        }
+        /// <summary>
+        /// Конвертационные функции
+        /// </summary>
+        private Account Convert(AccountViewModel c)
+        {
+            return new Account()
+            {
+                Id = c.Id,
+                Login = c.Login,
+                Mail = c.Mail,
+                Password = c.Password,
+                Role = c.Role
+            };
+        }
+        private AccountViewModel Convert(Account c)
+        {
+            return new AccountViewModel()
+            {
+                Id = c.Id,
+                Login = c.Login,
+                Mail = c.Mail,
+                Password = c.Password,
+                Role = c.Role
+            };
         }
     }
 }

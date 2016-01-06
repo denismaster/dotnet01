@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.GUI.Admin", "dotnet01\Courses.GUI.Admin.csproj", "{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.GUI.Old_WILL_BE_DELETED", "dotnet01\Courses.GUI.Old_WILL_BE_DELETED.csproj", "{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.DAL", "Courses.DAL\Courses.DAL.csproj", "{811D53D2-0687-44E8-855D-020F629227FA}"
 EndProject
@@ -18,6 +18,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{5231A492-125E-4872-B878-D0B2FA5D296A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{CA4EB1D6-8A6A-4FCC-8B90-A168F1C6AD6F}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Gui.Admin", "Courses.Gui.Admin\Courses.Gui.Admin.csproj", "{EA6E5992-138E-4AA7-991B-22AD5A816E2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +52,10 @@ Global
 		{DEF79D34-00E6-4658-B8A9-12798A36E88B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEF79D34-00E6-4658-B8A9-12798A36E88B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEF79D34-00E6-4658-B8A9-12798A36E88B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA6E5992-138E-4AA7-991B-22AD5A816E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA6E5992-138E-4AA7-991B-22AD5A816E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA6E5992-138E-4AA7-991B-22AD5A816E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA6E5992-138E-4AA7-991B-22AD5A816E2C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,5 +66,6 @@ Global
 		{1496FB44-C419-4EAE-95C7-49A068DC2E78} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
 		{95BFAC8F-52BC-4841-893A-1E894CE785B4} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
 		{DEF79D34-00E6-4658-B8A9-12798A36E88B} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
+		{EA6E5992-138E-4AA7-991B-22AD5A816E2C} = {CA264FC3-6998-46A4-A848-9A33C92AA808}
 	EndGlobalSection
 EndGlobal
