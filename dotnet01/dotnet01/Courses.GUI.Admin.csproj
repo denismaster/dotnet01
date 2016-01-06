@@ -206,6 +206,7 @@
     <Compile Include="Areas\Manager\Controllers\CourseController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Models\Course.cs" />
+    <Compile Include="Areas\Manager\Models\CourseNewViewModel.cs" />
     <Compile Include="Areas\Manager\Models\ManagerAccount.cs" />
     <Compile Include="Areas\Manager\Models\Rating.cs" />
     <Compile Include="Areas\Manager\Models\Teacher.cs" />
@@ -255,6 +256,7 @@
     <Content Include="Areas\User\Views\UserCourse\Index.cshtml" />
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\Manager\Views\Course\ManagerPage.cshtml" />
+    <Content Include="Areas\Manager\Views\Course\New.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

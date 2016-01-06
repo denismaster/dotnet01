@@ -26,6 +26,9 @@
         <div class="tab-content">
             <div id="sectionA" class="tab-pane fade in active">
                 <h3>Courses</h3>
+                <div class="btn-group">
+                    @Html.ActionLink("Добавить", "New", new { }, new { @class = "btn btn-default" })
+                </div>
                 <!--table class="table table-hover">
                     <thead>
                         <tr class="alert-danger">
@@ -71,6 +74,7 @@
                             <td><p>Price</p></td>
                             <td><p>Length</p></td>
                             <td></td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,14 +85,17 @@
                                 <td width="33%"><p>@b.Cost</p></td>
                                 <td width="33%"><p>@b.Length</p></td>
                                 <td>
-                                    <div class="btn-group">
-                                        @Html.ActionLink("Купить", "Index", new { @class = "btn btn-default" })
-                                    </div>
+                                        @Html.ActionLink("Редактировать", "Index", new { }, new { @class = "btn btn-default" })
+                                   
                                 </td>
-                            </tr>
+                                <td>
+                                        @Html.ActionLink("Детали", "Index", new { }, new { @class = "btn btn-default" })
+                                </td>
+                            </tr>   
                         }
                     </tbody>
                 </table>
+           
             </div>
             <div id="sectionB" class="tab-pane fade">
                 <h3>Section B</h3>
