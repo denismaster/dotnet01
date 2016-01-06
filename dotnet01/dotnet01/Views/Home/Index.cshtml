@@ -1,39 +1,42 @@
 ﻿@{
-        ViewBag.Title = "Home Page";
-    }
+    ViewBag.Title = "Home Page";
+}
 
-    <div class="jumbotron">
-        <h1>maCourses</h1>
-        <p class="lead">This site will be created using C#, HTML, CSS and JavaScript by our team. Maybe. Someday.</p>
-        <p><a  class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+<div class="jumbotron">
+    <h1>maCourses</h1>
+    <p class="lead">This site will be created using C#, HTML, CSS and JavaScript by our team. Maybe. Someday.</p>
+    <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Admin page</h2>
-            <p>
-                Visit admin page to browse and edit account list. 
-                Such functions as "Add","Edit","Details" are avaliable now. 
-                Click the button below to visit admin page!                
-            </p>
-            <p>
-                <a class="btn btn-default" @Html.ActionLink("Adminka", "Index", "Admin/Account")/>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>User page</h2>
-            <p> 
-                On the user page you can view list of avaliable corces and buy it. 
-                Also there will be  
-            </p>
-            <p><a class="btn btn-default">not implemented &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Manager page</h2>
-            <p>info info info info info info info info info info info info info info info info info info info info</p>
-            <p><a class="btn btn-default">not implemented &raquo;</a></p>
-        </div>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Admin page</h2>
+        <p>
+            Visit admin page to browse and edit account list.
+            Such functions as "Add","Edit","Details" are avaliable now.
+            Click the button below to visit admin page!
+        </p>
+        <p>
+            <a class="btn btn-default" @Html.ActionLink("Adminka", "Index", "Admin/Account") />
+        </p>
     </div>
+    <div class="col-md-4">
+        <h2>User page</h2>
+        <p>
+            On the user page you can view list of avaliable corces and buy it.
+            Also there will be short info about courses
+        </p>
+        <p>
+            <a class="btn btn-default" @Html.ActionLink("LIST!!!", "Index", "User/UserCourse")></a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>Manager page</h2>
+        <p>Here you can edit a list of coures</p>
+        @*<p><a class="btn btn-default" @Html.ActionLink("Courses list", "Index", "Manager/Course")></a></p>*@
+        <p><a class="btn btn-default" @Html.ActionLink("ManagerPage", "ManagerPage", "Manager/Course")></a></p>
+    </div>
+</div>
 
 
 

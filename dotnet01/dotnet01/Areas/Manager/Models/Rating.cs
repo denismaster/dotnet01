@@ -15,5 +15,7 @@ namespace dotnet01.Areas.Manager.Models
 
         public int Dislike { get; set; }
 
+        public int Grade { get; set; }
+
     }
 }

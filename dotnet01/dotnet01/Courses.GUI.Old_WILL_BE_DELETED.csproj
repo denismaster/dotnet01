@@ -203,12 +203,15 @@
     <Compile Include="Areas\Admin\Models\SortFilter.cs" />
     <Compile Include="Areas\Admin\Models\Test.cs" />
     <Compile Include="Areas\Helpers\PagingHelpers.cs" />
-    <Compile Include="Areas\Manager\Controllers\ManagersController.cs" />
+    <Compile Include="Areas\Manager\Controllers\CourseController.cs" />
     <Compile Include="Areas\Manager\ManagerAreaRegistration.cs" />
     <Compile Include="Areas\Manager\Models\Course.cs" />
+    <Compile Include="Areas\Manager\Models\CourseNewViewModel.cs" />
     <Compile Include="Areas\Manager\Models\ManagerAccount.cs" />
     <Compile Include="Areas\Manager\Models\Rating.cs" />
     <Compile Include="Areas\Manager\Models\Teacher.cs" />
+    <Compile Include="Areas\User\Controllers\UserCourseController.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -245,6 +248,15 @@
     <Content Include="Areas\Admin\Views\Account\New.cshtml" />
     <Content Include="Areas\Manager\Views\web.config" />
     <Content Include="Areas\Admin\Views\Account\Details.cshtml" />
+    <Content Include="Areas\Manager\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Manager\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Manager\Views\Course\Index.cshtml" />
+    <Content Include="Areas\User\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\User\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\User\Views\UserCourse\Index.cshtml" />
+    <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\Manager\Views\Course\ManagerPage.cshtml" />
+    <Content Include="Areas\Manager\Views\Course\New.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -294,7 +306,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Manager\Views\Shared\" />
+    <Folder Include="Areas\User\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -315,10 +327,6 @@
     <ProjectReference Include="..\Courses.DAL\Courses.DAL.csproj">
       <Project>{811d53d2-0687-44e8-855d-020f629227fa}</Project>
       <Name>Courses.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Courses.ViewModels\Courses.ViewModels.csproj">
-      <Project>{def79d34-00e6-4658-b8a9-12798a36e88b}</Project>
-      <Name>Courses.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
