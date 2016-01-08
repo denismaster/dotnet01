@@ -121,15 +121,14 @@ namespace dotnet01.Areas.Admin.Controllers
             int pageSize = 3;
             int Total = repository.Count();
             //получаем страницу, заданную в параметре из базы данных 
-            //IEnumerable<Account> accountsPerPages = repository.Get(page, pageSize);
-            var accounts = accountService.GetAccounts(page,pageSize);
+            IEnumerable<Account> accountsPerPages = repository.Get(page, pageSize);
             //определяем информацию о номере, размере и общем количестве страниц для отображения на View
             PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = Total };
             //создаем объект модели, с которым будет связан файл Index.cshtml (в этом файле @model = bla bla AccountIndexViewModel) по этой информации будет генерироваться View
 
             //класс PageLinks в файле PagingHelpers.cs на основании инфы и AccountIndexViewModel формирует ссылки между страницами на View
 
-            AccountIndexViewModel ivm = new AccountIndexViewModel() { PageInfo = pageInfo, Accounts = accounts };
+            AccountIndexViewModel ivm = new AccountIndexViewModel() { PageInfo = pageInfo, Accounts = accountsPerPages };
 
             return View(ivm);
         }

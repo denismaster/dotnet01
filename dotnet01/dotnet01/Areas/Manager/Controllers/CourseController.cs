@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using dotnet01.Areas.Admin.Models;
 using dotnet01.Areas.Manager.Models;
 using System.Data.Entity;
-using Courses.Buisness.Account;
+using Courses.Buisness;
 using Models2 = Courses.Models;
 
 
