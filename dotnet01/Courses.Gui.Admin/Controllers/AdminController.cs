@@ -88,12 +88,6 @@ namespace Courses.Gui.Admin.Controllers
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            //TODO : добавить два аргумента List<FieldFilter> и SortFilter, реализовать вызов перегруженного метода GetAccounts из сервиса
-            //который осуществляет выборку из БД по заданным фильтрам
-            //сигнатуру метода и его реализацию можно посмотреть в файле AccountaccountService.cs
-            //перегрузка Get с фильтрами не была тщательно протестирована, возможны ошибки
-            //отредактировать представление для возможности переключения фильтров.
-            //информация о передаче сложных аргументов типа List, Array в контроллер http://metanit.com/sharp/mvc5/5.11.php
             ViewBag.CurrentSort = sortOrder; 
             ViewBag.LoginSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "LogIn") ? "LogInDesc" : "LogIn";
             ViewBag.RoleSortParam = sortOrder == "Role" ? "RoleDesc" : "Role";
