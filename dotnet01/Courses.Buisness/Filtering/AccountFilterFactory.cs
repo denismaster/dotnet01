@@ -25,7 +25,7 @@ namespace Courses.Buisness.Filtering
     */
     public class AccountFilterFactory : IFilterFactory<Models.Account>
     {
-        public Func<Models.Account, bool> GetFilterExpression(IEnumerable<FieldFilter> fieldFilters, SortFilter sortFilter)
+        public Func<Models.Account, bool> GetFilterExpression(IEnumerable<FieldFilter> fieldFilters)
         {
             Func<Models.Account, bool> filterExp = acc => acc.Id >= 0;
             foreach (var fieldFilter in fieldFilters)

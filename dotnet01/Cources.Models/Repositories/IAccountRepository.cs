@@ -9,5 +9,6 @@ namespace Courses.Models.Repositories
     public interface IAccountRepository: IRepository<Account>
     {
         //Дополнительные действия, специфичные для аккаунтов.
+        IEnumerable<Models.Account> GetSorted(int page, int pageSize, Func<Models.Account, bool> expression, string sortFilter);
     }
 }

@@ -81,8 +81,9 @@ namespace Courses.Buisness
             int total;
             if (fieldFilters != null && sortFilter != null)
             {
-                var expression = filterFactory.GetFilterExpression(fieldFilters, sortFilter);
-                accounts =  repository.Get(page, pageSize, expression).Select(Convert);
+                
+                var expression = filterFactory.GetFilterExpression(fieldFilters);
+                accounts =  repository.GetSorted(page, pageSize, expression, sortFilter.SortOrder).Select(Convert);
                 total = repository.Count(expression);
             }
             else
@@ -98,6 +99,43 @@ namespace Courses.Buisness
             };
             return new AccountCollectionViewModel(){Accounts = accounts, PageInfo = pageInfo};
         }
+
+        //public IEnumerable<AccountViewModel> GetSorted(IEnumerable<AccountViewModel> accounts, Filtering.SortFilter sortFilter)
+        //{
+        //    if (String.IsNullOrWhiteSpace(sortFilter.SortOrder))
+        //    {
+        //        accounts.OrderBy(acc => acc.Id);
+        //        return accounts;
+        //    }
+
+        //    switch (sortFilter.SortOrder)
+        //    {
+        //        case "LogIn":
+        //            accounts = accounts.OrderBy(acc => acc.Login);
+        //            break;
+        //        case "LogInDesc":
+        //            accounts = accounts.OrderByDescending(acc => acc.Login);
+        //            break;
+        //        case "Mail":
+        //            accounts = accounts.OrderBy(acc => acc.Mail);
+        //            break;
+        //        case "MailDesc":
+        //            accounts = accounts.OrderByDescending(acc => acc.Mail);
+        //            break;
+        //        case "Role":
+        //            accounts = accounts.OrderBy(acc => acc.Role);
+        //            break;
+        //        case "RoleDesc":
+        //            accounts = accounts.OrderByDescending(acc => acc.Role);
+        //            break;
+        //        default:
+        //            accounts = accounts.OrderBy(acc => acc.Id);
+        //            break;
+
+        //    }
+        //    return accounts;
+        //}
+
         /// <summary>
         /// Получение информации об аккаунте по его идентификатору
         /// </summary>

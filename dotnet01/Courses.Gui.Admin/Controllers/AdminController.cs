@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Courses.Buisness;
 using Courses.Models;
 using Courses.ViewModels;
+using Courses.Buisness.Filtering;
 
 namespace Courses.Gui.Admin.Controllers
 {
@@ -85,17 +86,39 @@ namespace Courses.Gui.Admin.Controllers
             return View(account);
         }
 
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-
             //TODO : добавить два аргумента List<FieldFilter> и SortFilter, реализовать вызов перегруженного метода GetAccounts из сервиса
             //который осуществляет выборку из БД по заданным фильтрам
             //сигнатуру метода и его реализацию можно посмотреть в файле AccountaccountService.cs
             //перегрузка Get с фильтрами не была тщательно протестирована, возможны ошибки
             //отредактировать представление для возможности переключения фильтров.
             //информация о передаче сложных аргументов типа List, Array в контроллер http://metanit.com/sharp/mvc5/5.11.php
+            ViewBag.CurrentSort = sortOrder; 
+            ViewBag.LoginSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "LogIn") ? "LogInDesc" : "LogIn";
+            ViewBag.RoleSortParam = sortOrder == "Role" ? "RoleDesc" : "Role";
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            Buisness.Filtering.SortFilter sortFilter = new SortFilter() { SortOrder = sortOrder };
+            List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
+            if(!String.IsNullOrEmpty(searchString))
+            {
+                FieldFilter fieldFilter = new FieldFilter() { Name = "LogIn", Value = searchString };
+                fieldFilters.Add(fieldFilter);
+            }
+
             int pageSize = 3;
-            var accounts = accountService.GetAccounts(page, pageSize);
+            int currentPage = page ?? 1;
+            var accounts = accountService.GetAccounts(currentPage, pageSize, fieldFilters, sortFilter);
             return View(accounts);
         }
     }

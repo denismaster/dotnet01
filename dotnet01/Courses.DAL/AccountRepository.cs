@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Courses.Models.Repositories;
+//using Courses.Buisness.Filtering;  
 using System.Data.Entity;
 namespace Courses.DAL
 {
@@ -27,7 +28,32 @@ namespace Courses.DAL
             //временное решение
             return context.Account.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
         }
-        
+
+        public IEnumerable<Models.Account> GetSorted(int page, int pageSize, Func<Models.Account, bool> expression, string sortFilter)
+        {
+            if (String.IsNullOrWhiteSpace(sortFilter))
+            {
+                return context.Account.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+            }
+            switch (sortFilter)
+            {
+                case "LogIn":
+                    return context.Account.Where(expression).OrderBy(s => s.Login).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "LogInDesc":
+                    return context.Account.Where(expression).OrderByDescending(s => s.Login).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "Mail":
+                    return context.Account.Where(expression).OrderBy(s => s.Mail).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "MailDesc":
+                    return context.Account.Where(expression).OrderByDescending(s => s.Mail).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "Role":
+                    return context.Account.Where(expression).OrderBy(s => s.Role).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "RoleDesc":
+                    return context.Account.Where(expression).OrderByDescending(s => s.Role).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                default:
+                    return context.Account.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+            }
+        }
+
         public Models.Account Get(int id)
         {
             return context.Account.Find(id);

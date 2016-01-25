@@ -8,6 +8,6 @@ namespace Courses.Buisness.Filtering
 {
     public interface IFilterFactory<T>
     {
-        Func<T, bool> GetFilterExpression(IEnumerable<FieldFilter> fieldFilters, SortFilter sortFilter);
+        Func<T, bool> GetFilterExpression(IEnumerable<FieldFilter> fieldFilters);
     }
 }
