@@ -51,5 +51,6 @@ namespace Courses.Models
         /// актуальность(активность) курса
         /// </summary>
         public string Active { get; set; }
+
     }
 }
