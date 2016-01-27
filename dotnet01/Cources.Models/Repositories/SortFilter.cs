@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Courses.Buisness.Filtering
+namespace Courses.Models.Repositories
 {
     public class SortFilter
     {

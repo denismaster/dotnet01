@@ -31,6 +31,13 @@ namespace Courses.Models.Repositories
         /// <returns></returns>
         IEnumerable<T> Get(int page, int pageSize, Func<T, bool> expression);
         /// <summary>
+        /// Получает все сущности по заданному условию и с заданной сортировкой
+        /// </summary>
+        /// <param name="expression">Лямбда-выражение, описывающее условие поиска</param>
+        /// <param name="sortFilter">Поле и направление сортировки</param>
+        /// <returns></returns>
+        IEnumerable<T> Get(int page, int pageSize, Func<T, bool> expression, SortFilter sortFilter);
+        /// <summary>
         /// Получение единственной сущности по значению ключевого поля
         /// </summary>
         /// <param name="id"></param>

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Courses.Models.Repositories;
-//using Courses.Buisness.Filtering;  
 using System.Data.Entity;
 namespace Courses.DAL
 {
@@ -29,13 +28,13 @@ namespace Courses.DAL
             return context.Account.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
         }
 
-        public IEnumerable<Models.Account> GetSorted(int page, int pageSize, Func<Models.Account, bool> expression, string sortFilter)
+        public IEnumerable<Models.Account> Get(int page, int pageSize, Func<Models.Account, bool> expression, SortFilter sortFilter)
         {
-            if (String.IsNullOrWhiteSpace(sortFilter))
+            if (String.IsNullOrWhiteSpace(sortFilter.SortOrder))
             {
                 return context.Account.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
             }
-            switch (sortFilter)
+            switch (sortFilter.SortOrder)
             {
                 case "LogIn":
                     return context.Account.Where(expression).OrderBy(s => s.Login).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();

@@ -50,6 +50,8 @@
   <ItemGroup>
     <Compile Include="AccountContext.cs" />
     <Compile Include="AccountRepository.cs" />
+    <Compile Include="CourseContext.cs" />
+    <Compile Include="CourseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-    public interface IAccountRepository: IRepository<Account>
+    public interface ICourseRepository: IRepository<Course>
     {
-        //Дополнительные действия, специфичные для аккаунтов.
+        //Дополнительные действия, специфичные для курсов.
     }
 }

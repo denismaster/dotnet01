@@ -1,31 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Ninject;
-using Ninject.Injection;
-using Ninject.Infrastructure;
-using Ninject.Modules;
 using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
-using Courses.Buisness;
 
-namespace dotnet01
+namespace Courses.Gui.Manager
 {
     /// <summary>
-    /// Фабрика, которая будет управлять нашим AdminController
+    /// Фабрика, которая будет управлять нашим ManagerController
     /// </summary>
-    public class AdminControllerFactory : System.Web.Mvc.DefaultControllerFactory
+    public class ManagerControllerFactory : System.Web.Mvc.DefaultControllerFactory
     {
         /// <summary>
         /// Ядро Ninject
         /// </summary>
         IKernel kernel;
-        
-        public AdminControllerFactory()
+
+        public ManagerControllerFactory()
         {
             kernel = new StandardKernel();
             AddBindings();
@@ -48,9 +41,9 @@ namespace dotnet01
         //TODO Использовать авторегистрацию в других фабриках, это на будущее
         private void AddBindings()
         {
-            kernel.Bind<IAccountService>().To<AccountService>();
-            kernel.Bind<IFilterFactory<Account>>().To<AccountFilterFactory>();
-            kernel.Bind<IAccountRepository>().To<AccountRepository>();
+            kernel.Bind<ICourseService>().To<CourseService>();
+            kernel.Bind<IFilterFactory<Course>>().To<CourseFilterFactory>();
+            kernel.Bind<ICourseRepository>().To<CourseRepository>();
         }
     }
 }

@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Courses.ViewModels.CourseCollectionViewModel
+@using Courses.Gui.Helpers
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Курсы
+
+    </div>
+    <div class="panel-body">
+        @Html.ActionLink("Добавить", "New", new { }, new { @class = "btn btn-info" })
+    </div>
+    @using (Html.BeginForm())
+    {
+        <p>
+            Поиск по заголовку: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </p>
+    }
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink("Заголовок", "Index", new { sortOrder = ViewBag.TitleSortParam, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                @Html.ActionLink("Дата", "Index", new { sortOrder = ViewBag.DatesSortParam, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                @Html.ActionLink("Организатор", "Index", new { sortOrder = ViewBag.OrganizerSortParam, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @Html.ActionLink("Активность", "Index", new { sortOrder = ViewBag.ActiveSortParam, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Courses)
+            {
+                <tr>
+                    <td width="33%">@item.Title</td>
+                    <td width="33%">@item.Dates</td>
+                    <td width="33%">@item.Organizer</td>
+                    <td width="33%">@item.Active</td>
+                    <td width="33%">
+                        <div class="btn-group">
+                            @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Детали", "Details", new { id = item.Id }, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Удалить", "Delete", new { id = item.Id }, new { @class = "btn btn-default" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        Page @(Model.PageInfo.TotalPages < Model.PageInfo.PageNumber ? 0 : Model.PageInfo.PageNumber)
+        of @Model.PageInfo.TotalPages
+
+        @if (Model.PageInfo.PageNumber > 1)
+        {
+            @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw(" ");
+            @Html.ActionLink("< Prev", "Index", new { page = Model.PageInfo.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        }
+        else
+        {
+            @:<<
+            @Html.Raw(" ");
+            @:< Prev
+    }
+
+        @if (Model.PageInfo.PageNumber < Model.PageInfo.TotalPages)
+        {
+            @Html.ActionLink("Next >", "Index", new { page = Model.PageInfo.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw(" ");
+            @Html.ActionLink(">>", "Index", new { page = Model.PageInfo.TotalPages, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        }
+        else
+        {
+            @:Next >
+            @Html.Raw(" ")
+            @:>>
+    }
+    </div>
+    <div class="panel-footer">
+        <ul class="pagination pagination-panel pagination-sm">
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </ul>
+    </div>
+</div>
+
+<br />

@@ -9,33 +9,33 @@ using Courses.Models.Repositories;
 using Courses.ViewModels;
 using Courses.Buisness.Filtering;
 
-namespace Courses.Gui.Admin.Controllers
+namespace Courses.Gui.Manager.Controllers
 {
-    public class AdminController : Controller
+    public class ManagerController : Controller
     {
-        private readonly IAccountService accountService;
+        private readonly ICourseService courseService;
 
-        public AdminController(IAccountService accountService)
+        public ManagerController(ICourseService courseService)
         {
-            if (accountService == null)
+            if (courseService == null)
                 throw new ArgumentNullException();
-            this.accountService = accountService;
+            this.courseService = courseService;
         }
         [HttpGet]
         public ActionResult New()
         {
-            AccountViewModel model = new AccountViewModel();
+            CourseViewModel model = new CourseViewModel();
             return View(model);
         }
         [HttpPost]
-        public ActionResult New(AccountViewModel account)
+        public ActionResult New(CourseViewModel course)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    accountService.Add(account);
-                    accountService.SaveChanges();
+                    courseService.Add(course);
+                    courseService.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
@@ -43,7 +43,7 @@ namespace Courses.Gui.Admin.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(account);
+            return View(course);
         }
 
         [HttpGet]
@@ -51,21 +51,21 @@ namespace Courses.Gui.Admin.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var account = accountService.GetByID(id.Value);
-            if (account == null)
+            var course = courseService.GetByID(id.Value);
+            if (course == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(account);
+            return View(course);
         }
 
         [HttpPost]
-        public ActionResult Edit(AccountViewModel account)
+        public ActionResult Edit(CourseViewModel course)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    accountService.Edit(account);
-                    accountService.SaveChanges();
+                    courseService.Edit(course);
+                    courseService.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
@@ -73,7 +73,7 @@ namespace Courses.Gui.Admin.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(account);
+            return View(course);
         }
 
         [HttpGet]
@@ -81,17 +81,19 @@ namespace Courses.Gui.Admin.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var account = accountService.GetByID(id.Value);
-            if (account == null)
+            var course = courseService.GetByID(id.Value);
+            if (course == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(account);
+            return View(course);
         }
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewBag.CurrentSort = sortOrder; 
-            ViewBag.LoginSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "LogIn") ? "LogInDesc" : "LogIn";
-            ViewBag.RoleSortParam = sortOrder == "Role" ? "RoleDesc" : "Role";
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.TitleSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Title") ? "TitleDesc" : "Title";
+            ViewBag.DatesSortParam = sortOrder == "Dates" ? "DatesDesc" : "Dates";
+            ViewBag.OrganizerSortParam = sortOrder == "Organizer" ? "OrganizerDesc" : "Organizer";
+            ViewBag.ActiveSortParam = sortOrder == "Active" ? "ActiveDesc" : "Active";
 
             if (Request.HttpMethod == "GET")
             {
@@ -105,16 +107,16 @@ namespace Courses.Gui.Admin.Controllers
 
             SortFilter sortFilter = new SortFilter() { SortOrder = sortOrder };
             List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
-            if(!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
             {
-                FieldFilter fieldFilter = new FieldFilter() { Name = "LogIn", Value = searchString };
+                FieldFilter fieldFilter = new FieldFilter() { Name = "Title", Value = searchString };
                 fieldFilters.Add(fieldFilter);
             }
 
             int pageSize = 3;
             int currentPage = page ?? 1;
-            var accounts = accountService.GetAccounts(currentPage, pageSize, fieldFilters, sortFilter);
-            return View(accounts);
+            var courses = courseService.GetCourses(currentPage, pageSize, fieldFilters, sortFilter);
+            return View(courses);
         }
     }
 }
