@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="AccountCollectionViewModel.cs" />
     <Compile Include="AccountViewModel.cs" />
+    <Compile Include="PartnerCollectionViewModel.cs" />
+    <Compile Include="PartnerViewModel.cs" />
     <Compile Include="ProductCollectionViewModel.cs" />
     <Compile Include="ProductViewModel.cs" />
     <Compile Include="PageInfo.cs" />
