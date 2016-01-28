@@ -51,12 +51,12 @@ namespace Courses.Buisness
         /// <summary>
         /// Фабрика фильтров
         /// </summary>
-        private readonly Filtering.IFilterFactory<Models.Account> filterFactory;
+        private readonly Filtering.IFilterFactory<Models.User> filterFactory;
         /// <summary>
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public AccountService(Models.Repositories.IAccountRepository repository, Filtering.IFilterFactory<Models.Account> filterFactory)
+        public AccountService(Models.Repositories.IAccountRepository repository, Filtering.IFilterFactory<Models.User> filterFactory)
         {
             ///Guard Condition
             if (repository == null)
@@ -143,25 +143,27 @@ namespace Courses.Buisness
         /// <summary>
         /// Конвертационные функции
         /// </summary>
-        private Account Convert(AccountViewModel c)
+        private User Convert(AccountViewModel c)
         {
-            return new Account()
+            return new User()
             {
                 Id = c.Id,
                 Login = c.Login,
-                Mail = c.Mail,
-                Password = c.Password,
-                Role = c.Role
+                Email = c.Email,
+                PasswordHash = c.Password,
+                Role = c.Role,
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
             };
         }
-        private AccountViewModel Convert(Account c)
+        private AccountViewModel Convert(User c)
         {
             return new AccountViewModel()
             {
                 Id = c.Id,
                 Login = c.Login,
-                Mail = c.Mail,
-                Password = c.Password,
+                Email = c.Email,
+                Password = c.PasswordHash,
                 Role = c.Role
             };
         }

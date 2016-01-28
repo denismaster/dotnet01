@@ -48,7 +48,7 @@ namespace dotnet01
         private void AddBindings()
         {
             kernel.Bind<IAccountService>().To<AccountService>();
-            kernel.Bind<IFilterFactory<Account>>().To<AccountFilterFactory>();
+            kernel.Bind<IFilterFactory<User>>().To<AccountFilterFactory>();
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
         }
     }

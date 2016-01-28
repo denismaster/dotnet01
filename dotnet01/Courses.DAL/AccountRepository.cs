@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Courses.Models.Repositories;
-//using Courses.Buisness.Filtering;  
+using Courses.Models;
 using System.Data.Entity;
 namespace Courses.DAL
 {
@@ -16,60 +16,60 @@ namespace Courses.DAL
         /// <summary>
         /// Контекст Entity Framework, используем для работы с БД
         /// </summary>
-        AccountContext context = new AccountContext();
+        DatabaseContext context = new DatabaseContext();
 
-        public IEnumerable<Models.Account> Get()
+        public IEnumerable<Models.User> Get()
         {
-            return context.Account.AsEnumerable();
+            return context.Users.AsEnumerable();
         }
 
-        public IEnumerable<Models.Account> Get(int page, int pageSize, Func<Models.Account, bool> expression)
+        public IEnumerable<Models.User> Get(int page, int pageSize, Func<Models.User, bool> expression)
         {
             //временное решение
-            return context.Account.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+            return context.Users.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
         }
 
-        public IEnumerable<Models.Account> GetSorted(int page, int pageSize, Func<Models.Account, bool> expression, string sortFilter)
+        public IEnumerable<Models.User> GetSorted(int page, int pageSize, Func<Models.User, bool> expression, string sortFilter)
         {
             if (String.IsNullOrWhiteSpace(sortFilter))
             {
-                return context.Account.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                return context.Users.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
             }
             switch (sortFilter)
             {
                 case "LogIn":
-                    return context.Account.Where(expression).OrderBy(s => s.Login).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Users.Where(expression).OrderBy(s => s.Login).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 case "LogInDesc":
-                    return context.Account.Where(expression).OrderByDescending(s => s.Login).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Users.Where(expression).OrderByDescending(s => s.Login).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 case "Mail":
-                    return context.Account.Where(expression).OrderBy(s => s.Mail).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Users.Where(expression).OrderBy(s => s.Email).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 case "MailDesc":
-                    return context.Account.Where(expression).OrderByDescending(s => s.Mail).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Users.Where(expression).OrderByDescending(s => s.Email).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 case "Role":
-                    return context.Account.Where(expression).OrderBy(s => s.Role).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Users.Where(expression).OrderBy(s => s.Role).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 case "RoleDesc":
-                    return context.Account.Where(expression).OrderByDescending(s => s.Role).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Users.Where(expression).OrderByDescending(s => s.Role).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 default:
-                    return context.Account.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Users.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
             }
         }
 
-        public Models.Account Get(int id)
+        public Models.User Get(int id)
         {
-            return context.Account.Find(id);
+            return context.Users.Find(id);
         }
 
-        public void Add(Models.Account entity)
+        public void Add(Models.User entity)
         {
-            context.Account.Add(entity);
+            context.Users.Add(entity);
         }
 
-        public void Update(Models.Account entity)
+        public void Update(Models.User entity)
         {
             context.Entry(entity).State = EntityState.Deleted;
         }
 
-        public void Delete(Models.Account entity)
+        public void Delete(Models.User entity)
         {
             context.Entry(entity).State = EntityState.Deleted;
         }
@@ -81,9 +81,9 @@ namespace Courses.DAL
         }
 
 
-        public int Count(Func<Models.Account, bool> expression)
+        public int Count(Func<Models.User, bool> expression)
         {
-            return context.Account.Where(expression).Count();
+            return context.Users.Where(expression).Count();
         }
     }
 }

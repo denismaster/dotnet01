@@ -38,9 +38,10 @@ namespace Courses.Gui.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                ModelState.AddModelError("", "Unable to save changes");
+                ModelState.AddModelError("", "Unable to save changes:"+e.Message);
+                throw (e);
             }
             return View(account);
         }

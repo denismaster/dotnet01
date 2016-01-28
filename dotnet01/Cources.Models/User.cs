@@ -22,10 +22,18 @@ namespace Courses.Models
         public string AuthKey { get; set; }
         public string PasswordHash { get; set; }
         public string Email { get; set; }
-        public byte Role { get; set; }
+        public string Role { get; set; }
         public byte Status { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime UpdatedDate { get; set; }
+        public DateTime CreatedDate
+        {
+            get;
+            set;
+        }
+        public DateTime UpdatedDate
+        {
+            get;
+            set;
+        }
         public List<Product> Products { get; set; }
         public List<Partner> Partners { get; set; }
         public List<Event> Events { get; set; }

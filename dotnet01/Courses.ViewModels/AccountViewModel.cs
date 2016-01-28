@@ -23,7 +23,7 @@ namespace Courses.ViewModels
         public string Password { get; set; }
 
         [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "*неверный адрес")]
-        public string Mail { get; set; }
+        public string Email { get; set; }
 
         public string Role { get; set; }
 

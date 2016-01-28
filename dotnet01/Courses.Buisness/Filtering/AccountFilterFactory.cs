@@ -23,11 +23,11 @@ namespace Courses.Buisness.Filtering
 ¨¨¨¨¨\_________/¨¨ 
  С НОВЫМ ГОДОМ, ДРУЗЬЯ!)
     */
-    public class AccountFilterFactory : IFilterFactory<Models.Account>
+    public class AccountFilterFactory : IFilterFactory<Models.User>
     {
-        public Func<Models.Account, bool> GetFilterExpression(IEnumerable<FieldFilter> fieldFilters)
+        public Func<Models.User, bool> GetFilterExpression(IEnumerable<FieldFilter> fieldFilters)
         {
-            Func<Models.Account, bool> filterExp = acc => acc.Id >= 0;
+            Func<Models.User, bool> filterExp = acc => acc.Id >= 0;
             foreach (var fieldFilter in fieldFilters)
             {
                 switch (fieldFilter.Name)
@@ -39,7 +39,7 @@ namespace Courses.Buisness.Filtering
                         filterExp += acc => acc.Role.Trim().ToUpper().Contains(fieldFilter.Value.Trim().ToUpper());
                         break;
                     case "Mail":
-                        filterExp += acc => acc.Mail.Trim().ToUpper().Contains(fieldFilter.Value.Trim().ToUpper());
+                        filterExp += acc => acc.Email.Trim().ToUpper().Contains(fieldFilter.Value.Trim().ToUpper());
                         break;
                     default:
                         filterExp += acc => acc.Id >= 0;
