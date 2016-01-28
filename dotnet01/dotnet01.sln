@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.GUI.Old_WILL_BE_DELETED", "dotnet01\Courses.GUI.Old_WILL_BE_DELETED.csproj", "{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}"
 EndProject
@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.ViewModels", "Courses.ViewModels\Courses.ViewModels.csproj", "{DEF79D34-00E6-4658-B8A9-12798A36E88B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}"
+	ProjectSection(SolutionItems) = preProject
+		FavouriteProduct.cs = FavouriteProduct.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{5231A492-125E-4872-B878-D0B2FA5D296A}"
 EndProject

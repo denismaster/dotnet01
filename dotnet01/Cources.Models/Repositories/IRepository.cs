@@ -33,9 +33,9 @@ namespace Courses.Models.Repositories
         /// <summary>
         /// Получение единственной сущности по значению ключевого поля
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        T Get(int id);
+        T Get(int Id);
         /// <summary>
         /// Добавление сущности в БД
         /// </summary>

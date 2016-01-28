@@ -199,6 +199,7 @@
     <Compile Include="Areas\Admin\Models\AccountNewViewModel.cs" />
     <Compile Include="Areas\Admin\Models\AccountRepository.cs" />
     <Compile Include="Areas\Admin\Models\FieldFilter.cs" />
+    <Compile Include="Areas\Admin\Models\MainContext.cs" />
     <Compile Include="Areas\Admin\Models\PageInfo.cs" />
     <Compile Include="Areas\Admin\Models\SortFilter.cs" />
     <Compile Include="Areas\Admin\Models\Test.cs" />
