@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Courses.ViewModels
 {
-    public class CourseCollectionViewModel
+    public class ProductCollectionViewModel
     {
-        public IEnumerable<CourseViewModel> Courses
+        public IEnumerable<ProductViewModel> Products
         {
             get;
             set;

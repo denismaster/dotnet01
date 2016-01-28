@@ -77,6 +77,33 @@ namespace Courses.Gui.Admin.Controllers
         }
 
         [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var account = accountService.GetByID(id.Value);
+            if (account == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            return View(account);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(AccountViewModel account)
+        {
+            try
+            {
+                accountService.Delete(account);
+                accountService.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            return View(account);
+        }
+
+        [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)

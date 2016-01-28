@@ -9,55 +9,55 @@ using Courses.ViewModels;
 
 namespace Courses.Buisness
 {
-    public interface ICourseService
+    public interface IProductService
     {
         /// <summary>
         /// Возвращает список курсов. 
         /// TODO:Желательно возвращать готовые ViewModels, но это пока неважно.
         /// </summary>
-        CourseCollectionViewModel GetCourses(int page, int pageSize,
+        ProductCollectionViewModel GetProducts(int page, int pageSize,
             List<Filtering.FieldFilter> fieldFilter = null, SortFilter sortFilter = null);
         /// <summary>
         /// Получение одного курса
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        CourseViewModel GetByID(int id);
+        ProductViewModel GetByID(int id);
         /// <summary>
         /// Добавление курса. 
         /// </summary>
-        /// <param name="course"></param>
-        void Add(CourseViewModel course);
+        /// <param name="product"></param>
+        void Add(ProductViewModel product);
         /// <summary>
         /// Обновление данных курса
         /// </summary>
-        /// <param name="course"></param>
-        void Edit(CourseViewModel course);
+        /// <param name="product"></param>
+        void Edit(ProductViewModel product);
         /// <summary>
         /// Удаление курса
         /// </summary>
-        /// <param name="course"></param>
-        void Delete(CourseViewModel course);
+        /// <param name="product"></param>
+        void Delete(ProductViewModel product);
         /// <summary>
         /// Сохранение изменений в репозитории
         /// </summary>
         void SaveChanges();
     }
-    public class CourseService : ICourseService
+    public class ProductService : IProductService
     {
         /// <summary>
         /// Репозиторий, используемый сервисом
         /// </summary>
-        private readonly ICourseRepository repository;
+        private readonly IProductRepository repository;
         /// <summary>
         /// Фабрика фильтров
         /// </summary>
-        private readonly Filtering.IFilterFactory<Models.Course> filterFactory;
+        private readonly Filtering.IFilterFactory<Models.Product> filterFactory;
         /// <summary>
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public CourseService(Models.Repositories.ICourseRepository repository, Filtering.IFilterFactory<Models.Course> filterFactory)
+        public ProductService(Models.Repositories.IProductRepository repository, Filtering.IFilterFactory<Models.Product> filterFactory)
         {
             ///Guard Condition
             if (repository == null)
@@ -75,20 +75,20 @@ namespace Courses.Buisness
         /// <param name="fieldFilters">Список фильтров</param>
         /// <param name="sortFilter">Порядок сортировки</param>
         /// <returns></returns>
-        public CourseCollectionViewModel GetCourses(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters = null,
+        public ProductCollectionViewModel GetProducts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters = null,
             SortFilter sortFilter = null)
         {
-            IEnumerable<CourseViewModel> courses;
+            IEnumerable<ProductViewModel> products;
             int total;
             if (fieldFilters != null && sortFilter != null)
             {
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                courses = repository.Get(page, pageSize, expression, sortFilter).Select(Convert);
+                products = repository.Get(page, pageSize, expression, sortFilter).Select(Convert);
                 total = repository.Count(expression);
             }
             else
             {
-                courses = repository.Get(page, pageSize, x => true).Select(Convert);
+                products = repository.Get(page, pageSize, x => true).Select(Convert);
                 total = repository.Count(x => true);
             }
             var pageInfo = new PageInfo()
@@ -97,7 +97,7 @@ namespace Courses.Buisness
                 PageSize = pageSize,
                 TotalItems = total
             };
-            return new CourseCollectionViewModel() { Courses = courses, PageInfo = pageInfo };
+            return new ProductCollectionViewModel() { Products = products, PageInfo = pageInfo };
         }
 
         /// <summary>
@@ -105,34 +105,34 @@ namespace Courses.Buisness
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public CourseViewModel GetByID(int id)
+        public ProductViewModel GetByID(int id)
         {
-            var course = repository.Get(id);
-            return (course == null) ? null : Convert(course);
+            var product = repository.Get(id);
+            return (product == null) ? null : Convert(product);
         }
         /// <summary>
         /// Добавление курса в репозиторий
         /// </summary>
-        /// <param name="course"></param>
-        public void Add(CourseViewModel course)
+        /// <param name="product"></param>
+        public void Add(ProductViewModel product)
         {
-            repository.Add(Convert(course));
+            repository.Add(Convert(product));
         }
         /// <summary>
         /// Обновление курса
         /// </summary>
-        /// <param name="course"></param>
-        public void Edit(CourseViewModel course)
+        /// <param name="product"></param>
+        public void Edit(ProductViewModel product)
         {
-            repository.Update(Convert(course));
+            repository.Update(Convert(product));
         }
         /// <summary>
         /// Удаление курса
         /// </summary>
-        /// <param name="course"></param>
-        public void Delete(CourseViewModel course)
+        /// <param name="product"></param>
+        public void Delete(ProductViewModel product)
         {
-            repository.Delete(Convert(course));
+            repository.Delete(Convert(product));
         }
         /// <summary>
         /// Сохранение изменений
@@ -144,38 +144,40 @@ namespace Courses.Buisness
         /// <summary>
         /// Конвертационные функции
         /// </summary>
-        private Course Convert(CourseViewModel c)
+        private Product Convert(ProductViewModel c)
         {
-            return new Course()
+            return new Product()
             {
-                Id = c.Id,
-                Title = c.Title,
-                Cost = c.Cost,
-                Length = c.Length,
-                Dates = c.Dates,
-                Location = c.Location,
-                Teacher = c.Teacher,
-                Organizer = c.Organizer,
+                ID = c.ID,
+                Name = c.Name,
                 Description = c.Description,
-                Image = c.Image,
-                Active = c.Active
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                Type = c.Type,
+                PartnerID = c.PartnerID,
+                Teacher = c.Teacher,
+                SeatsCount = c.SeatsCount,
+                AssignedUserID = c.AssignedUserID,
+                Location = c.Location
             };
         }
-        private CourseViewModel Convert(Course c)
+        private ProductViewModel Convert(Product c)
         {
-            return new CourseViewModel()
+            return new ProductViewModel()
             {
-                Id = c.Id,
-                Title = c.Title,
-                Cost = c.Cost,
-                Length = c.Length,
-                Dates = c.Dates,
-                Location = c.Location,
-                Teacher = c.Teacher,
-                Organizer = c.Organizer,
+                ID = c.ID,
+                Name = c.Name,
                 Description = c.Description,
-                Image = c.Image,
-                Active = c.Active
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                Type = c.Type,
+                PartnerID = c.PartnerID,
+                Teacher = c.Teacher,
+                SeatsCount = c.SeatsCount,
+                AssignedUserID = c.AssignedUserID,
+                Location = c.Location
             };
         }
     }

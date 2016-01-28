@@ -13,29 +13,29 @@ namespace Courses.Gui.Manager.Controllers
 {
     public class ManagerController : Controller
     {
-        private readonly ICourseService courseService;
+        private readonly IProductService productService;
 
-        public ManagerController(ICourseService courseService)
+        public ManagerController(IProductService productService)
         {
-            if (courseService == null)
+            if (productService == null)
                 throw new ArgumentNullException();
-            this.courseService = courseService;
+            this.productService = productService;
         }
         [HttpGet]
         public ActionResult New()
         {
-            CourseViewModel model = new CourseViewModel();
+            ProductViewModel model = new ProductViewModel();
             return View(model);
         }
         [HttpPost]
-        public ActionResult New(CourseViewModel course)
+        public ActionResult New(ProductViewModel product)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    courseService.Add(course);
-                    courseService.SaveChanges();
+                    productService.Add(product);
+                    productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
@@ -43,7 +43,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(course);
+            return View(product);
         }
 
         [HttpGet]
@@ -51,21 +51,21 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var course = courseService.GetByID(id.Value);
-            if (course == null)
+            var product = productService.GetByID(id.Value);
+            if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(course);
+            return View(product);
         }
 
         [HttpPost]
-        public ActionResult Edit(CourseViewModel course)
+        public ActionResult Edit(ProductViewModel product)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    courseService.Edit(course);
-                    courseService.SaveChanges();
+                    productService.Edit(product);
+                    productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
@@ -73,27 +73,53 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(course);
+            return View(product);
         }
 
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var product = productService.GetByID(id.Value);
+            if (product == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(ProductViewModel product)
+        {
+            try
+            {
+                    productService.Delete(product);
+                    productService.SaveChanges();
+                    return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            return View(product);
+        }
         [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var course = courseService.GetByID(id.Value);
-            if (course == null)
+            var product = productService.GetByID(id.Value);
+            if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(course);
+            return View(product);
         }
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.TitleSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Title") ? "TitleDesc" : "Title";
-            ViewBag.DatesSortParam = sortOrder == "Dates" ? "DatesDesc" : "Dates";
-            ViewBag.OrganizerSortParam = sortOrder == "Organizer" ? "OrganizerDesc" : "Organizer";
+            ViewBag.NameSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Name") ? "NameDesc" : "Name";
             ViewBag.ActiveSortParam = sortOrder == "Active" ? "ActiveDesc" : "Active";
+            ViewBag.CreatedDaterSortParam = sortOrder == "CreatedDate" ? "CreatedDateDesc" : "CreatedDate";
+            ViewBag.LocationSortParam = sortOrder == "Location" ? "LocationDesc" : "Location";
 
             if (Request.HttpMethod == "GET")
             {
@@ -109,14 +135,14 @@ namespace Courses.Gui.Manager.Controllers
             List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
             if (!String.IsNullOrEmpty(searchString))
             {
-                FieldFilter fieldFilter = new FieldFilter() { Name = "Title", Value = searchString };
+                FieldFilter fieldFilter = new FieldFilter() { Name = "Name", Value = searchString.ToString() };
                 fieldFilters.Add(fieldFilter);
             }
 
             int pageSize = 3;
             int currentPage = page ?? 1;
-            var courses = courseService.GetCourses(currentPage, pageSize, fieldFilters, sortFilter);
-            return View(courses);
+            var products = productService.GetProducts(currentPage, pageSize, fieldFilters, sortFilter);
+            return View(products);
         }
     }
 }

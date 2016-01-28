@@ -5,14 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Courses.Models;
+
 namespace Courses.DAL
 {
-    public class CourseContext : DbContext
+    public class ProductContext : DbContext
     {
-        public CourseContext() :
-            base("CoursesDatabase")
+        public ProductContext() :
+            base("ProductsDatabase")
         { }
 
-        public DbSet<Course> Course { get; set; }
+        public DbSet<Product> Product { get; set; }
     }
 }

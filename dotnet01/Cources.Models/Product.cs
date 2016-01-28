@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Courses.Models
 {
-    class Product
+    public class Product: DomainObject
     {
         public int ID { get; set;}
         public string Name { get; set; }

@@ -11,6 +11,15 @@ namespace Courses.Models
     /// </summary>
     public class Account:DomainObject
     {
+
+        /// <summary>
+        /// Id пользователя
+        /// </summary>
+        public int Id
+        {
+            get;
+            set;
+        }
         /// <summary>
         /// Логин пользователя
         /// </summary>

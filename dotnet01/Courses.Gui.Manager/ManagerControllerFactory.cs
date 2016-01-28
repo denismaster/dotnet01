@@ -41,9 +41,9 @@ namespace Courses.Gui.Manager
         //TODO Использовать авторегистрацию в других фабриках, это на будущее
         private void AddBindings()
         {
-            kernel.Bind<ICourseService>().To<CourseService>();
-            kernel.Bind<IFilterFactory<Course>>().To<CourseFilterFactory>();
-            kernel.Bind<ICourseRepository>().To<CourseRepository>();
+            kernel.Bind<IProductService>().To<ProductService>();
+            kernel.Bind<IFilterFactory<Product>>().To<ProductFilterFactory>();
+            kernel.Bind<IProductRepository>().To<ProductRepository>();
         }
     }
 }

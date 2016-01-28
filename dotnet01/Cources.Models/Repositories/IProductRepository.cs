@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-    public interface ICourseRepository: IRepository<Course>
+    public interface IProductRepository: IRepository<Product>
     {
         //Дополнительные действия, специфичные для курсов.
     }
