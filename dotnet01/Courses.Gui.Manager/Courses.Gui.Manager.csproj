@@ -204,6 +204,7 @@
     <Content Include="Views\Manager\Details.cshtml" />
     <Content Include="Views\Manager\Delete.cshtml" />
     <Content Include="Views\Partner\Index.cshtml" />
+    <Content Include="Views\Partner\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

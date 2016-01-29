@@ -1,4 +1,6 @@
-﻿using Courses.Buisness.Partner;
+﻿using Courses.Buisness.Filtering;
+using Courses.Buisness.Partner;
+using Courses.Models.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +19,38 @@ namespace Courses.Gui.Manager.Controllers
                 throw new ArgumentNullException();
             this.partnerService = partnerService;
         }
-        
+
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Name") ? "NameDesc" : "Name";
+            ViewBag.AddressSortParam = sortOrder == "Address" ? "AddressDesc" : "Address";
+            ViewBag.PhoneSortParam = sortOrder == "Phone" ? "PhoneDesc" : "Phone";
+            ViewBag.EmailSortParam = sortOrder == "Email" ? "EmailDesc" : "Email";
+
+            if (Request.HttpMethod == "GET")
+            {
+                searchString = currentFilter;
+            }
+            else
+            {
+                page = 1;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            SortFilter sortFilter = new SortFilter() { SortOrder = sortOrder };
+            List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                FieldFilter fieldFilter = new FieldFilter() { Name = "Name", Value = searchString.ToString() };
+                fieldFilters.Add(fieldFilter);
+            }
+
+            int pageSize = 3;
+            int currentPage = page ?? 1;
+            var partners = partnerService.GetPartners(currentPage, pageSize, fieldFilters, sortFilter);
+            return View(partners);
+        }
+
     }
 }

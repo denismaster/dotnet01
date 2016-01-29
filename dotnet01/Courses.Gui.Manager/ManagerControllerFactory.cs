@@ -5,6 +5,7 @@ using Courses.Models.Repositories;
 using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
+using Courses.Buisness.Partner;
 
 namespace Courses.Gui.Manager
 {
@@ -44,6 +45,10 @@ namespace Courses.Gui.Manager
             kernel.Bind<IProductService>().To<ProductService>();
             kernel.Bind<IFilterFactory<Product>>().To<ProductFilterFactory>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
+
+            kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
+            kernel.Bind<IPartnerService>().To<PartnerService>();
+            kernel.Bind<IFilterFactory<Partner>>().To<PartnerFilterFactory>();
         }
     }
 }
