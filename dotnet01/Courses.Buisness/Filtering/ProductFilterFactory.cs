@@ -10,7 +10,7 @@ namespace Courses.Buisness.Filtering
     {
         public Func<Models.Product, bool> GetFilterExpression(IEnumerable<FieldFilter> fieldFilters)
         {
-            Func<Models.Product, bool> filterExp = acc => acc.ID >= 0;
+            Func<Models.Product, bool> filterExp = acc => acc.Id >= 0;
 
             foreach (var fieldFilter in fieldFilters)
             {
@@ -35,19 +35,19 @@ namespace Courses.Buisness.Filtering
                         filterExp += acc => acc.Active.ToString().Equals(fieldFilter.Value);
                         break;
                     case "PartnerID":
-                        filterExp += acc => acc.PartnerID.ToString().Equals(fieldFilter.Value);
+                        filterExp += acc => acc.PartnerId.ToString().Equals(fieldFilter.Value);
                         break;
                     case "SeatsCount":
                         filterExp += acc => acc.SeatsCount.ToString().Equals(fieldFilter.Value);
                         break;
                     case "AssignedUserID":
-                        filterExp += acc => acc.AssignedUserID.ToString().Equals(fieldFilter.Value);
+                        filterExp += acc => acc.AssignedUserId.ToString().Equals(fieldFilter.Value);
                         break;
                     case "Type":
                         filterExp += acc => acc.Type.ToString().Equals(fieldFilter.Value);
                         break;
                     default:
-                        filterExp += acc => acc.ID >= 0;
+                        filterExp += acc => acc.Id >= 0;
                         break;
                 }
             }

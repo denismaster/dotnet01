@@ -148,17 +148,17 @@ namespace Courses.Buisness
         {
             return new Product()
             {
-                ID = c.ID,
+                Id = c.ID,
                 Name = c.Name,
                 Description = c.Description,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
                 Type = c.Type,
-                PartnerID = c.PartnerID,
+                PartnerId = c.PartnerID,
                 Teacher = c.Teacher,
                 SeatsCount = c.SeatsCount,
-                AssignedUserID = c.AssignedUserID,
+                AssignedUserId = c.AssignedUserID,
                 Location = c.Location
             };
         }
@@ -166,17 +166,17 @@ namespace Courses.Buisness
         {
             return new ProductViewModel()
             {
-                ID = c.ID,
+                ID = c.Id,
                 Name = c.Name,
                 Description = c.Description,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
                 Type = c.Type,
-                PartnerID = c.PartnerID,
+                PartnerID = c.PartnerId,
                 Teacher = c.Teacher,
                 SeatsCount = c.SeatsCount,
-                AssignedUserID = c.AssignedUserID,
+                AssignedUserID = c.AssignedUserId.Value,
                 Location = c.Location
             };
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-    public interface IAccountRepository: IRepository<Account>
+    public interface IAccountRepository: IRepository<User>
     {
         //Дополнительные действия, специфичные для аккаунтов.
     }

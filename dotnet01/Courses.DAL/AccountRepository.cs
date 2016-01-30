@@ -29,13 +29,13 @@ namespace Courses.DAL
             return context.Users.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
         }
 
-        public IEnumerable<Models.User> GetSorted(int page, int pageSize, Func<Models.User, bool> expression, string sortFilter)
+        public IEnumerable<Models.User> Get(int page, int pageSize, Func<Models.User, bool> expression, SortFilter sortFilter)
         {
-            if (String.IsNullOrWhiteSpace(sortFilter))
+            if (String.IsNullOrWhiteSpace(sortFilter.SortOrder))
             {
                 return context.Users.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
             }
-            switch (sortFilter)
+            switch (sortFilter.SortOrder)
             {
                 case "LogIn":
                     return context.Users.Where(expression).OrderBy(s => s.Login).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
