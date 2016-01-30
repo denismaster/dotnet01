@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-    public class SortFilter
+    public interface IPartnerRepository: IRepository<Partner>
     {
-        public String SortOrder { get; set; }
+        //Дополнительные действия, специфичные для партнеров.
     }
 }

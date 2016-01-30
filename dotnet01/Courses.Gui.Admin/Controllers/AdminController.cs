@@ -42,7 +42,6 @@ namespace Courses.Gui.Admin.Controllers
             catch (Exception e)
             {
                 ModelState.AddModelError("", "Unable to save changes:"+e.Message);
-                throw (e);
             }
             return View(account);
         }
@@ -131,7 +130,7 @@ namespace Courses.Gui.Admin.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            SortFilter sortFilter = new SortFilter() { SortOrder = sortOrder };
+           var sortFilter = new Courses.Buisness.Filtering.SortFilter() { SortOrder = sortOrder };
             List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
             if(!String.IsNullOrEmpty(searchString))
             {

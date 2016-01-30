@@ -48,8 +48,9 @@ namespace Courses.Buisness
             int total;
             if (fieldFilters != null && sortFilter != null)
             {
+                var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                accounts =  repository.GetSorted(page, pageSize, expression, sortFilter.SortOrder).Select(Convert);
+                accounts =  repository.Get(page, pageSize, expression, newSortFilter).Select(Convert);
                 total = repository.Count(expression);
             }
             else
