@@ -11,7 +11,7 @@ namespace Courses.DAL
     public class ProductContext : DbContext
     {
         public ProductContext() :
-            base("ProductsDatabase")
+            base("AccountsDatabase")
         { }
 
         public DbSet<Product> Product { get; set; }

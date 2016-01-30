@@ -12,7 +12,7 @@ namespace Courses.Models
     public class ProductRating : DomainObject
     {
        
-        
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         
         public int ProductId { get; set; }

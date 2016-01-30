@@ -9,7 +9,7 @@ namespace Courses.ViewModels
 {
     public class PartnerViewModel
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
         public string Name { get; set; }

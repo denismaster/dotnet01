@@ -16,13 +16,13 @@ namespace Courses.Buisness
         /// TODO:Желательно возвращать готовые ViewModels, но это пока неважно.
         /// </summary>
         ProductCollectionViewModel GetProducts(int page, int pageSize,
-            List<Filtering.FieldFilter> fieldFilter = null, SortFilter sortFilter = null);
+            List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
         /// <summary>
         /// Получение одного курса
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        ProductViewModel GetByID(int id);
+        ProductViewModel GetById(int Id);
         /// <summary>
         /// Добавление курса. 
         /// </summary>
@@ -76,14 +76,15 @@ namespace Courses.Buisness
         /// <param name="sortFilter">Порядок сортировки</param>
         /// <returns></returns>
         public ProductCollectionViewModel GetProducts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters = null,
-            SortFilter sortFilter = null)
+            Filtering.SortFilter sortFilter = null)
         {
             IEnumerable<ProductViewModel> products;
             int total;
             if (fieldFilters != null && sortFilter != null)
             {
+                var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                products = repository.Get(page, pageSize, expression, sortFilter).Select(Convert);
+                products = repository.Get(page, pageSize, expression, newSortFilter).Select(Convert);
                 total = repository.Count(expression);
             }
             else
@@ -103,11 +104,11 @@ namespace Courses.Buisness
         /// <summary>
         /// Получение информации о курсе по его идентификатору
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        public ProductViewModel GetByID(int id)
+        public ProductViewModel GetById(int Id)
         {
-            var product = repository.Get(id);
+            var product = repository.Get(Id);
             return (product == null) ? null : Convert(product);
         }
         /// <summary>
@@ -148,17 +149,17 @@ namespace Courses.Buisness
         {
             return new Product()
             {
-                Id = c.ID,
+                Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
                 Type = c.Type,
-                PartnerId = c.PartnerID,
+                PartnerId = c.PartnerId,
                 Teacher = c.Teacher,
                 SeatsCount = c.SeatsCount,
-                AssignedUserId = c.AssignedUserID,
+                AssignedUserId = c.AssignedUserId,
                 Location = c.Location
             };
         }
@@ -166,17 +167,17 @@ namespace Courses.Buisness
         {
             return new ProductViewModel()
             {
-                ID = c.Id,
+                Id = c.Id,
                 Name = c.Name,
                 Description = c.Description,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
                 Type = c.Type,
-                PartnerID = c.PartnerId,
+                PartnerId = c.PartnerId,
                 Teacher = c.Teacher,
                 SeatsCount = c.SeatsCount,
-                AssignedUserID = c.AssignedUserId.Value,
+                AssignedUserId = c.AssignedUserId.Value,
                 Location = c.Location
             };
         }

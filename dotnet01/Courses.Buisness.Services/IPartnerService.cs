@@ -13,7 +13,7 @@ namespace Courses.Buisness
         /// Возвращает список партнеров. 
         /// </summary>
         PartnerCollectionViewModel GetPartners(int page, int pageSize,
-            List<Filtering.FieldFilter> fieldFilter = null, SortFilter sortFilter = null);
+            List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
         /// <summary>
         /// Получение одного партнера
         /// </summary>

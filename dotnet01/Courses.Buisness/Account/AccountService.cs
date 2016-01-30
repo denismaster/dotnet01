@@ -41,7 +41,8 @@ namespace Courses.Buisness
         /// <param name="fieldFilters">Список фильтров</param>
         /// <param name="sortFilter">Порядок сортировки</param>
         /// <returns></returns>
-        public AccountCollectionViewModel GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters = null,
+        public AccountCollectionViewModel GetAccounts(int page, int pageSize, 
+            List<Filtering.FieldFilter> fieldFilters = null,
             Filtering.SortFilter sortFilter = null)
         {
             IEnumerable<AccountViewModel> accounts;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.GUI.Old_WILL_BE_DELETED", "dotnet01\Courses.GUI.Old_WILL_BE_DELETED.csproj", "{B8AA7BBD-F3E6-445D-8D3D-31C97F8230A1}"
 EndProject
@@ -29,6 +29,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Models.Repositories", "Courses.Models.Repositories\Courses.Models.Repositories.csproj", "{BE2EAC06-2EB3-4013-B85E-5E52EBAF42D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Buisness.Services", "Courses.Buisness.Services\Courses.Buisness.Services.csproj", "{7DDC3E7C-E381-4D21-BFAB-71D69626B9FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Gui.Manager", "Courses.Gui.Manager\Courses.Gui.Manager.csproj", "{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,10 @@ Global
 		{7DDC3E7C-E381-4D21-BFAB-71D69626B9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DDC3E7C-E381-4D21-BFAB-71D69626B9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DDC3E7C-E381-4D21-BFAB-71D69626B9FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +87,6 @@ Global
 		{EA6E5992-138E-4AA7-991B-22AD5A816E2C} = {CA264FC3-6998-46A4-A848-9A33C92AA808}
 		{BE2EAC06-2EB3-4013-B85E-5E52EBAF42D1} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
 		{7DDC3E7C-E381-4D21-BFAB-71D69626B9FB} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
+		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988} = {CA264FC3-6998-46A4-A848-9A33C92AA808}
 	EndGlobalSection
 EndGlobal

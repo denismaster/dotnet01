@@ -14,7 +14,7 @@ namespace Courses.Buisness.Services
         /// TODO:Желательно возвращать готовые ViewModels, но это пока неважно.
         /// </summary>
         ProductCollectionViewModel GetProducts(int page, int pageSize,
-            List<Filtering.FieldFilter> fieldFilter = null, SortFilter sortFilter = null);
+            List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
         /// <summary>
         /// Получение одного курса
         /// </summary>

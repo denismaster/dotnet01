@@ -1,12 +1,13 @@
-﻿using Courses.Models.Repositories;
-using Courses.ViewModels;
-using Courses.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace Courses.Buisness.Partner
+using Courses.Models;
+using Courses.Models.Repositories;
+using Courses.ViewModels;
+
+namespace Courses.Buisness
 {
     public class PartnerService : IPartnerService
     {
@@ -40,15 +41,17 @@ namespace Courses.Buisness.Partner
         /// <param name="fieldFilters">Список фильтров</param>
         /// <param name="sortFilter">Порядок сортировки</param>
         /// <returns></returns>
-        public PartnerCollectionViewModel GetPartners(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters = null,
-            SortFilter sortFilter = null)
+        public PartnerCollectionViewModel GetPartners(int page, int pageSize,
+            List<Filtering.FieldFilter> fieldFilters = null,
+             Filtering.SortFilter sortFilter = null)
         {
             IEnumerable<PartnerViewModel> partners;
             int total;
             if (fieldFilters != null && sortFilter != null)
             {
+                var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                partners = repository.Get(page, pageSize, expression, sortFilter).Select(Convert);
+                partners = repository.Get(page, pageSize, expression, newSortFilter).Select(Convert);
                 total = repository.Count(expression);
             }
             else
@@ -113,7 +116,7 @@ namespace Courses.Buisness.Partner
         {
             return new Models.Partner()
             {
-                PartnerId = c.ID,
+                PartnerId = c.Id,
                 Name = c.Name,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
@@ -129,7 +132,7 @@ namespace Courses.Buisness.Partner
         {
             return new PartnerViewModel()
             {
-                ID = c.PartnerId,
+                Id = c.PartnerId,
                 Name = c.Name,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,

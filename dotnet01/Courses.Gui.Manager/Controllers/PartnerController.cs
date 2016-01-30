@@ -1,11 +1,13 @@
-﻿using Courses.Buisness.Filtering;
-using Courses.Buisness.Partner;
-using Courses.Models.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Courses.Buisness;
+using Courses.Models;
+using Courses.Models.Repositories;
+using Courses.ViewModels;
+using Courses.Buisness.Filtering;
 
 namespace Courses.Gui.Manager.Controllers
 {
@@ -38,7 +40,7 @@ namespace Courses.Gui.Manager.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            SortFilter sortFilter = new SortFilter() { SortOrder = sortOrder };
+            var sortFilter = new Courses.Buisness.Filtering.SortFilter() { SortOrder = sortOrder };
             List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
             if (!String.IsNullOrEmpty(searchString))
             {

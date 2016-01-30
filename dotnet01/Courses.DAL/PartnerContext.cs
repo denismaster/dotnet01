@@ -11,7 +11,7 @@ namespace Courses.DAL
     public class PartnerContext : DbContext
     {
         public PartnerContext() :
-            base("PartnersDatabase")
+            base("AccountsDatabase")
         { }
 
         public DbSet<Partner> Partner { get; set; }

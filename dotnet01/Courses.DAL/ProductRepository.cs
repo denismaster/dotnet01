@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Courses.Models.Repositories;
+using Courses.Models;
 using System.Data.Entity;
+
 namespace Courses.DAL
 {
     /// <summary>
@@ -32,7 +34,7 @@ namespace Courses.DAL
         {
             if (String.IsNullOrWhiteSpace(sortFilter.SortOrder))
             {
-                return context.Product.Where(expression).OrderBy(s => s.ID).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                return context.Product.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
             }
             switch (sortFilter.SortOrder)
             {
@@ -67,9 +69,9 @@ namespace Courses.DAL
                     return context.Product.Where(expression).OrderByDescending(s => s.Type).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 case "PartnerID":
-                    return context.Product.Where(expression).OrderBy(s => s.PartnerID).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Product.Where(expression).OrderBy(s => s.PartnerId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 case "PartnerIDDesc":
-                    return context.Product.Where(expression).OrderByDescending(s => s.PartnerID).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Product.Where(expression).OrderByDescending(s => s.PartnerId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 case "Teacher":
                     return context.Product.Where(expression).OrderBy(s => s.Teacher).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
@@ -82,9 +84,9 @@ namespace Courses.DAL
                     return context.Product.Where(expression).OrderByDescending(s => s.SeatsCount).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 case "AssignedUserID":
-                    return context.Product.Where(expression).OrderBy(s => s.AssignedUserID).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Product.Where(expression).OrderBy(s => s.AssignedUserId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 case "AssignedUserIDrDesc":
-                    return context.Product.Where(expression).OrderByDescending(s => s.AssignedUserID).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Product.Where(expression).OrderByDescending(s => s.AssignedUserId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 case "Location":
                     return context.Product.Where(expression).OrderBy(s => s.Location).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
@@ -92,7 +94,7 @@ namespace Courses.DAL
                     return context.Product.Where(expression).OrderByDescending(s => s.Location).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 default:
-                    return context.Product.Where(expression).OrderBy(s => s.ID).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Product.Where(expression).OrderBy(s => s.Id).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
             }
         }
 

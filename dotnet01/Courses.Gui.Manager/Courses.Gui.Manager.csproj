@@ -15,7 +15,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Courses.Gui.Manager</RootNamespace>
     <AssemblyName>Courses.Gui.Manager</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -71,16 +73,14 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -122,6 +122,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebActivatorEx">
       <HintPath>..\Courses.Gui.Admin\bin\WebActivatorEx.dll</HintPath>
     </Reference>
@@ -222,6 +223,10 @@
       <Project>{1496fb44-c419-4eae-95c7-49a068dc2e78}</Project>
       <Name>Courses.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Courses.Buisness.Services\Courses.Buisness.Services.csproj">
+      <Project>{7ddc3e7c-e381-4d21-bfab-71d69626b9fb}</Project>
+      <Name>Courses.Buisness.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Courses.Buisness\Courses.Buisness.csproj">
       <Project>{95bfac8f-52bc-4841-893a-1e894ce785b4}</Project>
       <Name>Courses.Buisness</Name>
@@ -229,6 +234,10 @@
     <ProjectReference Include="..\Courses.DAL\Courses.DAL.csproj">
       <Project>{811d53d2-0687-44e8-855d-020f629227fa}</Project>
       <Name>Courses.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Courses.Models.Repositories\Courses.Models.Repositories.csproj">
+      <Project>{be2eac06-2eb3-4013-b85e-5e52ebaf42d1}</Project>
+      <Name>Courses.Models.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\Courses.ViewModels\Courses.ViewModels.csproj">
       <Project>{def79d34-00e6-4658-b8a9-12798a36e88b}</Project>

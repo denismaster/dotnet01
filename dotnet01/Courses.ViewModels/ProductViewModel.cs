@@ -9,7 +9,7 @@ namespace Courses.ViewModels
 {
     public class ProductViewModel
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
         public string Name { get; set; }
@@ -30,7 +30,7 @@ namespace Courses.ViewModels
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
         [RegularExpression(@"\d{1,}", ErrorMessage = "введите число")]
-        public int PartnerID { get; set; }
+        public int PartnerId { get; set; }
 
         public string Teacher { get; set; }
 
@@ -39,7 +39,7 @@ namespace Courses.ViewModels
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
         [RegularExpression(@"\d{1,}", ErrorMessage = "введите число")]
-        public int AssignedUserID { get; set; }
+        public int AssignedUserId { get; set; }
 
         public string Location { get; set; }
     }

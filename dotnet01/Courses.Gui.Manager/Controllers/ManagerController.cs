@@ -32,6 +32,7 @@ namespace Courses.Gui.Manager.Controllers
         {
             try
             {
+                
                 if (ModelState.IsValid)
                 {
                     productService.Add(product);
@@ -51,7 +52,7 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetByID(id.Value);
+            var product = productService.GetById(id.Value);
             if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(product);
@@ -81,7 +82,7 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetByID(id.Value);
+            var product = productService.GetById(id.Value);
             if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(product);
@@ -107,7 +108,7 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetByID(id.Value);
+            var product = productService.GetById(id.Value);
             if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(product);
@@ -131,7 +132,7 @@ namespace Courses.Gui.Manager.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-            SortFilter sortFilter = new SortFilter() { SortOrder = sortOrder };
+            var sortFilter = new Courses.Buisness.Filtering.SortFilter() { SortOrder = sortOrder };
             List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
             if (!String.IsNullOrEmpty(searchString))
             {
