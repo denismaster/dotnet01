@@ -8,40 +8,7 @@ using Courses.Models.Repositories;
 using Courses.ViewModels;
 namespace Courses.Buisness
 {
-    public interface IAccountService
-    {
-        /// <summary>
-        /// Возвращает список аккаунтов. 
-        /// TODO:Желательно возвращать готовые ViewModels, но это пока неважно.
-        /// </summary>
-        AccountCollectionViewModel GetAccounts(int page, int pageSize,
-            List<Filtering.FieldFilter> fieldFilter = null, SortFilter sortFilter = null);
-        /// <summary>
-        /// Получение одного аккаунта
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        AccountViewModel GetByID(int id);
-        /// <summary>
-        /// Добавление аккаунта. 
-        /// </summary>
-        /// <param name="account"></param>
-        void Add(AccountViewModel account);
-        /// <summary>
-        /// Обновление данных аккаунта
-        /// </summary>
-        /// <param name="account"></param>
-        void Edit(AccountViewModel account);
-        /// <summary>
-        /// Удаление аккаунта
-        /// </summary>
-        /// <param name="account"></param>
-        void Delete(AccountViewModel account);
-        /// <summary>
-        /// Сохранение изменений в репозитории
-        /// </summary>
-        void SaveChanges();
-    }
+    
     public class AccountService : IAccountService
     {
         /// <summary>
@@ -75,14 +42,14 @@ namespace Courses.Buisness
         /// <param name="sortFilter">Порядок сортировки</param>
         /// <returns></returns>
         public AccountCollectionViewModel GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters = null,
-            SortFilter sortFilter = null)
+            Filtering.SortFilter sortFilter = null)
         {
             IEnumerable<AccountViewModel> accounts;
             int total;
             if (fieldFilters != null && sortFilter != null)
             {
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                accounts =  repository.Get(page, pageSize, expression, sortFilter).Select(Convert);
+                accounts =  repository.GetSorted(page, pageSize, expression, sortFilter.SortOrder).Select(Convert);
                 total = repository.Count(expression);
             }
             else

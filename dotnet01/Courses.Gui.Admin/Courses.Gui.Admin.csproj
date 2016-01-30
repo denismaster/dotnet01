@@ -210,6 +210,10 @@
       <Project>{1496fb44-c419-4eae-95c7-49a068dc2e78}</Project>
       <Name>Courses.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Courses.Buisness.Services\Courses.Buisness.Services.csproj">
+      <Project>{7ddc3e7c-e381-4d21-bfab-71d69626b9fb}</Project>
+      <Name>Courses.Buisness.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Courses.Buisness\Courses.Buisness.csproj">
       <Project>{95bfac8f-52bc-4841-893a-1e894ce785b4}</Project>
       <Name>Courses.Buisness</Name>
@@ -217,6 +221,10 @@
     <ProjectReference Include="..\Courses.DAL\Courses.DAL.csproj">
       <Project>{811d53d2-0687-44e8-855d-020f629227fa}</Project>
       <Name>Courses.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Courses.Models.Repositories\Courses.Models.Repositories.csproj">
+      <Project>{be2eac06-2eb3-4013-b85e-5e52ebaf42d1}</Project>
+      <Name>Courses.Models.Repositories</Name>
     </ProjectReference>
     <ProjectReference Include="..\Courses.ViewModels\Courses.ViewModels.csproj">
       <Project>{def79d34-00e6-4658-b8a9-12798a36e88b}</Project>

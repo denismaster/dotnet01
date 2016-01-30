@@ -57,6 +57,10 @@
       <Project>{1496fb44-c419-4eae-95c7-49a068dc2e78}</Project>
       <Name>Courses.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Courses.Models.Repositories\Courses.Models.Repositories.csproj">
+      <Project>{be2eac06-2eb3-4013-b85e-5e52ebaf42d1}</Project>
+      <Name>Courses.Models.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
