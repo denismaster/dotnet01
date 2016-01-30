@@ -55,6 +55,11 @@ namespace Courses.DAL
             }
         }
 
+        public Models.User GetUser(string login, string password)
+        {
+            return context.Users.Where(a => a.Login == login && a.PasswordHash == password).FirstOrDefault();
+        }
+
         public Models.User Get(int id)
         {
             return context.Users.Find(id);

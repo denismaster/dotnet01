@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="FieldFilter.cs" />
     <Compile Include="IAccountService.cs" />
+    <Compile Include="IAuthenticationService.cs" />
     <Compile Include="IFilterFactory.cs" />
     <Compile Include="IPartnerService.cs" />
     <Compile Include="IProductService.cs" />

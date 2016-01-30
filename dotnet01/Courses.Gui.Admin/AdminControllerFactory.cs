@@ -5,6 +5,8 @@ using Courses.Models.Repositories;
 using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
+using Courses.Buisness.Services;
+using Courses.Buisness.Authentication;
 
 namespace Courses.Gui.Admin
 {
@@ -44,6 +46,7 @@ namespace Courses.Gui.Admin
             kernel.Bind<IAccountService>().To<AccountService>();
             kernel.Bind<IFilterFactory<User>>().To<AccountFilterFactory>();
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
+            kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
         }
     }
 }
