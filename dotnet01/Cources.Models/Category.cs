@@ -24,7 +24,7 @@ namespace Courses.Models
         public int? ParentId { get; set; }
         public List<Partner> Partners { get; set; }
         public List<Product> Products { get; set; }
-        [ForeignKey("ParentId")]
+        
         public Category _Category { get; set; }
     }
 }
