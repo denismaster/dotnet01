@@ -116,6 +116,12 @@ namespace Courses.DAL
                      m.MapRightKey("CustomerId");
 
                  });
+            modelBuilder.Entity<ProductRating>().HasKey(e => new { e.ProductId, e.CustomerId });
+            modelBuilder.Entity<Schedule>()
+                .HasOptional(o => o._Schedule);
+
+            modelBuilder.Entity<Category>()
+                .HasOptional(o => o._Category);
         }
         
     }

@@ -22,7 +22,7 @@ namespace Courses.Models
         public string Text { get; set; }
         public int? ParentId { get; set; }
         public int AppointmentId { get; set; }
-        [ForeignKey("ParentId")]
+       
         public Schedule _Schedule { get; set; }
         public Appointment Appointment { get; set; }
     }
