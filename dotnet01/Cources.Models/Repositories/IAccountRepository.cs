@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-    public interface IAccountRepository: IRepository<User>
+    public interface IAccountRepository: IRepository<Account>
     {
         //Дополнительные действия, специфичные для аккаунтов.
-        IEnumerable<Models.User> GetSorted(int page, int pageSize, Func<Models.User, bool> expression, string sortFilter);
     }
 }

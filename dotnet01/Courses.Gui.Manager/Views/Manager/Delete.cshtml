@@ -1,0 +1,110 @@
+﻿@model Courses.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Удалить выбранный курс (продукт)?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartnerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Teacher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teacher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatsCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeatsCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад к списку", "Index")
+        </div>
+    }
+</div>

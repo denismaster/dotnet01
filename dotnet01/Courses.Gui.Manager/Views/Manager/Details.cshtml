@@ -1,0 +1,107 @@
+﻿@model Courses.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Детальная информация: курс № @Model.ID
+    </div>
+    <dl class="dl-horizontal">
+        @Html.AntiForgeryToken()
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartnerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Teacher)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Teacher)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SeatsCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SeatsCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AssignedUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AssignedUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Назад к списку", "Index")
+</p>

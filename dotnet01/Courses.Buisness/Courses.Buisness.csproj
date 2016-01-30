@@ -40,10 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\AccountService.cs" />
+    <Compile Include="Filtering\PartnerFilterFactory.cs" />
+    <Compile Include="Partner\PartnerService.cs" />
+    <Compile Include="Product\ProductService.cs" />
+    <Compile Include="Filtering\ProductFilterFactory.cs" />
     <Compile Include="Filtering\FieldFilter.cs" />
     <Compile Include="Filtering\AccountFilterFactory.cs" />
     <Compile Include="Filtering\IFilterFactory.cs" />
-    <Compile Include="Filtering\SortFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,9 +59,7 @@
       <Name>Courses.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pagination\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -15,7 +15,7 @@ namespace Courses.Buisness
         /// TODO:Желательно возвращать готовые ViewModels, но это пока неважно.
         /// </summary>
         AccountCollectionViewModel GetAccounts(int page, int pageSize,
-            List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
+            List<Filtering.FieldFilter> fieldFilter = null, SortFilter sortFilter = null);
         /// <summary>
         /// Получение одного аккаунта
         /// </summary>
@@ -75,14 +75,14 @@ namespace Courses.Buisness
         /// <param name="sortFilter">Порядок сортировки</param>
         /// <returns></returns>
         public AccountCollectionViewModel GetAccounts(int page, int pageSize, List<Filtering.FieldFilter> fieldFilters = null,
-            Filtering.SortFilter sortFilter = null)
+            SortFilter sortFilter = null)
         {
             IEnumerable<AccountViewModel> accounts;
             int total;
             if (fieldFilters != null && sortFilter != null)
             {
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                accounts =  repository.GetSorted(page, pageSize, expression, sortFilter.SortOrder).Select(Convert);
+                accounts =  repository.Get(page, pageSize, expression, sortFilter).Select(Convert);
                 total = repository.Count(expression);
             }
             else

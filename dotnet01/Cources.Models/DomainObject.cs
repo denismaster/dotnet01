@@ -11,6 +11,5 @@ namespace Courses.Models
     /// </summary>
     public abstract class DomainObject
     {
-      
     }
 }
