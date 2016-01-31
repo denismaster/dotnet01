@@ -36,7 +36,7 @@ namespace Courses.Models
         public List<Order> Orders { get; set; }
         public List<Comment> Comments { get; set; }
         public List<EmailQueue> EmailQueues { get; set; }
-        public List<Product> Products { get; set; }
+     
         public List<Product> FavouriteProducts { get; set; }
         public List<ProductRating> ProductRatings { get; set; }
       

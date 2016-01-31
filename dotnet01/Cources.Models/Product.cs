@@ -27,7 +27,7 @@ namespace Courses.Models
         public Partner Partner { get; set; }
         public User User { get; set; }
         public List<Category> Categories { get; set; }
-        public List<Customer> Customers { get; set; }
+   
        
         public List<Customer> CustomersWithFavouriteProducts { get; set; }
         public List<ProductRating> ProductRatings { get; set; }
