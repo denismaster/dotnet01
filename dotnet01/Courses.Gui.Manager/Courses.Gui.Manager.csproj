@@ -156,6 +156,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\AccountsDatabase.mdf" />
+    <Content Include="App_Data\AccountsDatabase_log.ldf">
+      <DependentUpon>AccountsDatabase.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\CoursesDatabase.mdf" />
     <Content Include="App_Data\CoursesDatabase_log.ldf">
       <DependentUpon>CoursesDatabase.mdf</DependentUpon>
