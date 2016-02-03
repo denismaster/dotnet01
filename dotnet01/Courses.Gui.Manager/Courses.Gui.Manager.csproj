@@ -156,14 +156,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\AccountsDatabase.mdf" />
-    <Content Include="App_Data\AccountsDatabase_log.ldf">
-      <DependentUpon>AccountsDatabase.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\CoursesDatabase.mdf" />
-    <Content Include="App_Data\CoursesDatabase_log.ldf">
-      <DependentUpon>CoursesDatabase.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-def.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -204,15 +196,17 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Manager\Index.cshtml" />
-    <Content Include="Views\Manager\New.cshtml" />
     <Content Include="Views\Manager\Edit.cshtml" />
     <Content Include="Views\Manager\Details.cshtml" />
     <Content Include="Views\Manager\Delete.cshtml" />
     <Content Include="Views\Partner\Index.cshtml" />
     <Content Include="Views\Partner\New.cshtml" />
+    <Content Include="Views\Manager\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
