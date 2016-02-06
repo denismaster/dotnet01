@@ -8,6 +8,7 @@ using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.ViewModels;
 using Courses.Buisness.Filtering;
+using Courses.Buisness.Services;
 
 namespace Courses.Gui.Manager.Controllers
 {
@@ -119,8 +120,8 @@ namespace Courses.Gui.Manager.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Name") ? "NameDesc" : "Name";
             ViewBag.ActiveSortParam = sortOrder == "Active" ? "ActiveDesc" : "Active";
-            ViewBag.CreatedDaterSortParam = sortOrder == "CreatedDate" ? "CreatedDateDesc" : "CreatedDate";
-            ViewBag.LocationSortParam = sortOrder == "Location" ? "LocationDesc" : "Location";
+            ViewBag.TypeSortParam = sortOrder == "Type" ? "TypeDesc" : "Type";
+            ViewBag.PartnerIdSortParam = sortOrder == "PartnerId" ? "PartnerIdDesc" : "PartnerId";
 
             if (Request.HttpMethod == "GET")
             {

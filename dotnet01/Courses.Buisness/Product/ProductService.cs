@@ -6,43 +6,10 @@ using System.Threading.Tasks;
 using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.ViewModels;
+using Courses.Buisness.Services;
 
 namespace Courses.Buisness
 {
-    public interface IProductService
-    {
-        /// <summary>
-        /// Возвращает список курсов. 
-        /// TODO:Желательно возвращать готовые ViewModels, но это пока неважно.
-        /// </summary>
-        ProductCollectionViewModel GetProducts(int page, int pageSize,
-            List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
-        /// <summary>
-        /// Получение одного курса
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        ProductViewModel GetById(int Id);
-        /// <summary>
-        /// Добавление курса. 
-        /// </summary>
-        /// <param name="product"></param>
-        void Add(ProductViewModel product);
-        /// <summary>
-        /// Обновление данных курса
-        /// </summary>
-        /// <param name="product"></param>
-        void Edit(ProductViewModel product);
-        /// <summary>
-        /// Удаление курса
-        /// </summary>
-        /// <param name="product"></param>
-        void Delete(ProductViewModel product);
-        /// <summary>
-        /// Сохранение изменений в репозитории
-        /// </summary>
-        void SaveChanges();
-    }
     public class ProductService : IProductService
     {
         /// <summary>
@@ -117,6 +84,7 @@ namespace Courses.Buisness
         /// <param name="product"></param>
         public void Add(ProductViewModel product)
         {
+            product.CreatedDate = product.UpdatedDate = DateTime.Now;
             repository.Add(Convert(product));
         }
         /// <summary>
@@ -125,6 +93,7 @@ namespace Courses.Buisness
         /// <param name="product"></param>
         public void Edit(ProductViewModel product)
         {
+            product.UpdatedDate = DateTime.Now;
             repository.Update(Convert(product));
         }
         /// <summary>
@@ -176,8 +145,8 @@ namespace Courses.Buisness
                 Type = c.Type,
                 PartnerId = c.PartnerId,
                 Teacher = c.Teacher,
-                SeatsCount = c.SeatsCount,
-                AssignedUserId = c.AssignedUserId.Value,
+                SeatsCount = c.SeatsCount ?? null,
+                AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location
             };
         }

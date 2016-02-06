@@ -58,11 +58,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PartnerID)
+            @Html.DisplayNameFor(model => model.PartnerId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PartnerID)
+            @Html.DisplayFor(model => model.PartnerId)
         </dd>
 
         <dt>
@@ -82,11 +82,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AssignedUserID)
+            @Html.DisplayNameFor(model => model.AssignedUserId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AssignedUserID)
+            @Html.DisplayFor(model => model.AssignedUserId)
         </dd>
 
         <dt>
@@ -103,8 +103,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> |
-            @Html.ActionLink("Назад к списку", "Index")
+            @Html.ActionLink("Назад к списку", "Index") |
+            <input type="submit" value="Удалить" class="btn btn-default" />
         </div>
     }
 </div>

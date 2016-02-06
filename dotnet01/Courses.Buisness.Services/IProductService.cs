@@ -18,9 +18,9 @@ namespace Courses.Buisness.Services
         /// <summary>
         /// Получение одного курса
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        ProductViewModel GetByID(int id);
+        ProductViewModel GetById(int Id);
         /// <summary>
         /// Добавление курса. 
         /// </summary>
