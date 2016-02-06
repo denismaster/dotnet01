@@ -8,6 +8,6 @@ namespace Courses.Buisness.Services
 {
     public interface IAuthenticationService
     {
-        Boolean IsValid(string login, string password);
+        bool IsValid(string login, string password);
     }
 }

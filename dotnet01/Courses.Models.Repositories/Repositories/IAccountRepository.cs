@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-    public interface IAccountRepository: IRepository<User>
+    public interface IAccountRepository: IRepository<User>,IDisposable
     {
         //Дополнительные действия, специфичные для аккаунтов.
         User GetUser(string login, string password);
+        Task<User> GetUserByID(int id);
+        Task<User> GetUserByEmail(string email);
+       
     }
 }
