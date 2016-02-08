@@ -66,6 +66,7 @@ namespace Courses.Gui.Admin.Controllers
         {
             if (authenticationService.IsValid(model.Login, model.Password)) // валидируем пользователя
             {
+                
                 FormsAuthentication.SetAuthCookie(model.Login, true); // выставляем куки для авторизованных лиц
                 if (!String.IsNullOrEmpty(model.ReturnUrl))
                 {

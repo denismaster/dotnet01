@@ -91,5 +91,20 @@ namespace Courses.DAL
         {
             return context.Users.Where(expression).Count();
         }
+
+        public async Task<User> GetUserByID(int id)
+        {
+            return await context.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await context.Users.Where(u => u.Email==email).FirstOrDefaultAsync();
+        }
+
+        public void Dispose()
+        {
+            context.Dispose();
+        }
     }
 }
