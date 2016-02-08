@@ -48,6 +48,9 @@ namespace Courses.Gui.Manager
 
             kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
             kernel.Bind<IPartnerService>().To<PartnerService>();
+
+            kernel.Bind<IAccountRepository>().To<AccountRepository>();
+
             kernel.Bind<IFilterFactory<Partner>>().To<PartnerFilterFactory>();
         }
     }

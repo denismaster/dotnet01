@@ -25,18 +25,17 @@ namespace Courses.Gui.Manager.Controllers
         [HttpGet]
         public ActionResult New()
         {
-            ProductViewModel model = new ProductViewModel();
-            return View(model);
+            var product = productService.GetProductWithAccauntsAndPartners(null);
+            return View(product);
         }
         [HttpPost]
-        public ActionResult New(ProductViewModel product)
+        public ActionResult New(ProductViewModelForAddEditView productView)
         {
             try
             {
-                
                 if (ModelState.IsValid)
                 {
-                    productService.Add(product);
+                    productService.Add(productView.product);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -45,7 +44,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(product);
+            return View(productView);
         }
 
         [HttpGet]
@@ -53,20 +52,20 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetById(id.Value);
-            if (product == null)
+            var productView = productService.GetProductWithAccauntsAndPartners(id.Value);
+            if (productView.product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(product);
+            return View(productView);
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductViewModel product)
+        public ActionResult Edit(ProductViewModelForAddEditView product)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    productService.Edit(product);
+                    productService.Edit(product.product);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
