@@ -7,9 +7,8 @@ using System.Web.Mvc;
 
 namespace Courses.ViewModels
 {
-    public class ProductViewModelForAddEditView
+    public class ProductViewModelForAddEditView: ProductViewModel
     {
-        public ProductViewModel product;
         /// <summary>
         /// Формируем список партнеров для передачи в представление
         /// </summary>

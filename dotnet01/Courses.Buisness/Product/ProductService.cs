@@ -65,12 +65,12 @@ namespace Courses.Buisness
             {
                 var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                products = repository.Get(page, pageSize, expression, newSortFilter).Select(Convert);
+                products = repository.Get(page, pageSize, expression, newSortFilter).Select(ConvertToProductViewModel);
                 total = repository.Count(expression);
             }
             else
             {
-                products = repository.Get(page, pageSize, x => true).Select(Convert);
+                products = repository.Get(page, pageSize, x => true).Select(ConvertToProductViewModel);
                 total = repository.Count(x => true);
             }
             var pageInfo = new PageInfo()
@@ -93,16 +93,16 @@ namespace Courses.Buisness
             {
                 productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login");
                 productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name");
-                productView.product = new ProductViewModel();
             }
             else
-            {
-                
+            {   
                 var product = repository.Get(Id.Value);
                 if (product != null)
-                    productView.product = Convert(product);
-                productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login", product.AssignedUserId);
-                productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name", product.PartnerId);
+                {
+                    productView = ConvertToProductViewModelForAddEditView(product);
+                    productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login", product.AssignedUserId);
+                    productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name", product.PartnerId);
+                }     
             }
             return productView;
         }
@@ -115,7 +115,7 @@ namespace Courses.Buisness
         public ProductViewModel GetById(int Id)
         {
             var product = repository.Get(Id);
-            return (product == null) ? null : Convert(product);
+            return (product == null) ? null : ConvertToProductViewModel(product);
         }
         /// <summary>
         /// Добавление курса в репозиторий
@@ -171,9 +171,28 @@ namespace Courses.Buisness
                 Location = c.Location
             };
         }
-        private ProductViewModel Convert(Product c)
+        private ProductViewModel ConvertToProductViewModel(Product c)
         {
             return new ProductViewModel()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                Type = c.Type,
+                PartnerId = c.PartnerId,
+                Teacher = c.Teacher,
+                SeatsCount = c.SeatsCount ?? null,
+                AssignedUserId = c.AssignedUserId ?? null,
+                Location = c.Location
+            };
+        }
+
+        private ProductViewModelForAddEditView ConvertToProductViewModelForAddEditView(Product c)
+        {
+            return new ProductViewModelForAddEditView()
             {
                 Id = c.Id,
                 Name = c.Name,

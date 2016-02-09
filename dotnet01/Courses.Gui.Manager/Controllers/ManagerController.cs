@@ -35,7 +35,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    productService.Add(productView.product);
+                    productService.Add(productView);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -53,7 +53,7 @@ namespace Courses.Gui.Manager.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             var productView = productService.GetProductWithAccauntsAndPartners(id.Value);
-            if (productView.product == null)
+            if (productView.Id == 0)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(productView);
         }
@@ -65,7 +65,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    productService.Edit(product.product);
+                    productService.Edit(product);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
