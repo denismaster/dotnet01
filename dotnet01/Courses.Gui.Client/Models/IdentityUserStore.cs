@@ -15,6 +15,8 @@ namespace Courses.Gui.Client
                                    IUserRoleStore<ApplicationUser, int>,
                                    IUserPasswordStore<ApplicationUser, int>,
         IUserClaimStore<ApplicationUser, int>,
+        IUserLockoutStore<ApplicationUser,int>,
+        IUserTwoFactorStore<ApplicationUser,int>,
                                    IDisposable
     {
         private readonly IAccountRepository _repository;
@@ -28,23 +30,31 @@ namespace Courses.Gui.Client
         }
         private User ToUser(ApplicationUser user)
         {
-            var usr = _repository.GetUser(user.UserName, user.PasswordHash);
+            var usr = _repository.Get(user.Id);
             return usr;
         }
         private User ConvertToUser(ApplicationUser user)
         {
-            Console.WriteLine(user.Id);
             return new User()
             {
                 CreatedDate = DateTime.Now,
-                Email = user.UserName,
+                Email = user.Email,
                 PasswordHash = user.PasswordHash,
+                Login  = user.Email
             };
         }
         public Task CreateAsync(ApplicationUser user)
         {
-            _repository.Add(ConvertToUser(user));
-            var usr = _repository.GetUser(user.UserName, user.PasswordHash);
+            _repository.Add(
+                new User()
+                {
+                    Email = user.Email,
+                    Login = user.UserName,
+                    PasswordHash = user.PasswordHash,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now
+                });
+            _repository.SaveChanges();
             return Task.FromResult<int>(0);
         }
 
@@ -59,14 +69,14 @@ namespace Courses.Gui.Client
             var user = await _repository.GetUserByID(userId);
             if (user != null)
             {
-                return new ApplicationUser{Id = user.Id, UserName= user.Login};
+                return new ApplicationUser { Id = user.Id, UserName = user.Email };
             }
             return null;
         }
 
         public async Task<ApplicationUser> FindByNameAsync(string userName)
         {
-            var user = await _repository.GetUserByEmail(userName);
+            var user = await _repository.GetUserByName(userName);
             if (user != null)
             {
                 return new ApplicationUser { Id = user.Id, UserName = user.Login };
@@ -93,9 +103,9 @@ namespace Courses.Gui.Client
 
         public Task<string> GetEmailAsync(ApplicationUser user)
         {
-            var usr = _repository.GetUser(user.UserName, user.PasswordHash);
-            if(usr!=null)
-            return Task.FromResult<string>(usr.Email);
+            var usr = _repository.Get(user.Id);
+            if (usr != null)
+                return Task.FromResult<string>(usr.Email);
             return Task.FromResult<string>("");
         }
 
@@ -176,10 +186,61 @@ namespace Courses.Gui.Client
 
         public Task<IList<System.Security.Claims.Claim>> GetClaimsAsync(ApplicationUser user)
         {
-            throw new NotImplementedException();
+            var usr = ToUser(user);
+            var claims = new List<System.Security.Claims.Claim>();
+            claims.Add(new System.Security.Claims.Claim("Id", usr.Id.ToString()));
+            claims.Add(new System.Security.Claims.Claim("UserName", usr.Login));
+            claims.Add(new System.Security.Claims.Claim("PasswordHash", usr.PasswordHash));
+            claims.Add(new System.Security.Claims.Claim("Role", usr.Role));
+            return Task.FromResult<IList<System.Security.Claims.Claim>>(claims);
         }
 
         public Task RemoveClaimAsync(ApplicationUser user, System.Security.Claims.Claim claim)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> GetAccessFailedCountAsync(ApplicationUser user)
+        {
+            return Task.FromResult<int>(0);
+        }
+
+        public Task<bool> GetLockoutEnabledAsync(ApplicationUser user)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<DateTimeOffset> GetLockoutEndDateAsync(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ResetAccessFailedCountAsync(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetLockoutEnabledAsync(ApplicationUser user, bool enabled)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetLockoutEndDateAsync(ApplicationUser user, DateTimeOffset lockoutEnd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> GetTwoFactorEnabledAsync(ApplicationUser user)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task SetTwoFactorEnabledAsync(ApplicationUser user, bool enabled)
         {
             throw new NotImplementedException();
         }

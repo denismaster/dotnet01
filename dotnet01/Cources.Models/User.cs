@@ -8,6 +8,13 @@ namespace Courses.Models
 {
     public class User : DomainObject
     {
+        public User()
+        {
+            Products = new List<Product>();
+            Partners = new List<Partner>();
+            Events = new List<Event>();
+            Role = "Default";
+        }
         /// <summary>
         /// Ключевое поле
         /// </summary>

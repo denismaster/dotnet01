@@ -96,7 +96,7 @@ namespace Courses.Gui.Admin.Controllers
                 accountService.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+            catch
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
