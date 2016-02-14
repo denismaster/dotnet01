@@ -17,6 +17,8 @@ namespace Courses.Gui.Client
         IUserClaimStore<ApplicationUser, int>,
         IUserLockoutStore<ApplicationUser,int>,
         IUserTwoFactorStore<ApplicationUser,int>,
+        IUserPhoneNumberStore<ApplicationUser,int>,
+        IUserLoginStore<ApplicationUser,int>,
                                    IDisposable
     {
         private readonly IAccountRepository _repository;
@@ -241,6 +243,46 @@ namespace Courses.Gui.Client
         }
 
         public Task SetTwoFactorEnabledAsync(ApplicationUser user, bool enabled)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<string> GetPhoneNumberAsync(ApplicationUser user)
+        {
+            return Task.FromResult<string>(@"+69785553388");
+        }
+
+        public Task<bool> GetPhoneNumberConfirmedAsync(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetPhoneNumberAsync(ApplicationUser user, string phoneNumber)
+        {
+            return Task.FromResult<string>(@"+69785553388");
+        }
+
+        public Task SetPhoneNumberConfirmedAsync(ApplicationUser user, bool confirmed)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddLoginAsync(ApplicationUser user, UserLoginInfo login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ApplicationUser> FindAsync(UserLoginInfo login)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<UserLoginInfo>> GetLoginsAsync(ApplicationUser user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RemoveLoginAsync(ApplicationUser user, UserLoginInfo login)
         {
             throw new NotImplementedException();
         }
