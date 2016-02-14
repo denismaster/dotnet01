@@ -7,15 +7,24 @@ using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.ViewModels;
 using Courses.Buisness.Services;
+using System.Web.Mvc;
 
 namespace Courses.Buisness
 {
     public class ProductService : IProductService
     {
         /// <summary>
-        /// Репозиторий, используемый сервисом
+        /// Репозиторий, используемый сервисом для получения продуктов
         /// </summary>
         private readonly IProductRepository repository;
+        /// <summary>
+        /// Репозиторий, используемый сервисом для получения аккаунтов
+        /// </summary>
+        private readonly IAccountRepository repositoryAccounts;
+        /// <summary>
+        /// Репозиторий, используемый сервисом для получения продуктов
+        /// </summary>
+        private readonly IPartnerRepository repositoryPartners;
         /// <summary>
         /// Фабрика фильтров
         /// </summary>
@@ -24,14 +33,19 @@ namespace Courses.Buisness
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public ProductService(Models.Repositories.IProductRepository repository, Filtering.IFilterFactory<Models.Product> filterFactory)
+        public ProductService(Models.Repositories.IProductRepository repository, Models.Repositories.IAccountRepository repositoryAccounts, 
+            Models.Repositories.IPartnerRepository repositoryPartners, Filtering.IFilterFactory<Models.Product> filterFactory)
         {
             ///Guard Condition
             if (repository == null)
-                throw new ArgumentNullException("Repository is null!");
+                throw new ArgumentNullException("Product repository is null!");
+            if (repositoryPartners == null)
+                throw new ArgumentNullException("Partner repository is null!");
             if (filterFactory == null)
                 throw new ArgumentNullException("Filtering Factory is null!");
             this.repository = repository;
+            this.repositoryAccounts = repositoryAccounts;
+            this.repositoryPartners = repositoryPartners;
             this.filterFactory = filterFactory;
         }
         /// <summary>
@@ -51,12 +65,12 @@ namespace Courses.Buisness
             {
                 var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                products = repository.Get(page, pageSize, expression, newSortFilter).Select(Convert);
+                products = repository.Get(page, pageSize, expression, newSortFilter).Select(ConvertToProductViewModel);
                 total = repository.Count(expression);
             }
             else
             {
-                products = repository.Get(page, pageSize, x => true).Select(Convert);
+                products = repository.Get(page, pageSize, x => true).Select(ConvertToProductViewModel);
                 total = repository.Count(x => true);
             }
             var pageInfo = new PageInfo()
@@ -67,6 +81,31 @@ namespace Courses.Buisness
             };
             return new ProductCollectionViewModel() { Products = products, PageInfo = pageInfo };
         }
+        /// <summary>
+        /// получение курса со списком аккаунтов и партнеров, для передачи его в форму добавления/редактирования
+        /// </summary>
+        /// <param name="Id">Id продукта для редактирования</param>
+        /// <returns></returns>
+        public ProductViewModelForAddEditView GetProductWithAccauntsAndPartners(int? Id)
+        {
+            ProductViewModelForAddEditView productView = new ProductViewModelForAddEditView();
+            if (Id == null)
+            {
+                productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login");
+                productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name");
+            }
+            else
+            {   
+                var product = repository.Get(Id.Value);
+                if (product != null)
+                {
+                    productView = ConvertToProductViewModelForAddEditView(product);
+                    productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login", product.AssignedUserId);
+                    productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name", product.PartnerId);
+                }     
+            }
+            return productView;
+        }
 
         /// <summary>
         /// Получение информации о курсе по его идентификатору
@@ -76,7 +115,7 @@ namespace Courses.Buisness
         public ProductViewModel GetById(int Id)
         {
             var product = repository.Get(Id);
-            return (product == null) ? null : Convert(product);
+            return (product == null) ? null : ConvertToProductViewModel(product);
         }
         /// <summary>
         /// Добавление курса в репозиторий
@@ -132,9 +171,28 @@ namespace Courses.Buisness
                 Location = c.Location
             };
         }
-        private ProductViewModel Convert(Product c)
+        private ProductViewModel ConvertToProductViewModel(Product c)
         {
             return new ProductViewModel()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                Type = c.Type,
+                PartnerId = c.PartnerId,
+                Teacher = c.Teacher,
+                SeatsCount = c.SeatsCount ?? null,
+                AssignedUserId = c.AssignedUserId ?? null,
+                Location = c.Location
+            };
+        }
+
+        private ProductViewModelForAddEditView ConvertToProductViewModelForAddEditView(Product c)
+        {
+            return new ProductViewModelForAddEditView()
             {
                 Id = c.Id,
                 Name = c.Name,

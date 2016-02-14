@@ -15,6 +15,13 @@ namespace Courses.Buisness.Services
         /// </summary>
         ProductCollectionViewModel GetProducts(int page, int pageSize,
             List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
+
+        /// <summary>
+        /// получение курса со списком аккаунтов и партнеров, для передачи его в форму добавления/редактирования
+        /// </summary>
+        /// <param name="Id">Id продукта для редактирования</param>
+        /// <returns></returns>
+        ProductViewModelForAddEditView GetProductWithAccauntsAndPartners(int? Id);
         /// <summary>
         /// Получение одного курса
         /// </summary>

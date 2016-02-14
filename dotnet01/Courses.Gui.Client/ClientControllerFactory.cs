@@ -7,19 +7,19 @@ using Courses.DAL;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
 
-namespace Courses.Gui.Manager
+namespace Courses.Gui.Client
 {
     /// <summary>
     /// Фабрика, которая будет управлять нашим ManagerController
     /// </summary>
-    public class ManagerControllerFactory : System.Web.Mvc.DefaultControllerFactory
+    public class ClientControllerFactory : System.Web.Mvc.DefaultControllerFactory
     {
         /// <summary>
         /// Ядро Ninject
         /// </summary>
         IKernel kernel;
 
-        public ManagerControllerFactory()
+        public ClientControllerFactory()
         {
             kernel = new StandardKernel();
             AddBindings();
