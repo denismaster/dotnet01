@@ -6,13 +6,16 @@ using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
-
+using System.Net;
+using System.Net.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Dispatcher;
 namespace Courses.Gui.Client
 {
     /// <summary>
     /// Фабрика, которая будет управлять нашим ManagerController
     /// </summary>
-    public class ClientControllerFactory : System.Web.Mvc.DefaultControllerFactory
+    public class ClientControllerFactory : System.Web.Mvc.DefaultControllerFactory, IHttpControllerActivator
     {
         /// <summary>
         /// Ядро Ninject
@@ -52,6 +55,11 @@ namespace Courses.Gui.Client
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
 
             kernel.Bind<IFilterFactory<Partner>>().To<PartnerFilterFactory>();
+        }
+
+        public System.Web.Http.Controllers.IHttpController Create(HttpRequestMessage request, System.Web.Http.Controllers.HttpControllerDescriptor controllerDescriptor, Type controllerType)
+        {
+            return (IHttpController)kernel.Get(controllerType);
         }
     }
 }

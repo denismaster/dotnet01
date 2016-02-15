@@ -37,8 +37,10 @@ namespace Courses.Gui.Client.Controllers
         }
 
         // GET: api/Product/5
+        [HttpGet]
+        [Route("Product/{id}")]
         [ResponseType(typeof(ProductViewModel))]
-        public async Task<IHttpActionResult> GetProduct(int id)
+        public IHttpActionResult GetProduct(int id)
         {
             var productView = productService.GetProductWithAccauntsAndPartners(id);
             if (productView.Id == 0)
