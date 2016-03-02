@@ -38,7 +38,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="#">О нас</a></li>
                     <li><a href="#">Контакты</a></li>
-                    <li><a href="#">Регистрация</a></li>
+                    <li>@Html.ActionLink("Регистрация", "Register")</li> 
                 </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -62,7 +62,7 @@
     action="login",id = "login-nav"
 }))
 {
-    Html.AntiForgeryToken();
+    @Html.AntiForgeryToken()
 
                                           <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -72,18 +72,20 @@
                                                       @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                                 </div>
                                                 <div class="form-group">
-                                                   @Html.Label("Пароль")
-                                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="пароль" required>
-                                                    <div class="help-block text-right"><a href="">Забыли пароль ?</a></div>
+                                                   @Html.Label("Пароль",new { @class = "src-only" })
+                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "exampleInputPassword2" , placeholder = "пароль", required =true})
+                                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                                    <div class="help-block text-center"><a href="">Забыли пароль ?</a></div>
+                                                    <div class="checkbox">
+                                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                                        @Html.Label("Запомнить пароль")
+                                                    </div>
                                                 </div>
+                                              
                                                 <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                                                    <input type="submit" value="Войти" id="enterButton" class="btn btn-primary btn-block" />
                                                 </div>
-                                                <div class="checkbox">
-                                                    <label>
-                                                        <input type="checkbox"> Запомнить пароль
-                                                    </label>
-                                                </div>
+
                                             </form>
 }
                                         </div>
@@ -110,16 +112,18 @@
                 </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
     <div class="container body-content">
         @RenderBody()
         @RenderSection("SPAViews", required: false)
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Все права защищены</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

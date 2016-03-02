@@ -187,8 +187,19 @@ label.src-only
    font-weight:100;
    padding-left:30px;
 }
-input#exampleInputEmail2.form-control
+input#exampleInputEmail2.form-control,
+input#exampleInputPassword2.form-control
 {
     margin-left:13px;
     width:222px;
+}
+#enterButton
+{
+    width:222px;
+    margin-left:13px;
+}
+div.checkbox
+{
+  margin-left:53px;
+
 }
