@@ -249,7 +249,10 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSS\font-awesome.css" />
+    <Content Include="Content\CSS\index.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\index.css" />
     <Content Include="Content\kendo.black.min.css" />
     <Content Include="Content\kendo.black.mobile.min.css" />
     <Content Include="Content\kendo.blueopal.min.css" />
