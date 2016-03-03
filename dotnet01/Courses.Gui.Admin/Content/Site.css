@@ -2,7 +2,40 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
+.panel-heading .pagination-panel, 
+.panel-footer .pagination-panel {
+    margin: -11px -16px; /* Based off default .panel-heading padding */
+    
+    >li{
+        >a,
+        >span{
+            padding: 10px 18px; /* Based off default .panel-heading padding */
+        }
+    }
+    
+}
 
+.panel-heading .pagination-panel {
+    >li {
+        &:last-child {
+            > a,
+            > span {
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
+}
+
+.panel-footer .pagination-panel {
+    > li {
+        &:last-child {
+            > a,
+            > span {
+                border-top-right-radius: 0;
+            }
+        }
+    }
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
