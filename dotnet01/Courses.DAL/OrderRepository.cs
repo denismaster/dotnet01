@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Courses.Models.Repositories;
 using Courses.Models;
 using System.Data.Entity;
 
 namespace Courses.DAL
 {
-    class OrderRepository
+    class OrderRepository:IOrderRepository
     {
         DatabaseContext context = new DatabaseContext();
 
         public IEnumerable<Models.Order> Get()
         {
             return context.Orders.AsEnumerable();
+        }
+        public IEnumerable<Models.Order> Get(int page, int pageSize, Func<Models.Order, bool> expression, SortFilter sortFilter)
+        {
+            return null;
         }
 
         public IEnumerable<Models.Order> Get(int page, int pageSize, Func<Models.Order, bool> expression)
@@ -36,7 +40,7 @@ namespace Courses.DAL
             context.Entry(entity).State = EntityState.Deleted;
         }
 
-        public void Delete(Models.User entity)
+        public void Delete(Models.Order entity)
         {
             context.Entry(entity).State = EntityState.Deleted;
         }

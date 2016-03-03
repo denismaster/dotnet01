@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Courses.Models.Repositories;
+using Courses.Models;
+using System.Data.Entity;
 
 namespace Courses.DAL
 {
-    class CommentsRepository
+    class CommentsRepository: ICommentsRepository
     {
         DatabaseContext context = new DatabaseContext();
 
@@ -16,6 +17,10 @@ namespace Courses.DAL
             return context.Comments.AsEnumerable();
         }
 
+        public IEnumerable<Models.Comment> Get(int page, int pageSize, Func<Models.Comment, bool> expression, SortFilter sortFilter)
+        {
+            return null;
+        }
         public IEnumerable<Models.Comment> Get(int page, int pageSize, Func<Models.Comment, bool> expression)
         {
             return context.Comments.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();

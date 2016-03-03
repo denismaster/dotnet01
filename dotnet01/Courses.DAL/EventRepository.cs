@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-
+using Courses.Models.Repositories;
+using Courses.Models;
+using System.Data.Entity;
 namespace Courses.DAL
 {
-    class EventRepository
+    class EventRepository: IEventRepository
     {
         DatabaseContext context = new DatabaseContext();
 
@@ -15,7 +15,10 @@ namespace Courses.DAL
         {
             return context.Events.AsEnumerable();
         }
-
+        public IEnumerable<Models.Event> Get(int page, int pageSize, Func<Models.Event, bool> expression, SortFilter sortFilter)
+        {
+            return null;
+        }
         public IEnumerable<Models.Event> Get(int page, int pageSize, Func<Models.Event, bool> expression)
         {
             return context.Events.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();

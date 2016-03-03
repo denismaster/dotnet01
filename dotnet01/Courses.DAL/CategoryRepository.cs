@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Courses.Models.Repositories;
+using Courses.Models;
+using System.Data.Entity;
 
 namespace Courses.DAL
 {
-    class CategoryRepository
+    public  class CategoryRepository: ICategoryRepository
     {
         DatabaseContext context = new DatabaseContext();
 
@@ -16,6 +17,10 @@ namespace Courses.DAL
             return context.Categories.AsEnumerable();
         }
 
+        //временно нереализовано
+        public IEnumerable<Category> Get(int page, int pageSize, Func<Category, bool> expression, SortFilter sortFilter) {
+            return null;
+        }
         public IEnumerable<Models.Category> Get(int page, int pageSize, Func<Models.Category, bool> expression)
         {
             return context.Categories.Where(expression).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
