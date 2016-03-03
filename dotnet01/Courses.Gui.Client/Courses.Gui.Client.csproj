@@ -252,6 +252,12 @@
     <Content Include="Content\CSS\font-awesome.css" />
     <Content Include="Content\CSS\index.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\images\fb2.png" />
+    <Content Include="Content\images\odn2.png" />
+    <Content Include="Content\images\skype2.png" />
+    <Content Include="Content\images\tw2.png" />
+    <Content Include="Content\images\vk2.png" />
+    <Content Include="Content\images\youtube2.png" />
     <Content Include="Content\index.css" />
     <Content Include="Content\kendo.black.min.css" />
     <Content Include="Content\kendo.black.mobile.min.css" />
@@ -360,6 +366,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\CentarRegular.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -669,7 +676,6 @@
     <Folder Include="Content\Fiori\" />
     <Folder Include="Content\Flat\" />
     <Folder Include="Content\HighContrast\" />
-    <Folder Include="Content\images\" />
     <Folder Include="Content\MaterialBlack\" />
     <Folder Include="Content\Material\" />
     <Folder Include="Content\MetroBlack\" />

@@ -1,6 +1,13 @@
+@font-face {
+    font-family:CentarRegular; 
+    src: url(../fonts/CentarRegular.otf); 
+   }
+
 body
 {
-    background-color: #414A4C;
+    margin-right:0px;
+    background-color: #C2D1C7;
+    font-family: 'Segoe UI','Georgia'; 
 }
 #login-dp{
     min-width: 250px;
@@ -57,44 +64,40 @@ margin-top: 5px;
     }
 }
 .navbar {
-     background-image: linear-gradient(#54B4EB, #2FA4E7 60%, #1D9CE5);
      background-repeat: no-repeat;
      border-bottom: 1px solid #178ACC;
      box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
      border-radius: 0px;
+     width:100%;
 }
 
 .navbar-default
  {
-     background-color: #2FA4E7;
-     border-color: #1995DC;
+    font-family:CentarRegular;
+    background-color: #0B2C3C;
+    border-color: #0B2C3C;
 }
 
 .navbar-default .navbar-brand,
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus ,
 .navbar-default .navbar-nav > li > a {
-     color: #FFF;
+    color: #F5EED2;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li.active > a:hover,
 .navbar-default .navbar-nav > li > a:focus
  {
-     color: #FFF;
-     background-color: #178ACC;
+     color: #8BB7AE;
+     border-bottom: 4px solid #8BB7AE;
+     padding-bottom: 5px; 
+     box-shadow: 10px;
 }
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-    background-color: #178ACC;
-}
-.active
-{
-    background-image: linear-gradient(#54B4EB, #2FA4E7 60%, #1D9CE5);
-    color: #FFF;
-    margin: 0;
-    border-bottom: 4px solid rgba(127,199,255,0.6);
+    background-color: #FF6666;
 }
 
 .navbar-default .navbar-toggle {
@@ -179,8 +182,8 @@ margin-top: 5px;
 }
 .open #enter-button
 {
-     background-color: #178ACC;
-     color: #fff;
+    color: #8BB7AE;
+   background-color:#0B2C3C;
 }
 label.src-only
 {
@@ -202,4 +205,69 @@ div.checkbox
 {
   margin-left:53px;
 
+}
+footer
+{
+    width:100%;
+    color: #071724;
+    height: 300px;
+    background-color: #578F90;
+}
+.contact-form,.about-us, .contact-us
+{
+    border-radius: 2px;
+    margin-top: 20px;
+    margin-left: 27px;
+    
+}
+.contact-form
+{
+    width: 320px;
+}
+.form-group
+{
+    margin-bottom: 2px;
+}
+
+
+.social-icon
+{
+    height: 50px;
+    width: 50px;
+}
+
+.social-row
+{
+    padding: 2px;
+}
+.copyright
+{
+   background-color:#071724;
+    margin-top: 15px;
+    height:30px;
+}
+input.form-control{
+    border-radius: 40px;
+}
+.btn-contact, .btn-contact:focus, .btn-contact:active
+{
+  margin-top: 8px;
+  margin-right: 10px;
+  background-color: #0B2C3C;
+  color: #F5EED2;
+  margin-left: 196px;
+}
+.btn-contact:hover
+{
+     color: #8BB7AE;
+}
+#useremail,#username,#usermessge
+{
+    margin-bottom: 13px;
+}
+.copyright p
+{
+    padding-top:4px;
+    color:#F5EED2;
+    text-align:center;
 }
