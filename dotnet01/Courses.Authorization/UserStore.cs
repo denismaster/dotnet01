@@ -66,7 +66,7 @@ namespace Courses.Authorization
 
         public async Task<IdentityUser> FindByNameAsync(string userName)
         {
-            var user = await _repository.GetUserByEmail(userName);
+            var user = await _repository.GetUserByName(userName);
             if (user != null)
             {
                 return new IdentityUser(user.Id, user.Login);

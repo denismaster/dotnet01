@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Courses.Models.Repositories;
 using Courses.Models;
@@ -94,12 +93,23 @@ namespace Courses.DAL
 
         public async Task<User> GetUserByID(int id)
         {
-            return await context.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
+            var result = await context.Users.FindAsync(id);
+            if (result != null)
+                return result;
+            else
+                return null;
         }
 
-        public async Task<User> GetUserByEmail(string email)
+        public async Task<User> GetUserByName(string email)
         {
-            return await context.Users.Where(u => u.Email==email).FirstOrDefaultAsync();
+            var allRecords = context.Users.ToList();
+            var result = await context.Users.Where(u=>u.Login== email).FirstOrDefaultAsync();
+            if (result != null)
+            {
+                return result;
+            }
+            else
+                return null;
         }
 
         public void Dispose()

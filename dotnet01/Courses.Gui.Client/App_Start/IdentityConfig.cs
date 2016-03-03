@@ -47,19 +47,19 @@ namespace Courses.Gui.Client
             //    new CustomUserStore(context.Get<ApplicationDbContext>()));
             var manager = new ApplicationUserManager(new ApplicationUserStore(context.Get<DAL.AccountRepository>()));
             // Configure validation logic for usernames 
-            manager.UserValidator = new UserValidator<ApplicationUser, int>(manager)
-            {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
-            };
+            //manager.UserValidator = new UserValidator<ApplicationUser, int>(manager)
+            //{
+            //    AllowOnlyAlphanumericUserNames = false,
+            //    RequireUniqueEmail = true
+            //};
             // Configure validation logic for passwords 
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase = false,
             };
             // Register two factor authentication providers. This application uses Phone 
             // and Emails as a step of receiving a code for verifying the user 

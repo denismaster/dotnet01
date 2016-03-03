@@ -44,7 +44,7 @@ namespace Courses.Gui.Client.Controllers
         public GetViewModel Get()
         {
             var user = UserManager.FindById(User.Identity.GetUserId<int>());
-            return new GetViewModel() { Hometown = user.Hometown };
+            return new GetViewModel() { Hometown = "Sevastopol"};
         }
     }
 }

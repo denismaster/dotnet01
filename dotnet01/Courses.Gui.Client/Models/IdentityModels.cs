@@ -16,8 +16,8 @@ namespace Courses.Gui.Client.Models
         {
             // Note the authenticationType must match the one defined in
             // CookieAuthenticationOptions.AuthenticationType 
-            var userIdentity = await manager.CreateIdentityAsync(
-                this, DefaultAuthenticationTypes.ApplicationCookie);
+            ClaimsIdentity userIdentity;
+            userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here 
             return userIdentity;
         }
