@@ -18,13 +18,13 @@ namespace Courses.Gui.Client.Controllers
 {
     public class PartnerController : ApiController
     {
-        private readonly IPartnerService partnerService;
+        private readonly ICategoryService partnerService;
 
         public PartnerController()
         {
         }
 
-        public PartnerController(IPartnerService partnerService)
+        public PartnerController(ICategoryService partnerService)
         {
             if (partnerService == null)
                 throw new ArgumentNullException();

@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="AccountCollectionViewModel.cs" />
     <Compile Include="AccountViewModel.cs" />
+    <Compile Include="CategoryCollectionViewModel.cs" />
+    <Compile Include="CategoryViewModel.cs" />
     <Compile Include="DateRangeAttribute.cs" />
     <Compile Include="PartnerCollectionViewModel.cs" />
     <Compile Include="PartnerViewModel.cs" />

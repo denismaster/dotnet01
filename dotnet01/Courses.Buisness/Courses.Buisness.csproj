@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Authentication\AuthenticationService.cs" />
+    <Compile Include="Category\CategoryService.cs" />
+    <Compile Include="Filtering\CategoryFilterFactory.cs" />
     <Compile Include="Filtering\PartnerFilterFactory.cs" />
     <Compile Include="Partner\PartnerService.cs" />
     <Compile Include="Product\ProductService.cs" />
