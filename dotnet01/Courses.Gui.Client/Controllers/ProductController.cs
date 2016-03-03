@@ -37,15 +37,13 @@ namespace Courses.Gui.Client.Controllers
         }
 
         // GET: api/Product/5
-        [HttpGet]
-        [Route("Product/{id}")]
-        [ResponseType(typeof(ProductViewModel))]
-        public IHttpActionResult GetProduct(int id)
+        public ProductViewModel GetProduct(int id)
         {
-            var productView = productService.GetProductWithAccauntsAndPartners(id);
-            if (productView.Id == 0)
-                return NotFound();
-            return Ok(productView);
+            var productView = productService.GetById(id);
+            return productView;
         }
+
     }
 }
+
+
