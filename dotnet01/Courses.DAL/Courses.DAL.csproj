@@ -48,8 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="CommentsRepository.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="AccountRepository.cs" />
+    <Compile Include="EventRepository.cs" />
+    <Compile Include="OrderRepository.cs" />
     <Compile Include="PartnerRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -48,7 +48,7 @@
     <Compile Include="Partner\PartnerService.cs" />
     <Compile Include="Product\ProductService.cs" />
     <Compile Include="Filtering\ProductFilterFactory.cs" />
-    <Compile Include="Filtering\AccountFilterFactory.cs" />
+    <Compile Include="Authentication\AccountFilterFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
