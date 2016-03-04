@@ -8,18 +8,33 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         Партнеры
-
     </div>
     <div class="panel-body">
-        @Html.ActionLink("Добавить", "New", new { }, new { @class = "btn btn-info" })
+        <table>
+            <thead>
+                <tr>
+                    <th>@Html.ActionLink("Добавить партнера", "New", new { }, new { @class = "btn btn-info" })</th>
+                    <th>
+                        @using (Html.BeginForm())
+                        {
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Поиск по названию" })
+                                    <span class="input-group-btn">
+                                        <input class="btn btn-info" type="submit" value="Search" />
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </th>
+                </tr>
+            </thead>
+        </table>
+       
+       
     </div>
-    @using (Html.BeginForm())
-    {
-        <p>
-            Поиск по названию: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Search" />
-        </p>
-    }
+    
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -48,9 +63,9 @@
                     <td width="33%">@item.Email</td>
                     <td width="33%">
                         <div class="btn-group">
-                            @Html.ActionLink("Редактировать", "Edit", new { iD = item.Id }, new { @class = "btn btn-default" })
-                            @Html.ActionLink("Детали", "Details", new { iD = item.Id }, new { @class = "btn btn-default" })
-                            @Html.ActionLink("Удалить", "Delete", new { iD = item.Id }, new { @class = "btn btn-default" })
+                            @Html.ActionLink(" ", "Edit", new { iD = item.Id }, new { @class = "btn btn-success glyphicon glyphicon-pencil" })
+                            @Html.ActionLink(" ", "Details", new { iD = item.Id }, new { @class = "btn btn-info glyphicon glyphicon-info-sign" })
+                            @Html.ActionLink(" ", "Delete", new { iD = item.Id }, new { @class = "btn btn-danger glyphicon glyphicon-remove" })
                         </div>
                     </td>
                 </tr>
@@ -91,4 +106,5 @@
         </ul>
     </div>
 </div>
-<br />
+
+            <br />

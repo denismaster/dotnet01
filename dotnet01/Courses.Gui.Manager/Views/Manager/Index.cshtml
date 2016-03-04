@@ -13,21 +13,22 @@
         <table>
             <thead>
                 <tr>
-                    <th>
-                        @Html.ActionLink("Добавить курсы", "New", new { }, new { @class = "btn btn-info" })
-                    </th>
+                    <th>@Html.ActionLink("Добавить курсы", "New", new { }, new { @class = "btn btn-info" })</th>
                     <th>
                         @using (Html.BeginForm())
                         {
                             <div class="col-lg-4">
                                 <div class="input-group">
-                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", @placeholder = "Поиск по названию" })
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Поиск по названию" })
                                     <span class="input-group-btn">
                                         <input class="btn btn-info" type="submit" value="Поиск" />
                                     </span>
                                 </div>
                             </div>
                         }
+                    </th>
+                    <th>
+                        @Html.ActionLink("Партнеры", "", new { }, new { @class = "btn btn-info" })
                     </th>
                 </tr>
             </thead>
