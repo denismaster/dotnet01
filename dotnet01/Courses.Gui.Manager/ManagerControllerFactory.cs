@@ -47,7 +47,7 @@ namespace Courses.Gui.Manager
             kernel.Bind<IProductRepository>().To<ProductRepository>();
 
             kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
-            kernel.Bind<ICategoryService>().To<PatherService>();
+            kernel.Bind<IPartnerService>().To<PatherService>();
 
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
 

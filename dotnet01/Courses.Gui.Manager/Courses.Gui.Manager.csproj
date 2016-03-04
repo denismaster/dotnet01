@@ -195,8 +195,11 @@
     <Content Include="Views\Manager\Details.cshtml" />
     <Content Include="Views\Manager\Delete.cshtml" />
     <Content Include="Views\Partner\Index.cshtml" />
-    <Content Include="Views\Partner\New.cshtml" />
     <Content Include="Views\Manager\New.cshtml" />
+    <Content Include="Views\Partner\New.cshtml" />
+    <Content Include="Views\Partner\Edit.cshtml" />
+    <Content Include="Views\Partner\Delete.cshtml" />
+    <Content Include="Views\Partner\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

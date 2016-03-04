@@ -24,16 +24,10 @@
         <thead>
             <tr>
                 <th>
-                    @Html.ActionLink("Название", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("ФИО", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    @Html.ActionLink("Адрес", "Index", new { sortOrder = ViewBag.AddressSortParam, currentFilter = ViewBag.CurrentFilter })
-                </th>
-                <th>
-                    @Html.ActionLink("Телефон", "Index", new { sortOrder = ViewBag.PhoneSortParam, currentFilter = ViewBag.CurrentFilter })
-                </th>
-                <th>
-                    @Html.ActionLink("E-mail", "Index", new { sortOrder = ViewBag.EmailSortParam, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("Дата регистрации", "Index", new { sortOrder = ViewBag.CreateDateSortParam, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th></th>
             </tr>
@@ -44,8 +38,6 @@
                 <tr>
                     <td width="33%">@item.Name</td>
                     <td width="33%">@item.Address</td>
-                    <td width="33%">@item.Phone</td>
-                    <td width="33%">@item.Email</td>
                     <td width="33%">
                         <div class="btn-group">
                             @Html.ActionLink("Редактировать", "Edit", new { iD = item.Id }, new { @class = "btn btn-default" })
