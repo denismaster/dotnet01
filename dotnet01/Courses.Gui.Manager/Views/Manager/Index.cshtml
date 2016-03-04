@@ -58,11 +58,11 @@
             @foreach (var item in Model.Products)
             {
                 <tr>
-                    <td width="33%">@item.Name</td>
-                    <td width="33%">@item.PartnerId</td>
-                    <td width="33%">@item.Type</td>
-                    <td width="33%">@item.Active</td>
-                    <td width="33%">
+                    <td width="35%">@item.Name</td>
+                    <td width="15%">@item.PartnerId</td>
+                    <td width="20%">@item.Type</td>
+                    <td width="15%">@item.Active</td>
+                    <td width="20%">
                         <div class="btn-group">
                             @Html.ActionLink(" ", "Edit", new { iD = item.Id}, new { @class = "btn btn-success glyphicon glyphicon-pencil" })
                             @Html.ActionLink(" ", "Details", new { iD = item.Id }, new { @class = "btn btn-info glyphicon glyphicon-info-sign" })
