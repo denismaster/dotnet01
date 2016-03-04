@@ -71,7 +71,7 @@ namespace Courses.Gui.Manager.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
@@ -120,7 +120,7 @@ namespace Courses.Gui.Manager.Controllers
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Name") ? "NameDesc" : "Name";
-            ViewBag.AddressSortParam = sortOrder == "CreateDate" ? "CreateDateDesc" : "CreateDate";
+            ViewBag.CreatedDateSortParam = sortOrder == "CreatedDate" ? "CreatedDateDesc" : "CreatedDate";
 
 
             if (Request.HttpMethod == "GET")

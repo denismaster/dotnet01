@@ -85,6 +85,7 @@ namespace Courses.Buisness
         /// <param name="partner"></param>
         public void Add(PartnerViewModel partner)
         {
+            partner.CreatedDate = partner.UpdatedDate = DateTime.Now;
             repository.Add(Convert(partner));
         }
         /// <summary>
@@ -93,6 +94,7 @@ namespace Courses.Buisness
         /// <param name="partner"></param>
         public void Edit(PartnerViewModel partner)
         {
+            partner.UpdatedDate = DateTime.Now;
             repository.Update(Convert(partner));
         }
         /// <summary>
@@ -121,7 +123,7 @@ namespace Courses.Buisness
                 Name = c.Name,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
-                UserId = c.UserId,
+                UserId = c.UserId ?? null,
                 Address = c.Address,
                 Phone = c.Phone,
                 Email = c.Email,
@@ -137,7 +139,7 @@ namespace Courses.Buisness
                 Name = c.Name,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
-                UserId = c.UserId,
+                UserId = c.UserId ?? null,
                 Address = c.Address,
                 Phone = c.Phone,
                 Email = c.Email,
