@@ -42,7 +42,7 @@
                     @Html.ActionLink("ФИО", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    @Html.ActionLink("Дата регистрации", "Index", new { sortOrder = ViewBag.CreateDateSortParam, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("Дата регистрации", "Index", new { sortOrder = ViewBag.CreatedDateSortParam, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th></th>
             </tr>
@@ -52,7 +52,7 @@
             {
                 <tr>
                     <td width="45%">@item.Name</td>
-                    <td width="35%">@item.Address</td>
+                    <td width="35%">@item.CreatedDate</td>
                     <td width="20%">
                         <div class="btn-group">
                             @Html.ActionLink(" ", "Edit", new { iD = item.Id }, new { @class = "btn btn-success glyphicon glyphicon-pencil" })
