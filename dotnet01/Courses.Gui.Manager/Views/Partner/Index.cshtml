@@ -27,6 +27,7 @@
                             </div>
                         }
                     </th>
+                    <th>@Html.ActionLink("Курсы", "", new { }, new { @class = "btn btn-info" })</th>
                 </tr>
             </thead>
         </table>
@@ -44,6 +45,7 @@
                 <th>
                     @Html.ActionLink("Дата регистрации", "Index", new { sortOrder = ViewBag.CreatedDateSortParam, currentFilter = ViewBag.CurrentFilter })
                 </th>
+                
                 <th></th>
             </tr>
         </thead>
