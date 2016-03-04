@@ -120,5 +120,6 @@ namespace Courses.DAL
             modelBuilder.Entity<Category>()
                 .HasOptional(o => o._Category);
         }
+
     }
 }

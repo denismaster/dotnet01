@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-   public interface ICategoryRepository: IRepository<Category>,IDisposable
+   public interface ICategoryRepository: IRepository<Category>
     {
 
 

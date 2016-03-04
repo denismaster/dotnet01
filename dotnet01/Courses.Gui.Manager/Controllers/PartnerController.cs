@@ -23,13 +23,105 @@ namespace Courses.Gui.Manager.Controllers
             this.partnerService = partnerService;
         }
 
+        [HttpGet]
+        public ActionResult New()
+        {
+            PartnerViewModel model = new PartnerViewModel();
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult New(PartnerViewModel partner)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    partnerService.Add(partner);
+                    partnerService.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            return View(partner);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var pather = partnerService.GetByID(id.Value);
+            if (pather == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            return View(pather);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(PartnerViewModel partner)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    partnerService.Edit(partner);
+                    partnerService.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            return View(partner);
+        }
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var partner = partnerService.GetByID(id.Value);
+            if (partner == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            return View(partner);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(PartnerViewModel partner)
+        {
+            try
+            {
+                partnerService.Delete(partner);
+                partnerService.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            return View(partner);
+        }
+
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var account = partnerService.GetByID(id.Value);
+            if (account == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            return View(account);
+        }
+
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Name") ? "NameDesc" : "Name";
-            ViewBag.AddressSortParam = sortOrder == "Address" ? "AddressDesc" : "Address";
-            ViewBag.PhoneSortParam = sortOrder == "Phone" ? "PhoneDesc" : "Phone";
-            ViewBag.EmailSortParam = sortOrder == "Email" ? "EmailDesc" : "Email";
+            ViewBag.AddressSortParam = sortOrder == "CreateDate" ? "CreateDateDesc" : "CreateDate";
+
 
             if (Request.HttpMethod == "GET")
             {

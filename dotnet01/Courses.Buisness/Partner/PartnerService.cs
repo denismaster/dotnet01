@@ -10,7 +10,7 @@ using Courses.Buisness.Services;
 
 namespace Courses.Buisness
 {
-    public class PartnerService : IPartnerService
+    public class PatherService : IPartnerService
     {
         /// <summary>
         /// Репозиторий, используемый сервисом
@@ -24,7 +24,7 @@ namespace Courses.Buisness
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public PartnerService(Models.Repositories.IPartnerRepository repository, Filtering.IFilterFactory<Models.Partner> filterFactory)
+        public PatherService(Models.Repositories.IPartnerRepository repository, Filtering.IFilterFactory<Models.Partner> filterFactory)
         {
             ///Guard Condition
             if (repository == null)
