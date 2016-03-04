@@ -4,16 +4,16 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Редактирование</h2>
-
-
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Редактирование
+    </div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>PartnerViewModel</h4>
-        <hr />
+        <br>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -64,18 +64,15 @@
                 @Html.ValidationMessageFor(model => model.Contact, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group ">
-            @Html.ActionLink("Back to List", "Index", new { }, htmlAttributes: new { @class="btn btn-warning"})
+        <br />
+        <div class="panel-footer">
+                @Html.ActionLink("Back to List", "Index", new { }, htmlAttributes: new { @class = "btn btn-warning" })
             <input type="submit" value="Save" class="btn btn-success" />
         </div>
     </div>
-}
+    }
 
-<div>
-    
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
