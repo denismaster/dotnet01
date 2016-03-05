@@ -85,7 +85,7 @@ namespace Courses.DAL
 
                 case "AssignedUserID":
                     return context.Products.Where(expression).OrderBy(s => s.AssignedUserId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
-                case "AssignedUserIDrDesc":
+                case "AssignedUserIDDesc":
                     return context.Products.Where(expression).OrderByDescending(s => s.AssignedUserId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 case "Location":

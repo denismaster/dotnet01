@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Courses.Models;
 using Courses.ViewModels;
-namespace Courses.Buisness
+namespace Courses.Buisness.Services
 {
     public interface IPartnerService
     {
