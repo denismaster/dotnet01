@@ -272,3 +272,39 @@ input.form-control{
     text-align:center;
 }
 
+img
+{
+	height:100px;
+	width:100px;
+}
+h2#create-acc
+{
+text-align: center;
+border-bottom: 3px solid #578F90;
+
+}
+.registr
+{
+   margin-top:10px;
+      margin-bottom:10px;
+	background-color: #fff;
+}
+.btn
+{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.btn,.btn:active,.btn:focus
+{
+	background-color: #071724;
+	color: #F5EED2;
+}
+.btn:hover
+{
+	background-color: #578F90;
+	color: #F5EED2;
+}
+.registr .form-control input
+{
+width:1300px;
+}

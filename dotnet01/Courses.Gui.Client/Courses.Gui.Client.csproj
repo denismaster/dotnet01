@@ -254,6 +254,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\fb2.png" />
     <Content Include="Content\images\odn2.png" />
+    <Content Include="Content\images\person.png" />
     <Content Include="Content\images\skype2.png" />
     <Content Include="Content\images\tw2.png" />
     <Content Include="Content\images\vk2.png" />
@@ -344,7 +345,9 @@
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\app\router.js" />
     <Content Include="Scripts\app\viewModels\home\aboutViewModel.js" />
+    <Content Include="Scripts\app\viewModels\home\contactViewModel.js" />
     <Content Include="Scripts\app\viewModels\home\indexViewModel.js" />
+    <Content Include="Scripts\app\viewModels\home\registrationViewModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -674,6 +677,9 @@
     <Content Include="Scripts\kendo.window.min.js.map" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Spa.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

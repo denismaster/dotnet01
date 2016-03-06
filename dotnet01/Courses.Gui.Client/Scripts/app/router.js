@@ -22,6 +22,19 @@
                 loadView(null, view);
             });
         });
+            router.route("/home/register", function () {
+            require(['text!/home/registration'], function (view) {
+                loadView(null, view);
+            });
+            });
+            router.route("/account/register", function () {
+                require(['text!/account/register'], function (view) {
+                    loadView(null, view);
+                });
+            });
+           
+            
+
 
 
         var loadView = function (viewModel, view, delegate) {

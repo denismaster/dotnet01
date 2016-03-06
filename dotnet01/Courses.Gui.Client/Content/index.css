@@ -179,4 +179,29 @@ div.container .body-content
 {
     width:100% !important;
 }
-body{margin-top:0px !important;}
+#person-img
+{
+	height:100px;
+	width: 100px;
+}
+h2
+{
+text-align: center;
+border-bottom: 3px solid #578F90;
+
+}
+.registr
+{
+	background-color: #fff;
+}
+
+.btn,.btn:active,.btn:focus
+{
+	background-color: #071724;
+	color: #F5EED2;
+}
+.btn:hover
+{
+	background-color: #578F90;
+	color: #F5EED2;
+}
