@@ -5,11 +5,30 @@ using System.Web.Mvc;
 
 namespace Courses.Gui.Client.Controllers
 {
-    [Authorize]
+
     public class HomeController : Controller
     {
+        public ActionResult Spa()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult About()
+        {
+       
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
             return View();
         }
     }
