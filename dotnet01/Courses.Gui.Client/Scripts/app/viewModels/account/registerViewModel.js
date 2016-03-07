@@ -1,6 +1,6 @@
 ﻿define(['kendo'],
     function(kendo) {
-        var registrerViewModel = new kendo.observable(
+        var registerViewModel = new kendo.observable(
             {
                 content: "",
             });

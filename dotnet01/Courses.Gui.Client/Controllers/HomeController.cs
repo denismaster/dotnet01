@@ -9,13 +9,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Courses.Gui.Client.Models;
+
 namespace Courses.Gui.Client.Controllers
 {
-
+  
     public class HomeController : Controller
     {
-
-
         public ActionResult Spa()
         {
             return View();
@@ -37,8 +36,10 @@ namespace Courses.Gui.Client.Controllers
         {
             return View();
         }
-
-
-
+        public ActionResult Register()
+        {
+            return RedirectToAction("Register","Account");
+        }
     }
 }
+

@@ -511,6 +511,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sammy-0.7.4.js" />
     <Content Include="Scripts\sammy-0.7.4.min.js" />
+    <Content Include="Scripts\util.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\app\_run.js" />
     <Content Include="Scripts\app\app.datamodel.js" />
@@ -680,6 +681,18 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\VerifyCode.cshtml" />
+    <Content Include="Views\Home\SendCode.cshtml" />
+    <Content Include="Views\Home\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Home\ResetPassword.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Home\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Home\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Home\ConfirmEmail.cshtml" />
+    <Content Include="Views\Home\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
