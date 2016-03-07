@@ -243,7 +243,7 @@ footer
 .copyright
 {
    background-color:#071724;
-    margin-top: 15px;
+    margin-top: 10px;
     height:30px;
 }
 input.form-control{
@@ -271,3 +271,4 @@ input.form-control{
     color:#F5EED2;
     text-align:center;
 }
+
