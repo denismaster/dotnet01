@@ -12,7 +12,7 @@ shim : {
   },
   priority: ['text', 'router', 'app'],
   jquery: '2.0.3',
-  waitSeconds: 5
+  waitSeconds: 1
 });
 require([
   'app'

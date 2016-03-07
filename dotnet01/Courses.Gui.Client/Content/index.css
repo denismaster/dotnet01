@@ -41,7 +41,7 @@
 }
 .btn-instagram, .btn-odnoklassniki, .btn-twitter, .btn-pinterest, .btn-vk
 {
-margin-top: 5px;
+margin-top: 1px;
 }
 @media(max-width:768px){
     #login-dp{
@@ -195,7 +195,8 @@ border-bottom: 3px solid #578F90;
 	background-color: #fff;
 }
 
-.btn,.btn:active,.btn:focus
+
+/*.btn,.btn:active,.btn:focus
 {
 	background-color: #071724;
 	color: #F5EED2;
@@ -204,4 +205,4 @@ border-bottom: 3px solid #578F90;
 {
 	background-color: #578F90;
 	color: #F5EED2;
-}
+}*/

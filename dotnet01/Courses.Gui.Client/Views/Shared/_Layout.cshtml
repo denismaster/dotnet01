@@ -44,7 +44,7 @@
                                     <div class="col-md-12">
                                         Войти через
                                         <div class="social-buttons">
-                                            <a href="#" class="btn btn-facebook"><i class="fa fa-fb"></i> Facebook</a>
+                                            <a href="#" class="btn btn-facebook" ><i class="fa fa-fb"></i> Facebook</a>
                                             <a href="#" class="btn btn-vk"><i class="fa fa-vk"></i> Вконтакте </a>
                                             <a href="#" class="btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i> Одноклассники</a>
                                             <a href="#" class="btn btn-instagram"><i class="fa fa-instagram"></i> Instagram </a>
@@ -52,14 +52,7 @@
                                             <a href="#" class="btn btn-pinterest"><i class="fa fa-pinterest"></i> Pinterest</a>
                                         </div>
                                         или
-                                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
-                                        {
-                                            @class = "form-horizontal",
-                                            role = "form",
-                                            method = "post",
-                                            action = "login",
-                                            id = "login-nav"
-                                        }))
+                                    
                                         {
                                             @Html.AntiForgeryToken()
 
@@ -86,12 +79,12 @@
                                                 </div>
 
                                             </form>
-                                        }
-                                    </div>
                                     <div class="bottom text-center">
                                         Еще не с нами?
                             <a href="#/home/registration">Зарегестрироваться</a>
 </div>
+                                      
+                                        </div>
                                 </div>
                             </li>
                         </ul>
