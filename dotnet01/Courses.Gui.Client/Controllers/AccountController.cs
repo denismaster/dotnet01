@@ -179,9 +179,8 @@ namespace Courses.Gui.Client.Controllers
                 }
                 AddErrors(result);
             }
-
+            return View(model);
             // If we got this far, something failed, redisplay form
-           return View(model);
        
         }
 

@@ -1,9 +1,9 @@
 ﻿define(['kendo'],
     function(kendo) {
-        var registrationViewModel = new kendo.observable(
+        var registrerViewModel = new kendo.observable(
             {
                 content: "",
             });
 
-        return registrationViewModel;
+        return registerViewModel;
     });
