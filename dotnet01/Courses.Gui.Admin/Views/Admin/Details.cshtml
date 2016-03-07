@@ -7,7 +7,7 @@
 <br />
 <div class="panel panel-default">
     <div class="panel-heading">
-        Детальная информация: аккаунт № @Model.Id
+        Детальная информация: аккаунт №@Model.Id
     </div>
     @using (Html.BeginForm())
     {
@@ -32,8 +32,8 @@
             </div>
         </div>
         <div class= "panel-footer">
-            @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
-            @Html.ActionLink("Назад к списку", "Index", new { @class = "btn btn-default" })
+            @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, new { @class = "btn btn-default" }) 
+            @Html.ActionLink("Назад к списку", "Index",new{}, new { @class = "btn btn-default" })
         </div>
     }
 </div>
