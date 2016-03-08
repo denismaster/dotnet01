@@ -35,6 +35,7 @@
                     <li><a href="#/home/contact">Contact</a></li>
                     <li>@Html.ActionLink("Регистрация", "Register", "Home")</li>
                 </ul>
+
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" id="enter-button" data-toggle="dropdown"><b>Войти</b> <span class="caret"></span></a>
@@ -44,7 +45,7 @@
                                     <div class="col-md-12">
                                         Войти через
                                         <div class="social-buttons">
-                                            <a href="#" class="btn btn-facebook" ><i class="fa fa-fb"></i> Facebook</a>
+                                            <a href="#" id="fb" class="btn btn-facebook" ><i class="fa fa-fb"></i> Facebook</a>
                                             <a href="#" class="btn btn-vk"><i class="fa fa-vk"></i> Вконтакте </a>
                                             <a href="#" class="btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i> Одноклассники</a>
                                             <a href="#" class="btn btn-instagram"><i class="fa fa-instagram"></i> Instagram </a>
@@ -52,11 +53,10 @@
                                             <a href="#" class="btn btn-pinterest"><i class="fa fa-pinterest"></i> Pinterest</a>
                                         </div>
                                         или
-                                    
-                                        {
+                                          @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                          {
                                             @Html.AntiForgeryToken()
 
-                                            <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                                 <div class="form-group">
                                                     @Html.Label("E-mail", new { @class = "src-only" })
@@ -78,10 +78,10 @@
                                                     <input type="submit" value="Войти" id="enterButton" class="btn btn-primary btn-block" />
                                                 </div>
 
-                                            </form>
+                                          }
                                     <div class="bottom text-center">
                                         Еще не с нами?
-                            <a href="#/home/registration">Зарегестрироваться</a>
+                                        @Html.ActionLink("Зарегестрироваться", "Register", "Home")
 </div>
                                       
                                         </div>

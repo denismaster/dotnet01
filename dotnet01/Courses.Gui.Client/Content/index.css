@@ -24,6 +24,7 @@
     margin-bottom: 10px;
 }
 .btn-fb{
+   margin-top:1px;
     color: #fff;
     background-color:#3b5998;
 }
@@ -39,10 +40,15 @@
     color: #fff;
     background-color:#59b5fa;
 }
-.btn-instagram, .btn-odnoklassniki, .btn-twitter, .btn-pinterest, .btn-vk
+ .btn-instagram, .btn-odnoklassniki, .btn-twitter, .btn-pinterest, .btn-vk
 {
-margin-top: 1px;
+padding-top: 0px;
+margin-top:0px;
 }
+ a#fb.btn-facebook
+ {
+     margin-bottom:1px;
+ }
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;
@@ -175,34 +181,8 @@ li.active
      background-color: #178ACC;
      color: #fff;
 }
+
 div.container .body-content
 {
     width:100% !important;
 }
-#person-img
-{
-	height:100px;
-	width: 100px;
-}
-h2
-{
-text-align: center;
-border-bottom: 3px solid #578F90;
-
-}
-.registr
-{
-	background-color: #fff;
-}
-
-
-/*.btn,.btn:active,.btn:focus
-{
-	background-color: #071724;
-	color: #F5EED2;
-}
-.btn:hover
-{
-	background-color: #578F90;
-	color: #F5EED2;
-}*/

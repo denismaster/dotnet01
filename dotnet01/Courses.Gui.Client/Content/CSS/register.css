@@ -1,0 +1,41 @@
+img
+{
+	height:250px;
+	width: 250px;
+}
+h2
+{
+text-align: center;
+border-bottom: 3px solid #578F90;
+
+}
+.registr
+{
+   width:650px;
+    background-color: #fff;
+   margin-bottom:15px;
+}
+#reg
+{
+    margin-bottom:10px;
+    margin-top:10px;
+    margin-left:25px;
+}
+#reg,
+#reg:active,
+#reg:focus
+{
+	background-color: #071724;
+	color: #F5EED2;
+}
+
+#reg:hover
+{
+	background-color: #578F90;
+	color: #F5EED2;
+}
+#reg-form
+{
+    margin-left:20px;
+    margin-top:5px;
+}
