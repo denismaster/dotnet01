@@ -26,11 +26,11 @@ namespace Courses.Gui.Manager.Controllers
         [HttpGet]
         public ActionResult New()
         {
-            PartnerViewModel model = new PartnerViewModel();
-            return View(model);
+            var partner= partnerService.GetPartnerWithMenegers(null);
+            return View(partner);
         }
         [HttpPost]
-        public ActionResult New(PartnerViewModel partner)
+        public ActionResult New(PartnerViewModelForAddEditView partner)
         {
             try
             {
@@ -53,14 +53,14 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var pather = partnerService.GetByID(id.Value);
+            var pather = partnerService.GetPartnerWithMenegers(id.Value);
             if (pather == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(pather);
         }
 
         [HttpPost]
-        public ActionResult Edit(PartnerViewModel partner)
+        public ActionResult Edit(PartnerViewModelForAddEditView partner)
         {
             try
             {

@@ -22,7 +22,7 @@ namespace Courses.Buisness
         /// </summary>
         private readonly IAccountRepository repositoryAccounts;
         /// <summary>
-        /// Репозиторий, используемый сервисом для получения продуктов
+        /// Репозиторий, используемый сервисом для получения партнеров
         /// </summary>
         private readonly IPartnerRepository repositoryPartners;
         /// <summary>
@@ -91,7 +91,11 @@ namespace Courses.Buisness
             ProductViewModelForAddEditView productView = new ProductViewModelForAddEditView();
             if (Id == null)
             {
-                productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login");
+                //для возможности не выбирать менеджера                                                              
+                User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
+                var listUser = repositoryAccounts.Get().ToList<User>();
+                listUser.Add(noManager);
+                productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
                 productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name");
             }
             else
@@ -100,7 +104,15 @@ namespace Courses.Buisness
                 if (product != null)
                 {
                     productView = ConvertToProductViewModelForAddEditView(product);
-                    productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login", product.AssignedUserId);
+                    if(product.User == null)
+                    {
+                        User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
+                        var listUser = repositoryAccounts.Get().ToList<User>();
+                        listUser.Add(noManager);
+                        productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
+                    }
+                    else
+                        productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login", product.AssignedUserId);
                     productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name", product.PartnerId);
                 }     
             }
@@ -124,6 +136,8 @@ namespace Courses.Buisness
         public void Add(ProductViewModel product)
         {
             product.CreatedDate = product.UpdatedDate = DateTime.Now;
+            if (product.AssignedUserId == 0)
+                product.AssignedUserId = null;
             repository.Add(Convert(product));
         }
         /// <summary>
@@ -133,6 +147,8 @@ namespace Courses.Buisness
         public void Edit(ProductViewModel product)
         {
             product.UpdatedDate = DateTime.Now;
+            if (product.AssignedUserId == 0)
+                product.AssignedUserId = null;
             repository.Update(Convert(product));
         }
         /// <summary>

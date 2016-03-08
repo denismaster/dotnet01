@@ -38,9 +38,9 @@ namespace Courses.ViewModels
         public bool Active { get; set; }
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
-        [DisplayName("Тип мероприятия *")]
+        [DisplayName("Тип (лекции, курс, мастер-класс) *")]
         [RegularExpression(@"\d{1,}", ErrorMessage = "введите число")]
-        public int Type { get; set; }
+        public int Type { get; set; } // мастер-класс, лекции, курс
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
         [DisplayName("Партнер *")]
