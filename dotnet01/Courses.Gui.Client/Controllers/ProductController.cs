@@ -27,12 +27,9 @@ namespace Courses.Gui.Client.Controllers
             this.productService = productService;
         }
         // GET: api/Product
-        public ProductCollectionViewModel GetProducts()
+        public IEnumerable<ProductViewModel> GetProducts()
         {
-            int? page = 1;
-            int pageSize = 3;
-            int currentPage = page ?? 1;
-            var products = productService.GetProducts(currentPage, pageSize);
+            var products = productService.GetIEnumerableProductsCollection();
             return products;
         }
 

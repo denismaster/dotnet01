@@ -17,6 +17,12 @@ namespace Courses.Buisness.Services
             List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
 
         /// <summary>
+        /// Получение всех курсов без фильтров и сортировок
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<ProductViewModel> GetIEnumerableProductsCollection();
+
+        /// <summary>
         /// получение курса со списком аккаунтов и партнеров, для передачи его в форму добавления/редактирования
         /// </summary>
         /// <param name="Id">Id продукта для редактирования</param>

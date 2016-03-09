@@ -20,20 +20,15 @@ namespace Courses.ViewModels
         [Required(ErrorMessage = "*поле должно быть заполнено")]
         public DateTime UpdatedDate { get; set; }
 
-        [Required(ErrorMessage = "*поле должно быть заполнено")]
         [RegularExpression(@"\d{1,}", ErrorMessage = "введите число")]
         public int? UserId { get; set; }
 
-        [Required(ErrorMessage = "*поле должно быть заполнено")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "*поле должно быть заполнено")]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "*поле должно быть заполнено")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "*поле должно быть заполнено")]
         public string Contact { get; set; }
 
 
