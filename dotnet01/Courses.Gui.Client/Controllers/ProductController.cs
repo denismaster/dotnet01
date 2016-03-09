@@ -13,6 +13,8 @@ using Courses.DAL;
 using Courses.ViewModels;
 using Courses.Buisness.Services;
 using Courses.Buisness.Filtering;
+using Microsoft.Ajax.Utilities;
+using System.Web.Mvc;
 
 namespace Courses.Gui.Client.Controllers
 {
@@ -27,13 +29,13 @@ namespace Courses.Gui.Client.Controllers
             this.productService = productService;
         }
         // GET: api/Product
-        public ProductCollectionViewModel GetProducts()
+        public System.Web.Http.Results.JsonResult<IEnumerable<ProductViewModel>> GetProducts()
         {
             int? page = 1;
             int pageSize = 3;
             int currentPage = page ?? 1;
             var products = productService.GetProducts(currentPage, pageSize);
-            return products;
+            return Json(products.Products);
         }
 
         // GET: api/Product/5
