@@ -243,10 +243,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\AccountsDatabase.mdf" />
-    <Content Include="App_Data\AccountsDatabase_log.ldf">
-      <DependentUpon>AccountsDatabase.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -690,6 +686,7 @@
     <Content Include="Views\Account\_Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Content\Black\" />
     <Folder Include="Content\BlueOpal\" />
     <Folder Include="Content\Bootstrap\" />
