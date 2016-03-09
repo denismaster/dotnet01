@@ -82,6 +82,17 @@ namespace Courses.Buisness
             return new ProductCollectionViewModel() { Products = products, PageInfo = pageInfo };
         }
         /// <summary>
+        /// Получение всех курсов без фильтров и сортировок
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ProductViewModel> GetIEnumerableProductsCollection()
+        {
+            IEnumerable<ProductViewModel> products;
+            products = repository.Get().Select(ConvertToProductViewModel);
+            return products;
+        }
+
+        /// <summary>
         /// получение курса со списком аккаунтов и партнеров, для передачи его в форму добавления/редактирования
         /// </summary>
         /// <param name="Id">Id продукта для редактирования</param>
