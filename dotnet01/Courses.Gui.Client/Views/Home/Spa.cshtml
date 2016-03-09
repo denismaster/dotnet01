@@ -10,64 +10,106 @@
 
 <div id="app"></div>
 
-<div class="container">
-    <div id="courseGrid"></div>
-</div>
-<script>
-    $(document).ready(function() {
+<div id="example">
 
-        var products = [{"Name":"first", "Description":"first product"}]
+    <div class="demo-section k-content wide">
+        <div id="listView"></div>
+        <div id="pager" class="k-pager-wrap"></div>
+    </div>
 
-        var dataTest = new kendo.data.DataSource({
-            data:products
-        })
+    <script type="text/x-kendo-template" id="template">
+        <div class="product">
+            <img src="" alt="#: Name # image" />
+            <h3>#:Name#</h3>
+            <p><br>Подробнее...</p>
+        </div>
+    </script>
 
-        var grid = $("#courseGrid"),
-            dataSrc = new kendo.data.DataSource({
-                serverPaging: true,
-                serverSorting: true,
-                serverFiltering: true,
-                pageSize: 10,
-                type: 'aspnetmvc-ajax',
+    <script>
+        $(function() {
+            var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        dataType: 'json',
                         url: '/api/Product',
+                        dataType: 'json'
                     }
                 },
-                schema: {
-                    model: {
-                        id: "Id",
-                        fields: {
-                            Name: "Name",
-                            Description: "Description",
-                        }
-                    },
-                },
+                pageSize: 9
             });
 
-        grid.kendoGrid({
-            sortable: true,
-            reorderable: true,
-            resizable: true,
-            pageable: true,
-            filterable: true,
-            autoBind: true,
-            customBinding: true,
-            columns: [
-				{
-					title: "Name",
-					field: "Name",
-					width: 50
-				},
-                {
-                    title: "Description",
-                    field: "Description",
-                    width: 50
-                },
-            ],
-            dataSource: dataSrc
-        });
+            $("#pager").kendoPager({
+                dataSource: dataSource
+            });
 
-    });
-</script>
+            $("#listView").kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#template").html())
+            });
+        });
+    </script>
+
+    <style>
+        #listView {
+            padding: 10px 5px;
+            margin-bottom: -1px;
+            min-height: 510px;
+        }
+
+        .product {
+            float: left;
+            position: relative;
+            width: 111px;
+            height: 170px;
+            margin: 0 10% 15%;
+            padding: 0;
+        }
+            .product img {
+                width: 300px;
+                height: 300px;
+            }
+
+            .product h3 {
+                margin: 0;
+                padding: 3px 5px 0 0;
+                max-width: 96px;
+                overflow: hidden;
+                line-height: 1.1em;
+                font-size: .9em;
+                font-weight: normal;
+                text-transform: uppercase;
+                color: #999;
+            }
+
+            .product p {
+                visibility: hidden;
+                font-size: 200%;
+            }
+
+            .product:hover p {
+                visibility: visible;
+                position: absolute;
+                width: 300px;
+                height: 300px;
+                top: 0;
+                margin: 0;
+                padding: 0;
+                line-height: 100px;
+                vertical-align: middle;
+                text-align: center;
+                color: #fff;
+                background-color: rgba(0,0,0,0.75);
+                transition: background .2s linear, color .2s linear;
+                -moz-transition: background .2s linear, color .2s linear;
+                -webkit-transition: background .2s linear, color .2s linear;
+                -o-transition: background .2s linear, color .2s linear;
+            }
+
+        .k-listview:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>
+</div>
