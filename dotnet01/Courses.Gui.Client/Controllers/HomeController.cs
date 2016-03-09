@@ -1,11 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using Courses.Gui.Client.Models;
 
 namespace Courses.Gui.Client.Controllers
 {
-
+  
     public class HomeController : Controller
     {
         public ActionResult Spa()
@@ -20,16 +27,19 @@ namespace Courses.Gui.Client.Controllers
 
         public ActionResult About()
         {
-       
+
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+        public ActionResult Register()
+        {
+            return RedirectToAction("Register","Account");
         }
     }
 }
+

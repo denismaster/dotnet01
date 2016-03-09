@@ -21,7 +21,7 @@ namespace Courses.Gui.Client.Controllers
         public AccountController()
         {
         }
-
+      
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
@@ -175,13 +175,12 @@ namespace Courses.Gui.Client.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("SPA", "Home");
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return View();
+         //   If we got this far, something failed, redisplay form
         }
 
         //
@@ -461,7 +460,7 @@ namespace Courses.Gui.Client.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Spa", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
