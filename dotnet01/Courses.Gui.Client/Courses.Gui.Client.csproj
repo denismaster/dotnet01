@@ -249,11 +249,14 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSS\contact.css" />
     <Content Include="Content\CSS\font-awesome.css" />
     <Content Include="Content\CSS\index.css" />
     <Content Include="Content\CSS\register.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\images\call.png" />
     <Content Include="Content\images\fb2.png" />
+    <Content Include="Content\images\mail.png" />
     <Content Include="Content\images\odn2.png" />
     <Content Include="Content\images\person.png" />
     <Content Include="Content\images\skype2.png" />
