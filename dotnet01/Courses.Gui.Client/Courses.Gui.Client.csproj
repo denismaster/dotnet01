@@ -236,6 +236,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityUserStore.cs" />
     <Compile Include="Models\Identity\UserModel.cs" />
+    <Compile Include="Models\Identity\UserRole.cs" />
+    <Compile Include="Models\Identity\UserStore.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
