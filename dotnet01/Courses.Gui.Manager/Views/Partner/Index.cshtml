@@ -21,13 +21,13 @@
                                 <div class="input-group">
                                     @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Поиск по названию" })
                                     <span class="input-group-btn">
-                                        <input class="btn btn-info" type="submit" value="Search" />
+                                        <input class="btn btn-info" type="submit" value="Поиск" />
                                     </span>
                                 </div>
                             </div>
                         }
                     </th>
-                    <th>@Html.ActionLink("Курсы", "", new { }, new { @class = "btn btn-info" })</th>
+                    <th>@Html.ActionLink("Курсы", "Index","Manager", new { }, new { @class = "btn btn-info" })</th>
                 </tr>
             </thead>
         </table>
@@ -67,29 +67,29 @@
         </tbody>
     </table>
     <div>
-        Page @(Model.PageInfo.TotalPages < Model.PageInfo.PageNumber ? 0 : Model.PageInfo.PageNumber)
-        of @Model.PageInfo.TotalPages
+        Стр @(Model.PageInfo.TotalPages < Model.PageInfo.PageNumber ? 0 : Model.PageInfo.PageNumber)
+        из @Model.PageInfo.TotalPages  
         @if (Model.PageInfo.PageNumber > 1)
         {
-            @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
-            @Html.Raw(" ");
-            @Html.ActionLink("< Prev", "Index", new { page = Model.PageInfo.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(" <<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw("  ");
+            @Html.ActionLink("< Пред", "Index", new { page = Model.PageInfo.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
         }
         else
         {
             @:<<
             @Html.Raw(" ");
-            @:< Prev
+            @:< Пред
     }
         @if (Model.PageInfo.PageNumber < Model.PageInfo.TotalPages)
         {
-            @Html.ActionLink("Next >", "Index", new { page = Model.PageInfo.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
-            @Html.Raw(" ");
+            @Html.ActionLink("След >", "Index", new { page = Model.PageInfo.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw("  ");
             @Html.ActionLink(">>", "Index", new { page = Model.PageInfo.TotalPages, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
         }
         else
         {
-            @:Next >
+            @:След >
             @Html.Raw(" ")
             @:>>
     }

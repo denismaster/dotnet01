@@ -16,7 +16,7 @@ namespace Courses.Models
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool Active { get; set; }
-        public int Type { get; set; }
+        public int Type { get; set; }  //мастер-класс, лекции, курс
         public int PartnerId { get; set; }
         public string Teacher { get; set; }
         public int? SeatsCount { get; set; }

@@ -50,6 +50,7 @@
     <Compile Include="DateRangeAttribute.cs" />
     <Compile Include="PartnerCollectionViewModel.cs" />
     <Compile Include="PartnerViewModel.cs" />
+    <Compile Include="PartnerViewModelForAddEditView.cs" />
     <Compile Include="ProductCollectionViewModel.cs" />
     <Compile Include="ProductViewModel.cs" />
     <Compile Include="PageInfo.cs" />

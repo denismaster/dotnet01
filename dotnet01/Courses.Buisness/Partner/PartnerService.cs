@@ -7,6 +7,7 @@ using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.ViewModels;
 using Courses.Buisness.Services;
+using System.Web.Mvc;
 
 namespace Courses.Buisness
 {
@@ -17,6 +18,10 @@ namespace Courses.Buisness
         /// </summary>
         private readonly IPartnerRepository repository;
         /// <summary>
+        /// Репозиторий, используемый сервисом для получения аккаунтов (менеджеров)
+        /// </summary>
+        private readonly IAccountRepository repositoryAccounts;
+        /// <summary>
         /// Фабрика фильтров
         /// </summary>
         private readonly Filtering.IFilterFactory<Models.Partner> filterFactory;
@@ -24,7 +29,8 @@ namespace Courses.Buisness
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public PatherService(Models.Repositories.IPartnerRepository repository, Filtering.IFilterFactory<Models.Partner> filterFactory)
+        public PatherService(Models.Repositories.IPartnerRepository repository, Models.Repositories.IAccountRepository repositoryAccounts,
+            Filtering.IFilterFactory<Models.Partner> filterFactory)
         {
             ///Guard Condition
             if (repository == null)
@@ -32,6 +38,7 @@ namespace Courses.Buisness
             if (filterFactory == null)
                 throw new ArgumentNullException("Filtering Factory is null!");
             this.repository = repository;
+            this.repositoryAccounts = repositoryAccounts;
             this.filterFactory = filterFactory;
         }
         /// <summary>
@@ -70,6 +77,42 @@ namespace Courses.Buisness
         }
 
         /// <summary>
+        /// получение партнера со списком аккаунтов, для передачи его в форму добавления/редактирования
+        /// </summary>
+        /// <param name="Id">Id партнера для редактирования</param>
+        /// <returns></returns>
+        public PartnerViewModelForAddEditView GetPartnerWithMenegers(int? Id)
+        {
+            PartnerViewModelForAddEditView partnerView = new PartnerViewModelForAddEditView();
+            if (Id == null)
+            {
+                //для возможности не выбирать менеджера                                                              
+                User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
+                var listUser = repositoryAccounts.Get().ToList<User>();
+                listUser.Add(noManager);
+                partnerView.Managers = new SelectList(listUser, "Id", "Login", 0);
+            }
+            else
+            {
+                var partner = repository.Get(Id.Value);
+                if (partner != null)
+                {
+                    partnerView = ConvertToPartnerViewModelForAddEditView(partner);
+                    if (partner.User == null)
+                    {
+                        User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
+                        var listUser = repositoryAccounts.Get().ToList<User>();
+                        listUser.Add(noManager);
+                        partnerView.Managers = new SelectList(listUser, "Id", "Login", 0);
+                    }
+                    else
+                        partnerView.Managers = new SelectList(repositoryAccounts.Get(), "Id", "Login", partner.UserId);
+                }
+            }
+            return partnerView;
+        }
+
+        /// <summary>
         /// Получение информации о партнере по его идентификатору
         /// </summary>
         /// <param name="id"></param>
@@ -86,6 +129,8 @@ namespace Courses.Buisness
         public void Add(PartnerViewModel partner)
         {
             partner.CreatedDate = partner.UpdatedDate = DateTime.Now;
+            if (partner.UserId == 0)
+                partner.UserId = null;
             repository.Add(Convert(partner));
         }
         /// <summary>
@@ -95,6 +140,8 @@ namespace Courses.Buisness
         public void Edit(PartnerViewModel partner)
         {
             partner.UpdatedDate = DateTime.Now;
+            if (partner.UserId == 0)
+                partner.UserId = null;
             repository.Update(Convert(partner));
         }
         /// <summary>
@@ -134,6 +181,21 @@ namespace Courses.Buisness
         private PartnerViewModel Convert(Models.Partner c)
         {
             return new PartnerViewModel()
+            {
+                Id = c.PartnerId,
+                Name = c.Name,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                UserId = c.UserId ?? null,
+                Address = c.Address,
+                Phone = c.Phone,
+                Email = c.Email,
+                Contact = c.Contact
+            };
+        }
+        private PartnerViewModelForAddEditView ConvertToPartnerViewModelForAddEditView(Models.Partner c)
+        {
+            return new PartnerViewModelForAddEditView()
             {
                 Id = c.PartnerId,
                 Name = c.Name,
