@@ -71,7 +71,7 @@ namespace Courses.Gui.Client
             var user = await _repository.GetUserByID(userId);
             if (user != null)
             {
-                return new ApplicationUser { Id = user.Id, UserName = user.Email };
+                return new ApplicationUser { Id = user.Id, UserName = user.Login };
             }
             return null;
         }
