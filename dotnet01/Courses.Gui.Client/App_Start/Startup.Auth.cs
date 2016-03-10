@@ -13,17 +13,17 @@ using Courses.Gui.Client.Providers;
 
 namespace Courses.Gui.Client
 {
-    public partial class Startup
+    public class Startup2
     {
         // Enable the application to use OAuthAuthorization. You can then secure your Web APIs
-        static Startup()
+        static Startup2()
         {
-            PublicClientId = "web";
+            //PublicClientId = "web";
 
             OAuthOptions = new OAuthAuthorizationServerOptions
             {
                 TokenEndpointPath = new PathString("/Token"),
-                AuthorizeEndpointPath = new PathString("/Account/Authorize"),
+                AuthorizeEndpointPath = new PathString("/Account/"),
                 Provider = new ApplicationOAuthProvider(PublicClientId),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
                 AllowInsecureHttp = true
@@ -56,9 +56,9 @@ namespace Courses.Gui.Client
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, Models.Identity.UserModel>(
-                    validateInterval: TimeSpan.FromMinutes(30),regenerateIdentity:(manager, user) =>
-                        user.GenerateUserIdentityAsync(manager) )
+                    //OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, Models.Identity.UserModel>(
+                    //validateInterval: TimeSpan.FromMinutes(30),regenerateIdentity:(manager, user) =>
+                    //    user.GenerateUserIdentityAsync(manager) )
                    // getUserIdCallback: (id) => (id.GetUserId<int>().ToString()))
                 }
             });

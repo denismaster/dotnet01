@@ -56,7 +56,7 @@ namespace Courses.Gui.Client
 
             kernel.Bind<IFilterFactory<Partner>>().To<PartnerFilterFactory>();
 
-            kernel.Bind<Microsoft.AspNet.Identity.IUserStore<Models.Identity.UserModel>>().To<Models.Identity.UserStore>();
+            kernel.Bind<IAuthenticationService>().To<Buisness.Authentication.AuthenticationService>();
         }
 
         public System.Web.Http.Controllers.IHttpController Create(HttpRequestMessage request, System.Web.Http.Controllers.HttpControllerDescriptor controllerDescriptor, Type controllerType)

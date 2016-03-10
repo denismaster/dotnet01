@@ -6,23 +6,7 @@ using System.Threading.Tasks;
 
 namespace Courses.Buisness.Filtering
 {
-    /*
-¨¨¨¨¨¨¨¨¨★ 
-¨¨¨¨¨¨¨¨¨**
-¨¨¨¨¨¨¨¨¨*o*
-¨¨¨¨¨¨¨¨*♥*o*
-¨¨¨¨¨¨¨***o***
-¨¨¨¨¨¨**o**♥*o*
-¨¨¨¨¨**♥**o**o**
-¨¨¨¨**o**♥***♥*o*
-¨¨¨*****♥*o**o****
-¨¨**♥**o*****o**♥**
-¨******o*****♥**o***
-****o***♥**o***o***♥ *
-¨¨¨¨¨____!_!____
-¨¨¨¨¨\_________/¨¨ 
- С НОВЫМ ГОДОМ, ДРУЗЬЯ!)
-    */
+    
     public class AccountFilterFactory : IFilterFactory<Models.User>
     {
         public Func<Models.User, bool> GetFilterExpression(IEnumerable<FieldFilter> fieldFilters)

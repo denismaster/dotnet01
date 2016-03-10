@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-using Courses.Gui.Client.Models.Identity;
+//using Courses.Gui.Client.Models.Identity;
 using Courses.Gui.Client.Models;
 using System;
 using System.Threading.Tasks;
@@ -12,13 +12,22 @@ namespace Courses.Gui.Client.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<UserModel> _userManager;
+        //private readonly UserManager<UserModel> _userManager;
 
-        public AccountController(UserManager<UserModel> userManager)
+        //public AccountController(UserManager<UserModel> userManager)
+        //{
+        //    _userManager = userManager;
+        //}
+        private readonly Buisness.Services.IAuthenticationService _authService;
+
+        public AccountController(Buisness.Services.IAuthenticationService service)
         {
-            _userManager = userManager;
+            if(service==null)
+            {
+                throw new ArgumentNullException("Authentication Service");
+            }
+            _authService = service;
         }
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -33,23 +42,29 @@ namespace Courses.Gui.Client.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindAsync(model.Email, model.Password);
-                if (user != null)
+                //User user = await db.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+                var user = _authService.Find(model.Email, model.Password);
+                if (user == null)
                 {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    ModelState.AddModelError("", "Неверный логин или пароль.");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    var claims = _authService.GetIdentity(user);
+
+                    AuthenticationManager.SignOut();
+
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claims);
+                    return RedirectToAction("Index", "Home");
                 }
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -70,16 +85,23 @@ namespace Courses.Gui.Client.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new UserModel(0) { UserName = model.Email};
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                var result = _authService.Register(model.Email, model.Password);
+                //var result = await _userManager.CreateAsync(user, model.Password);
+                if (result)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    var user = _authService.Find(model.Email);
+                    var claims = _authService.GetIdentity(user);
+                    AuthenticationManager.SignOut();
+                    AuthenticationManager.SignIn(new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    }, claims);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    AddErrors(result);
+                    //AddErrors();
+                    ModelState.AddModelError("", "Пользователь уже зарегистрирован");
                 }
             }
 
@@ -93,17 +115,18 @@ namespace Courses.Gui.Client.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
-            ManageMessageId? message = null;
-            IdentityResult result = await _userManager.RemoveLoginAsync(getint(User.Identity.GetUserId()), new UserLoginInfo(loginProvider, providerKey));
-            if (result.Succeeded)
-            {
-                message = ManageMessageId.RemoveLoginSuccess;
-            }
-            else
-            {
-                message = ManageMessageId.Error;
-            }
-            return RedirectToAction("Manage", new { Message = message });
+            throw new NotImplementedException();
+            //ManageMessageId? message = null;
+            //IdentityResult result = await _userManager.RemoveLoginAsync(getint(User.Identity.GetUserId()), new UserLoginInfo(loginProvider, providerKey));
+            //if (result.Succeeded)
+            //{
+            //    message = ManageMessageId.RemoveLoginSuccess;
+            //}
+            //else
+            //{
+            //    message = ManageMessageId.Error;
+            //}
+            //return RedirectToAction("Manage", new { Message = message });
         }
 
         //
@@ -127,49 +150,50 @@ namespace Courses.Gui.Client.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Manage(Models.ChangePasswordViewModel model)
         {
-            bool hasPassword = HasPassword();
-            ViewBag.HasLocalPassword = hasPassword;
-            ViewBag.ReturnUrl = Url.Action("Manage");
-            if (hasPassword)
-            {
-                if (ModelState.IsValid)
-                {
-                    IdentityResult result = await _userManager.ChangePasswordAsync(getint(User.Identity.GetUserId()), model.OldPassword, model.NewPassword);
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
-                    }
-                    else
-                    {
-                        AddErrors(result);
-                    }
-                }
-            }
-            else
-            {
-                // User does not have a password so remove any validation errors caused by a missing OldPassword field
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
-                {
-                    state.Errors.Clear();
-                }
+            throw new NotImplementedException();
+            //bool hasPassword = HasPassword();
+            //ViewBag.HasLocalPassword = hasPassword;
+            //ViewBag.ReturnUrl = Url.Action("Manage");
+            //if (hasPassword)
+            //{
+            //    if (ModelState.IsValid)
+            //    {
+            //        IdentityResult result = await _userManager.ChangePasswordAsync(getint(User.Identity.GetUserId()), model.OldPassword, model.NewPassword);
+            //        if (result.Succeeded)
+            //        {
+            //            return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+            //        }
+            //        else
+            //        {
+            //            AddErrors(result);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    // User does not have a password so remove any validation errors caused by a missing OldPassword field
+            //    ModelState state = ModelState["OldPassword"];
+            //    if (state != null)
+            //    {
+            //        state.Errors.Clear();
+            //    }
 
-                if (ModelState.IsValid)
-                {
-                    IdentityResult result = await _userManager.AddPasswordAsync(getint(User.Identity.GetUserId()), model.NewPassword);
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    else
-                    {
-                        AddErrors(result);
-                    }
-                }
-            }
+            //    if (ModelState.IsValid)
+            //    {
+            //        IdentityResult result = await _userManager.AddPasswordAsync(getint(User.Identity.GetUserId()), model.NewPassword);
+            //        if (result.Succeeded)
+            //        {
+            //            return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+            //        }
+            //        else
+            //        {
+            //            AddErrors(result);
+            //        }
+            //    }
+            //}
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            //// If we got this far, something failed, redisplay form
+           // return View(model);
         }
 
         //
@@ -188,26 +212,27 @@ namespace Courses.Gui.Client.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Login");
-            }
+            throw new NotImplementedException();
+            //var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            //if (loginInfo == null)
+            //{
+            //    return RedirectToAction("Login");
+            //}
 
-            // Sign in the user with this external login provider if the user already has a login
-            var user = await _userManager.FindAsync(loginInfo.Login);
-            if (user != null)
-            {
-                await SignInAsync(user, isPersistent: false);
-                return RedirectToLocal(returnUrl);
-            }
-            else
-            {
-                // If the user does not have an account, then prompt the user to create an account
-                ViewBag.ReturnUrl = returnUrl;
-                ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.DefaultUserName });
-            }
+            //// Sign in the user with this external login provider if the user already has a login
+            //var user = await _userManager.FindAsync(loginInfo.Login);
+            //if (user != null)
+            //{
+            //    await SignInAsync(user, isPersistent: false);
+            //    return RedirectToLocal(returnUrl);
+            //}
+            //else
+            //{
+            //    // If the user does not have an account, then prompt the user to create an account
+            //    ViewBag.ReturnUrl = returnUrl;
+            //    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+            //    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.DefaultUserName });
+            //}
         }
 
         //
@@ -224,17 +249,18 @@ namespace Courses.Gui.Client.Controllers
         // GET: /Account/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
-            }
-            var result = await _userManager.AddLoginAsync(getint(User.Identity.GetUserId()), loginInfo.Login);
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Manage");
-            }
-            return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
+            throw new NotImplementedException();
+            //var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
+            //if (loginInfo == null)
+            //{
+            //    return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
+            //}
+            //var result = await _userManager.AddLoginAsync(getint(User.Identity.GetUserId()), loginInfo.Login);
+            //if (result.Succeeded)
+            //{
+            //    return RedirectToAction("Manage");
+            //}
+            //return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
 
         //
@@ -244,35 +270,36 @@ namespace Courses.Gui.Client.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Manage");
-            }
+            throw new NotImplementedException();
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Manage");
+            //}
 
-            if (ModelState.IsValid)
-            {
-                // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                    return View("ExternalLoginFailure");
-                }
-                var user = new UserModel(0) { UserName = model.Email };
-                var result = await _userManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    result = await _userManager.AddLoginAsync(user.Id.ToString(), info.Login);
-                    if (result.Succeeded)
-                    {
-                        await SignInAsync(user, isPersistent: false);
-                        return RedirectToLocal(returnUrl);
-                    }
-                }
-                AddErrors(result);
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    // Get the information about the user from the external login provider
+            //    var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+            //    if (info == null)
+            //    {
+            //        return View("ExternalLoginFailure");
+            //    }
+            //    var user = new UserModel(0) { UserName = model.Email };
+            //    var result = await _userManager.CreateAsync(user);
+            //    if (result.Succeeded)
+            //    {
+            //        result = await _userManager.AddLoginAsync(user.Id.ToString(), info.Login);
+            //        if (result.Succeeded)
+            //        {
+            //            await SignInAsync(user, isPersistent: false);
+            //            return RedirectToLocal(returnUrl);
+            //        }
+            //    }
+            //    AddErrors(result);
+            //}
 
-            ViewBag.ReturnUrl = returnUrl;
-            return View(model);
+            //ViewBag.ReturnUrl = returnUrl;
+            //return View(model);
         }
 
         //
@@ -296,18 +323,21 @@ namespace Courses.Gui.Client.Controllers
         [ChildActionOnly]
         public ActionResult RemoveAccountList()
         {
-            var linkedAccounts = _userManager.GetLogins(getint(User.Identity.GetUserId()));
-            ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
-            return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
+            throw new NotImplementedException();
+            //var linkedAccounts = _userManager.GetLogins(getint(User.Identity.GetUserId()));
+            //ViewBag.ShowRemoveButton = HasPassword() || linkedAccounts.Count > 1;
+            //return (ActionResult)PartialView("_RemoveAccountPartial", linkedAccounts);
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && _userManager != null)
-            {
-                _userManager.Dispose();
-            }
             base.Dispose(disposing);
+            ///throw new NotImplementedException();
+            //if (disposing && _userManager != null)
+            //{
+            //    _userManager.Dispose();
+            //}
+            //base.Dispose(disposing);
         }
 
         #region Helpers
@@ -322,12 +352,13 @@ namespace Courses.Gui.Client.Controllers
             }
         }
 
-        private async Task SignInAsync(UserModel user, bool isPersistent)
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
-        }
+        //private async Task SignInAsync(UserModel user, bool isPersistent)
+        //{
+        //    throw new NotImplementedException();
+        //    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+        //    var identity = await _userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+        //    AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
+        //}
 
         private void AddErrors(IdentityResult result)
         {
@@ -339,11 +370,12 @@ namespace Courses.Gui.Client.Controllers
 
         private bool HasPassword()
         {
-            var user = _userManager.FindById(getint(User.Identity.GetUserId()));
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
+
+            //var user = _userManager.FindById(getint(User.Identity.GetUserId()));
+            //if (user != null)
+            //{
+            //    return user.PasswordHash != null;
+            //}
             return false;
         }
 

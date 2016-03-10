@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Courses.Authorization;
+//using Courses.Authorization;
 using Courses.Models;
 using Courses.Models.Repositories;
 using Microsoft.AspNet.Identity;

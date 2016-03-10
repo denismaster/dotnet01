@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace Courses.Gui.Client.Controllers
 {
-    [Authorize]
+    
     public class HomeController : Controller
     {
         public ActionResult Index()
