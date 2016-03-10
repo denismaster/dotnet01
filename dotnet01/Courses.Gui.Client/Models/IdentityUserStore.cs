@@ -68,22 +68,24 @@ namespace Courses.Gui.Client
 
         public async Task<ApplicationUser> FindByIdAsync(int userId)
         {
-            var user = await _repository.GetUserByID(userId);
-            if (user != null)
-            {
-                return new ApplicationUser { Id = user.Id, UserName = user.Login };
-            }
-            return null;
+            //var user = await _repository.GetUserByID(userId);
+            //if (user != null)
+            //{
+            //    return new ApplicationUser { Id = user.Id, UserName = user.Login };
+            //}
+            //return null;
+            throw new NotImplementedException();
         }
 
         public async Task<ApplicationUser> FindByNameAsync(string userName)
         {
-            var user = await _repository.GetUserByName(userName);
-            if (user != null)
-            {
-                return new ApplicationUser { Id = user.Id, UserName = user.Login };
-            }
-            return null;
+            //var user = await _repository.GetUserByName(userName);
+            //if (user != null)
+            //{
+            //    return new ApplicationUser { Id = user.Id, UserName = user.Login };
+            //}
+            //return null;
+            throw new NotImplementedException();
         }
 
         public Task UpdateAsync(ApplicationUser user)

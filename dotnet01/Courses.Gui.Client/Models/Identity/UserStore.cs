@@ -9,14 +9,15 @@ using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 namespace Courses.Gui.Client.Models.Identity
 {
-    public class UserStore : IUserLoginStore<UserModel, int>, 
-        IUserClaimStore<UserModel, int>, 
-        IUserRoleStore<UserModel, int>,
-        IUserPasswordStore<UserModel, int>, 
-        IUserStore<UserModel, int>, IDisposable
+    public class UserStore : IUserLoginStore<UserModel>, 
+        IUserClaimStore<UserModel>, 
+        IUserRoleStore<UserModel>,
+        IUserPasswordStore<UserModel>, 
+        IUserLockoutStore<UserModel,string>,
+        IUserStore<UserModel>, IDisposable
     {
         private readonly IAccountRepository _repository;
-
+        private static int _lastId;
         public UserStore(IAccountRepository repository)
         {
             if (repository != null)
@@ -41,7 +42,8 @@ namespace Courses.Gui.Client.Models.Identity
             user.Id = identityUser.Id;
             user.Login = identityUser.UserName;
             user.PasswordHash = identityUser.PasswordHash;
-            //user.SecurityStamp = identityUser.SecurityStamp;
+            user.CreatedDate = DateTime.Now;
+            user.UpdatedDate = DateTime.Now;
         }
 
         private UserModel getUserModel(Entities.User user)
@@ -49,7 +51,7 @@ namespace Courses.Gui.Client.Models.Identity
             if (user == null)
                 return null;
 
-            var identityUser = new UserModel();
+            var identityUser = new UserModel(user.Id);
             populateUserModel(identityUser, user);
 
             return identityUser;
@@ -72,6 +74,7 @@ namespace Courses.Gui.Client.Models.Identity
 
             _repository.Add(u);
             _repository.SaveChanges();
+            _lastId = u.Id;
             return Task.FromResult<int>(0);
         }
         public Task DeleteAsync(UserModel user)
@@ -85,7 +88,7 @@ namespace Courses.Gui.Client.Models.Identity
             _repository.SaveChanges();
             return Task.FromResult<int>(0);
         }
-        public Task<UserModel> GetUserByIDAsync(int userId)
+        public Task<UserModel> FindByIdAsync(string userId)
         {
             var user = _repository.GetUserByID(userId);
             return Task.FromResult<UserModel>(getUserModel(user));
@@ -93,7 +96,8 @@ namespace Courses.Gui.Client.Models.Identity
 
         public Task<UserModel> FindByNameAsync(string userName)
         {
-            var user = _repository.FindByUserName(userName);
+            var user =_repository.GetUserByName(userName);
+            if (user != null) _lastId = user.Id;
             return Task.FromResult<UserModel>(getUserModel(user));
         }
 
@@ -102,14 +106,15 @@ namespace Courses.Gui.Client.Models.Identity
             if (user == null)
                 throw new ArgumentException("user");
 
-            var u = _repository.GetUserByID(user.Id);
+            var u = _repository.GetUserByID(user.Id.ToString());
             if (u == null)
                 throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
 
             populateUser(u, user);
 
             _repository.Update(u);
-            return _unitOfWork.SaveChangesAsync();
+            _repository.SaveChanges();
+            return Task.FromResult<int>(0);
         }
 
         #region IDisposable Members
@@ -122,25 +127,26 @@ namespace Courses.Gui.Client.Models.Identity
         #region IUserClaimStore<UserModel, int> Members
         public Task AddClaimAsync(UserModel user, Claim claim)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
-            if (claim == null)
-                throw new ArgumentNullException("claim");
+            //if (user == null)
+            //    throw new ArgumentNullException("user");
+            //if (claim == null)
+            //    throw new ArgumentNullException("claim");
 
-            var u = _repository.GetUserByID(user.Id);
-            if (u == null)
-                throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
+            //var u = _repository.GetUserByID(user.Id);
+            //if (u == null)
+            //    throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
 
-            var c = new Entities.Claim
-            {
-                ClaimType = claim.Type,
-                ClaimValue = claim.Value,
-                User = u
-            };
-            u.Claims.Add(c);
+            //var c = new Entities.Claim
+            //{
+            //    ClaimType = claim.Type,
+            //    ClaimValue = claim.Value,
+            //    User = u
+            //};
+            //u.Claims.Add(c);
 
-            _repository.Update(u);
-            return _unitOfWork.SaveChangesAsync();
+            //_repository.Update(u);
+            //return _unitOfWork.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public Task<IList<Claim>> GetClaimsAsync(UserModel user)
@@ -148,110 +154,120 @@ namespace Courses.Gui.Client.Models.Identity
             if (user == null)
                 throw new ArgumentNullException("user");
 
-            var u = _repository.GetUserByID(user.Id);
+            var u = _repository.GetUserByID(user.Id.ToString());
             if (u == null)
                 throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
 
-            return Task.FromResult<IList<Claim>>(u.Claims.Select(x => new Claim(x.ClaimType, x.ClaimValue)).ToList());
+
+
+            //return Task.FromResult<IList<Claim>>(u.Claims.Select(x => new Claim(x.ClaimType, x.ClaimValue)).ToList());
+            return Task.FromResult<IList<Claim>>(new List<Claim>());
         }
 
         public Task RemoveClaimAsync(UserModel user, Claim claim)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
-            if (claim == null)
-                throw new ArgumentNullException("claim");
+            //if (user == null)
+            //    throw new ArgumentNullException("user");
+            //if (claim == null)
+            //    throw new ArgumentNullException("claim");
 
-            var u = _repository.GetUserByID(user.Id);
-            if (u == null)
-                throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
+            //var u = _repository.GetUserByID(user.Id);
+            //if (u == null)
+            //    throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
 
-            var c = u.Claims.FirstOrDefault(x => x.ClaimType == claim.Type && x.ClaimValue == claim.Value);
-            u.Claims.Remove(c);
+            //var c = u.Claims.FirstOrDefault(x => x.ClaimType == claim.Type && x.ClaimValue == claim.Value);
+            //u.Claims.Remove(c);
 
-            _repository.Update(u);
-            return _unitOfWork.SaveChangesAsync();
+            //_repository.Update(u);
+            //return _unitOfWork.SaveChangesAsync();
+
+            throw new NotImplementedException();
+
         }
         #endregion
 
         #region IUserLoginStore<UserModel, int> Members
         public Task AddLoginAsync(UserModel user, UserLoginInfo login)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
-            if (login == null)
-                throw new ArgumentNullException("login");
+            //if (user == null)
+            //    throw new ArgumentNullException("user");
+            //if (login == null)
+            //    throw new ArgumentNullException("login");
 
-            var u = _repository.GetUserByID(user.Id);
-            if (u == null)
-                throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
+            //var u = _repository.GetUserByID(user.Id);
+            //if (u == null)
+            //    throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
 
-            var l = new Entities.ExternalLogin
-            {
-                LoginProvider = login.LoginProvider,
-                ProviderKey = login.ProviderKey,
-                User = u
-            };
-            u.Logins.Add(l);
+            //var l = new Entities.ExternalLogin
+            //{
+            //    LoginProvider = login.LoginProvider,
+            //    ProviderKey = login.ProviderKey,
+            //    User = u
+            //};
+            //u.Logins.Add(l);
 
-            _repository.Update(u);
-            return _unitOfWork.SaveChangesAsync();
+            //_repository.Update(u);
+            //return _unitOfWork.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public Task<UserModel> FindAsync(UserLoginInfo login)
         {
-            if (login == null)
-                throw new ArgumentNullException("login");
+            //if (login == null)
+            //    throw new ArgumentNullException("login");
 
-            var identityUser = default(UserModel);
+            //var identityUser = default(UserModel);
 
-            var l = _unitOfWork.ExternalLoginRepository.GetByProviderAndKey(login.LoginProvider, login.ProviderKey);
-            if (l != null)
-                identityUser = getUserModel(l.User);
+            //var l = _unitOfWork.ExternalLoginRepository.GetByProviderAndKey(login.LoginProvider, login.ProviderKey);
+            //if (l != null)
+            //    identityUser = getUserModel(l.User);
 
-            return Task.FromResult<UserModel>(identityUser);
+            //return Task.FromResult<UserModel>(identityUser);
+            throw new NotImplementedException();
         }
 
         public Task<IList<UserLoginInfo>> GetLoginsAsync(UserModel user)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
+            //if (user == null)
+            //    throw new ArgumentNullException("user");
 
-            var u = _repository.GetUserByID(user.Id);
-            if (u == null)
-                throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
+            //var u = _repository.GetUserByID(user.Id);
+            //if (u == null)
+            //    throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
 
-            return Task.FromResult<IList<UserLoginInfo>>(u.Logins.Select(x => new UserLoginInfo(x.LoginProvider, x.ProviderKey)).ToList());
+            //return Task.FromResult<IList<UserLoginInfo>>(u.Logins.Select(x => new UserLoginInfo(x.LoginProvider, x.ProviderKey)).ToList());
+            throw new NotImplementedException();
         }
 
         public Task RemoveLoginAsync(UserModel user, UserLoginInfo login)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
-            if (login == null)
-                throw new ArgumentNullException("login");
+            //if (user == null)
+            //    throw new ArgumentNullException("user");
+            //if (login == null)
+            //    throw new ArgumentNullException("login");
 
-            var u = _repository.GetUserByID(user.Id);
-            if (u == null)
-                throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
+            //var u = _repository.GetUserByID(user.Id);
+            //if (u == null)
+            //    throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
 
-            var l = u.Logins.FirstOrDefault(x => x.LoginProvider == login.LoginProvider && x.ProviderKey == login.ProviderKey);
-            u.Logins.Remove(l);
+            //var l = u.Logins.FirstOrDefault(x => x.LoginProvider == login.LoginProvider && x.ProviderKey == login.ProviderKey);
+            //u.Logins.Remove(l);
 
-            _repository.Update(u);
-            return _unitOfWork.SaveChangesAsync();
+            //_repository.Update(u);
+            //return _unitOfWork.SaveChangesAsync();
+            throw new NotImplementedException();
         }
         #endregion
 
         #region IUserRoleStore<UserModel, int> Members
-        public async Task AddToRoleAsync(UserModel user, string roleName)
+        public Task AddToRoleAsync(UserModel user, string roleName)
         {
             if (user == null)
                 throw new ArgumentNullException("user");
             if (string.IsNullOrWhiteSpace(roleName))
                 throw new ArgumentException("Argument cannot be null, empty, or whitespace: roleName.");
 
-            var u = await _repository.GetUserByID(user.Id);
+            var u = _repository.GetUserByID(user.Id.ToString());
             if (u == null)
                 throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
             u.Role = roleName;
@@ -260,16 +276,17 @@ namespace Courses.Gui.Client.Models.Identity
             return Task.FromResult<int>(0);
         }
 
-        public Task<IList<string>> GetRolesAsync(UserModel user)
+        public  Task<IList<string>> GetRolesAsync(UserModel user)
         {
             if (user == null)
                 throw new ArgumentNullException("user");
 
-            var u = _repository.GetUserByID(user.Id);
+            var u = _repository.GetUserByID(user.Id.ToString());
             if (u == null)
                 throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
-
-            return Task.FromResult<IList<string>>(u.Roles.Select(x => x.Name).ToList());
+            var roles = new List<string>();
+            roles.Add(u.Role);
+            return Task.FromResult<IList<string>>(roles);
         }
 
         public Task<bool> IsInRoleAsync(UserModel user, string roleName)
@@ -279,29 +296,29 @@ namespace Courses.Gui.Client.Models.Identity
             if (string.IsNullOrWhiteSpace(roleName))
                 throw new ArgumentException("Argument cannot be null, empty, or whitespace: role.");
 
-            var u = _repository.GetUserByID(user.Id);
+            var u =  _repository.GetUserByID(user.Id.ToString());
             if (u == null)
                 throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
-
-            return Task.FromResult<bool>(u.Roles.Any(x => x.Name == roleName));
+            return Task.FromResult<bool>(u.Role == roleName);
         }
 
         public Task RemoveFromRoleAsync(UserModel user, string roleName)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
-            if (string.IsNullOrWhiteSpace(roleName))
-                throw new ArgumentException("Argument cannot be null, empty, or whitespace: role.");
+            //if (user == null)
+            //    throw new ArgumentNullException("user");
+            //if (string.IsNullOrWhiteSpace(roleName))
+            //    throw new ArgumentException("Argument cannot be null, empty, or whitespace: role.");
 
-            var u = _repository.GetUserByID(user.Id);
-            if (u == null)
-                throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
+            //var u = _repository.GetUserByID(user.Id);
+            //if (u == null)
+            //    throw new ArgumentException("UserModel does not correspond to a User entity.", "user");
 
-            var r = u.Roles.FirstOrDefault(x => x.Name == roleName);
-            u.Roles.Remove(r);
+            //var r = u.Roles.FirstOrDefault(x => x.Name == roleName);
+            //u.Roles.Remove(r);
 
-            _repository.Update(u);
-            return _unitOfWork.SaveChangesAsync();
+            //_repository.Update(u);
+            //return _unitOfWork.SaveChangesAsync();
+            throw new NotImplementedException();
         }
         #endregion
 
@@ -327,19 +344,39 @@ namespace Courses.Gui.Client.Models.Identity
         }
         #endregion
 
-        #region IUserSecurityStampStore<UserModel, int> Members
-        public Task<string> GetSecurityStampAsync(UserModel user)
+        public Task<int> GetAccessFailedCountAsync(UserModel user)
         {
-            if (user == null)
-                throw new ArgumentNullException("user");
-            return Task.FromResult<string>(user.SecurityStamp);
+            throw new NotImplementedException();
         }
 
-        public Task SetSecurityStampAsync(UserModel user, string stamp)
+        public Task<bool> GetLockoutEnabledAsync(UserModel user)
         {
-            user.SecurityStamp = stamp;
-            return Task.FromResult(0);
+            return Task.FromResult<bool>(false);
         }
-    }
+
+        public Task<DateTimeOffset> GetLockoutEndDateAsync(UserModel user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(UserModel user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ResetAccessFailedCountAsync(UserModel user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetLockoutEnabledAsync(UserModel user, bool enabled)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetLockoutEndDateAsync(UserModel user, DateTimeOffset lockoutEnd)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

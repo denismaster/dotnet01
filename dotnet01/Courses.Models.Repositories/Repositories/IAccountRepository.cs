@@ -10,8 +10,7 @@ namespace Courses.Models.Repositories
     {
         //Дополнительные действия, специфичные для аккаунтов.
         User GetUser(string login, string password);
-        Task<User> GetUserByID(int id);
-        Task<User> GetUserByName(string username);
-       
+        User GetUserByID(string id);
+        User GetUserByName(string username);
     }
 }

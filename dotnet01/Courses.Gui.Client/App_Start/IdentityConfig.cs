@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Courses.Gui.Client.Models;
+using Courses.Gui.Client.Models.Identity;
 
 namespace Courses.Gui.Client
 {
@@ -33,9 +34,9 @@ namespace Courses.Gui.Client
     }
 
     // Configure the application user manager which is used in this application.
-    public class ApplicationUserManager : UserManager<ApplicationUser, int>
+    public class ApplicationUserManager : UserManager<UserModel>
     {
-        public ApplicationUserManager(IUserStore<ApplicationUser, int> store)
+        public ApplicationUserManager(IUserStore<UserModel> store)
             : base(store)
         {
         }
@@ -45,9 +46,9 @@ namespace Courses.Gui.Client
         {
             //var manager = new ApplicationUserManager(
             //    new CustomUserStore(context.Get<ApplicationDbContext>()));
-            var manager = new ApplicationUserManager(new ApplicationUserStore(context.Get<DAL.AccountRepository>()));
+            var manager = new ApplicationUserManager(new Models.Identity.UserStore(context.Get<DAL.AccountRepository>()));
             // Configure validation logic for usernames 
-            //manager.UserValidator = new UserValidator<ApplicationUser, int>(manager)
+            //manager.UserValidator = new UserValidator<UserModel, int>(manager)
             //{
             //    AllowOnlyAlphanumericUserNames = false,
             //    RequireUniqueEmail = true
@@ -65,12 +66,12 @@ namespace Courses.Gui.Client
             // and Emails as a step of receiving a code for verifying the user 
             // You can write your own provider and plug in here. 
             manager.RegisterTwoFactorProvider("PhoneCode",
-                new PhoneNumberTokenProvider<ApplicationUser, int>
+                new PhoneNumberTokenProvider<UserModel>
                 {
                     MessageFormat = "Your security code is: {0}"
                 });
             manager.RegisterTwoFactorProvider("EmailCode",
-                new EmailTokenProvider<ApplicationUser, int>
+                new EmailTokenProvider<UserModel>
                 {
                     Subject = "Security Code",
                     BodyFormat = "Your security code is: {0}"
@@ -81,7 +82,7 @@ namespace Courses.Gui.Client
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider =
-                    new DataProtectorTokenProvider<ApplicationUser, int>(
+                    new DataProtectorTokenProvider<UserModel>(
                         dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
@@ -89,12 +90,12 @@ namespace Courses.Gui.Client
     } 
 
     // Configure the application sign-in manager which is used in this application.  
-    public class ApplicationSignInManager : SignInManager<ApplicationUser, int>
+    public class ApplicationSignInManager : SignInManager<UserModel,string>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager) :
             base(userManager, authenticationManager) { }
 
-        public override Task<ClaimsIdentity> CreateUserIdentityAsync(ApplicationUser user)
+        public override Task<ClaimsIdentity> CreateUserIdentityAsync(UserModel user)
         {
             return user.GenerateUserIdentityAsync((ApplicationUserManager)UserManager);
         }

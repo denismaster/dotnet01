@@ -43,7 +43,7 @@ namespace Courses.Gui.Client.Controllers
         // GET api/Me
         public GetViewModel Get()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId<int>());
+            var user = UserManager.FindById(User.Identity.GetUserId<int>().ToString());
             return new GetViewModel() { Hometown = "Sevastopol"};
         }
     }

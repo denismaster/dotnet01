@@ -54,24 +54,23 @@ namespace Courses.Authorization
             return Task.FromResult<int>(0);
         }
 
-        public async Task<IdentityUser> FindByIdAsync(int userId)
+        public Task<IdentityUser> FindByIdAsync(int userId)
         {
-            var user = await _repository.GetUserByID(userId);
-            if (user != null)
-            {
-                return new IdentityUser(user.Id, user.Login);
-            }
-            return null;
+            //var user = _repository.GetUserByID(userId);
+            //return Task.FromResult<IdentityUser>(new ApplicationUse(user);
+
+            throw new NotImplementedException();
         }
 
         public async Task<IdentityUser> FindByNameAsync(string userName)
         {
-            var user = await _repository.GetUserByName(userName);
-            if (user != null)
-            {
-                return new IdentityUser(user.Id, user.Login);
-            }
-            return null;
+            //var user = _repository.GetUserByName(userName);
+            //if (user != null)
+            //{
+            //    return new IdentityUser(user.Id, user.Login);
+            //}
+            //return null;
+            throw new NotImplementedException();
         }
 
         public Task UpdateAsync(IdentityUser user)
