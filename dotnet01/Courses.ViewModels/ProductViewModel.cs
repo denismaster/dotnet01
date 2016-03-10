@@ -60,5 +60,8 @@ namespace Courses.ViewModels
 
         [DisplayName("Место проведения")]
         public string Location { get; set; }
+
+        [DisplayName("Путь к изображению")]
+        public String imagePath { get; set; }
     }
 }

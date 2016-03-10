@@ -21,6 +21,7 @@ namespace Courses.Models
         public string Teacher { get; set; }
         public int? SeatsCount { get; set; }
         public int? AssignedUserId { get; set; }
+        public String imagePath { get; set; }
         public string Location { get; set; }
 
         public List<Appointment> Appointments { get; set; }

@@ -195,7 +195,8 @@ namespace Courses.Buisness
                 Teacher = c.Teacher,
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
-                Location = c.Location
+                Location = c.Location,
+                imagePath = c.imagePath
             };
         }
         private ProductViewModel ConvertToProductViewModel(Product c)
@@ -213,7 +214,8 @@ namespace Courses.Buisness
                 Teacher = c.Teacher,
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
-                Location = c.Location
+                Location = c.Location,
+                imagePath = c.imagePath
             };
         }
 
@@ -232,7 +234,8 @@ namespace Courses.Buisness
                 Teacher = c.Teacher,
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
-                Location = c.Location
+                Location = c.Location,
+                imagePath = c.imagePath
             };
         }
     }
