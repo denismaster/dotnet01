@@ -48,13 +48,15 @@ namespace Courses.Gui.Client
             kernel.Bind<IProductService>().To<ProductService>();
             kernel.Bind<IFilterFactory<Product>>().To<ProductFilterFactory>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
-
+            
             kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
             kernel.Bind<IPartnerService>().To<PartnerService>();
 
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
 
             kernel.Bind<IFilterFactory<Partner>>().To<PartnerFilterFactory>();
+
+            kernel.Bind<Microsoft.AspNet.Identity.IUserStore<Models.Identity.UserModel>>().To<Models.Identity.UserStore>();
         }
 
         public System.Web.Http.Controllers.IHttpController Create(HttpRequestMessage request, System.Web.Http.Controllers.HttpControllerDescriptor controllerDescriptor, Type controllerType)
