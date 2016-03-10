@@ -12,5 +12,10 @@ namespace Courses.Gui.Client.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }
