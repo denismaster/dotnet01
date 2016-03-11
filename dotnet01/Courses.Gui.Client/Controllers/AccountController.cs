@@ -75,7 +75,14 @@ namespace Courses.Gui.Client.Controllers
         {
             return View();
         }
-
+        [HttpGet]
+        public ActionResult Authorize()
+        {
+            var claims = new System.Security.Claims.ClaimsPrincipal(User).Claims;
+            var identity = new System.Security.Claims.ClaimsIdentity(claims, "Bearer");
+            AuthenticationManager.SignIn(identity);
+            return new EmptyResult();
+        }
         //
         // POST: /Account/Register
         [HttpPost]

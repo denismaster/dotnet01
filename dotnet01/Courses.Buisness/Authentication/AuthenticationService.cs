@@ -86,7 +86,8 @@ namespace Courses.Buisness.Authentication
             if(user==null)
             {
                 throw new ArgumentNullException("user");
-            } 
+            }
+ 
             var claim = new ClaimsIdentity("ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             claim.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(), ClaimValueTypes.String));
             claim.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email, ClaimValueTypes.String));
