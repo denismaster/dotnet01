@@ -47,6 +47,7 @@ namespace Courses.Gui.Admin
             kernel.Bind<IFilterFactory<User>>().To<AccountFilterFactory>();
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
             kernel.Bind<IAuthenticationService>().To<AuthenticationService>();
+            kernel.Bind<IPasswordHasher>().To<SHA256PasswordHasher>();
         }
     }
 }
