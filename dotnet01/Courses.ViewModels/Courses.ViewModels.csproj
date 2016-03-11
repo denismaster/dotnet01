@@ -46,6 +46,7 @@
     <Compile Include="AccountCollectionViewModel.cs" />
     <Compile Include="AccountViewModel.cs" />
     <Compile Include="DateRangeAttribute.cs" />
+    <Compile Include="LoginVewModel.cs" />
     <Compile Include="PartnerCollectionViewModel.cs" />
     <Compile Include="PartnerViewModel.cs" />
     <Compile Include="ProductCollectionViewModel.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="PageInfo.cs" />
     <Compile Include="ProductViewModelForAddEditView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterVeiwModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
