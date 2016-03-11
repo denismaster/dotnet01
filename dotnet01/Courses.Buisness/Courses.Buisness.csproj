@@ -45,6 +45,7 @@
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Authentication\AuthenticationService.cs" />
     <Compile Include="Authentication\IdentityExtensions.cs" />
+    <Compile Include="Authentication\SHA256PasswordHasher.cs" />
     <Compile Include="Filtering\PartnerFilterFactory.cs" />
     <Compile Include="Partner\PartnerService.cs" />
     <Compile Include="Product\ProductService.cs" />

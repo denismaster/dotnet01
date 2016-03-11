@@ -12,12 +12,15 @@ namespace Courses.Buisness.Authentication
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IAccountRepository repository;
-
-        public AuthenticationService(Models.Repositories.IAccountRepository repository)
+        private readonly IPasswordHasher passwordHasher;
+        public AuthenticationService(Models.Repositories.IAccountRepository repository, IPasswordHasher hasher)
         {
             if (repository == null)
                 throw new ArgumentNullException("Repository is null!");
+            if (hasher == null)
+                throw new ArgumentNullException("Hasher is null");
             this.repository = repository;
+            this.passwordHasher = hasher;
         }
         public User Find(int id)
         {
@@ -47,7 +50,7 @@ namespace Courses.Buisness.Authentication
             {
                 throw new ArgumentException("password");
             }
-            var user = repository.GetUser(username, password);
+            var user = repository.GetUser(username, passwordHasher.Hash(password));
 
             return user;
         }
@@ -69,7 +72,7 @@ namespace Courses.Buisness.Authentication
             {
                 Login = username,
                 Email = username,
-                PasswordHash = password,
+                PasswordHash = passwordHasher.Hash(password),
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now,
                 Role = Roles.Default.ToString()
