@@ -56,6 +56,7 @@ namespace Courses.Gui.Client
 
             kernel.Bind<IFilterFactory<Partner>>().To<PartnerFilterFactory>();
 
+            kernel.Bind<IPasswordHasher>().To<Buisness.Authentication.SHA256PasswordHasher>();
             kernel.Bind<IAuthenticationService>().To<Buisness.Authentication.AuthenticationService>();
         }
 

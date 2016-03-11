@@ -236,6 +236,10 @@
     <Compile Include="Migrations\201603091813229_Initial.Designer.cs">
       <DependentUpon>201603091813229_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603111830576_1.cs" />
+    <Compile Include="Migrations\201603111830576_1.Designer.cs">
+      <DependentUpon>201603111830576_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -248,10 +252,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\AccountsDatabase.mdf" />
-    <Content Include="App_Data\AccountsDatabase_log.ldf">
-      <DependentUpon>AccountsDatabase.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -661,6 +661,7 @@
     <Content Include="Scripts\kendo.window.min.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Content\Black\" />
     <Folder Include="Content\BlueOpal\" />
     <Folder Include="Content\Bootstrap\" />
@@ -723,6 +724,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603091813229_Initial.resx">
       <DependentUpon>201603091813229_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111830576_1.resx">
+      <DependentUpon>201603111830576_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

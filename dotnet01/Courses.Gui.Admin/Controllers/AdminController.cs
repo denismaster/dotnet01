@@ -54,6 +54,7 @@ namespace Courses.Gui.Admin.Controllers
             var account = accountService.GetByID(id.Value);
             if (account == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            var items = new List<SelectListItem>();
             return View(account);
         }
 

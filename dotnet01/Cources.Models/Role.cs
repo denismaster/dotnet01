@@ -8,8 +8,8 @@ namespace Courses.Models
 {
     public enum Roles
     {
-        Default,
-        Manager,
-        Admin
+        Default=0,
+        Manager=1,
+        Admin=2
     }
 }
