@@ -702,10 +702,6 @@
       <Project>{1496fb44-c419-4eae-95c7-49a068dc2e78}</Project>
       <Name>Courses.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Courses.Authorization\Courses.Authorization.csproj">
-      <Project>{0784039b-e8ad-4604-a209-3c0b05e2981e}</Project>
-      <Name>Courses.Authorization</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Courses.Buisness.Services\Courses.Buisness.Services.csproj">
       <Project>{7ddc3e7c-e381-4d21-bfab-71d69626b9fb}</Project>
       <Name>Courses.Buisness.Services</Name>
