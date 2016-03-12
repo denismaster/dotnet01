@@ -68,9 +68,9 @@ namespace Courses.DAL
                 case "TypeDesc":
                     return context.Products.Where(expression).OrderByDescending(s => s.Type).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
-                case "PartnerID":
+                case "PartnerId":
                     return context.Products.Where(expression).OrderBy(s => s.PartnerId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
-                case "PartnerIDDesc":
+                case "PartnerIdDesc":
                     return context.Products.Where(expression).OrderByDescending(s => s.PartnerId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 case "Teacher":

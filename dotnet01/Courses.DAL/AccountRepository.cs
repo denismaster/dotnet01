@@ -71,7 +71,7 @@ namespace Courses.DAL
 
         public void Update(Models.User entity)
         {
-            context.Entry(entity).State = EntityState.Deleted;
+            context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(Models.User entity)
@@ -91,25 +91,19 @@ namespace Courses.DAL
             return context.Users.Where(expression).Count();
         }
 
-        public async User GetUserByID(int id)
+        public User GetUserByID(string id)
         {
-            var result = await context.Users.FindAsync(id);
-            if (result != null)
-                return result;
-            else
+            var intId=0;
+            if (!int.TryParse(id, out intId))
                 return null;
+            var result = context.Users.Find(intId);
+            return result;
         }
 
-        public async User GetUserByName(string email)
+        public User GetUserByName(string email)
         {
-            var allRecords = context.Users.ToList();
-            var result = await context.Users.Where(u=>u.Login== email).FirstOrDefaultAsync();
-            if (result != null)
-            {
-                return result;
-            }
-            else
-                return null;
+            //var allRecords = context.Users.ToList();
+            return context.Users.Where(u => u.Login == email).FirstOrDefault();
         }
 
         public void Dispose()

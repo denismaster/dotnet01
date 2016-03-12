@@ -11,6 +11,7 @@
     </div>
     <dl class="dl-horizontal">
         @Html.AntiForgeryToken()
+        
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -102,6 +103,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Назад к списку", "Index") |
-    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id })
+    @Html.ActionLink("Назад к списку", "Index", new { }, htmlAttributes: new { @class="btn btn-warning"})
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, htmlAttributes: new { @class="btn btn-success"})
 </p>

@@ -1,7 +1,7 @@
-﻿@section SPAViews {
-    @Html.Partial("_Home")
+﻿@{
+    ViewBag.Title = "Главная";
 }
-@section Scripts{
-    @Scripts.Render("~/bundles/knockout")
-    @Scripts.Render("~/bundles/app")
-}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Здесь будет анонс курсов и меню направлений</p>

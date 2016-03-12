@@ -659,6 +659,13 @@
     <Content Include="Scripts\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo.webcomponents.min.js.map" />
     <Content Include="Scripts\kendo.window.min.js.map" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Register - Copy.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\Home\Spa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Black\" />
@@ -694,10 +701,6 @@
     <ProjectReference Include="..\Cources.Models\Courses.Models.csproj">
       <Project>{1496fb44-c419-4eae-95c7-49a068dc2e78}</Project>
       <Name>Courses.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Courses.Authorization\Courses.Authorization.csproj">
-      <Project>{0784039b-e8ad-4604-a209-3c0b05e2981e}</Project>
-      <Name>Courses.Authorization</Name>
     </ProjectReference>
     <ProjectReference Include="..\Courses.Buisness.Services\Courses.Buisness.Services.csproj">
       <Project>{7ddc3e7c-e381-4d21-bfab-71d69626b9fb}</Project>

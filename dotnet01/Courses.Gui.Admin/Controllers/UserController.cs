@@ -8,7 +8,6 @@ using Courses.Buisness.Authentication;
 
 namespace Courses.Gui.Admin.Controllers
 {
-    //[Authorize(Roles = "Admin")]
     public class AuthorizationModel
     {
         public string Login { get; set; }
@@ -65,7 +64,7 @@ namespace Courses.Gui.Admin.Controllers
         [HttpPost]
         public ActionResult LogOn(AuthorizationModel model)
         {
-            if (authenticationService.IsValid(model.Login, model.Password)) // валидируем пользователя
+            //if (authenticationService.IsValid(model.Login, model.Password)) // валидируем пользователя
             {
                 
                 FormsAuthentication.SetAuthCookie(model.Login, true); // выставляем куки для авторизованных лиц

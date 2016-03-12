@@ -1,0 +1,37 @@
+.contact-page .container-fluide
+{
+background-color: #fff;
+margin-bottom:10px;
+margin-top:10px;
+}
+.contact-page img
+{
+	height: 60px;
+	width: 60px;
+	float: left;
+
+}
+.text
+{
+	margin-left: 5px;
+	padding-top: 5px;
+}
+h2.header
+{
+	padding-bottom: 10px;
+}
+.text-contact
+{
+	margin-top: 90px;
+}
+.contact-info
+{
+   margin-top:130px;
+}
+.info
+{
+	padding-bottom: 10px;
+}
+iframe
+{   	padding-bottom: 5px;
+}

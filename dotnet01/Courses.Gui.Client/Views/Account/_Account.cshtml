@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @using Courses.Gui.Client.Models
+    @model LoginViewModel
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/CSS/index.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap-social.css")
+    @Styles.Render("~/Content/CSS/font-awesome.css")
+
+</head>
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Навигация</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand active" href="#/">Course Cloud</a>
+            </div>
+            <div class="navbar-collapse collapse " id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="../#/">Home</a></li>
+                    <li><a href="../#/home/about">О нас</a></li>
+                    <li><a href="../#/home/contact">Контакты</a></li>
+                    <li>@Html.ActionLink("Регистрация", "Register", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" id="enter-button" data-toggle="dropdown"><b>Войти</b> <span class="caret"></span></a>
+                        <ul id="login-dp" class="dropdown-menu">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Войти через
+                                        <div class="social-buttons">
+                                            <a href="#" class="btn btn-facebook"><i class="fa fa-fb"></i> Facebook</a>
+                                            <a href="#" class="btn btn-vk"><i class="fa fa-vk"></i> Вконтакте </a>
+                                            <a href="#" class="btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i> Одноклассники</a>
+                                            <a href="#" class="btn btn-instagram"><i class="fa fa-instagram"></i> Instagram </a>
+                                            <a href="#" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
+                                            <a href="#" class="btn btn-pinterest"><i class="fa fa-pinterest"></i> Pinterest</a>
+                                        </div>
+                                        или
+                                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new
+                                        {
+                                            @class = "form-horizontal",
+                                            role = "form",
+                                            method = "post",
+                                            action = "login",
+                                            id = "login-nav"
+                                        }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="form-group">
+                                                    @Html.Label("E-mail", new { @class = "src-only" })
+                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", id = "exampleInputEmail2", placeholder = "e-mail", required = true })
+                                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.Label("Пароль", new { @class = "src-only" })
+                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "exampleInputPassword2", placeholder = "пароль", required = true })
+                                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                                    <div class="help-block text-center"><a href="">Забыли пароль ?</a></div>
+                                                    <div class="checkbox">
+                                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                                        @Html.Label("Запомнить пароль")
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <input type="submit" value="Войти" id="enterButton" class="btn btn-primary btn-block" />
+                                                </div>
+
+                                            </form>
+                                        }
+                                    </div>
+                                    <div class="bottom text-center">
+                                        Еще не с нами?
+                                        <a href="#/home/registration">Зарегестрироваться</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="icon-addon addon-md">
+                                <input type="text" placeholder="Поиск" class="form-control" id="serach">
+                                <label for="search" class="glyphicon glyphicon-search" rel="tooltip" title="search"></label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container-fluid body-content">
+        @RenderBody()
+    </div>
+
+
+    <footer>
+        <div class="footer-container">
+
+            <div class="row">
+                <div class="col-sm-2">
+
+                </div>
+                <div class="col-sm-4 contact-form">
+                    <h4>Связаться с нами: </h4>
+                    <form class="form" role="form" method="post" accept-charset="UTF-8" action="mailto:support@course_cloud.com">
+                        <div class="form-group">
+                            <div class="icon-addon addon-md">
+                                <input type="text" placeholder="Введите Ваше имя" class="form-control" id="username">
+                                <label for="username" class="glyphicon glyphicon-user" rel="tooltip" title="name"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="icon-addon addon-md">
+                                <input type="text" placeholder="Введите e-mail" class="form-control" id="useremail">
+                                <label for="useremail" class="glyphicon glyphicon-envelope" rel="tooltip" title="email"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" placeholder="Ваше сообщение" id="usermessage"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-contact">Отправить</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-3 about-us">
+                    <h4>О нас: </h4>
+                    <p class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+                <div class="col-sm-3 contact-us">
+                    <div class="row">
+                        <h4>Контакты: </h4>
+                        <h5 class="text">+7 (978) 664-48-25</h5>
+                        <h5 class="text">+7 (978) 664-48-26</h5>
+                        <h5 class="text">info@course_cloud.com</h5>
+                        <h5 class="text">support@course_cloud.com</h5>
+                    </div>
+                    <div class="row social-row">
+                        <img class="social-icon" src="~/Content/images/vk2.png">
+                        <img class="social-icon" src="~/Content/images/fb2.png">
+                        <img class="social-icon" src="~/Content/images/odn2.png">
+                    </div>
+                    <div class="row social-row">
+                        <img class="social-icon" src="~/Content/images/tw2.png">
+                        <img class="social-icon" src="~/Content/images/skype2.png">
+                        <img class="social-icon" src="~/Content/images/youtube2.png">
+                    </div>
+
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; @DateTime.Now.Year - Все права защищены</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", false)
+</body>
+</html>

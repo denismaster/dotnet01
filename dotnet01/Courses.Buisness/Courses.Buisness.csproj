@@ -44,13 +44,15 @@
   <ItemGroup>
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Authentication\AuthenticationService.cs" />
-    <Compile Include="Authorization\AuthorizationService.cs" />
-    <Compile Include="Authorization\IdentityExtensions.cs" />
+    <Compile Include="Authentication\IdentityExtensions.cs" />
+    <Compile Include="Authentication\SHA256PasswordHasher.cs" />
+    <Compile Include="Category\CategoryService.cs" />
+    <Compile Include="Filtering\CategoryFilterFactory.cs" />
     <Compile Include="Filtering\PartnerFilterFactory.cs" />
     <Compile Include="Partner\PartnerService.cs" />
     <Compile Include="Product\ProductService.cs" />
     <Compile Include="Filtering\ProductFilterFactory.cs" />
-    <Compile Include="Authentication\AccountFilterFactory.cs" />
+    <Compile Include="Filtering\AccountFilterFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

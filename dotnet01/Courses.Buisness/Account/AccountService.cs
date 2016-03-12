@@ -122,7 +122,8 @@ namespace Courses.Buisness
                 PasswordHash = c.Password,
                 Role = c.Role,
                 CreatedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now
+                UpdatedDate = DateTime.Now,
+                Status = System.Convert.ToByte(c.IsActive)
             };
         }
         private AccountViewModel Convert(User c)
@@ -133,7 +134,8 @@ namespace Courses.Buisness
                 Login = c.Login,
                 Email = c.Email,
                 Password = c.PasswordHash,
-                Role = c.Role
+                Role = c.Role,
+                IsActive = System.Convert.ToBoolean(c.Status)
             };
         }
     }

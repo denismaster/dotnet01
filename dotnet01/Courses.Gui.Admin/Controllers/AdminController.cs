@@ -8,19 +8,24 @@ using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.ViewModels;
 using Courses.Buisness.Filtering;
-
+using Courses.Buisness.Services;
 namespace Courses.Gui.Admin.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles="Admin")]
     public class AdminController : Controller
     {
         private readonly IAccountService accountService;
 
-        public AdminController(IAccountService accountService)
+        private readonly IPasswordHasher hasher;
+
+        public AdminController(IAccountService accountService, IPasswordHasher hasher)
         {
             if (accountService == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("accountService");
+            if (hasher == null)
+                throw new ArgumentNullException("hasher");
             this.accountService = accountService;
+            this.hasher = hasher;
         }
         [HttpGet]
         public ActionResult New()
@@ -35,6 +40,7 @@ namespace Courses.Gui.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    account.Password = hasher.Hash(account.Password);
                     accountService.Add(account);
                     accountService.SaveChanges();
                     return RedirectToAction("Index");
@@ -55,6 +61,7 @@ namespace Courses.Gui.Admin.Controllers
             var account = accountService.GetByID(id.Value);
             if (account == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            var items = new List<SelectListItem>();
             return View(account);
         }
 
@@ -65,6 +72,7 @@ namespace Courses.Gui.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    account.Password = hasher.Hash(account.Password);
                     accountService.Edit(account);
                     accountService.SaveChanges();
                     return RedirectToAction("Index");

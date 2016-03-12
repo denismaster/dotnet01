@@ -6,7 +6,7 @@ using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
-
+using Courses.Buisness;
 namespace Courses.Gui.Manager
 {
     /// <summary>
@@ -47,7 +47,7 @@ namespace Courses.Gui.Manager
             kernel.Bind<IProductRepository>().To<ProductRepository>();
 
             kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
-            kernel.Bind<IPartnerService>().To<PartnerService>();
+            kernel.Bind<IPartnerService>().To<PatherService>();
 
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
 

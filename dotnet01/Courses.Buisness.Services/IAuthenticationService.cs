@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Courses.Buisness.Services
 {
     public interface IAuthenticationService
     {
-        bool IsValid(string login, string password);
+        Courses.Models.User Find(int id);
+        Courses.Models.User Find(string username);
+        Courses.Models.User Find(string username, string password);
+        System.Security.Claims.ClaimsIdentity GetIdentity(Courses.Models.User user);
+        bool Register(string username, string password);
     }
 }

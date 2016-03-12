@@ -20,6 +20,13 @@ namespace Courses.Buisness.Services
         /// <param name="id"></param>
         /// <returns></returns>
         PartnerViewModel GetByID(int id);
+
+        /// <summary>
+        /// получение партнера со списком аккаунтов, для передачи его в форму добавления/редактирования
+        /// </summary>
+        /// <param name="Id">Id партнера для редактирования</param>
+        /// <returns></returns>
+        PartnerViewModelForAddEditView GetPartnerWithMenegers(int? Id);
         /// <summary>
         /// Добавление партнера 
         /// </summary>

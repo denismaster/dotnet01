@@ -13,10 +13,10 @@ using Courses.DAL;
 using Courses.ViewModels;
 using Courses.Buisness.Services;
 using Courses.Buisness.Filtering;
+using System.Web.Http.Results;
 
 namespace Courses.Gui.Client.Controllers
 {
-    //[Authorize(Roles = "Admin, Manager, Default")]
     public class ProductController : ApiController
     {
         private readonly IProductService productService;
@@ -28,13 +28,10 @@ namespace Courses.Gui.Client.Controllers
             this.productService = productService;
         }
         // GET: api/Product
-        public ProductCollectionViewModel GetProducts()
+        public JsonResult<IEnumerable<ProductViewModel>> GetProducts()
         {
-            int? page = 1;
-            int pageSize = 3;
-            int currentPage = page ?? 1;
-            var products = productService.GetProducts(currentPage, pageSize);
-            return products;
+            var products = productService.GetIEnumerableProductsCollection();
+            return Json(products);
         }
 
         // GET: api/Product/5

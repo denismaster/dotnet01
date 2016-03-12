@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.DAL", "Courses.DAL\Courses.DAL.csproj", "{811D53D2-0687-44E8-855D-020F629227FA}"
 EndProject
@@ -29,10 +29,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Buisness.Services", "Courses.Buisness.Services\Courses.Buisness.Services.csproj", "{7DDC3E7C-E381-4D21-BFAB-71D69626B9FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Gui.Manager", "Courses.Gui.Manager\Courses.Gui.Manager.csproj", "{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{BACD6707-0CCE-467B-A457-603D3EAFACE5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Authorization", "Courses.Authorization\Courses.Authorization.csproj", "{0784039B-E8AD-4604-A209-3C0B05E2981E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Gui.Client", "Courses.Gui.Client\Courses.Gui.Client.csproj", "{0B978A13-514F-45DE-BED2-9BD93BD059DC}"
 EndProject
@@ -74,10 +70,6 @@ Global
 		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0784039B-E8AD-4604-A209-3C0B05E2981E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0784039B-E8AD-4604-A209-3C0B05E2981E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0784039B-E8AD-4604-A209-3C0B05E2981E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0784039B-E8AD-4604-A209-3C0B05E2981E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B978A13-514F-45DE-BED2-9BD93BD059DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B978A13-514F-45DE-BED2-9BD93BD059DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B978A13-514F-45DE-BED2-9BD93BD059DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -95,7 +87,6 @@ Global
 		{BE2EAC06-2EB3-4013-B85E-5E52EBAF42D1} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
 		{7DDC3E7C-E381-4D21-BFAB-71D69626B9FB} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
 		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988} = {CA264FC3-6998-46A4-A848-9A33C92AA808}
-		{0784039B-E8AD-4604-A209-3C0B05E2981E} = {BACD6707-0CCE-467B-A457-603D3EAFACE5}
 		{0B978A13-514F-45DE-BED2-9BD93BD059DC} = {CA264FC3-6998-46A4-A848-9A33C92AA808}
 	EndGlobalSection
 EndGlobal
