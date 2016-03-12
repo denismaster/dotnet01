@@ -659,6 +659,13 @@
     <Content Include="Scripts\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo.webcomponents.min.js.map" />
     <Content Include="Scripts\kendo.window.min.js.map" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Register - Copy.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\Home\Spa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Black\" />

@@ -6,6 +6,7 @@ using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
+
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
@@ -50,7 +51,7 @@ namespace Courses.Gui.Client
             kernel.Bind<IProductRepository>().To<ProductRepository>();
             
             kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
-            kernel.Bind<IPartnerService>().To<PatherService>();
+            kernel.Bind<IPartnerService>().To<Buisness.PatherService>();
 
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
 
