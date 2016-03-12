@@ -8,6 +8,7 @@ using Courses.Buisness.Authentication;
 
 namespace Courses.Gui.Admin.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class AuthorizationModel
     {
         public string Login { get; set; }

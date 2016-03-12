@@ -16,6 +16,7 @@ using Courses.Buisness.Filtering;
 
 namespace Courses.Gui.Client.Controllers
 {
+    //[Authorize(Roles = "Admin, Manager, Default")]
     public class PartnerController : ApiController
     {
         private readonly IPartnerService partnerService;

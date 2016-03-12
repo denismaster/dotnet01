@@ -10,7 +10,7 @@ using Courses.Gui.Client.Models;
 
 namespace Courses.Gui.Client.Controllers
 {
-    [Authorize]
+    //[Authorize(Roles = "Admin, Manager, Default")]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

@@ -11,6 +11,7 @@ using Courses.Buisness.Filtering;
 
 namespace Courses.Gui.Admin.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly IAccountService accountService;

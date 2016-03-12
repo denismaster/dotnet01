@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Courses.Gui.Manager.Controllers
 {
+    //[Authorize(Roles = "Admin, Manager")]
     public class HomeController : Controller
     {
         public ActionResult Index()
