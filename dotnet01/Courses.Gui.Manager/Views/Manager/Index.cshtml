@@ -8,18 +8,33 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         Курсы
-
     </div>
     <div class="panel-body">
-        @Html.ActionLink("Добавить", "New", new { }, new { @class = "btn btn-info" })
+        <table>
+            <thead>
+                <tr>
+                    <th>@Html.ActionLink("Добавить курсы", "New", new { }, new { @class = "btn btn-info" })</th>
+                    <th>
+                        @using (Html.BeginForm())
+                        {
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Поиск по названию" })
+                                    <span class="input-group-btn">
+                                        <input class="btn btn-info" type="submit" value="Поиск" />
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </th>
+                    <th>
+                        @Html.ActionLink("Партнеры", "Index", "Partner", new { }, new { @class = "btn btn-info" })
+                    </th>
+                </tr>
+            </thead>
+        </table>
     </div>
-    @using (Html.BeginForm())
-    {
-        <p>
-            Поиск по названию: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Search" />
-        </p>
-    }
+    
     <table class="table table-striped">
         <thead>
             <tr>
@@ -43,15 +58,15 @@
             @foreach (var item in Model.Products)
             {
                 <tr>
-                    <td width="33%">@item.Name</td>
-                    <td width="33%">@item.PartnerId</td>
-                    <td width="33%">@item.Type</td>
-                    <td width="33%">@item.Active</td>
-                    <td width="33%">
+                    <td width="35%">@item.Name</td>
+                    <td width="15%">@item.PartnerId</td>
+                    <td width="20%">@item.Type</td>
+                    <td width="15%">@item.Active</td>
+                    <td width="20%">
                         <div class="btn-group">
-                            @Html.ActionLink("Редактировать", "Edit", new { iD = item.Id}, new { @class = "btn btn-default" })
-                            @Html.ActionLink("Детали", "Details", new { iD = item.Id }, new { @class = "btn btn-default" })
-                            @Html.ActionLink("Удалить", "Delete", new { iD = item.Id }, new { @class = "btn btn-default" })
+                            @Html.ActionLink(" ", "Edit", new { iD = item.Id}, new { @class = "btn btn-success glyphicon glyphicon-pencil" })
+                            @Html.ActionLink(" ", "Details", new { iD = item.Id }, new { @class = "btn btn-info glyphicon glyphicon-info-sign" })
+                            @Html.ActionLink(" ", "Delete", new { iD = item.Id }, new { @class = "btn btn-danger glyphicon glyphicon-remove" })
                         </div>
                     </td>
                 </tr>
@@ -60,31 +75,31 @@
     </table>
 
     <div>
-        Page @(Model.PageInfo.TotalPages < Model.PageInfo.PageNumber ? 0 : Model.PageInfo.PageNumber)
-        of @Model.PageInfo.TotalPages
+        Стр @(Model.PageInfo.TotalPages < Model.PageInfo.PageNumber ? 0 : Model.PageInfo.PageNumber)
+        из @Model.PageInfo.TotalPages
 
         @if (Model.PageInfo.PageNumber > 1)
         {
-            @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }, new { @class=""})
             @Html.Raw(" ");
-            @Html.ActionLink("< Prev", "Index", new { page = Model.PageInfo.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("< Пред", "Index", new { page = Model.PageInfo.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
         }
         else
         {
             @:<<
             @Html.Raw(" ");
-            @:< Prev
+            @:< Пред
     }
 
         @if (Model.PageInfo.PageNumber < Model.PageInfo.TotalPages)
         {
-            @Html.ActionLink("Next >", "Index", new { page = Model.PageInfo.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("След >", "Index", new { page = Model.PageInfo.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
             @Html.Raw(" ");
             @Html.ActionLink(">>", "Index", new { page = Model.PageInfo.TotalPages, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
         }
         else
         {
-            @:Next >
+            @:След >
             @Html.Raw(" ")
             @:>>
     }

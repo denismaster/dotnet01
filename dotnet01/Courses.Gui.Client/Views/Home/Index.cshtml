@@ -1,7 +1,7 @@
-﻿@section SPAViews {
-    @Html.Partial("_Home")
+﻿@{
+    ViewBag.Title = "About";
 }
-@section Scripts{
-    @Scripts.Render("~/bundles/knockout")
-    @Scripts.Render("~/bundles/app")
-}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
