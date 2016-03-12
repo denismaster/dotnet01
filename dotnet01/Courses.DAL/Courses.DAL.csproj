@@ -53,6 +53,15 @@
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="AccountRepository.cs" />
     <Compile Include="EventRepository.cs" />
+    <Compile Include="Migrations\201603091159254_InitialCreate.cs" />
+    <Compile Include="Migrations\201603091159254_InitialCreate.Designer.cs">
+      <DependentUpon>201603091159254_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603120547242_1.cs" />
+    <Compile Include="Migrations\201603120547242_1.Designer.cs">
+      <DependentUpon>201603120547242_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="PartnerRepository.cs" />
     <Compile Include="ProductRepository.cs" />
@@ -73,6 +82,14 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603091159254_InitialCreate.resx">
+      <DependentUpon>201603091159254_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603120547242_1.resx">
+      <DependentUpon>201603120547242_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
