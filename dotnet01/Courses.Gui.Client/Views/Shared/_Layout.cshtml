@@ -37,32 +37,34 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" id="enter-button" data-toggle="dropdown"><b>Войти</b> <span class="caret"></span></a>
-                        <ul id="login-dp" class="dropdown-menu">
-                            <li>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        Войти через
-                                        <div class="social-buttons">
-                                            <a href="#" id="fb" class="btn btn-facebook"><i class="fa fa-fb"></i> Facebook</a>
-                                            <a href="#" class="btn btn-vk"><i class="fa fa-vk"></i> Вконтакте </a>
-                                            <a href="#" class="btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i> Одноклассники</a>
-                                            <a href="#" class="btn btn-instagram"><i class="fa fa-instagram"></i> Instagram </a>
-                                            <a href="#" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                                            <a href="#" class="btn btn-pinterest"><i class="fa fa-pinterest"></i> Pinterest</a>
-                                        </div>
-                                        или
-                                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                                        {
-                                            @Html.AntiForgeryToken()
-
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                @Html.Label("E-mail", new { @class = "src-only" })
-                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", id = "exampleInputEmail2", placeholder = "e-mail", required = true })
-                                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" id="enter-button" data-toggle="dropdown"><b>Войти</b> <span class="caret"></span></a>
+                            <ul id="login-dp" class="dropdown-menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Войти через
+                                            <div class="social-buttons">
+                                                <a href="#" id="fb" class="btn btn-facebook"><i class="fa fa-fb"></i> Facebook</a>
+                                                <a href="#" class="btn btn-vk"><i class="fa fa-vk"></i> Вконтакте </a>
+                                                <a href="#" class="btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i> Одноклассники</a>
+                                                <a href="#" class="btn btn-instagram"><i class="fa fa-instagram"></i> Instagram </a>
+                                                <a href="#" class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
+                                                <a href="#" class="btn btn-pinterest"><i class="fa fa-pinterest"></i> Pinterest</a>
                                             </div>
+                                            или
+                                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="form-group">
+                                                    @Html.Label("E-mail", new { @class = "src-only" })
+                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", id = "exampleInputEmail2", placeholder = "e-mail", required = true })
+                                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                                </div>
                                                 <div class="form-group">
                                                     @Html.Label("Пароль", new { @class = "src-only" })
                                                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "exampleInputPassword2", placeholder = "пароль", required = true })
@@ -78,18 +80,25 @@
                                                     <input type="submit" value="Войти" id="enterButton" class="btn btn-primary btn-block" />
                                                 </div>
 
-                                        }
-                                        <div class="bottom text-center">
-                                            Еще не с нами?
-                                            @Html.ActionLink("Зарегестрироваться", "Register", "Home")
+                                            }
+                                            <div class="bottom text-center">
+                                                Еще не с нами?
+                                                @Html.ActionLink("Зарегестрироваться", "Register", "Home")
+                                            </div>
+
                                         </div>
-
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
 
-                    </li>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            @Html.ActionLink(User.Identity.Name, "Manage", "Account", new { }, new { disabled="disabled"});
+                        </li>
+                    }
                 </ul>
 
                 <form class="navbar-form navbar-right" role="search">
