@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Courses.Gui.Client.Controllers
 {
-    [Authorize]
+    //[Authorize(Roles = "Admin, Manager, Default")]
     public class AccountController : Controller
     {
         //private readonly UserManager<UserModel> _userManager;

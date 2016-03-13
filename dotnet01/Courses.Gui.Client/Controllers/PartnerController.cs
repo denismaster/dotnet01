@@ -13,6 +13,7 @@ using Courses.DAL;
 using Courses.ViewModels;
 using Courses.Buisness.Services;
 using Courses.Buisness.Filtering;
+using System.Web.Http.Results;
 
 namespace Courses.Gui.Client.Controllers
 {
@@ -21,10 +22,6 @@ namespace Courses.Gui.Client.Controllers
     {
         private readonly IPartnerService partnerService;
 
-        public PartnerController()
-        {
-        }
-
         public PartnerController(IPartnerService partnerService)
         {
             if (partnerService == null)
@@ -32,25 +29,16 @@ namespace Courses.Gui.Client.Controllers
             this.partnerService = partnerService;
         }
 
-
-        public PartnerViewModel Get(int id)
+        public PartnerViewModel GetPartner(int id)
         {
             var partnerViewModel = partnerService.GetByID(id);
             return partnerViewModel;
         }
 
-        public PartnerCollectionViewModel Get()
+        public JsonResult<IEnumerable<PartnerViewModel>> GetPartners()
         {
-            int? page = 1;
-            int pageSize = 5;
-            int currentPage = page ?? 1;
-            var partners = partnerService.GetPartners(currentPage, pageSize);
-            return partners;
-        }
-
-        public void Post(PartnerViewModel partnerViewModel)
-        {
-            partnerService.Edit(partnerViewModel);
+            var partners = partnerService.GetIEnumerablePartnersCollection();
+            return Json(partners);
         }
     }
 }
