@@ -123,7 +123,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentId = c.ParentId
+               // ParentCategory = c.ParentCategory
             };
         }
         private CategoryViewModel Convert(Models.Category c)
@@ -135,7 +135,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentId = c.ParentId
+             //   ParentId = c.ParentId
             };
         }
     }
