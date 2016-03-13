@@ -6,6 +6,7 @@ using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
+
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Controllers;
@@ -48,13 +49,16 @@ namespace Courses.Gui.Client
             kernel.Bind<IProductService>().To<ProductService>();
             kernel.Bind<IFilterFactory<Product>>().To<ProductFilterFactory>();
             kernel.Bind<IProductRepository>().To<ProductRepository>();
-
+            
             kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
-            kernel.Bind<IPartnerService>().To<PatherService>();
+            kernel.Bind<IPartnerService>().To<Buisness.PatherService>();
 
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
 
             kernel.Bind<IFilterFactory<Partner>>().To<PartnerFilterFactory>();
+
+            kernel.Bind<IPasswordHasher>().To<Buisness.Authentication.SHA256PasswordHasher>();
+            kernel.Bind<IAuthenticationService>().To<Buisness.Authentication.AuthenticationService>();
         }
 
         public System.Web.Http.Controllers.IHttpController Create(HttpRequestMessage request, System.Web.Http.Controllers.HttpControllerDescriptor controllerDescriptor, Type controllerType)

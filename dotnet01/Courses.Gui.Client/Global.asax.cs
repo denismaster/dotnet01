@@ -14,7 +14,7 @@ namespace Courses.Gui.Client
         protected void Application_Start()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext,Configuration>());
-        
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -1,7 +1,34 @@
 ﻿
 @{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Контакты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Contact</h2>
-
+@Styles.Render("~/Content/Css/contact.css")
+<div class="contact-page">
+    <div >
+        <div class="container-fluide">
+            <div class="row">
+                    <div class="info">
+                        <div class="col-md-offset-1 col-md-3 contact-info">
+                            <h2>Контакты</h2>
+                            <img src="~/Content/images/call.png" />
+                            <div>
+                                <h5 class="text">+7 (978) 664-48-25</h5>
+                                <h5 class="text">+7 (978) 664-48-26</h5>
+                            </div>
+                            <img src="~/Content/images/mail.png" />
+                            <div>
+                                <h5 class="text">info@course_cloud.com</h5>
+                                <h5 class="text">support@course_cloud.com</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map">
+                        <div class="col-md-offset-1 col-md-6">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11365.097376077914!2d33.46789343183235!3d44.59141394489856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x409524bc63e64d79%3A0x38c3474cb718b6d0!2z0KHQtdCy0LDRgdGC0L7Qv9C-0LvRjNGB0LrQuNC5INCz0L7RgdGD0LTQsNGA0YHRgtCy0LXQvdC90YvQuSDRg9C90LjQstC10YDRgdC40YLQtdGC!5e0!3m2!1sru!2s!4v1457517708831" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

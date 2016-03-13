@@ -6,7 +6,7 @@ using Courses.Buisness;
 using Courses.DAL;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
-
+using Courses.Buisness;
 namespace Courses.Gui.Manager
 {
     /// <summary>
