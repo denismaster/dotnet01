@@ -28,7 +28,7 @@ namespace Courses.Buisness.Filtering
                     case "Active":
                         filterExp += acc => acc.Active.ToString().Equals(fieldFilter.Value);
                         break;
-                    case "ParentID":
+                    case "ParentId":
                         filterExp += acc => acc.ParentId.ToString().Equals(fieldFilter.Value);
                         break;
                     default:

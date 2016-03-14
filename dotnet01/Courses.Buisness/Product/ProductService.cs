@@ -115,17 +115,12 @@ namespace Courses.Buisness
                 if (product != null)
                 {
                     productView = ConvertToProductViewModelForAddEditView(product);
-                    if(product.User == null)
-                    {
-                        User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                        var listUser = repositoryAccounts.Get().ToList<User>();
-                        listUser.Add(noManager);
-                        productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
-                    }
-                    else
-                        productView.Accounts = new SelectList(repositoryAccounts.Get(), "Id", "Login", product.AssignedUserId);
+                    User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
+                    var listUser = repositoryAccounts.Get().ToList<User>();
+                    listUser.Add(noManager);
+                    productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
                     productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name", product.PartnerId);
-                }     
+                } 
             }
             return productView;
         }

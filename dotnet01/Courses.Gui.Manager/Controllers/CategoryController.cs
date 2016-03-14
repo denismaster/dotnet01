@@ -1,43 +1,40 @@
-﻿using System;
+﻿using Courses.Buisness.Filtering;
+using Courses.Buisness.Services;
+using Courses.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Courses.Buisness;
-using Courses.Models;
-using Courses.Models.Repositories;
-using Courses.ViewModels;
-using Courses.Buisness.Filtering;
-using Courses.Buisness.Services;
 
 namespace Courses.Gui.Manager.Controllers
 {
     //[Authorize(Roles = "Manager,Admin")]
-    public class ManagerController : Controller
+    public class CategoryController : Controller
     {
-        private readonly IProductService productService;
+        private readonly ICategoryService categoryService;
 
-        public ManagerController(IProductService productService)
+        public CategoryController(ICategoryService categoryService)
         {
-            if (productService == null)
+            if (categoryService == null)
                 throw new ArgumentNullException();
-            this.productService = productService;
+            this.categoryService = categoryService;
         }
         [HttpGet]
         public ActionResult New()
         {
-            var product = productService.GetProductWithAccauntsAndPartners(null);
-            return View(product);
+            var category = categoryService.GetCategoryWithCategorys(null);
+            return View(category);
         }
         [HttpPost]
-        public ActionResult New(ProductViewModelForAddEditView productView)
+        public ActionResult New(CategoryViewModelForAddEditView categoryView)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    productService.Add(productView);
-                    productService.SaveChanges();
+                    categoryService.Add(categoryView);
+                    categoryService.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
@@ -45,7 +42,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(productView);
+            return View(categoryView);
         }
 
         [HttpGet]
@@ -53,21 +50,21 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var productView = productService.GetProductWithAccauntsAndPartners(id.Value);
-            if (productView.Id == 0)
+            var categoryView = categoryService.GetCategoryWithCategorys(id.Value);
+            if (categoryView.Id == 0)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(productView);
+            return View(categoryView);
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductViewModelForAddEditView product)
+        public ActionResult Edit(CategoryViewModelForAddEditView category)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    productService.Edit(product);
-                    productService.SaveChanges();
+                    categoryService.Edit(category);
+                    categoryService.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
@@ -75,7 +72,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(product);
+            return View(category);
         }
 
         [HttpGet]
@@ -83,36 +80,36 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetById(id.Value);
-            if (product == null)
+            var category = categoryService.GetByID(id.Value);
+            if (category == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(product);
+            return View(category);
         }
 
         [HttpPost]
-        public ActionResult Delete(ProductViewModel product)
+        public ActionResult Delete(CategoryViewModel category)
         {
             try
             {
-                    productService.Delete(product);
-                    productService.SaveChanges();
-                    return RedirectToAction("Index");
+                categoryService.Delete(category);
+                categoryService.SaveChanges();
+                return RedirectToAction("Index");
             }
             catch
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(product);
+            return View(category);
         }
         [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetById(id.Value);
-            if (product == null)
+            var category = categoryService.GetByID(id.Value);
+            if (category == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(product);
+            return View(category);
         }
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -120,8 +117,7 @@ namespace Courses.Gui.Manager.Controllers
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Name") ? "NameDesc" : "Name";
             ViewBag.ActiveSortParam = sortOrder == "Active" ? "ActiveDesc" : "Active";
-            ViewBag.TypeSortParam = sortOrder == "Type" ? "TypeDesc" : "Type";
-            ViewBag.PartnerIdSortParam = sortOrder == "PartnerId" ? "PartnerIdDesc" : "PartnerId";
+            ViewBag.UpdateDateSortParam = sortOrder == "UpdateDate" ? "UpdateDateDesc" : "UpdateDate";
 
             if (Request.HttpMethod == "GET")
             {
@@ -143,8 +139,8 @@ namespace Courses.Gui.Manager.Controllers
 
             int pageSize = 3;
             int currentPage = page ?? 1;
-            var products = productService.GetProducts(currentPage, pageSize, fieldFilters, sortFilter);
-            return View(products);
+            var categorys = categoryService.GetCategorys(currentPage, pageSize, fieldFilters, sortFilter);
+            return View(categorys);
         }
     }
 }
