@@ -118,24 +118,34 @@ namespace Courses.Buisness
         /// <summary>
         /// Добавление категории в репозиторий
         /// </summary>
-        /// <param name="category"></param>
-        public void Add(CategoryViewModel category)
+        /// <param name="categoryView"></param>
+        public void Add(CategoryViewModel categoryView)
         {
-            category.CreatedDate = category.UpdatedDate = DateTime.Now;
-            if (category.ParentId == 0)
-                category.ParentId = null;
-            repository.Add(Convert(category));
+            categoryView.CreatedDate = categoryView.UpdatedDate = DateTime.Now;
+            Category category = Convert(categoryView);
+            if (categoryView.ParentCategoryId == 0)
+                category._Category = null;
+            else
+            {
+                category._Category = repository.Get(categoryView.ParentCategoryId.Value);
+            }
+            repository.Add(category);
         }
         /// <summary>
         /// Обновление категории
         /// </summary>
         /// <param name="category"></param>
-        public void Edit(CategoryViewModel category)
+        public void Edit(CategoryViewModel categoryView)
         {
-            category.UpdatedDate = DateTime.Now;
-            if (category.ParentId == 0)
-                category.ParentId = null;
-            repository.Update(Convert(category));
+            categoryView.UpdatedDate = DateTime.Now;
+            Category category = Convert(categoryView);
+            if (categoryView.ParentCategoryId == 0)
+                category._Category = null;
+            else
+            {
+                category._Category = repository.Get(categoryView.ParentCategoryId.Value);
+            }
+            repository.Update(category);
         }
         /// <summary>
         /// Удаление категории
@@ -163,8 +173,7 @@ namespace Courses.Buisness
                 Name = c.Name,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
-                Active = c.Active,
-                ParentId = c.ParentId
+                Active = c.Active
             };
         }
         private CategoryViewModel Convert(Models.Category c)
@@ -176,7 +185,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentId = c.ParentId
+                ParentCategoryId = c._Category.CategoryId
             };
         }
         private CategoryViewModelForAddEditView ConvertToCategoryViewModelForAddEditView(Models.Category c)
@@ -188,7 +197,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentId = c.ParentId
+                ParentCategoryId = c._Category.CategoryId
             };
         }
     }

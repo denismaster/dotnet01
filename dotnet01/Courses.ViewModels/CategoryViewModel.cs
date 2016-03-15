@@ -23,7 +23,7 @@ namespace Courses.ViewModels
         [Required(ErrorMessage = "*поле должно быть заполнено")]
         public bool Active { get; set; }
 
-        public int? ParentId { get; set; }
+        public int? ParentCategoryId { get; set; }
     }
 }
 
