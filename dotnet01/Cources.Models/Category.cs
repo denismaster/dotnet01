@@ -21,10 +21,9 @@ namespace Courses.Models
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public bool Active { get; set; }
-        public int? ParentId { get; set; }
         public List<Partner> Partners { get; set; }
         public List<Product> Products { get; set; }
-        
-        public Category _Category { get; set; }
+        public string Description { get; set; }
+        public Category ParentCategory { get; set; }
     }
 }

@@ -118,7 +118,7 @@ namespace Courses.DAL
                 .HasOptional(o => o._Schedule);
 
             modelBuilder.Entity<Category>()
-                .HasOptional(o => o._Category);
+                .HasOptional(o => o.ParentCategory);
         }
     }
 }
