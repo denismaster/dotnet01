@@ -24,6 +24,8 @@ namespace Courses.ViewModels
         public bool Active { get; set; }
 
         public int? ParentCategoryId { get; set; }
+
+        public String Description { get; set; }
     }
 }
 

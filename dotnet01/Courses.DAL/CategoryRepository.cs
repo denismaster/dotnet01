@@ -31,10 +31,10 @@ namespace Courses.DAL
                 case "NameDesc":
                     return context.Categories.Where(expression).OrderByDescending(s => s.Name).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
-                //case "Description":
-                //    return context.Categories.Where(expression).OrderBy(s => s.Description).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
-                //case "DescriptionDesc":
-                //    return context.Categories.Where(expression).OrderByDescending(s => s.Description).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "Description":
+                    return context.Categories.Where(expression).OrderBy(s => s.Description).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "DescriptionDesc":
+                    return context.Categories.Where(expression).OrderByDescending(s => s.Description).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 case "CreateDate":
                     return context.Categories.Where(expression).OrderBy(s => s.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
@@ -52,9 +52,9 @@ namespace Courses.DAL
                     return context.Categories.Where(expression).OrderByDescending(s => s.Active).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 case "ParentId":
-                    return context.Categories.Where(expression).OrderBy(s => s.ParentId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Categories.Where(expression).OrderBy(s => s.ParentCategory.CategoryId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
                 case "ParentIdDesc":
-                    return context.Categories.Where(expression).OrderByDescending(s => s.ParentId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                    return context.Categories.Where(expression).OrderByDescending(s => s.ParentCategory.CategoryId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
 
                 default:
                     return context.Categories.Where(expression).OrderBy(s => s.CategoryId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();

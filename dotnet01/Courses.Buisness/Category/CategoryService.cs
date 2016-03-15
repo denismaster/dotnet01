@@ -124,10 +124,10 @@ namespace Courses.Buisness
             categoryView.CreatedDate = categoryView.UpdatedDate = DateTime.Now;
             Category category = Convert(categoryView);
             if (categoryView.ParentCategoryId == 0)
-                category._Category = null;
+                category.ParentCategory = null;
             else
             {
-                category._Category = repository.Get(categoryView.ParentCategoryId.Value);
+                category.ParentCategory = repository.Get(categoryView.ParentCategoryId.Value);
             }
             repository.Add(category);
         }
@@ -140,10 +140,10 @@ namespace Courses.Buisness
             categoryView.UpdatedDate = DateTime.Now;
             Category category = Convert(categoryView);
             if (categoryView.ParentCategoryId == 0)
-                category._Category = null;
+                category.ParentCategory = null;
             else
             {
-                category._Category = repository.Get(categoryView.ParentCategoryId.Value);
+                category.ParentCategory = repository.Get(categoryView.ParentCategoryId.Value);
             }
             repository.Update(category);
         }
@@ -173,7 +173,8 @@ namespace Courses.Buisness
                 Name = c.Name,
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
-                Active = c.Active
+                Active = c.Active,
+                Description = c.Description
             };
         }
         private CategoryViewModel Convert(Models.Category c)
@@ -185,7 +186,8 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentCategoryId = c._Category.CategoryId
+                ParentCategoryId = (c.ParentCategory == null) ? 0 : c.ParentCategory.CategoryId,
+                Description = c.Description
             };
         }
         private CategoryViewModelForAddEditView ConvertToCategoryViewModelForAddEditView(Models.Category c)
@@ -197,7 +199,8 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentCategoryId = c._Category.CategoryId
+                ParentCategoryId = (c.ParentCategory == null) ? 0 : c.ParentCategory.CategoryId,
+                Description = c.Description
             };
         }
     }
