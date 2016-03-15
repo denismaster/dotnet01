@@ -6,6 +6,9 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Courses.Gui.Client.Migrations;
 using Courses.DAL;
+using Courses.Models;
+using Courses.Models.Repositories;
+using System;
 
 namespace Courses.Gui.Client
 {
@@ -13,14 +16,18 @@ namespace Courses.Gui.Client
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext,Configuration>());
-
+            //  Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext,Configuration>());
+         
+           
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ControllerBuilder.Current.SetControllerFactory(new ClientControllerFactory());
+            DBInitializer initializer = new DBInitializer();
+            initializer.Init();
+           
         }
     }
 }

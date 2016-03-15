@@ -43,11 +43,13 @@
     <Compile Include="Repositories\IAccountRepository.cs" />
     <Compile Include="Repositories\ICategoryRepository.cs" />
     <Compile Include="Repositories\ICommentsRepository.cs" />
+    <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IEventRepository.cs" />
     <Compile Include="Repositories\IOrderRepository.cs" />
     <Compile Include="Repositories\IPartnerRepository.cs" />
     <Compile Include="Repositories\IProductRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IProductRatingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cources.Models\Courses.Models.csproj">
