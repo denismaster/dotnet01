@@ -236,6 +236,18 @@
     <Compile Include="Migrations\201603091813229_Initial.Designer.cs">
       <DependentUpon>201603091813229_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603132235300_first.cs" />
+    <Compile Include="Migrations\201603132235300_first.Designer.cs">
+      <DependentUpon>201603132235300_first.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603132254476_second.cs" />
+    <Compile Include="Migrations\201603132254476_second.Designer.cs">
+      <DependentUpon>201603132254476_second.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603132339221_2.cs" />
+    <Compile Include="Migrations\201603132339221_2.Designer.cs">
+      <DependentUpon>201603132339221_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -248,16 +260,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\AccountsDatabase.mdf" />
-    <Content Include="App_Data\AccountsDatabase_log.ldf">
-      <DependentUpon>AccountsDatabase.mdf</DependentUpon>
-    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Content\bootstrap-social.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\index.css" />
     <Content Include="Content\kendo.black.min.css" />
     <Content Include="Content\kendo.black.mobile.min.css" />
     <Content Include="Content\kendo.blueopal.min.css" />
@@ -339,6 +349,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\main.js" />
+    <Content Include="Scripts\app\router.js" />
+    <Content Include="Scripts\app\viewModels\account\registerViewModel.js" />
+    <Content Include="Scripts\app\viewModels\home\aboutViewModel.js" />
+    <Content Include="Scripts\app\viewModels\home\contactViewModel.js" />
+    <Content Include="Scripts\app\viewModels\home\indexViewModel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -360,9 +378,9 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\jquery-2.0.3.js" />
+    <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jszip.min.js" />
     <Content Include="Scripts\kendo.all.min.js" />
@@ -491,6 +509,7 @@
     <Content Include="Scripts\knockout.validation.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\pako_deflate.min.js" />
+    <Content Include="Scripts\require.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sammy-0.7.4.js" />
@@ -538,7 +557,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery.min.map" />
     <Content Include="Scripts\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo.angular.min.js.map" />
@@ -668,6 +686,7 @@
     <Content Include="Views\Home\Spa.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Content\Black\" />
     <Folder Include="Content\BlueOpal\" />
     <Folder Include="Content\Bootstrap\" />
@@ -696,6 +715,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-2.0.3.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cources.Models\Courses.Models.csproj">
@@ -726,6 +746,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603091813229_Initial.resx">
       <DependentUpon>201603091813229_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603132235300_first.resx">
+      <DependentUpon>201603132235300_first.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603132254476_second.resx">
+      <DependentUpon>201603132254476_second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603132339221_2.resx">
+      <DependentUpon>201603132339221_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

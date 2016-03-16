@@ -1,4 +1,14 @@
+@font-face {
+    font-family:CentarRegular; 
+    src: url(../fonts/CentarRegular.otf); 
+   }
 
+body
+{
+    margin-right:0px;
+    background-color: #C2D1C7;
+    font-family: 'Segoe UI','Georgia'; 
+}
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
@@ -24,7 +34,6 @@
     margin-bottom: 10px;
 }
 .btn-fb{
-   margin-top:1px;
     color: #fff;
     background-color:#3b5998;
 }
@@ -40,15 +49,10 @@
     color: #fff;
     background-color:#59b5fa;
 }
- .btn-instagram, .btn-odnoklassniki, .btn-twitter, .btn-pinterest, .btn-vk
+.btn-instagram, .btn-odnoklassniki, .btn-twitter, .btn-pinterest, .btn-vk
 {
-padding-top: 0px;
-margin-top:0px;
+margin-top: 5px;
 }
- a#fb.btn-facebook
- {
-     margin-bottom:1px;
- }
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;
@@ -60,36 +64,40 @@ margin-top:0px;
     }
 }
 .navbar {
-     background-image: linear-gradient(#54B4EB, #2FA4E7 60%, #1D9CE5);
      background-repeat: no-repeat;
      border-bottom: 1px solid #178ACC;
      box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
      border-radius: 0px;
- 
+     width:100%;
 }
 
-.navbar-default {
-     background-color: #2FA4E7;
-     border-color: #1995DC;
-
+.navbar-default
+ {
+    font-family:CentarRegular;
+    background-color: #0B2C3C;
+    border-color: #0B2C3C;
 }
 
 .navbar-default .navbar-brand,
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus ,
 .navbar-default .navbar-nav > li > a {
-     color: #FFF;
+    color: #F5EED2;
 }
 
 .navbar-default .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav > li > a:focus {
-     color: #FFF;
-     background-color: #178ACC;
+.navbar-default .navbar-nav > li.active > a:hover,
+.navbar-default .navbar-nav > li > a:focus
+ {
+     color: #8BB7AE;
+     border-bottom: 4px solid #8BB7AE;
+     padding-bottom: 5px; 
+     box-shadow: 10px;
 }
 
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-    background-color: #178ACC;
+    background-color: #FF6666;
 }
 
 .navbar-default .navbar-toggle {
@@ -98,10 +106,6 @@ margin-top:0px;
 
 .navbar-default .navbar-toggle .icon-bar {
     background-color: #FFF;
-}
-li.active
-{
-    background-color: black;
 }
 .center-block {
     float: none;
@@ -178,11 +182,129 @@ li.active
 }
 .open #enter-button
 {
-     background-color: #178ACC;
-     color: #fff;
+    color: #8BB7AE;
+   background-color:#0B2C3C;
+}
+label.src-only
+{
+   font-weight:100;
+   padding-left:30px;
+}
+input#exampleInputEmail2.form-control,
+input#exampleInputPassword2.form-control
+{
+    margin-left:13px;
+    width:222px;
+}
+#enterButton
+{
+    width:222px;
+    margin-left:13px;
+}
+div.checkbox
+{
+  margin-left:53px;
+
+}
+footer
+{
+    width:100%;
+    color: #071724;
+    height: 300px;
+    background-color: #578F90;
+}
+.contact-form,.about-us, .contact-us
+{
+    border-radius: 2px;
+    margin-top: 20px;
+    margin-left: 27px;
+    
+}
+.contact-form
+{
+    width: 320px;
+}
+.form-group
+{
+    margin-bottom: 2px;
 }
 
-div.container .body-content
+
+.social-icon
 {
-    width:100% !important;
+    height: 50px;
+    width: 50px;
 }
+
+.social-row
+{
+    padding: 2px;
+}
+.copyright
+{
+   background-color:#071724;
+    margin-top: 10px;
+    height:30px;
+}
+input.form-control{
+    border-radius: 40px;
+}
+.btn-contact, .btn-contact:focus, .btn-contact:active
+{
+  margin-top: 8px;
+  margin-right: 10px;
+  background-color: #0B2C3C;
+  color: #F5EED2;
+  margin-left: 196px;
+}
+.btn-contact:hover
+{
+     color: #8BB7AE;
+}
+#useremail,#username,#usermessge
+{
+    margin-bottom: 13px;
+}
+.copyright p
+{
+    padding-top:4px;
+    color:#F5EED2;
+    text-align:center;
+}
+
+/*img
+{
+	height:100px;
+	width:100px;
+}
+h2#create-acc
+{
+text-align: center;
+border-bottom: 3px solid #578F90;
+
+}
+.registr
+{
+   margin-top:10px;
+      margin-bottom:10px;
+	background-color: #fff;
+}
+.btn
+{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.btn,.btn:active,.btn:focus
+{
+	background-color: #071724;
+	color: #F5EED2;
+}
+.btn:hover
+{
+	background-color: #578F90;
+	color: #F5EED2;
+}
+.registr .form-control input
+{
+width:1300px;
+}*/
