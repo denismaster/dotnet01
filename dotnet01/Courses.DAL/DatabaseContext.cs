@@ -10,7 +10,7 @@ namespace Courses.DAL
     public class DatabaseContext : DbContext
     {
         public DatabaseContext() :
-            base("AccountsDatabase")
+            base("CoursesDatabase")
         { }
         public DbSet<Product> Products { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
@@ -115,6 +115,16 @@ namespace Courses.DAL
 
             modelBuilder.Entity<ProductRating>().HasKey(e => new { e.ProductId, e.CustomerId });
 
+            modelBuilder.Entity<Product>()
+                .HasMany(o => o.ProductRatings)
+                .WithRequired(o => o.Product)
+                .HasForeignKey(o => o.ProductId);
+
+            modelBuilder.Entity<Customer>()
+               .HasMany(o => o.ProductRatings)
+               .WithRequired(o => o.Customer)
+               .HasForeignKey(o => o.CustomerId);
+               
             modelBuilder.Entity<Schedule>()
                 .HasOptional(o => o._Schedule);
 
