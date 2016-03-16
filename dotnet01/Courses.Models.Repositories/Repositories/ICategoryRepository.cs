@@ -9,7 +9,7 @@ namespace Courses.Models.Repositories
    public interface ICategoryRepository: IRepository<Category>
     {
 
-
+        Category GetOnlyOne();
 
    
     }
