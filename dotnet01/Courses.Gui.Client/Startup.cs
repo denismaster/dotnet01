@@ -35,6 +35,7 @@ namespace Courses.Gui.Client
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "ApplicationCookie",
+                CookieName = "CourseCookie",
                 LoginPath = new PathString("/Account/Login"),
             });
             app.UseOAuthBearerTokens(OAuthOptions);

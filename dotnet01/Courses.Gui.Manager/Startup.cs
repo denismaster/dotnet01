@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.Cookies;
-[assembly: OwinStartup(typeof(Courses.Gui.Admin.Startup))]
+[assembly: OwinStartup(typeof(Courses.Gui.Manager.Startup))]
 
-namespace Courses.Gui.Admin
+namespace Courses.Gui.Manager
 {
     public class Startup
     {
