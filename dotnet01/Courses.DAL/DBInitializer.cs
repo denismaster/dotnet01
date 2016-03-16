@@ -12,22 +12,20 @@ namespace Courses.DAL
 
 
 {
-    public class DBInitializer:DropCreateDatabaseAlways<DatabaseContext>
+    public class DBInitializer : DropCreateDatabaseAlways<DatabaseContext>
     {
 
-        
+
         IPartnerRepository partnersRep = new PartnerRepository();
         IProductRepository productRep = new ProductRepository();
         IAccountRepository accRep = new AccountRepository();
         ICustomerRepository customerRep = new CustomerRepository();
         IProductRatingRepository productRatingRep = new ProductRatingRepository();
+        ICategoryRepository categoryRep = new CategoryRepository();
 
-        Product product;
-        Customer customer;
-        
         private void AddPartners()
         {
-     
+
 
             Partner partner = new Partner
             {
@@ -49,7 +47,7 @@ namespace Courses.DAL
 
             productRep.Add(new Product
             {
-                Name = "Программирование C#",
+                Name = "Программирование Pascal",
                 Location = "Севастополь",
                 Description = "Лекции",
                 CreatedDate = new DateTime(2015, 11, 2),
@@ -96,7 +94,7 @@ namespace Courses.DAL
         }
         private void AddUsers()
         {
-           
+
             User user = new User
             {
                 AuthKey = "1ADSDFS1231SL",
@@ -108,7 +106,7 @@ namespace Courses.DAL
                 PasswordHash = "asdasdasfhj1jg3123123123ghdsfdghkg123",
                 Role = "Admin",
                 Status = 1,
-                UpdatedDate = new DateTime(2016, 12, 12)  
+                UpdatedDate = new DateTime(2016, 12, 12)
             };
             User user2 = new User
             {
@@ -120,7 +118,7 @@ namespace Courses.DAL
                 Login = "IvanIvanov",
                 PasswordHash = "afghasjgalkjgasjlglj123",
                 Role = "Manager",
-                Status =21,
+                Status = 21,
                 UpdatedDate = new DateTime(2016, 11, 11)
             };
 
@@ -130,7 +128,7 @@ namespace Courses.DAL
         }
         private void AddCustomers()
         {
-           
+
             Customer customer = new Customer
             {
                 AuthKey = "1ADSDFS1231SL",
@@ -167,7 +165,7 @@ namespace Courses.DAL
                 Phone = "123123123",
                 Role = 1,
                 Status = 1,
-                UpdatedDate = new DateTime(2016, 12,5)
+                UpdatedDate = new DateTime(2016, 12, 5)
             };
             customerRep.Add(customer);
             customerRep.Add(customer2);
@@ -175,33 +173,50 @@ namespace Courses.DAL
         }
         private void AddProductRatings()
         {
-           
+
 
             ProductRating rating = new ProductRating();
-           // rating.ProductId = 1;
-           // rating.CustomerId = 1;
-           product =  rating.Product = productRep.GetOnlyOne();
-           customer = rating.Customer = customerRep.GetOnlyOne();
-        
-            rating.Rate = 10;
-           
 
-         
-       
+            rating.Product = productRep.GetOnlyOne();
+            rating.Customer = customerRep.GetOnlyOne();
+
+            rating.Rate = 10;
+
+
+
+
             productRatingRep.Add(rating);
             //productRatingRep.Add(rating2);
             productRatingRep.SaveChanges();
         }
-    
-        public void Init()
+        IEnumerable<Category> categories;
+        private void AddCategories()
         {
-            AddPartners();
-            AddProducts();
-            AddUsers();
-            AddCustomers();
-            AddProductRatings();
+            Category category = new Category
+            {
+                Active = true,
+                CreatedDate = new DateTime(2015, 12, 12),
+                Description = "Программирование",
+                UpdatedDate = new DateTime(2016, 1, 1),
+                Name = "Программирование",
+            };
+            Category category2 = new Category
+            {
+                Active = true,
+                CreatedDate = new DateTime(2015, 12, 12),
+                Description = "C#",
+                UpdatedDate = new DateTime(2016, 1, 1),
+                Name = "C# курсы",
+                ParentCategory = category
+        };
+            categoryRep.Add(category);
+            categoryRep.Add(category2);
+            categoryRep.SaveChanges();
+           
+            
         }
-     
+    
+ 
         protected override void Seed(DatabaseContext db)
         {
             AddPartners();
@@ -209,6 +224,7 @@ namespace Courses.DAL
             AddUsers();
             AddCustomers();
             AddProductRatings();
+            AddCategories();
         } 
     }
 }

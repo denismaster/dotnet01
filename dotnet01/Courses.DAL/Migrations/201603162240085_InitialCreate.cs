@@ -105,6 +105,7 @@ namespace Courses.DAL.Migrations
                         Teacher = c.String(),
                         SeatsCount = c.Int(),
                         AssignedUserId = c.Int(),
+                        imagePath = c.String(),
                         Location = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -122,12 +123,12 @@ namespace Courses.DAL.Migrations
                         CreatedDate = c.DateTime(nullable: false),
                         UpdatedDate = c.DateTime(nullable: false),
                         Active = c.Boolean(nullable: false),
-                        ParentId = c.Int(),
-                        _Category_CategoryId = c.Int(),
+                        Description = c.String(),
+                        ParentCategory_CategoryId = c.Int(),
                     })
                 .PrimaryKey(t => t.CategoryId)
-                .ForeignKey("dbo.Categories", t => t._Category_CategoryId)
-                .Index(t => t._Category_CategoryId);
+                .ForeignKey("dbo.Categories", t => t.ParentCategory_CategoryId)
+                .Index(t => t.ParentCategory_CategoryId);
             
             CreateTable(
                 "dbo.Partners",
@@ -189,9 +190,10 @@ namespace Courses.DAL.Migrations
                         Rate = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.ProductId, t.CustomerId })
-                .ForeignKey("dbo.Products", t => t.Id, cascadeDelete: true)
-                .ForeignKey("dbo.Customers", t => t.Id, cascadeDelete: true)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.Products", t => t.ProductId, cascadeDelete: true)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.ProductId)
+                .Index(t => t.CustomerId);
             
             CreateTable(
                 "dbo.EmailQueues",
@@ -299,13 +301,13 @@ namespace Courses.DAL.Migrations
             DropForeignKey("dbo.Schedules", "_Schedule_Id", "dbo.Schedules");
             DropForeignKey("dbo.OrderItems", "AppointmentId", "dbo.Appointments");
             DropForeignKey("dbo.OrderItems", "OrderId", "dbo.Orders");
-            DropForeignKey("dbo.ProductRatings", "Id", "dbo.Customers");
+            DropForeignKey("dbo.ProductRatings", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Orders", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.EmailQueues", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.EmailNewsletters", "TemplateId", "dbo.EmailTemplates");
             DropForeignKey("dbo.EmailQueues", "NewsletterId", "dbo.EmailNewsletters");
             DropForeignKey("dbo.Comments", "CustomerId", "dbo.Customers");
-            DropForeignKey("dbo.ProductRatings", "Id", "dbo.Products");
+            DropForeignKey("dbo.ProductRatings", "ProductId", "dbo.Products");
             DropForeignKey("dbo.FavouriteProducts", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.FavouriteProducts", "ProductId", "dbo.Products");
             DropForeignKey("dbo.Comments", "ProductId", "dbo.Products");
@@ -317,7 +319,7 @@ namespace Courses.DAL.Migrations
             DropForeignKey("dbo.Products", "PartnerId", "dbo.Partners");
             DropForeignKey("dbo.PartnerCategories", "Category_CategoryId", "dbo.Categories");
             DropForeignKey("dbo.PartnerCategories", "Partner_PartnerId", "dbo.Partners");
-            DropForeignKey("dbo.Categories", "_Category_CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Categories", "ParentCategory_CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Appointments", "ProductId", "dbo.Products");
             DropIndex("dbo.FavouriteProducts", new[] { "CustomerId" });
             DropIndex("dbo.FavouriteProducts", new[] { "ProductId" });
@@ -330,10 +332,11 @@ namespace Courses.DAL.Migrations
             DropIndex("dbo.EmailNewsletters", new[] { "TemplateId" });
             DropIndex("dbo.EmailQueues", new[] { "CustomerId" });
             DropIndex("dbo.EmailQueues", new[] { "NewsletterId" });
-            DropIndex("dbo.ProductRatings", new[] { "Id" });
+            DropIndex("dbo.ProductRatings", new[] { "CustomerId" });
+            DropIndex("dbo.ProductRatings", new[] { "ProductId" });
             DropIndex("dbo.Events", new[] { "UserId" });
             DropIndex("dbo.Partners", new[] { "UserId" });
-            DropIndex("dbo.Categories", new[] { "_Category_CategoryId" });
+            DropIndex("dbo.Categories", new[] { "ParentCategory_CategoryId" });
             DropIndex("dbo.Products", new[] { "AssignedUserId" });
             DropIndex("dbo.Products", new[] { "PartnerId" });
             DropIndex("dbo.Comments", new[] { "ProductId" });
