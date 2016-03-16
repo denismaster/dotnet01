@@ -54,7 +54,7 @@ namespace Courses.DAL
             }
         }
 
-        public Models.User GetUser(string login, string password)
+        public Models.User GetUserByPassword(string login, string password)
         {
             return context.Users.Where(a => a.Login == login && a.PasswordHash == password).FirstOrDefault();
         }
@@ -85,7 +85,6 @@ namespace Courses.DAL
             context.SaveChanges();
         }
 
-
         public int Count(Func<Models.User, bool> expression)
         {
             return context.Users.Where(expression).Count();
@@ -99,11 +98,13 @@ namespace Courses.DAL
             var result = context.Users.Find(intId);
             return result;
         }
-
-        public User GetUserByName(string email)
+        public User GetUserByName(string login)
         {
-            //var allRecords = context.Users.ToList();
-            return context.Users.Where(u => u.Login == email).FirstOrDefault();
+            return context.Users.Where(u => u.Login == login).FirstOrDefault();
+        }
+        public User GetUserByAuthKey(string authKey)
+        {
+            return context.Users.Where(u => u.AuthKey == authKey).FirstOrDefault();
         }
 
         public void Dispose()

@@ -1,26 +1,31 @@
-﻿body {
-    font-family: arial, helvetica, sans-serif;
-    font-size: 80%;
-    color: black;
-    margin: 1em;
-    padding: 0;
+﻿.about-page
+{
+    background-color: #fff;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
-div {
-    margin-left: 15%;
-    margin-right: 15%;
-}
-p {
-    text-indent: 2.0em;
-    text-align: justify;
-    line-height: 1.5em;
-}
-h3 {
-    margin: 0;
+h2
+{
     text-align: center;
+    border-bottom: 3px solid #578F90;
 }
-h4 {
-    font-size: 1.5em;
-    margin: 0;
-    padding: 0.1em;
-    padding-left: 1em;
+h4
+{
+    text-indent: 5%;
 }
+img
+{
+    height:150px;
+    width: 150px;
+}
+p
+{
+    line-height: 1.5;
+    text-align: justify;
+    text-indent: 5%;
+}
+
+

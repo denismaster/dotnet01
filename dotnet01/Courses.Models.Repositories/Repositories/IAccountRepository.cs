@@ -9,8 +9,9 @@ namespace Courses.Models.Repositories
     public interface IAccountRepository: IRepository<User>,IDisposable
     {
         //Дополнительные действия, специфичные для аккаунтов.
-        User GetUser(string login, string password);
+        User GetUserByPassword(string login, string password);
         User GetUserByID(string id);
         User GetUserByName(string username);
+        User GetUserByAuthKey(string authkey);
     }
 }
