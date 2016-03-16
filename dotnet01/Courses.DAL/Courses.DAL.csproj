@@ -63,6 +63,14 @@
     <Compile Include="Migrations\201603132258356_f.Designer.cs">
       <DependentUpon>201603132258356_f.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603161053484_imgPath.cs" />
+    <Compile Include="Migrations\201603161053484_imgPath.Designer.cs">
+      <DependentUpon>201603161053484_imgPath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603161058431_imgPath1.cs" />
+    <Compile Include="Migrations\201603161058431_imgPath1.Designer.cs">
+      <DependentUpon>201603161058431_imgPath1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="PartnerRepository.cs" />
@@ -92,6 +100,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603132258356_f.resx">
       <DependentUpon>201603132258356_f.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603161053484_imgPath.resx">
+      <DependentUpon>201603161053484_imgPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603161058431_imgPath1.resx">
+      <DependentUpon>201603161058431_imgPath1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

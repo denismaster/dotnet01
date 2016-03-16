@@ -12,7 +12,7 @@ namespace Courses.DAL
 
 
 {
-    public class DBInitializer 
+    public class DBInitializer:DropCreateDatabaseAlways<DatabaseContext>
     {
 
         
@@ -21,16 +21,13 @@ namespace Courses.DAL
         IAccountRepository accRep = new AccountRepository();
         ICustomerRepository customerRep = new CustomerRepository();
         IProductRatingRepository productRatingRep = new ProductRatingRepository();
-        
 
-        private bool isExistAnyEntity<T>(IRepository<T> rep) where T : DomainObject
-        {
-            if (rep.Count(e => true) > 0) return true;
-            else return false;
-        }
+        Product product;
+        Customer customer;
+        
         private void AddPartners()
         {
-            if (isExistAnyEntity(partnersRep)) return;
+     
 
             Partner partner = new Partner
             {
@@ -49,7 +46,7 @@ namespace Courses.DAL
         }
         private void AddProducts()
         {
-            if (isExistAnyEntity(productRep)) return;
+
             productRep.Add(new Product
             {
                 Name = "Программирование C#",
@@ -59,7 +56,7 @@ namespace Courses.DAL
                 UpdatedDate = new DateTime(2015, 11, 4),
                 Active = true,
                 Type = 1,
-                PartnerId = partnersRep.GetOnlyOne().PartnerId,
+                Partner = partnersRep.GetOnlyOne(),
                 AssignedUserId = null,
                 SeatsCount = 50,
                 imagePath = "IMG.png"
@@ -74,7 +71,7 @@ namespace Courses.DAL
                 UpdatedDate = new DateTime(2015, 11, 4),
                 Active = true,
                 Type = 1,
-                PartnerId = partnersRep.GetOnlyOne().PartnerId,
+                Partner = partnersRep.GetOnlyOne(),
                 AssignedUserId = null,
                 SeatsCount = 50,
                 imagePath = "IMG.png"
@@ -89,7 +86,7 @@ namespace Courses.DAL
                 UpdatedDate = new DateTime(2015, 11, 4),
                 Active = true,
                 Type = 1,
-                PartnerId = partnersRep.GetOnlyOne().PartnerId,
+                Partner = partnersRep.GetOnlyOne(),
                 AssignedUserId = null,
                 SeatsCount = 50,
                 imagePath = "IMG.png"
@@ -99,7 +96,7 @@ namespace Courses.DAL
         }
         private void AddUsers()
         {
-            if (isExistAnyEntity(accRep)) return;
+           
             User user = new User
             {
                 AuthKey = "1ADSDFS1231SL",
@@ -133,7 +130,7 @@ namespace Courses.DAL
         }
         private void AddCustomers()
         {
-            if (isExistAnyEntity(customerRep)) return;
+           
             Customer customer = new Customer
             {
                 AuthKey = "1ADSDFS1231SL",
@@ -176,13 +173,16 @@ namespace Courses.DAL
             customerRep.Add(customer2);
             customerRep.SaveChanges();
         }
-      /*  private void AddProductRatings()
+        private void AddProductRatings()
         {
-            if (isExistAnyEntity(productRatingRep)) return;
+           
 
             ProductRating rating = new ProductRating();
-            rating.ProductId = productRep.GetOnlyOne().Id;
-            rating.CustomerId = customerRep.GetOnlyOne().Id;
+           // rating.ProductId = 1;
+           // rating.CustomerId = 1;
+           product =  rating.Product = productRep.GetOnlyOne();
+           customer = rating.Customer = customerRep.GetOnlyOne();
+        
             rating.Rate = 10;
            
 
@@ -192,14 +192,23 @@ namespace Courses.DAL
             //productRatingRep.Add(rating2);
             productRatingRep.SaveChanges();
         }
-    */
+    
         public void Init()
         {
             AddPartners();
             AddProducts();
             AddUsers();
             AddCustomers();
-            //AddProductRatings();
+            AddProductRatings();
         }
+     
+        protected override void Seed(DatabaseContext db)
+        {
+            AddPartners();
+            AddProducts();
+            AddUsers();
+            AddCustomers();
+            AddProductRatings();
+        } 
     }
 }
