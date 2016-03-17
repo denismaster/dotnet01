@@ -111,6 +111,10 @@ namespace Courses.DAL
         {
             return context.Partners.Where(expression).Count();
         }
+        public Partner GetOnlyOne()
+        {
+            return context.Partners.FirstOrDefault();
+        }
     }
 }
 

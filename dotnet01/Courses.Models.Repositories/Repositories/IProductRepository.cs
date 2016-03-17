@@ -8,6 +8,9 @@ namespace Courses.Models.Repositories
 {
     public interface IProductRepository: IRepository<Product>
     {
+
+        Product GetOnlyOne();
+
         //Дополнительные действия, специфичные для курсов.
     }
 }

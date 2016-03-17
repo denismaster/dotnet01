@@ -10,7 +10,7 @@ namespace Courses.DAL
     public class DatabaseContext : DbContext
     {
         public DatabaseContext() :
-            base("AccountsDatabase")
+            base("CoursesDatabase")
         { }
         public DbSet<Product> Products { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
@@ -21,17 +21,16 @@ namespace Courses.DAL
         public DbSet<EmailQueue> EmailQueues { get; set; }
         public DbSet<EmailTemplate> EmailTemplates { get; set; }
         public DbSet<Event> Events { get; set; }
-
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Partner> Partners { get; set; }
-
         public DbSet<ProductRating> ProductRatings { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
 
             modelBuilder.Entity<Product>()
              .HasMany(c => c.Appointments)
@@ -113,12 +112,25 @@ namespace Courses.DAL
                      m.MapRightKey("CustomerId");
 
                  });
+
             modelBuilder.Entity<ProductRating>().HasKey(e => new { e.ProductId, e.CustomerId });
+
+            modelBuilder.Entity<Product>()
+                .HasMany(o => o.ProductRatings)
+                .WithRequired(o => o.Product)
+                .HasForeignKey(o => o.ProductId);
+
+            modelBuilder.Entity<Customer>()
+               .HasMany(o => o.ProductRatings)
+               .WithRequired(o => o.Customer)
+               .HasForeignKey(o => o.CustomerId);
+               
             modelBuilder.Entity<Schedule>()
                 .HasOptional(o => o._Schedule);
 
             modelBuilder.Entity<Category>()
                 .HasOptional(o => o.ParentCategory);
         }
+
     }
 }

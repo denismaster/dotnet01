@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-   public interface ICategoryRepository: IRepository<Category>
+    public interface IProductRatingRepository:IRepository<ProductRating>
     {
-
-        Category GetOnlyOne();
-
-   
+        
     }
 }

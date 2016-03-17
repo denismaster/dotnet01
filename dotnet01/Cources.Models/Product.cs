@@ -23,7 +23,7 @@ namespace Courses.Models
         public int? AssignedUserId { get; set; }
         public String imagePath { get; set; }
         public string Location { get; set; }
-
+        //навигационные свойства, не участвуют при инициализции, служат для обращения к связанным сущностям.
         public List<Appointment> Appointments { get; set; }
         public List<Comment> Comments { get; set; }
 

@@ -50,20 +50,23 @@
   <ItemGroup>
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="CommentsRepository.cs" />
+    <Compile Include="CustomerRepository.cs" />
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="AccountRepository.cs" />
+    <Compile Include="DBInitializer.cs" />
     <Compile Include="EventRepository.cs" />
-    <Compile Include="Migrations\201603062304358_InitialCreate.cs" />
-    <Compile Include="Migrations\201603062304358_InitialCreate.Designer.cs">
-      <DependentUpon>201603062304358_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201603162240085_InitialCreate.cs" />
+    <Compile Include="Migrations\201603162240085_InitialCreate.Designer.cs">
+      <DependentUpon>201603162240085_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603132258356_f.cs" />
-    <Compile Include="Migrations\201603132258356_f.Designer.cs">
-      <DependentUpon>201603132258356_f.cs</DependentUpon>
+    <Compile Include="Migrations\201603162250587_ParentCategoryId.cs" />
+    <Compile Include="Migrations\201603162250587_ParentCategoryId.Designer.cs">
+      <DependentUpon>201603162250587_ParentCategoryId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="PartnerRepository.cs" />
+    <Compile Include="ProductRatingRepository.cs" />
     <Compile Include="ProductRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,11 +87,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603062304358_InitialCreate.resx">
-      <DependentUpon>201603062304358_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603162240085_InitialCreate.resx">
+      <DependentUpon>201603162240085_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603132258356_f.resx">
-      <DependentUpon>201603132258356_f.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603162250587_ParentCategoryId.resx">
+      <DependentUpon>201603162250587_ParentCategoryId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

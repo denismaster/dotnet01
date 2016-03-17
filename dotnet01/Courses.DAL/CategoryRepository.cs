@@ -97,7 +97,10 @@ namespace Courses.DAL
             return context.Categories.Where(expression).Count();
         }
 
-
+       public  Category GetOnlyOne()
+        {
+            return context.Categories.FirstOrDefault();
+        }
         public void Dispose()
         {
             context.Dispose();
