@@ -55,15 +55,6 @@
     <Compile Include="AccountRepository.cs" />
     <Compile Include="DBInitializer.cs" />
     <Compile Include="EventRepository.cs" />
-    <Compile Include="Migrations\201603162240085_InitialCreate.cs" />
-    <Compile Include="Migrations\201603162240085_InitialCreate.Designer.cs">
-      <DependentUpon>201603162240085_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603162250587_ParentCategoryId.cs" />
-    <Compile Include="Migrations\201603162250587_ParentCategoryId.Designer.cs">
-      <DependentUpon>201603162250587_ParentCategoryId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderRepository.cs" />
     <Compile Include="PartnerRepository.cs" />
     <Compile Include="ProductRatingRepository.cs" />
@@ -85,14 +76,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603162240085_InitialCreate.resx">
-      <DependentUpon>201603162240085_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603162250587_ParentCategoryId.resx">
-      <DependentUpon>201603162250587_ParentCategoryId.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
