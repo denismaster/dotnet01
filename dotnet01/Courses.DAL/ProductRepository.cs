@@ -129,5 +129,14 @@ namespace Courses.DAL
         {
             return context.Products.Where(expression).Count();
         }
+        public Product GetOnlyOne()
+        {
+            return context.Products.FirstOrDefault();
+        }
+        public void ClearTable()
+        {
+            context.Products.RemoveRange(Get());
+        }
+
     }
 }

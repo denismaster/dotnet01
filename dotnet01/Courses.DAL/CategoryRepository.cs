@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace Courses.DAL
 {
-    public  class CategoryRepository: ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         DatabaseContext context = new DatabaseContext();
 
@@ -18,8 +18,47 @@ namespace Courses.DAL
         }
 
         //временно нереализовано
-        public IEnumerable<Category> Get(int page, int pageSize, Func<Category, bool> expression, SortFilter sortFilter) {
-            return null;
+        public IEnumerable<Category> Get(int page, int pageSize, Func<Category, bool> expression, SortFilter sortFilter)
+        {
+            if (String.IsNullOrWhiteSpace(sortFilter.SortOrder))
+            {
+                return context.Categories.Where(expression).OrderBy(s => s.CategoryId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+            }
+            switch (sortFilter.SortOrder)
+            {
+                case "Name":
+                    return context.Categories.Where(expression).OrderBy(s => s.Name).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "NameDesc":
+                    return context.Categories.Where(expression).OrderByDescending(s => s.Name).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+
+                case "Description":
+                    return context.Categories.Where(expression).OrderBy(s => s.Description).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "DescriptionDesc":
+                    return context.Categories.Where(expression).OrderByDescending(s => s.Description).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+
+                case "CreateDate":
+                    return context.Categories.Where(expression).OrderBy(s => s.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "CreateDateDesc":
+                    return context.Categories.Where(expression).OrderByDescending(s => s.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+
+                case "UpdateDate":
+                    return context.Categories.Where(expression).OrderBy(s => s.UpdatedDate).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "UpdateDateDesc":
+                    return context.Categories.Where(expression).OrderByDescending(s => s.UpdatedDate).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+
+                case "Active":
+                    return context.Categories.Where(expression).OrderBy(s => s.Active).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "ActiveDesc":
+                    return context.Categories.Where(expression).OrderByDescending(s => s.Active).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+
+                case "ParentId":
+                    return context.Categories.Where(expression).OrderBy(s => s.ParentCategory.CategoryId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+                case "ParentIdDesc":
+                    return context.Categories.Where(expression).OrderByDescending(s => s.ParentCategory.CategoryId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+
+                default:
+                    return context.Categories.Where(expression).OrderBy(s => s.CategoryId).Skip((page - 1) * pageSize).Take(pageSize).AsEnumerable();
+            }
         }
         public IEnumerable<Models.Category> Get(int page, int pageSize, Func<Models.Category, bool> expression)
         {
@@ -38,7 +77,7 @@ namespace Courses.DAL
 
         public void Update(Models.Category entity)
         {
-            context.Entry(entity).State = EntityState.Deleted;
+            context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(Models.Category entity)
@@ -58,10 +97,56 @@ namespace Courses.DAL
             return context.Categories.Where(expression).Count();
         }
 
-
+        public Category GetOnlyOne()
+        {
+            return context.Categories.FirstOrDefault();
+        }
         public void Dispose()
         {
             context.Dispose();
+        }
+        public void ClearTable()
+        {
+            context.Categories.RemoveRange(Get());
+        }
+        public void AddPartners(int categoryId, int partnerId)
+        { 
+            using (DatabaseContext context = new DatabaseContext())
+            { 
+
+                Category category = new Category { CategoryId = categoryId };
+                context.Categories.Add(category);
+                context.Categories.Attach(category);
+
+                Partner partner = new Partner { PartnerId = partnerId };
+                context.Partners.Add(partner);
+                context.Partners.Attach(partner);
+
+                if (category.Partners == null)
+                    category.Partners = new List<Partner>();
+
+                category.Partners.Add(partner);
+                context.SaveChanges();
+            }
+        }
+        public void AddProducts(int categoryId,int productId)
+        {
+            using (DatabaseContext context = new DatabaseContext())
+            {
+                Category category = new Category { CategoryId = categoryId };
+                context.Categories.Add(category);
+                context.Categories.Attach(category);
+
+                Product product = new Product { Id = productId };
+                context.Products.Add(product);
+                context.Products.Attach(product);
+
+                if (category.Products == null)
+                    category.Products= new List<Product>();
+
+                category.Products.Add(product);
+                context.SaveChanges();
+            }
         }
     }
 }

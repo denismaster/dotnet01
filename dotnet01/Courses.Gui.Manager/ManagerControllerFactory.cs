@@ -43,15 +43,17 @@ namespace Courses.Gui.Manager
         private void AddBindings()
         {
             kernel.Bind<IProductService>().To<ProductService>();
-            kernel.Bind<IFilterFactory<Product>>().To<ProductFilterFactory>();
-            kernel.Bind<IProductRepository>().To<ProductRepository>();
-
-            kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
             kernel.Bind<IPartnerService>().To<PatherService>();
+            kernel.Bind<ICategoryService>().To<CategoryService>();
 
+            kernel.Bind<IProductRepository>().To<ProductRepository>();
+            kernel.Bind<IPartnerRepository>().To<PartnerRepository>();
+            kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
 
+            kernel.Bind<IFilterFactory<Product>>().To<ProductFilterFactory>();
             kernel.Bind<IFilterFactory<Partner>>().To<PartnerFilterFactory>();
+            kernel.Bind<IFilterFactory<Category>>().To<CategoryFilterFactory>();
         }
     }
 }

@@ -1,0 +1,63 @@
+﻿@*<pre>
+@model TastyCakes.Models.Cakes
+</pre>
+<div class="row">
+<div class="large-12 columns">
+<hgroup class="title">
+<h1>Edit Cakes</h1>
+</hgroup>
+@using (Html.BeginForm())
+ {
+       @Html.AntiForgeryToken()
+<div class="form-horizontal">
+             <hr />
+
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.CakesID)
+                <div class="medium-12 column">
+                    @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+            <div class="medium-12 column">
+                @Html.LabelFor(model => model.Description)
+                 @Html.EditorFor(model => model.Description)
+               @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="medium-12 column">
+                  @Html.LabelFor(model => model.Price)
+                    @Html.EditorFor(model => model.Price)
+                  @Html.ValidationMessageFor(model => model.Price)
+             </div>
+            <div class="medium-12 column">
+                <input class="tiny button" type="submit" value="Save" />
+                 @Html.ActionLink("Back to List", "Index", null, new { @class = "tiny button" })
+          </div>
+</div>
+        }
+        @if (File.Exists(Server.MapPath("~/Images/Cakes/" + Html.DisplayFor(modelItem => Model.CakeImage))))
+        {
+            <img alt="" src="~/Images/Cakes/@Html.DisplayFor(modelItem => Model.CakeImage)" />
+            <form action="/Cakes/DeletePhoto" method="post" name="deletePhoto">
+                @Html.AntiForgeryToken()
+                        If the image above is not the correct image,
+                        hit delete and Re-Upload:
+                <input type="text" name="photoFileName" value="@Html.DisplayFor(modelItem => Model.CakeImage)" />
+
+                <input class="tiny button" type="submit" value="Delete" />
+            </form>
+        }
+        else
+        {
+          <form action = "/Cakes/UploadPhoto" enctype = "multipart/form-data" method = "post" >
+              <label for= "photo" > Upload a Photo:</label >
+              <input class="tiny button" id="photo" type="file" name="photo" />
+                <input class="tiny button" type="submit" value="Upload" />
+                <input type="hidden" name="cakesImage" value="@Html.DisplayFor(modelItem   => Model.CakeImage)" />
+          </form>
+        }
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+    </div>
+</div>*@

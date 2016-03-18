@@ -25,5 +25,8 @@ namespace Courses.Models
         public List<Product> Products { get; set; }
         public string Description { get; set; }
         public Category ParentCategory { get; set; }
+
+        //инициализировать вручную данный айди
+        public int? ParentCategoryId { get; set; }
     }
 }
