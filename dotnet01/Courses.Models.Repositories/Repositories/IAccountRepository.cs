@@ -12,5 +12,6 @@ namespace Courses.Models.Repositories
         User GetUser(string login, string password);
         User GetUserByID(string id);
         User GetUserByName(string username);
+        User GetOnlyOne();
     }
 }

@@ -110,5 +110,14 @@ namespace Courses.DAL
         {
             context.Dispose();
         }
+
+        public User GetOnlyOne()
+        {
+            return context.Users.FirstOrDefault();
+        }
+        public void ClearTable()
+        {
+            context.Users.RemoveRange(Get());
+        }
     }
 }

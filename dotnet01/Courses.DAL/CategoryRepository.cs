@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace Courses.DAL
 {
-    public  class CategoryRepository: ICategoryRepository
+    public class CategoryRepository : ICategoryRepository
     {
         DatabaseContext context = new DatabaseContext();
 
@@ -18,7 +18,8 @@ namespace Courses.DAL
         }
 
         //временно нереализовано
-        public IEnumerable<Category> Get(int page, int pageSize, Func<Category, bool> expression, SortFilter sortFilter) {
+        public IEnumerable<Category> Get(int page, int pageSize, Func<Category, bool> expression, SortFilter sortFilter)
+        {
             return null;
         }
         public IEnumerable<Models.Category> Get(int page, int pageSize, Func<Models.Category, bool> expression)
@@ -58,13 +59,56 @@ namespace Courses.DAL
             return context.Categories.Where(expression).Count();
         }
 
-       public  Category GetOnlyOne()
+        public Category GetOnlyOne()
         {
             return context.Categories.FirstOrDefault();
         }
         public void Dispose()
         {
             context.Dispose();
+        }
+        public void ClearTable()
+        {
+            context.Categories.RemoveRange(Get());
+        }
+        public void AddPartners(int categoryId, int partnerId)
+        { 
+            using (DatabaseContext context = new DatabaseContext())
+            { 
+
+                Category category = new Category { CategoryId = categoryId };
+                context.Categories.Add(category);
+                context.Categories.Attach(category);
+
+                Partner partner = new Partner { PartnerId = partnerId };
+                context.Partners.Add(partner);
+                context.Partners.Attach(partner);
+
+                if (category.Partners == null)
+                    category.Partners = new List<Partner>();
+
+                category.Partners.Add(partner);
+                context.SaveChanges();
+            }
+        }
+        public void AddProducts(int categoryId,int productId)
+        {
+            using (DatabaseContext context = new DatabaseContext())
+            {
+                Category category = new Category { CategoryId = categoryId };
+                context.Categories.Add(category);
+                context.Categories.Attach(category);
+
+                Product product = new Product { Id = productId };
+                context.Products.Add(product);
+                context.Products.Attach(product);
+
+                if (category.Products == null)
+                    category.Products= new List<Product>();
+
+                category.Products.Add(product);
+                context.SaveChanges();
+            }
         }
     }
 }
