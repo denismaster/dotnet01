@@ -25,6 +25,7 @@
             <img src="" alt="#: Name # image" />
             <h3>#:Name#</h3>
             <p><br>Подробнее...</p>
+            <button data-id="#: Id#" onclick="BasketButtonEventListener">Купить </button>
         </div>
     </script>
 
@@ -191,7 +192,7 @@
     <button type="button" id="textButton">НАЗАД</button>
 </div>
 
-
+@Scripts.Render("~/bundles/basket")
 <script>
     $("#textButton").kendoButton({
         click: onClick

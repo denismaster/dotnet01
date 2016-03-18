@@ -347,6 +347,7 @@
     <Content Include="Scripts\app\viewModels\home\aboutViewModel.js" />
     <Content Include="Scripts\app\viewModels\home\contactViewModel.js" />
     <Content Include="Scripts\app\viewModels\home\indexViewModel.js" />
+    <Content Include="Scripts\basket\basket.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />

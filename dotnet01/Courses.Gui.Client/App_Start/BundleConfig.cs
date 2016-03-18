@@ -20,8 +20,10 @@ namespace Courses.Gui.Client
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                 "~/Scripts/knockout-{version}.js",
                 "~/Scripts/knockout.validation.js"));
-
+            bundles.Add(new ScriptBundle("~/bundles/basket").Include(
+                "~/Scripts/basket/basket.js"));
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                
                 "~/Scripts/sammy-{version}.js",
                 "~/Scripts/app/common.js",
                 "~/Scripts/app/app.datamodel.js",
