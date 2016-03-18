@@ -36,7 +36,7 @@ namespace Courses.DAL
 
         public void Update(Models.Event entity)
         {
-            context.Entry(entity).State = EntityState.Deleted;
+            context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(Models.Event entity)

@@ -9,10 +9,12 @@ using Courses.Models.Repositories;
 using Courses.ViewModels;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
+using System.IO;
+using System.Drawing;
 
 namespace Courses.Gui.Manager.Controllers
 {
-   //  [Authorize(Roles = "Manager,Admin")]
+    //[Authorize(Roles = "Manager,Admin")]
     public class ManagerController : Controller
     {
         private readonly IProductService productService;
@@ -30,12 +32,13 @@ namespace Courses.Gui.Manager.Controllers
             return View(product);
         }
         [HttpPost]
-        public ActionResult New(ProductViewModelForAddEditView productView)
+        public ActionResult New(ProductViewModelForAddEditView productView, HttpPostedFileBase file)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    productView.imagePath = SaveImageInFolder(file);
                     productService.Add(productView);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
@@ -46,6 +49,32 @@ namespace Courses.Gui.Manager.Controllers
                 ModelState.AddModelError("", "Unable to save changes");
             }
             return View(productView);
+        }
+
+        /// <summary>
+        /// Сохраняет картинку в папке CoursesImages. Если картинка в запросе полученна не была, 
+        /// то возвращает пустую строку, иначе возвращает путь к картинке
+        /// </summary>
+        /// <param name="file">Путь к картинке</param>
+        /// <returns></returns>
+        private String SaveImageInFolder(HttpPostedFileBase file)
+        {
+            string path = null;
+            try
+            {
+                if (file != null && file.ContentLength > 0)
+                {
+                    string filename = System.IO.Path.GetFileName(file.FileName);
+                    path = "~/CoursesImages/" + filename;
+                    // file is uploaded
+                    file.SaveAs(Server.MapPath(path));
+                }
+            }
+            catch (Exception c)
+            {
+                return null;
+            }
+            return path;
         }
 
         [HttpGet]
@@ -60,12 +89,14 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductViewModelForAddEditView product)
+        public ActionResult Edit(ProductViewModelForAddEditView product, HttpPostedFileBase file)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if(file != null)
+                        product.imagePath = SaveImageInFolder(file);
                     productService.Edit(product);
                     productService.SaveChanges();
                     return RedirectToAction("Index");

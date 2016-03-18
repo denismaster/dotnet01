@@ -16,6 +16,12 @@ namespace Courses.Buisness.Services
         CategoryCollectionViewModel GetCategorys(int page, int pageSize,
            List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
         /// <summary>
+        /// получение категории со списком категорий (для выбора родительской) , для передачи его в форму добавления/редактирования
+        /// </summary>
+        /// <param name="Id">Id категории для редактирования</param>
+        /// <returns></returns>
+        CategoryViewModelForAddEditView GetCategoryWithCategorys(int? Id);
+        /// <summary>
         /// Получение категории
         /// </summary>
         /// <param name="id"></param>
