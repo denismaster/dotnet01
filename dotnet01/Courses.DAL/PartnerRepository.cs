@@ -115,6 +115,10 @@ namespace Courses.DAL
         {
             return context.Partners.FirstOrDefault();
         }
+        public void ClearTable()
+        {
+            context.Partners.RemoveRange(Get());
+        }
     }
 }
 

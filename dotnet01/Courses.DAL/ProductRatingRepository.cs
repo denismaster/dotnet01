@@ -66,5 +66,9 @@ namespace Courses.DAL
         {
             return context.ProductRatings.FirstOrDefault();
         }
+        public void ClearTable()
+        {
+            context.ProductRatings.RemoveRange(Get());
+        }
     }
 }

@@ -61,5 +61,9 @@ namespace Courses.DAL
         {
             context.Dispose();
         }
+        public void ClearTable()
+        {
+            context.Events.RemoveRange(Get());
+        }
     }
 }

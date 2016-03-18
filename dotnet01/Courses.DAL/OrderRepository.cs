@@ -56,11 +56,18 @@ namespace Courses.DAL
         {
             return context.Orders.Where(expression).Count();
         }
-
+        public Order GetOnlyOne()
+        {
+            return context.Orders.FirstOrDefault();
+        }
        
         public void Dispose()
         {
             context.Dispose();
+        }
+        public void ClearTable()
+        {
+            context.Orders.RemoveRange(Get());
         }
     }
 }

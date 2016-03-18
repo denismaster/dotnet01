@@ -10,7 +10,8 @@ namespace Courses.Models.Repositories
     {
 
         Category GetOnlyOne();
-
+        void AddPartners(int categoryId, int partnerId);
+        void AddProducts(int categoryId, int productId);
    
     }
 }

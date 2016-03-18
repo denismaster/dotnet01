@@ -58,10 +58,17 @@ namespace Courses.DAL
             return context.Comments.Where(expression).Count();
         }
 
-
+        public Comment GetOnlyOne()
+        {
+            return context.Comments.FirstOrDefault();
+        }
         public void Dispose()
         {
             context.Dispose();
+        }
+        public void ClearTable()
+        {
+            context.Comments.RemoveRange(Get());
         }
     }
 }

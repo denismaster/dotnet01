@@ -133,7 +133,10 @@ namespace Courses.DAL
         {
             return context.Products.FirstOrDefault();
         }
-
+        public void ClearTable()
+        {
+            context.Products.RemoveRange(Get());
+        }
 
     }
 }

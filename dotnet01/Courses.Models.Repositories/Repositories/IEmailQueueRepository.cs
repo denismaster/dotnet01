@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-    public interface ICommentsRepository : IRepository<Comment>, IDisposable
+   public  interface IEmailQueueRepository:IRepository<EmailQueue>
     {
-        Comment GetOnlyOne();
+        EmailQueue GetOnlyOne();
     }
 }
