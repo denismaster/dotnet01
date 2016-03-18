@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Courses.ViewModels.CategoryCollectionViewModel
+@using Courses.Gui.Helpers
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Направления
+    </div>
+    <div class="panel-body">
+        <table>
+            <thead>
+                <tr>
+                    <th>@Html.ActionLink("Добавить направление", "New", new { }, new { @class = "btn btn-info" })</th>
+                    <th>
+                        @using (Html.BeginForm())
+                        {
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Поиск по названию" })
+                                    <span class="input-group-btn">
+                                        <input class="btn btn-info" type="submit" value="Поиск" />
+                                    </span>
+                                </div>
+                            </div>
+                        }
+                    </th>
+                    <th>@Html.ActionLink("Курсы", "Index", "Manager", new { }, new { @class = "btn btn-info" })</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink("Название", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @Html.ActionLink("Активность", "Index", new { sortOrder = ViewBag.ActiveSortParam, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    @Html.ActionLink("Дата обновления", "Index", new { sortOrder = ViewBag.UpdateDateSortParam, currentFilter = ViewBag.CurrentFilter })
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categorys)
+            {
+                <tr>
+                    <td width="30%">@item.Name</td>
+                    <td width="20%">@item.Active</td>
+                    <td width="15%">@item.UpdatedDate</td>
+                    <td width="20%">
+                        <div class="btn-group">
+                            @Html.ActionLink(" ", "Edit", new { iD = item.Id }, new { @class = "btn btn-success glyphicon glyphicon-pencil" })
+                            @Html.ActionLink(" ", "Details", new { iD = item.Id }, new { @class = "btn btn-info glyphicon glyphicon-info-sign" })
+                            @Html.ActionLink(" ", "Delete", new { iD = item.Id }, new { @class = "btn btn-danger glyphicon glyphicon-remove" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        Стр @(Model.PageInfo.TotalPages < Model.PageInfo.PageNumber ? 0 : Model.PageInfo.PageNumber)
+        из @Model.PageInfo.TotalPages
+        @if (Model.PageInfo.PageNumber > 1)
+        {
+            @Html.ActionLink(" <<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw("  ");
+            @Html.ActionLink("< Пред", "Index", new { page = Model.PageInfo.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        }
+        else
+        {
+            @:<<
+            @Html.Raw(" ");
+            @:< Пред
+    }
+        @if (Model.PageInfo.PageNumber < Model.PageInfo.TotalPages)
+        {
+            @Html.ActionLink("След >", "Index", new { page = Model.PageInfo.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.Raw("  ");
+            @Html.ActionLink(">>", "Index", new { page = Model.PageInfo.TotalPages, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        }
+        else
+        {
+            @:След >
+            @Html.Raw(" ")
+            @:>>
+    }
+    </div>
+    <div class="panel-footer">
+        <ul class="pagination pagination-panel pagination-sm">
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </ul>
+    </div>
+</div>
+
+<br />
