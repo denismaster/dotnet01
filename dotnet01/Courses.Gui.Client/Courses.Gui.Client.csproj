@@ -236,23 +236,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ClientControllerFactory.cs" />
-    <Compile Include="Migrations\201603091813229_Initial.cs" />
-    <Compile Include="Migrations\201603091813229_Initial.Designer.cs">
-      <DependentUpon>201603091813229_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603132235300_first.cs" />
-    <Compile Include="Migrations\201603132235300_first.Designer.cs">
-      <DependentUpon>201603132235300_first.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603132254476_second.cs" />
-    <Compile Include="Migrations\201603132254476_second.Designer.cs">
-      <DependentUpon>201603132254476_second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603132339221_2.cs" />
-    <Compile Include="Migrations\201603132339221_2.Designer.cs">
-      <DependentUpon>201603132339221_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityUserStore.cs" />
@@ -712,6 +695,7 @@
     <Folder Include="Content\Silver\" />
     <Folder Include="Content\textures\" />
     <Folder Include="Content\Uniform\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Scripts\cultures\" />
     <Folder Include="Scripts\messages\" />
   </ItemGroup>
@@ -748,20 +732,6 @@
       <Project>{def79d34-00e6-4658-b8a9-12798a36e88b}</Project>
       <Name>Courses.ViewModels</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603091813229_Initial.resx">
-      <DependentUpon>201603091813229_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603132235300_first.resx">
-      <DependentUpon>201603132235300_first.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603132254476_second.resx">
-      <DependentUpon>201603132254476_second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603132339221_2.resx">
-      <DependentUpon>201603132339221_2.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
