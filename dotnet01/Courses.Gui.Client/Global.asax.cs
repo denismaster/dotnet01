@@ -4,7 +4,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Courses.Gui.Client.Migrations;
 using Courses.DAL;
 using System.Data.SqlClient;
 
@@ -34,7 +33,7 @@ namespace Courses.Gui.Client
             }
 
             Database.SetInitializer(new DBInitializer());
-            context.Database.Initialize(true);
+           // context.Database.Initialize(true);
           //  DBInitializer initializer = new DBInitializer();
            // initializer.Init();
         }

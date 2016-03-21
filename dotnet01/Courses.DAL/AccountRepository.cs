@@ -102,8 +102,15 @@ namespace Courses.DAL
 
         public User GetUserByName(string email)
         {
-            //var allRecords = context.Users.ToList();
             return context.Users.Where(u => u.Login == email).FirstOrDefault();
+        }
+        public User GetUserByPassword(string login, string password)
+        {
+            return context.Users.Where(u => u.Login == login && u.PasswordHash==password).FirstOrDefault();
+        }
+        public User GetUserByAuthKey(string authKey)
+        {
+            return context.Users.Where(u => u.AuthKey == authKey).FirstOrDefault();
         }
 
         public void Dispose()
