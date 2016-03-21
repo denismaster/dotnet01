@@ -8,6 +8,6 @@ namespace Courses.Models.Repositories
 {
    public  interface IEmailQueueRepository:IRepository<EmailQueue>
     {
-        EmailQueue GetOnlyOne();
+ 
     }
 }

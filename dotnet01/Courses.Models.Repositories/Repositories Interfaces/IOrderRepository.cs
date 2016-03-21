@@ -8,6 +8,6 @@ namespace Courses.Models.Repositories
 {
    public interface IOrderRepository : IRepository<Order>, IDisposable
     {
-        Order GetOnlyOne();
+ 
     }
 }

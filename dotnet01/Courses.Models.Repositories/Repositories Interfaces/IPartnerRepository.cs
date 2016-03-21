@@ -8,7 +8,7 @@ namespace Courses.Models.Repositories
 {
     public interface IPartnerRepository: IRepository<Partner>
     {
-        Partner GetOnlyOne();
+ 
         //Дополнительные действия, специфичные для партнеров.
         /// <summary>
         /// Получает все сущности по заданному условию и с заданной сортировкой
