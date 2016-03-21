@@ -38,7 +38,7 @@ namespace Courses.DAL
 
         public void Update(Models.Comment entity)
         {
-            context.Entry(entity).State = EntityState.Deleted;
+            context.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(Models.Comment entity)
@@ -58,10 +58,17 @@ namespace Courses.DAL
             return context.Comments.Where(expression).Count();
         }
 
-
+        public Comment GetOnlyOne()
+        {
+            return context.Comments.FirstOrDefault();
+        }
         public void Dispose()
         {
             context.Dispose();
+        }
+        public void ClearTable()
+        {
+            context.Comments.RemoveRange(Get());
         }
     }
 }

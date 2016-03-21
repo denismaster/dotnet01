@@ -62,5 +62,9 @@ namespace Courses.Models.Repositories
         /// Сохраняет изменения в БД
         /// </summary>
         void SaveChanges();
+        /// <summary>
+        /// удаляет все данные о сущностях данного типа из БД
+        /// </summary>
+        void ClearTable();
     }
 }

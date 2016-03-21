@@ -12,6 +12,7 @@ using Courses.Buisness.Services;
 
 namespace Courses.Gui.Manager.Controllers
 {
+    //[Authorize(Roles = "Manager,Admin")]
     public class PartnerController: Controller
     {
         private readonly IPartnerService partnerService;

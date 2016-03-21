@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Courses.Gui.Client.Migrations;
 using Courses.DAL;
+using System.Data.SqlClient;
 
 namespace Courses.Gui.Client
 {
@@ -13,7 +14,7 @@ namespace Courses.Gui.Client
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext,Configuration>());
+           // Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext,Configuration>());
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -21,6 +22,21 @@ namespace Courses.Gui.Client
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ControllerBuilder.Current.SetControllerFactory(new ClientControllerFactory());
+            
+            DatabaseContext context= new DatabaseContext();
+           if (context.Database.Exists())
+            {
+                // set the database to SINGLE_USER so it can be dropped
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "ALTER DATABASE [" + context.Database.Connection.Database + "] SET SINGLE_USER WITH ROLLBACK IMMEDIATE");
+
+                // drop the database
+                context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "USE master DROP DATABASE [" + context.Database.Connection.Database + "]");
+            }
+
+            Database.SetInitializer(new DBInitializer());
+            context.Database.Initialize(true);
+          //  DBInitializer initializer = new DBInitializer();
+           // initializer.Init();
         }
     }
 }
