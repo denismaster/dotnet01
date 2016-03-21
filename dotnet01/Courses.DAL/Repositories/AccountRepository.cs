@@ -40,7 +40,7 @@ namespace Courses.DAL
 
         public User GetUser(string login, string password)
         {
-            throw new NotImplementedException();
+            return entityContext.Where(a => a.Login == login && a.PasswordHash == password).FirstOrDefault();
         }
 
         public User GetUserByID(string id)
