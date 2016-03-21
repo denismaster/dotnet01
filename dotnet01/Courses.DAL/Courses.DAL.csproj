@@ -67,10 +67,6 @@
     <Compile Include="Migrations\201603162250587_ParentCategoryId.Designer.cs">
       <DependentUpon>201603162250587_ParentCategoryId.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603161328497_3.cs" />
-    <Compile Include="Migrations\201603161328497_3.Designer.cs">
-      <DependentUpon>201603161328497_3.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OrderItemRepository.cs" />
     <Compile Include="OrderRepository.cs" />
@@ -102,9 +98,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603162250587_ParentCategoryId.resx">
       <DependentUpon>201603162250587_ParentCategoryId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603161328497_3.resx">
-      <DependentUpon>201603161328497_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

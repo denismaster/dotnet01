@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
-//using Courses.Gui.Client.Models.Identity;
+using System.Linq;
+using System.Security.Claims;
 using Courses.Gui.Client.Models;
 using System;
 using System.Threading.Tasks;
@@ -135,7 +136,7 @@ namespace Courses.Gui.Client.Controllers
         }
         public ActionResult AuthorizeVk()
         {
-            return ExternalLinkLogin("Vkontakte");
+            return ExternalLogin("Vkontakte", Url.Action("Index","Home"));
         }
         //
         // POST: /Account/Manage
@@ -162,22 +163,18 @@ namespace Courses.Gui.Client.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-                return RedirectToAction("LogOn");
-
-            // AUTHENTICATED!
-            var providerKey = loginInfo.Login.ProviderKey;
-            var providerName = loginInfo.Login.LoginProvider;
-
-            var user = _authService.Find(providerKey);
+            var loginData = await AuthenticationManager.AuthenticateAsync("ExternalCookie");          
+            var loginClaims = loginData.Identity.Claims;
+            var userName = loginClaims.First(c => c.Type == ClaimTypes.Name).Value;
+            var providerName = loginClaims.First().Issuer;
+            var authKey = loginClaims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
+            var user = _authService.FindExternal(authKey);
 
             if (user == null)
             {
                 return RedirectToAction("LogOn", new
                 {
-                    message = "Unable to log in with " + loginInfo.Login.LoginProvider +
-                                ". "
+                    message = "Unable to log in with "+providerName+". "
                 });
             }
 
@@ -199,7 +196,6 @@ namespace Courses.Gui.Client.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLinkLogin(string provider)
         {
-            // Request a redirect to the external login provider to link a login for the current user
             return new ChallengeResult(provider, Url.Action("ExternalLinkLoginCallback"), User.Identity.GetUserId());
         }
 
@@ -209,46 +205,28 @@ namespace Courses.Gui.Client.Controllers
         [HttpGet]
         public async Task<ActionResult> ExternalLinkLoginCallback()
         {
-            // Handle external Login Callback
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-            {
-                AuthenticationManager.SignOut();
-                return RedirectToAction("Register", new { message = "Unable to authenticate with external login." });
-            }
-
-            // Authenticated!
-            string providerKey = loginInfo.Login.ProviderKey;
-            string providerName = loginInfo.Login.LoginProvider;
+            var loginData = await AuthenticationManager.AuthenticateAsync("ExternalCookie");
+            var loginClaims= loginData.Identity.Claims;
+            var userName = loginClaims.First(c => c.Type == ClaimTypes.Name).Value;
+            var providerName = loginClaims.First().Issuer;
+            var authKey = loginClaims.Where(c => c.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
             Courses.Models.User user=null;
-            if(!String.IsNullOrEmpty(User.Identity.Name))
-            // Now load, create or update our custom user
-                user = _authService.Find(User.Identity.Name);
-
+            if(!String.IsNullOrEmpty(userName))
+                user = _authService.Find(userName);
             if (user == null)
             {
-                _authService.Register(loginInfo.DefaultUserName, providerKey, providerName);
+                _authService.Register(userName, authKey, providerName);
             }
-
-            //if (string.IsNullOrEmpty(user.Email))
-            //    user.Email = AppUserState.Email;
-
-            //if (string.IsNullOrEmpty(user.Name))
-            //    user.Name = AppUserState.Name ?? "Unknown (" + providerName + ")";
             else
-
-            if (loginInfo.Login != null)
             {
-                _authService.LinkExternalLogin(user, providerKey, providerName);
+                _authService.LinkExternalLogin(user, authKey, providerName);
             }
-
             AuthenticationManager.SignOut();
             var claims = _authService.GetIdentity(user);
             AuthenticationManager.SignIn(new AuthenticationProperties
             {
                 IsPersistent = true
             }, claims);
-
             return RedirectToAction("Register");
         }
 
