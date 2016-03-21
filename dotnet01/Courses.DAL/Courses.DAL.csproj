@@ -48,6 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201603211950469_1.cs" />
+    <Compile Include="Migrations\201603211950469_1.Designer.cs">
+      <DependentUpon>201603211950469_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\AppointmentRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CommentsRepository.cs" />
@@ -99,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201603162250587_ParentCategoryId.resx">
       <DependentUpon>201603162250587_ParentCategoryId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603211950469_1.resx">
+      <DependentUpon>201603211950469_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
