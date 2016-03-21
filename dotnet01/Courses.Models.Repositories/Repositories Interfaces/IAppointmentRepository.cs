@@ -8,6 +8,6 @@ namespace Courses.Models.Repositories
 {
     public interface IAppointmentRepository : IRepository<Appointment>
     {
-        Appointment GetOnlyOne();
+       
     }
 }
