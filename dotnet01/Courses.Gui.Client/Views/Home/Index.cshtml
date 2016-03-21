@@ -2,6 +2,11 @@
     ViewBag.Title = "Главная";
 }
 <h2>@ViewBag.Title.</h2>
+@if(Request.IsAuthenticated)
+{
+    <h2> @User.Identity.Name</h2>
+    <h2> @User.Identity.AuthenticationType.ToString()</h2>
+}
 <h3>@ViewBag.Message</h3>
 
 <script>
