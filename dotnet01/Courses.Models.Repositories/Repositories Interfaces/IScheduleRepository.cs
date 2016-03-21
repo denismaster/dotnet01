@@ -8,6 +8,6 @@ namespace Courses.Models.Repositories
 {
    public interface IScheduleRepository:IRepository<Schedule>
     {
-        Schedule GetOnlyOne();
+       
     }
 }

@@ -9,7 +9,7 @@ namespace Courses.Models.Repositories
     public interface IProductRepository: IRepository<Product>
     {
 
-        Product GetOnlyOne();
+   
 
                 /// <summary>
         /// Получает все сущности по заданному условию и с заданной сортировкой

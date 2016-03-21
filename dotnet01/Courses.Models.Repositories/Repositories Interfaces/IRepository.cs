@@ -59,6 +59,7 @@ namespace Courses.Models.Repositories
         /// <summary>
         /// удаляет все данные о сущностях данного типа из БД
         /// </summary>
+        T GetOnlyOne();
         
     }
 }
