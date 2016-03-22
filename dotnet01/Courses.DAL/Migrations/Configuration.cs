@@ -9,7 +9,7 @@ namespace Courses.DAL.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "Courses.DAL.DatabaseContext";
         }
 

@@ -38,7 +38,7 @@ namespace Courses.DAL
         {
             DatabaseContext context = new DatabaseContext();
             
-            partnersRep.ClearTable();
+            
 
             Partner partner = new Partner
             {
@@ -58,7 +58,7 @@ namespace Courses.DAL
         }
         private void AddProducts()
         {
-            productRep.ClearTable();
+          
             
             productRep.Add(new Product
             {
@@ -111,7 +111,7 @@ namespace Courses.DAL
        }
        private void AddUsers()
        {
-           accRep.ClearTable();
+           
 
            User user = new User
            {
@@ -153,7 +153,7 @@ namespace Courses.DAL
        }
        private void AddCustomers()
        {
-           customerRep.ClearTable();
+         
             
            Customer customer = new Customer
            {
@@ -211,7 +211,7 @@ namespace Courses.DAL
        private void AddProductRatings()
        {
 
-           productRatingRep.ClearTable();
+         
            ProductRating rating = new ProductRating();
             rating.ProductId = productRep.GetOnlyOne().Id;
             rating.CustomerId = customerRep.GetOnlyOne().Id;
@@ -222,7 +222,7 @@ namespace Courses.DAL
        }
        private void AddCategories()
        {
-           categoryRep.ClearTable();
+          
            Category category = new Category
            {
                Active = true,
@@ -254,7 +254,7 @@ namespace Courses.DAL
        }
        private void AddAppointments()
        {
-           appointmentRep.ClearTable();
+          
            Appointment app = new Appointment
            {
                Price = 500,
@@ -273,7 +273,7 @@ namespace Courses.DAL
        }
        private void AddComments()
        {
-           commentsRep.ClearTable();
+          
            Comment comment = new Comment
            {
                CreatedDate = DateTime.Now,
@@ -296,7 +296,7 @@ namespace Courses.DAL
        }
        private void AddEmailTemplates()
        {
-           emailTemplateRep.ClearTable();
+           
            EmailTemplate temp = new EmailTemplate
            {
                Name = "Поздравление с днюхой",
@@ -311,7 +311,7 @@ namespace Courses.DAL
        }
        private void AddEvents()
        {
-           eventRep.ClearTable();
+       
            Event event1 = new Event()
            {
                Changes = "Изменения",
@@ -333,7 +333,7 @@ namespace Courses.DAL
        }
        private void AddOrders()
        {
-           orderRep.ClearTable();
+          
            Order order = new Order()
            {
                CreatedDate = DateTime.Now,
@@ -352,7 +352,7 @@ namespace Courses.DAL
        }
        private void AddOrderItems()
        {
-           orderItemRep.ClearTable();
+        
            OrderItem item = new OrderItem()
            {
                CreatedDate = DateTime.Now,
@@ -375,7 +375,7 @@ namespace Courses.DAL
        }
        private void AddSchedules()
        {
-           scheduleRep.ClearTable();
+    
             Schedule schedule = new Schedule()
             {
                 StartDate = new DateTime(2016, 02, 02),
@@ -398,7 +398,7 @@ namespace Courses.DAL
        }
        private void AddEmailNewsLetters()
        {
-           newsLetterRep.ClearTable();
+        
            EmailNewsletter letter = new EmailNewsletter()
            {
                CreatedDate = DateTime.Now,
@@ -423,7 +423,7 @@ namespace Courses.DAL
        }
        private void AddEmailQueues()
        {
-           emailQueueRep.ClearTable();
+         
            EmailQueue queue = new EmailQueue()
            {
                CreatedDate = new DateTime(2015, 12, 12),

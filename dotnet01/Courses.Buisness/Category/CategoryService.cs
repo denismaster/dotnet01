@@ -174,7 +174,8 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                Description = c.Description
+                Description = c.Description,
+                ParentCategoryId = c.ParentCategoryId
             };
         }
         private CategoryViewModel Convert(Models.Category c)
@@ -186,7 +187,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentCategoryId = (c.ParentCategory == null) ? 0 : c.ParentCategory.CategoryId,
+                ParentCategoryId = (c.ParentCategoryId == null) ? 0 : c.ParentCategoryId,
                 Description = c.Description
             };
         }
@@ -199,7 +200,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentCategoryId = (c.ParentCategory == null) ? 0 : c.ParentCategory.CategoryId,
+                ParentCategoryId = (c.ParentCategoryId == null) ? 0 : c.ParentCategoryId,
                 Description = c.Description
             };
         }

@@ -1,7 +1,7 @@
 ﻿
 function BasketButtonEventListener()
 {
-    var id = $(this).attr("data-id");
+    var id = $(target).attr("data-id");
     alert(id);
 }
 

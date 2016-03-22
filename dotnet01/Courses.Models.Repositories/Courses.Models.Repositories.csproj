@@ -39,23 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\IEmailNewsletterRepository.cs" />
-    <Compile Include="Repositories\IEmailQueueRepository.cs" />
-    <Compile Include="Repositories\IScheduleRepository.cs" />
+    <Compile Include="Repositories Interfaces\IEmailNewsletterRepository.cs" />
+    <Compile Include="Repositories Interfaces\IEmailQueueRepository.cs" />
+    <Compile Include="Repositories Interfaces\IScheduleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IAccountRepository.cs" />
-    <Compile Include="Repositories\IAppointmentRepository.cs" />
-    <Compile Include="Repositories\ICategoryRepository.cs" />
-    <Compile Include="Repositories\ICommentsRepository.cs" />
-    <Compile Include="Repositories\ICustomerRepository.cs" />
-    <Compile Include="Repositories\IEmailTemplateRepoitory.cs" />
-    <Compile Include="Repositories\IEventRepository.cs" />
-    <Compile Include="Repositories\IOrderItemRepository.cs" />
-    <Compile Include="Repositories\IOrderRepository.cs" />
-    <Compile Include="Repositories\IPartnerRepository.cs" />
-    <Compile Include="Repositories\IProductRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\IProductRatingRepository.cs" />
+    <Compile Include="Repositories Interfaces\IAccountRepository.cs" />
+    <Compile Include="Repositories Interfaces\IAppointmentRepository.cs" />
+    <Compile Include="Repositories Interfaces\ICategoryRepository.cs" />
+    <Compile Include="Repositories Interfaces\ICommentsRepository.cs" />
+    <Compile Include="Repositories Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Repositories Interfaces\IEmailTemplateRepoitory.cs" />
+    <Compile Include="Repositories Interfaces\IEventRepository.cs" />
+    <Compile Include="Repositories Interfaces\IOrderItemRepository.cs" />
+    <Compile Include="Repositories Interfaces\IOrderRepository.cs" />
+    <Compile Include="Repositories Interfaces\IPartnerRepository.cs" />
+    <Compile Include="Repositories Interfaces\IProductRepository.cs" />
+    <Compile Include="Repositories Interfaces\IRepository.cs" />
+    <Compile Include="Repositories Interfaces\IProductRatingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cources.Models\Courses.Models.csproj">
