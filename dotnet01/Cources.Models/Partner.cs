@@ -26,8 +26,14 @@ namespace Courses.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Contact { get; set; }
-        public List<Product> Products { get; set; }
-        public List<Category> Categories { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
         public User User { get; set; }
+
+        public Partner()
+        {
+            Products = new  List<Product>();
+            Categories = new  List<Category>();
+        }
     }
 }

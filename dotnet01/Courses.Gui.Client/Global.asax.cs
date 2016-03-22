@@ -5,7 +5,8 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Courses.DAL;
-
+using Courses.Models;
+using System.Collections.Generic;
 namespace Courses.Gui.Client
 {
     public class MvcApplication : HttpApplication
@@ -31,6 +32,7 @@ namespace Courses.Gui.Client
             }
             Database.SetInitializer(new DBInitializer());
             context.Database.Initialize(true);
+         
         }
     }
 }
