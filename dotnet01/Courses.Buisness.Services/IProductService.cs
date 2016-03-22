@@ -34,6 +34,7 @@ namespace Courses.Buisness.Services
         /// <param name="Id"></param>
         /// <returns></returns>
         ProductViewModel GetById(int Id);
+       
         /// <summary>
         /// Добавление курса. 
         /// </summary>
@@ -48,6 +49,17 @@ namespace Courses.Buisness.Services
         /// Удаление курса
         /// </summary>
         /// <param name="product"></param>
+        ///  /// <summary>
+        /// получение продукта со списком всех категорий
+        /// </summary>
+        /// <param name="Id">Id продукта для редактирования</param>
+        /// <returns></returns>
+        ProductCategoryViewModel GetProductCategory(int? Id);
+        /// <summary>
+        /// Редактирование списка категорий продукта
+        /// </summary>
+        /// <param name="product"></param>
+        void EditProductCategorys(ProductCategoryViewModel productView, int[] selectedCourses);
         void Delete(ProductViewModel product);
         /// <summary>
         /// Сохранение изменений в репозитории

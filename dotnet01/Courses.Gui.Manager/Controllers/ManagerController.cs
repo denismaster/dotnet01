@@ -110,6 +110,36 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditProductCategorys(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var productView = productService.GetProductCategory(id.Value);
+            if (productView.Id == 0)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            return View(productView);
+        }
+
+        [HttpPost]
+        public ActionResult EditProductCategorys(ProductCategoryViewModel product, int[] selectedCategorys)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    productService.EditProductCategorys(product, selectedCategorys);
+                    productService.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            return View(product);
+        }
+
+        [HttpGet]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -135,6 +165,9 @@ namespace Courses.Gui.Manager.Controllers
             }
             return View(product);
         }
+
+
+
         [HttpGet]
         public ActionResult Details(int? id)
         {
