@@ -31,6 +31,7 @@ namespace Courses.Models
         public string Email { get; set; }
         public string Role { get; set; }
         public byte Status { get; set; }
+        public string ProviderName { get; set; }
         public DateTime CreatedDate
         {
             get;
