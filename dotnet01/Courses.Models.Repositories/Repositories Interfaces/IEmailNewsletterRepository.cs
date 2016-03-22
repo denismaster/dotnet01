@@ -8,6 +8,6 @@ namespace Courses.Models.Repositories
 {
    public interface IEmailNewsletterRepository:IRepository<EmailNewsletter>
     {
-        
+
     }
 }

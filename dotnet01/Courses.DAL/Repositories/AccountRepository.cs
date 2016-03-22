@@ -11,7 +11,7 @@ namespace Courses.DAL
     /// <summary>
     /// Реализация репозитория для работы с аккаунтами
     /// </summary>
-    public class AccountRepository:RepositoryBase<User>,IAccountRepository
+    public class AccountRepository : RepositoryBase<User>, IAccountRepository
     {
         public IEnumerable<Models.User> Get(int page, int pageSize, Func<Models.User, bool> expression, SortFilter sortFilter)
         {
@@ -40,12 +40,12 @@ namespace Courses.DAL
 
         public User GetUser(string login, string password)
         {
-            throw new NotImplementedException();
+            return entityContext.Where(a => a.Login == login && a.PasswordHash == password).FirstOrDefault();
         }
 
         public User GetUserByID(string id)
         {
-            var intId=0;
+            var intId = 0;
             if (!int.TryParse(id, out intId))
                 return null;
             var result = entityContext.Find(intId);
@@ -57,7 +57,15 @@ namespace Courses.DAL
             //var allRecords = entityContext.ToList();
             return entityContext.Where(u => u.Login == email).FirstOrDefault();
         }
+        public User GetUserByAuthKey(string authKey)
+        {
+            return entityContext.Where(u => u.AuthKey == authKey).FirstOrDefault();
+        }
 
-     
+        public User GetUserByPassword(string username,string password)
+        {
+            return entityContext.Where(u => u.Login == username && u.PasswordHash == password).FirstOrDefault();
+        }
+
     }
 }

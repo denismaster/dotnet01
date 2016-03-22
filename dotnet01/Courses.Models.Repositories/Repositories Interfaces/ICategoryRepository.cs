@@ -9,7 +9,7 @@ namespace Courses.Models.Repositories
    public interface ICategoryRepository: IRepository<Category>
     {
 
-        
+
         void AddPartners(int categoryId, int partnerId);
         void AddProducts(int categoryId, int productId);
         /// <summary>

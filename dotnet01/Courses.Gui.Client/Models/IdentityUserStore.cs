@@ -120,7 +120,7 @@ namespace Courses.Gui.Client
 
         public Task SetEmailAsync(ApplicationUser user, string email)
         {
-            var usr = _repository.GetUser(user.UserName, user.PasswordHash);
+            var usr = _repository.GetUserByPassword(user.UserName, user.PasswordHash);
             if (usr != null)
                 usr.Email = email;
             return Task.Delay(1);

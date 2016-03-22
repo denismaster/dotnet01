@@ -12,7 +12,7 @@ using Courses.Gui.Client.Models;
 
 namespace Courses.Gui.Client.Controllers
 {
-  
+    //[Authorize(Roles = "Admin, Manager, Default")]
     public class HomeController : Controller
     {
         public ActionResult Spa()
@@ -27,8 +27,6 @@ namespace Courses.Gui.Client.Controllers
 
         public ActionResult About()
         {
-
-
             return View();
         }
 

@@ -12,7 +12,9 @@ namespace Courses.Models.Repositories
         User GetUser(string login, string password);
         User GetUserByID(string id);
         User GetUserByName(string username);
-        User GetOnlyOne();
+
+        User GetUserByAuthKey(string authKey);
+        User GetUserByPassword(string username, string password);
         /// <summary>
         /// Получает все сущности по заданному условию и с заданной сортировкой
         /// </summary>

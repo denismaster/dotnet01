@@ -48,6 +48,7 @@
                                             Войти через
                                             <div class="social-buttons">
                                                 <a href="#" id="fb" class="btn btn-facebook"><i class="fa fa-fb"></i> Facebook</a>
+                                                @Html.ActionLink("Vkontakte", "AuthorizeVk", "Account", new { }, new {@class="btn btn-vk" })
                                                 <a href="#" class="btn btn-vk"><i class="fa fa-vk"></i> Вконтакте </a>
                                                 <a href="#" class="btn btn-odnoklassniki"><i class="fa fa-odnoklassniki"></i> Одноклассники</a>
                                                 <a href="#" class="btn btn-instagram"><i class="fa fa-instagram"></i> Instagram </a>
@@ -188,7 +189,7 @@
             </div>
         </div>
     </footer>
-
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", false)

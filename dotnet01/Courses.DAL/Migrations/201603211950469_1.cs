@@ -1,16 +1,18 @@
-namespace Courses.Gui.Client.Migrations
+namespace Courses.DAL.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class second : DbMigration
+    public partial class _1 : DbMigration
     {
         public override void Up()
         {
+            AddColumn("dbo.Users", "ProviderName", c => c.String());
         }
         
         public override void Down()
         {
+            DropColumn("dbo.Users", "ProviderName");
         }
     }
 }

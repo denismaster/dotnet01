@@ -4,7 +4,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Courses.Gui.Client.Migrations;
 using Courses.DAL;
 
 namespace Courses.Gui.Client
