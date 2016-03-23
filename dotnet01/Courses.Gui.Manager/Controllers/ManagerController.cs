@@ -117,14 +117,7 @@ namespace Courses.Gui.Manager.Controllers
             var productView = productService.GetProductCategory(id.Value);
             if (productView.Id == 0)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            //bool flag = false;
-            //foreach (Courses.ViewModels.CategoryViewModel c in productView.AllCategorys)
-            //{
-            //    if (productView.SelectedCategorys.Contains(c))
-            //        flag = true;
-            //}
-
-                return View(productView);
+            return View(productView);
         }
 
         [HttpPost]
