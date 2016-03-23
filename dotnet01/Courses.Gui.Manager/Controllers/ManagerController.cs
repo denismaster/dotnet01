@@ -179,7 +179,7 @@ namespace Courses.Gui.Manager.Controllers
             return View(product);
         }
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string sortOrder, string CurrentNameFilter, string CurrentParentIdFilter, string SearchNameString, string SearchParentIdString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Name") ? "NameDesc" : "Name";
@@ -189,21 +189,31 @@ namespace Courses.Gui.Manager.Controllers
 
             if (Request.HttpMethod == "GET")
             {
-                searchString = currentFilter;
+                SearchNameString = CurrentNameFilter;
+                SearchParentIdString = CurrentParentIdFilter;
             }
             else
             {
                 page = 1;
             }
-            ViewBag.CurrentFilter = searchString;
+            ViewBag.CurrentNameFilter = SearchNameString;
+            ViewBag.CurrentParentIdFilter = SearchParentIdString;
 
             var sortFilter = new Courses.Buisness.Filtering.SortFilter() { SortOrder = sortOrder };
+
             List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(SearchNameString))
             {
-                FieldFilter fieldFilter = new FieldFilter() { Name = "Name", Value = searchString.ToString() };
+                FieldFilter fieldFilter = new FieldFilter() { Name = "Name", Value = SearchNameString.ToString() };
                 fieldFilters.Add(fieldFilter);
             }
+            if (!String.IsNullOrEmpty(SearchParentIdString))
+            {
+                FieldFilter fieldFilter = new FieldFilter() { Name = "PartnerID", Value = SearchParentIdString.ToString() };
+                fieldFilters.Add(fieldFilter);
+            }
+            
+            
 
             int pageSize = 3;
             int currentPage = page ?? 1;

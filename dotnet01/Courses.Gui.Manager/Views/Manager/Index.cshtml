@@ -17,14 +17,16 @@
                     <th>
                         @using (Html.BeginForm())
                         {
-                            <div class="col-lg-4">
+                            <div class="col-lg-6">
                                 <div class="input-group">
-                                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Поиск по названию" })
-                                    <span class="input-group-btn">
-                                        <input class="btn btn-info" type="submit" value="Поиск" />
-                                    </span>
+                                    @Html.TextBox("SearchNameString", ViewBag.CurrentNameFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Поиск по названию" })
+                                    @Html.TextBox("SearchParentIdString", ViewBag.CurrentParentIdFilter as string, htmlAttributes: new { @class = "form-control", @placeholder = "Поиск по id партнера" })
                                 </div>
+                               
                             </div>
+                            <span class="btn">
+                                <input class="btn btn-info" type="submit" value="Поиск" />
+                            </span>
                         }
                     </th>
                     <th>
@@ -80,9 +82,9 @@
 
         @if (Model.PageInfo.PageNumber > 1)
         {
-            @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }, new { @class=""})
+            @Html.ActionLink("<<", "Index", new { page = 1, sortOrder = ViewBag.CurrentSort, CurrentNameFilter = ViewBag.CurrentNameFilter, CurrentParentIdFilter = ViewBag.CurrentParentIdFilter }, new { @class=""})
             @Html.Raw(" ");
-            @Html.ActionLink("< Пред", "Index", new { page = Model.PageInfo.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("< Пред", "Index", new { page = Model.PageInfo.PageNumber - 1, sortOrder = ViewBag.CurrentSort, CurrentNameFilter = ViewBag.CurrentNameFilter, CurrentParentIdFilter = ViewBag.CurrentParentIdFilter })
         }
         else
         {
@@ -93,9 +95,9 @@
 
         @if (Model.PageInfo.PageNumber < Model.PageInfo.TotalPages)
         {
-            @Html.ActionLink("След >", "Index", new { page = Model.PageInfo.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("След >", "Index", new { page = Model.PageInfo.PageNumber + 1, sortOrder = ViewBag.CurrentSort, CurrentNameFilter = ViewBag.CurrentNameFilter, CurrentParentIdFilter = ViewBag.CurrentParentIdFilter })
             @Html.Raw(" ");
-            @Html.ActionLink(">>", "Index", new { page = Model.PageInfo.TotalPages, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink(">>", "Index", new { page = Model.PageInfo.TotalPages, sortOrder = ViewBag.CurrentSort, CurrentNameFilter = ViewBag.CurrentNameFilter, CurrentParentIdFilter = ViewBag.CurrentParentIdFilter })
         }
         else
         {
@@ -106,7 +108,7 @@
     </div>
     <div class="panel-footer">
         <ul class="pagination pagination-panel pagination-sm">
-            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x, sortOrder = ViewBag.CurrentSort, CurrentNameFilter = ViewBag.CurrentNameFilter, CurrentParentIdFilter = ViewBag.CurrentParentIdFilter }))
         </ul>
     </div>
 </div>

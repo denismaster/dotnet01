@@ -186,7 +186,8 @@ namespace Courses.Buisness
             }
             else
             {
-                var product = productRepository.Get(Id.Value);
+                Product product = productRepository.Get(Id.Value);
+                Category category = categoryRepository.Get(1);
                 productView = ConvertFromProductToProductCategoryViewModel(product);
                 var categorysList = categoryRepository.Get().Select(ConvertToCategoryViewModelFromCategory);
                 productView.AllCategorys = categorysList.ToList();

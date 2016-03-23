@@ -16,16 +16,16 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(m => m.Id)
             @Html.HiddenFor(m => m.Name)
-            @Html.HiddenFor(m => m.SelectedCategory)
-            @Html.HiddenFor(m => m.AllCategorys)
+            @*@Html.HiddenFor(m => m.SelectedCategorys)
+            @Html.HiddenFor(m => m.AllCategorys)*@
            
            
-                @Html.LabelFor(model => model.SelectedCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.SelectedCategorys, htmlAttributes: new { @class = "control-label col-md-2" })
                 <br>
                 @foreach (Courses.ViewModels.CategoryViewModel c in Model.AllCategorys)
                 {
                     <input type="checkbox" name="selectedCategorys" value="@c.Id"
-                           @( (Model.SelectedCategory != null && Model.SelectedCategory.Contains(c)) ? "checked=\"checked\"" : "") />@c.Name <br />
+                           @( (Model.SelectedCategorys != null && Model.SelectedCategorys.Contains(c)) ? "checked=\"checked\"" : "") />@c.Name <br />
                 }
 
 
