@@ -14,13 +14,11 @@ namespace Courses.Models
        
         public int Id { get; set; }
         public int CustomerId { get; set; }
-        
         public int ProductId { get; set; }
         public int  Rate { get; set; }
 
-       
-        public Customer Customer;
+        public Customer Customer { get; set; }
         
-        public Product Product;
-    }
+        public Product Product { get; set; }
+}
 }

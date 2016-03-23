@@ -17,6 +17,10 @@ namespace Courses.Models
             set;
         }
         public string Name { get; set; }
-        public List<EmailNewsletter> EmailNewsLetters { get; set; }
+        public virtual ICollection<EmailNewsletter> EmailNewsLetters { get; set; }
+        public EmailTemplate()
+        {
+            EmailNewsLetters = new List<EmailNewsletter>();
+        }
     }
 }

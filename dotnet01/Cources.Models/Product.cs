@@ -23,17 +23,23 @@ namespace Courses.Models
         public int? AssignedUserId { get; set; }
         public String imagePath { get; set; }
         public string Location { get; set; }
-
-        public List<Appointment> Appointments { get; set; }
-        public List<Comment> Comments { get; set; }
+        //навигационные свойства, не участвуют при инициализции, служат для обращения к связанным сущностям.
+        public virtual ICollection<Appointment> Appointments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public Partner Partner { get; set; }
         public User User { get; set; }
-        public List<Category> Categories { get; set; }
-   
-       
-        public List<Customer> CustomersWithFavouriteProducts { get; set; }
-        public List<ProductRating> ProductRatings { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<Customer> CustomersWithFavouriteProducts { get; set; }
+        public virtual ICollection<ProductRating> ProductRatings { get; set; }
+        public Product()
+        {
+            CustomersWithFavouriteProducts = new List<Customer>();
+            ProductRatings = new List<ProductRating>();
+            Categories = new List<Category>();
+            Appointments = new List<Appointment>();
+            Comments = new List<Comment>();
+        }
        
     }
 }

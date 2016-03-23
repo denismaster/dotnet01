@@ -59,12 +59,12 @@ namespace Courses.Buisness
             {
                 var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                partners = repository.Get(page, pageSize, expression, newSortFilter).Select(Convert);
+                partners = repository.Get(page, pageSize, expression, newSortFilter).Select(ConvertToPartnerViewModel);
                 total = repository.Count(expression);
             }
             else
             {
-                partners = repository.Get(page, pageSize, x => true).Select(Convert);
+                partners = repository.Get(page, pageSize, x => true).Select(ConvertToPartnerViewModel);
                 total = repository.Count(x => true);
             }
             var pageInfo = new PageInfo()
@@ -74,6 +74,17 @@ namespace Courses.Buisness
                 TotalItems = total
             };
             return new PartnerCollectionViewModel() { Partners = partners, PageInfo = pageInfo };
+        }
+
+        /// <summary>
+        /// Получение всех партнёров без фильтров и сортировок
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<PartnerViewModel> GetIEnumerablePartnersCollection()
+        {
+            IEnumerable<PartnerViewModel> products;
+            products = repository.Get().Select(ConvertToPartnerViewModel);
+            return products;
         }
 
         /// <summary>
@@ -120,7 +131,7 @@ namespace Courses.Buisness
         public PartnerViewModel GetByID(int id)
         {
             var partner = repository.Get(id);
-            return (partner == null) ? null : Convert(partner);
+            return (partner == null) ? null : ConvertToPartnerViewModel(partner);
         }
         /// <summary>
         /// Добавление партнера в репозиторий
@@ -162,7 +173,7 @@ namespace Courses.Buisness
         /// <summary>
         /// Конвертационные функции
         /// </summary>
-        private Models.Partner Convert(PartnerViewModel c)
+        private Partner Convert(PartnerViewModel c)
         {
             return new Models.Partner()
             {
@@ -178,7 +189,7 @@ namespace Courses.Buisness
                 
             };
         }
-        private PartnerViewModel Convert(Models.Partner c)
+        private PartnerViewModel ConvertToPartnerViewModel(Models.Partner c)
         {
             return new PartnerViewModel()
             {

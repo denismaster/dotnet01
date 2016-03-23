@@ -7,6 +7,7 @@ using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.ViewModels;
 using Courses.Buisness.Services;
+using System.Web.Mvc;
 
 namespace Courses.Buisness
 {
@@ -69,6 +70,40 @@ namespace Courses.Buisness
             return new CategoryCollectionViewModel() { Categorys = categorys, PageInfo = pageInfo };
         }
 
+        /// <summary>
+        /// получение категории со списком категорий (для выбора родительской) , для передачи его в форму добавления/редактирования
+        /// </summary>
+        /// <param name="Id">Id категории для редактирования</param>
+        /// <returns></returns>
+        public CategoryViewModelForAddEditView GetCategoryWithCategorys(int? Id)
+        {
+            CategoryViewModelForAddEditView categoryView = new CategoryViewModelForAddEditView();
+            if (Id == null)
+            {
+                //для возможности не выбирать категорию                                                            
+                Category noCategory = new Category { CategoryId = 0, Name = "------------Отсутствует----------", Active = true, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
+                var listCategorys = repository.Get().ToList<Category>();
+                listCategorys.Add(noCategory);
+                categoryView.Categorys = new SelectList(listCategorys, "CategoryId", "Name", 0);
+            }
+            else
+            {
+                var category = repository.Get(Id.Value);
+                if (category != null)
+                {
+                    categoryView = ConvertToCategoryViewModelForAddEditView(category);
+                    //для возможности не выбирать категорию                                                            
+                    Category noCategory = new Category { CategoryId = 0, Name = "------------Отсутствует----------", Active = true, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
+                    var listCategorys = repository.Get().ToList<Category>();
+                    listCategorys.Add(noCategory);
+                    listCategorys.Remove(category);
+                    categoryView.Categorys = new SelectList(listCategorys, "CategoryId", "Name", 0);
+
+                }
+            }
+            return categoryView;
+        }
+
 
         /// <summary>
         /// Получение информации о категории по его идентификатору
@@ -83,18 +118,34 @@ namespace Courses.Buisness
         /// <summary>
         /// Добавление категории в репозиторий
         /// </summary>
-        /// <param name="category"></param>
-        public void Add(CategoryViewModel category)
+        /// <param name="categoryView"></param>
+        public void Add(CategoryViewModel categoryView)
         {
-            repository.Add(Convert(category));
+            categoryView.CreatedDate = categoryView.UpdatedDate = DateTime.Now;
+            Category category = Convert(categoryView);
+            if (categoryView.ParentCategoryId == 0)
+                category.ParentCategory = null;
+            else
+            {
+                category.ParentCategory = repository.Get(categoryView.ParentCategoryId.Value);
+            }
+            repository.Add(category);
         }
         /// <summary>
         /// Обновление категории
         /// </summary>
         /// <param name="category"></param>
-        public void Edit(CategoryViewModel category)
+        public void Edit(CategoryViewModel categoryView)
         {
-            repository.Update(Convert(category));
+            categoryView.UpdatedDate = DateTime.Now;
+            Category category = Convert(categoryView);
+            if (categoryView.ParentCategoryId == 0)
+                category.ParentCategory = null;
+            else
+            {
+                category.ParentCategory = repository.Get(categoryView.ParentCategoryId.Value);
+            }
+            repository.Update(category);
         }
         /// <summary>
         /// Удаление категории
@@ -123,7 +174,8 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-               // ParentCategory = c.ParentCategory
+                Description = c.Description,
+                ParentCategoryId = c.ParentCategoryId
             };
         }
         private CategoryViewModel Convert(Models.Category c)
@@ -135,7 +187,21 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-             //   ParentId = c.ParentId
+                ParentCategoryId = (c.ParentCategoryId == null) ? 0 : c.ParentCategoryId,
+                Description = c.Description
+            };
+        }
+        private CategoryViewModelForAddEditView ConvertToCategoryViewModelForAddEditView(Models.Category c)
+        {
+            return new CategoryViewModelForAddEditView()
+            {
+                Id = c.CategoryId,
+                Name = c.Name,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                ParentCategoryId = (c.ParentCategoryId == null) ? 0 : c.ParentCategoryId,
+                Description = c.Description
             };
         }
     }

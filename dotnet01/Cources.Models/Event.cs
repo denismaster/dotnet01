@@ -16,6 +16,7 @@ namespace Courses.Models
             get;
             set;
         }
+        
         public string Entity { get; set; }
         public string Changes { get; set; }
         public int UserId { get; set; }

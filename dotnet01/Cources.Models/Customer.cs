@@ -33,12 +33,21 @@ namespace Courses.Models
         public string Phone { get; set; }
         public DateTime BirthDate { get; set; }
 
-        public List<Order> Orders { get; set; }
-        public List<Comment> Comments { get; set; }
-        public List<EmailQueue> EmailQueues { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<EmailQueue> EmailQueues { get; set; }
      
-        public List<Product> FavouriteProducts { get; set; }
-        public List<ProductRating> ProductRatings { get; set; }
+        public virtual ICollection<Product> FavouriteProducts { get; set; }
+        public virtual ICollection<ProductRating> ProductRatings { get; set; }
+        public Customer()
+        {
+            Orders = new List<Order>();
+            Comments = new List<Comment>();
+            EmailQueues = new List<EmailQueue>();
+            FavouriteProducts = new List<Product>();
+            ProductRatings = new List<ProductRating>();
+                 
+        }
       
         
     }

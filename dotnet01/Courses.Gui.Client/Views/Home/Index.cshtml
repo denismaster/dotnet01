@@ -4,9 +4,14 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<script src="~/Scripts/app/index/index-listView.js"></script>
-<link href="~/Content/IndexCSS/index-listView.css" rel="stylesheet" type="text/css" />
-<link href="~/Content/IndexCSS/index-product-details.css" rel="stylesheet" type="text/css" />
+<script>
+    $(document).ready(function () {
+        $(".product-details").hide();
+    });
+</script>
+<script>
+    var selectedItem;
+</script>
 
 <div class="index">
 
@@ -20,10 +25,121 @@
             <img src="" alt="#: Name # image" />
             <h3>#:Name#</h3>
             <p><br>Подробнее...</p>
+            <button data-id="#: Id#" onclick="BasketButtonEventListener">Купить </button>
         </div>
     </script>
 
+    <script>
+        $(function () {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: '/api/Product',
+                        dataType: 'json'
+                    }
+                },
+                pageSize: 9
+            });
+
+            $("#pager").kendoPager({
+                dataSource: dataSource
+            });
+
+            $("#listView").kendoListView({
+                dataSource: dataSource,
+                selectable: "single",
+                change: onChange,
+                template: kendo.template($("#template").html())
+            });
+            function onChange() {
+                var data = dataSource.view(),
+                    selected = $.map(this.select(), function (item) {
+                        return data[$(item).index()];
+                    });
+                selectedItem = selected[0];
+                var viewModel = kendo.observable({
+                    nameValue: selectedItem["Name"],
+                    descriptionValue: selectedItem["Description"],
+                    activeValue: selectedItem["Active"],
+                    typeValue: selectedItem["Type"],
+                    locationValue: selectedItem["Location"],
+                    seatsCountValue: selectedItem["SeatsCount"]
+                });
+                console.log(viewModel["Name"]);
+                kendo.bind($(".product-details"), viewModel);
+                $(".index").hide();
+                $(".product-details").show();
+            }
+        });
+    </script>
+
+    <style>
+        #listView {
+            padding: 10% 15%;
+            margin-bottom: -1px;
+            min-height: 510px;
+        }
+
+        .product {
+            float: left;
+            position: relative;
+            width: 251px;
+            height: 310px;
+            margin: 3% 3%;
+            padding: 0;
+        }
+
+            .product img {
+                width: 250px;
+                height: 250px;
+            }
+
+            .product h3 {
+                margin: 0;
+                padding: 3px 5px 0 0;
+                max-width: 96px;
+                overflow: hidden;
+                line-height: 1.1em;
+                font-size: .9em;
+                font-weight: normal;
+                text-transform: uppercase;
+                color: #999;
+            }
+
+            .product p {
+                visibility: hidden;
+                font-size: 200%;
+            }
+
+            .product:hover p {
+                visibility: visible;
+                position: absolute;
+                width: 250px;
+                height: 250px;
+                top: 0;
+                margin: 0;
+                padding: 0;
+                line-height: 75px;
+                vertical-align: middle;
+                text-align: center;
+                color: #fff;
+                background-color: rgba(0,0,0,0.75);
+                transition: background .2s linear, color .2s linear;
+                -moz-transition: background .2s linear, color .2s linear;
+                -webkit-transition: background .2s linear, color .2s linear;
+                -o-transition: background .2s linear, color .2s linear;
+            }
+
+        .k-listview:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>
 </div>
+
 
 <div class="product-details">
     <div class="parent">
@@ -76,3 +192,50 @@
     <button type="button" id="textButton">НАЗАД</button>
 </div>
 
+@Scripts.Render("~/bundles/basket")
+<script>
+    $("#textButton").kendoButton({
+        click: onClick
+    });
+    function onClick() {
+        $(".index").show();
+        $(".product-details").hide();
+    }
+</script>
+<style>
+    .parent {
+        /*width: 100%;
+            height: 100%;
+            position: center;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            overflow: auto;*/
+    }
+
+    .block {
+        font-size: large;
+    }
+
+
+    .demo {
+        left: 50%;
+        right: 50%;
+        position: center;
+    }
+
+    .fieldlist {
+        margin: 0 3em 0 0;
+        padding: 0;
+    }
+
+        .fieldlist li {
+            list-style: none;
+            text-align: left;
+        }
+
+        .fieldlist h5 {
+            padding-top: 5px;
+        }
+</style>

@@ -14,6 +14,13 @@ namespace Courses.Buisness.Services
         /// </summary>
         PartnerCollectionViewModel GetPartners(int page, int pageSize,
             List<Filtering.FieldFilter> fieldFilter = null, Filtering.SortFilter sortFilter = null);
+
+        /// <summary>
+        /// Получение всех партнёров без фильтров и сортировок
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<PartnerViewModel> GetIEnumerablePartnersCollection();
+
         /// <summary>
         /// Получение одного партнера
         /// </summary>
