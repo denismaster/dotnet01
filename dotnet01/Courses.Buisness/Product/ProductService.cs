@@ -201,17 +201,17 @@ namespace Courses.Buisness
         public void EditProductCategorys(ProductCategoryViewModel productView, int[] selectedCategorys)
         {
             Product product = productRepository.Get(productView.Id);
+            product.UpdatedDate = DateTime.Now;
             product.Categories.Clear();
+            SaveChanges();
 
             if(selectedCategorys != null)
             {
-                foreach(var c in productView.AllCategorys.Where(co => selectedCategorys.Contains(co.Id)))
+                foreach (int categoryId in selectedCategorys)
                 {
-                    product.Categories.Add(ConvertFromCategoryViewModelToCategory(c));
+                    categoryRepository.AddProducts(categoryId, product.Id);
                 }
             }
-            product.UpdatedDate = DateTime.Now;
-            productRepository.Update(product);
         }
 
         /// <summary>

@@ -14,8 +14,8 @@
         <div class="panel-body">
             @Html.HiddenFor(m => m.Id)
             @Html.HiddenFor(m => m.Name)
-            @Html.HiddenFor(m => m.AllCategorys)
-            @Html.HiddenFor(m => m.SelectedCategorys)
+            @*@Html.HiddenFor(m => m.AllCategorys)
+            @Html.HiddenFor(m => m.SelectedCategorys)*@
            
            
                 @Html.LabelFor(model => model.SelectedCategorys, htmlAttributes: new { @class = "control-label col-md-6" })
@@ -28,7 +28,7 @@
         </div>
         <br>
         <div class=" panel-footer">
-            @Html.ActionLink("Назад к списку", "Index", new { }, htmlAttributes: new { @class = "btn btn-warning" })
+            @Html.ActionLink("Назад к детальной информации", "Details", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
             <input type="submit" value="Сохранить" class="btn btn-success" />
         </div>
     }

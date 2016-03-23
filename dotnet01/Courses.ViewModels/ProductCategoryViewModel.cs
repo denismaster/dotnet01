@@ -13,7 +13,7 @@ namespace Courses.ViewModels
         public string Name { get; set; }
 
         [DisplayName("Категории (направления) курса")]
-        public IEnumerable<CategoryViewModel> SelectedCategorys
+        public List<CategoryViewModel> SelectedCategorys
         {
             get;
             set;
@@ -22,7 +22,7 @@ namespace Courses.ViewModels
         /// <summary>
         /// Формируем список всех категорий для передачи в представление
         /// </summary>
-        public IEnumerable<CategoryViewModel> AllCategorys
+        public List<CategoryViewModel> AllCategorys
         {
             get;
             set;

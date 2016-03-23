@@ -121,21 +121,18 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProductCategorys(ProductCategoryViewModel product, int[] selectedCategorys)
+        public ActionResult EditProductCategorys(ProductCategoryViewModel product, IEnumerable<int> selectedCategorys)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    productService.EditProductCategorys(product, selectedCategorys);
-                    productService.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                productService.EditProductCategorys(product, (selectedCategorys != null)?selectedCategorys.ToArray() : null);
+                return RedirectToAction("Details", new { id = product.Id});
             }
-            catch
+            catch(Exception e) 
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
+            var productView = productService.GetProductCategory(product.Id);
             return View(product);
         }
 
