@@ -187,7 +187,7 @@ namespace Courses.Buisness
             else
             {
                 Product product = productRepository.Get(Id.Value);
-                Category category = categoryRepository.Get(1);
+                Category category = categoryRepository.Get(2);
                 productView = ConvertFromProductToProductCategoryViewModel(product);
                 var categorysList = categoryRepository.Get().Select(ConvertToCategoryViewModelFromCategory);
                 productView.AllCategorys = categorysList.ToList();
@@ -305,7 +305,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentCategoryId = (c.ParentCategoryId == null) ? 0 : c.ParentCategoryId,
+                ParentCategoryId = (c.ParentCategory == null) ? null : (int?)(c.ParentCategory.CategoryId),
                 Description = c.Description
             };
         }

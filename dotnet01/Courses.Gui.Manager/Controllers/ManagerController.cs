@@ -117,7 +117,14 @@ namespace Courses.Gui.Manager.Controllers
             var productView = productService.GetProductCategory(id.Value);
             if (productView.Id == 0)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(productView);
+            //bool flag = false;
+            //foreach (Courses.ViewModels.CategoryViewModel c in productView.AllCategorys)
+            //{
+            //    if (productView.SelectedCategorys.Contains(c))
+            //        flag = true;
+            //}
+
+                return View(productView);
         }
 
         [HttpPost]
@@ -212,7 +219,6 @@ namespace Courses.Gui.Manager.Controllers
                 FieldFilter fieldFilter = new FieldFilter() { Name = "PartnerID", Value = SearchParentIdString.ToString() };
                 fieldFilters.Add(fieldFilter);
             }
-            
             
 
             int pageSize = 3;
