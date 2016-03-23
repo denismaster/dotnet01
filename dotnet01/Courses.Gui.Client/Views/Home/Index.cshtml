@@ -24,8 +24,11 @@
         <div class="product">
             <img src="" alt="#: Name # image" />
             <h3>#:Name#</h3>
-            <p><br>Подробнее...</p>
-            <button data-id="#: Id#" onclick="BasketButtonEventListener">Купить </button>
+            <p>
+                <br>Подробнее... <br>
+                <button type="button" id="buyButton" data-id="#: Id#" onclick="BasketButtonEventListener"><h5>Купить</h5> </button>
+            </p>
+            
         </div>
     </script>
 
@@ -69,11 +72,16 @@
                 kendo.bind($(".product-details"), viewModel);
                 $(".index").hide();
                 $(".product-details").show();
+                
             }
         });
     </script>
 
     <style>
+        #buyButton{
+            height: 15%;
+        }
+        
         #listView {
             padding: 10% 15%;
             margin-bottom: -1px;
@@ -172,20 +180,6 @@
                     <label> Описание : </label>
                     <label data-bind="text:descriptionValue"></label>
                 </div>
-
-                @*<ul class="fieldlist">
-                        <li><img src="" id="product-img" /></li>
-                        <li><span data-bind="text: nameValue"></span></li>
-                        <li><h5>ТИП МЕРОПРИЯТИЯ</h5></li>
-                        <li data-bind="text: typeValue"></li>
-                        <li><h5>ДОСТУПНЫХ МЕСТ</h5></li>
-                        <li data-bind="text: seatsCountValue"></li>
-                        <li><h5>МЕСТО ПРОВЕДЕНИЯ</h5></li>
-                        <li data-bind="text: locationValue"></li>
-                        <li><input type="checkbox" data-bind="checked: activeValue" disabled />Активность</li>
-                        <li><h3>ОПИСАНИЕ</h3></li>
-                        <li data-bind="text: descriptionValue"></li>
-                    </ul>*@
             </div>
         </div>
     </div>
@@ -200,18 +194,11 @@
     function onClick() {
         $(".index").show();
         $(".product-details").hide();
+        $("#listView").data("kendoListView").clearSelection();
     }
 </script>
 <style>
     .parent {
-        /*width: 100%;
-            height: 100%;
-            position: center;
-            top: 0;
-            left: 0;
-            display: flex;
-            align-items: center;
-            overflow: auto;*/
     }
 
     .block {
