@@ -250,14 +250,15 @@ namespace Courses.DAL
             categoryRep.SaveChanges();
             categoryRep.AddPartners(categoryRep.GetOnlyOne().CategoryId, partnersRep.GetOnlyOne().PartnerId);
             categoryRep.AddProducts(categoryRep.GetOnlyOne().CategoryId, productRep.GetOnlyOne().Id);
-         
-           Category category2 = new Category
-           {
-               Active = true,
-               CreatedDate = new DateTime(2015, 12, 12),
-               Description = "C#",
-               UpdatedDate = new DateTime(2016, 1, 1),
-               Name = "C# курсы",
+
+            Category category2 = new Category
+            {
+                Active = true,
+                CreatedDate = new DateTime(2015, 12, 12),
+                Description = "C#",
+                UpdatedDate = new DateTime(2016, 1, 1),
+                Name = "C# курсы",
+                ParentCategoryId = category.CategoryId,
                ParentCategory = category
        };
             categoryRep.Add(category2);
