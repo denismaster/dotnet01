@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Courses.Models.Repositories
 {
     public interface IOrderItemRepository:IRepository<OrderItem>
-    {
-
+    { 
     }
 }

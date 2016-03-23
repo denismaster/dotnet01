@@ -42,8 +42,8 @@ namespace Courses.Models
             get;
             set;
         }
-        public List<Product> Products { get; set; }
-        public List<Partner> Partners { get; set; }
-        public List<Event> Events { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Partner> Partners { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

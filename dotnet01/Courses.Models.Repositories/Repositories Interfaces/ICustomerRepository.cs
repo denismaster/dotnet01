@@ -8,7 +8,7 @@ namespace Courses.Models.Repositories
 {
     public interface ICustomerRepository: IRepository<Customer>, IDisposable
     {
- 
+        
         void AddFavouriteProduct(int customerId, int productId);
         void AddFavouriteProduct(Customer customer, Product product);
     }

@@ -21,9 +21,13 @@ namespace Courses.Models
         public int ProductId { get; set; }
         public decimal Price { get; set; }
         public Product Product { get; set; }
-        
-        public List<Schedule> Schedules { get; set; }
-        public List<OrderItem> OrderItems { get; set; }
+        public Appointment()
+        {
+            Schedules = new List<Schedule>();
+            OrderItems = new List<OrderItem>();
+        }
+        public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
 
     }
 }

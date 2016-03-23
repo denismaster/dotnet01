@@ -122,11 +122,24 @@ namespace Courses.DAL
                LastName = "Сухоруких",
                Login = "KirillSuhorukih",
                PasswordHash = "asdasdasfhj1jg3123123123ghdsfdghkg123",
-               Role = "Admin",
+               Role = "Manager",
                Status = 1,
                UpdatedDate = new DateTime(2016, 12, 12)
            };
-           User user2 = new User
+            User user3 = new User
+            {
+                AuthKey = "1ADSDFS1231SL",
+                CreatedDate = new DateTime(2016, 10, 10),
+                Email = "email@mail.ru",
+                FirstName = "Кирилл",
+                LastName = "Сухоруких",
+                Login = "KirillSuhorukih",
+                PasswordHash = "asdasdasfhj1jg3123123123ghdsfdghkg123",
+                Role = "User",
+                Status = 1,
+                UpdatedDate = new DateTime(2016, 12, 12)
+            };
+            User user2 = new User
            {
                AuthKey = "1dfsdfsfsdfsdfsdfdsfdsf",
                CreatedDate = new DateTime(2016, 4, 3),
@@ -144,6 +157,7 @@ namespace Courses.DAL
           // db.Users.Attach(partner.User);
            accRep.Add(user);
            accRep.Add(user2);
+           accRep.Add(user3);
            accRep.SaveChanges();
 
 
