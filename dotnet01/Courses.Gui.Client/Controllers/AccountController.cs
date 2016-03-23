@@ -172,7 +172,7 @@ namespace Courses.Gui.Client.Controllers
 
             if (user == null)
             {
-                return RedirectToAction("LogOn", new
+                return RedirectToAction("Login", new
                 {
                     message = "Unable to log in with "+providerName+". "
                 });
