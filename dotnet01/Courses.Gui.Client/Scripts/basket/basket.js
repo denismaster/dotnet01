@@ -15,11 +15,6 @@ function AddToBasket(item)
     SaveBasketState(basket);
 }
 
-function GetBasket()
-{
-    alert(GetBasketItems());
-}
-
 function RemoveFromBasket(item)
 {
     var index = 0;
@@ -31,12 +26,6 @@ function RemoveFromBasket(item)
         }
     }
     basket.splice(index, 1);
-}
-
-function GetBasketItems()
-{
-    var basket = RestoreBasket();
-    return basket;
 }
 
 function SaveBasketState(basket)
