@@ -1,14 +1,14 @@
-﻿@model Courses.ViewModels.PartnerViewModel
+﻿@model Courses.ViewModels.PartnerWithCategorysViewModel
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Дополнительная информация о партнере</h2>
-
-<div>
-    <h4>@Model.Name</h4>
-    <hr />
+<br />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Детальная информация: Партнер № @Model.Id - @Model.Name
+    </div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -74,9 +74,29 @@
             @Html.DisplayFor(model => model.Contact)
         </dd>
 
+        <dt>
+            Категории
+        </dt>
+        <dd>
+            <ul style="padding-left: 10px;">
+                @if (Model.Categorys != null)
+                {
+
+                    foreach (Courses.ViewModels.CategoryViewModel c in Model.Categorys)
+                    {
+                        <li>@c.Name</li>
+                    }
+
+                }
+            </ul>
+        </dd>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index", new { }, htmlAttributes: new { @class = "btn btn-warning" })
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, htmlAttributes: new { @class="btn btn-success"}) 
+    @Html.ActionLink("Категории партнера", "EditPartnerCategorys", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
+
+
 </p>

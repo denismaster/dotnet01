@@ -16,15 +16,19 @@ namespace Courses.Buisness
         /// <summary>
         /// Репозиторий, используемый сервисом для получения продуктов
         /// </summary>
-        private readonly IProductRepository repository;
+        private readonly IProductRepository productRepository;
         /// <summary>
         /// Репозиторий, используемый сервисом для получения аккаунтов
         /// </summary>
-        private readonly IAccountRepository repositoryAccounts;
+        private readonly IAccountRepository accountRepository;
         /// <summary>
         /// Репозиторий, используемый сервисом для получения партнеров
         /// </summary>
-        private readonly IPartnerRepository repositoryPartners;
+        private readonly IPartnerRepository partnerRepository;
+        /// <summary>
+        /// Репозиторий, используемый сервисом для получения категорий
+        /// </summary>
+        private readonly ICategoryRepository categoryRepository;
         /// <summary>
         /// Фабрика фильтров
         /// </summary>
@@ -33,8 +37,8 @@ namespace Courses.Buisness
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public ProductService(Models.Repositories.IProductRepository repository, Models.Repositories.IAccountRepository repositoryAccounts, 
-            Models.Repositories.IPartnerRepository repositoryPartners, Filtering.IFilterFactory<Models.Product> filterFactory)
+        public ProductService(IProductRepository repository, IAccountRepository repositoryAccounts, 
+            IPartnerRepository repositoryPartners, ICategoryRepository categoryRepository, Filtering.IFilterFactory<Models.Product> filterFactory)
         {
             ///Guard Condition
             if (repository == null)
@@ -43,9 +47,10 @@ namespace Courses.Buisness
                 throw new ArgumentNullException("Partner repository is null!");
             if (filterFactory == null)
                 throw new ArgumentNullException("Filtering Factory is null!");
-            this.repository = repository;
-            this.repositoryAccounts = repositoryAccounts;
-            this.repositoryPartners = repositoryPartners;
+            this.productRepository = repository;
+            this.accountRepository = repositoryAccounts;
+            this.partnerRepository = repositoryPartners;
+            this.categoryRepository = categoryRepository;
             this.filterFactory = filterFactory;
         }
         /// <summary>
@@ -65,13 +70,13 @@ namespace Courses.Buisness
             {
                 var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                products = repository.Get(page, pageSize, expression, newSortFilter).Select(ConvertToProductViewModel);
-                total = repository.Count(expression);
+                products = productRepository.Get(page, pageSize, expression, newSortFilter).Select(ConvertFromProductToProductViewModel);
+                total = productRepository.Count(expression);
             }
             else
             {
-                products = repository.Get(page, pageSize, x => true).Select(ConvertToProductViewModel);
-                total = repository.Count(x => true);
+                products = productRepository.Get(page, pageSize, x => true).Select(ConvertFromProductToProductViewModel);
+                total = productRepository.Count(x => true);
             }
             var pageInfo = new PageInfo()
             {
@@ -88,7 +93,7 @@ namespace Courses.Buisness
         public IEnumerable<ProductViewModel> GetIEnumerableProductsCollection()
         {
             IEnumerable<ProductViewModel> products;
-            products = repository.Get().Select(ConvertToProductViewModel);
+            products = productRepository.Get().Select(ConvertFromProductToProductViewModel);
             return products;
         }
 
@@ -104,22 +109,22 @@ namespace Courses.Buisness
             {
                 //для возможности не выбирать менеджера                                                              
                 User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                var listUser = repositoryAccounts.Get().ToList<User>();
+                var listUser = accountRepository.Get().ToList<User>();
                 listUser.Add(noManager);
                 productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
-                productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name");
+                productView.Partners = new SelectList(partnerRepository.Get(), "PartnerId", "Name");
             }
             else
             {   
-                var product = repository.Get(Id.Value);
+                var product = productRepository.Get(Id.Value);
                 if (product != null)
                 {
-                    productView = ConvertToProductViewModelForAddEditView(product);
+                    productView = ConvertFromProductToProductViewModelForAddEditView(product);
                     User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                    var listUser = repositoryAccounts.Get().ToList<User>();
+                    var listUser = accountRepository.Get().ToList<User>();
                     listUser.Add(noManager);
                     productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
-                    productView.Partners = new SelectList(repositoryPartners.Get(), "PartnerId", "Name", product.PartnerId);
+                    productView.Partners = new SelectList(partnerRepository.Get(), "PartnerId", "Name", product.PartnerId);
                 } 
             }
             return productView;
@@ -132,9 +137,11 @@ namespace Courses.Buisness
         /// <returns></returns>
         public ProductViewModel GetById(int Id)
         {
-            var product = repository.Get(Id);
-            return (product == null) ? null : ConvertToProductViewModel(product);
+            var product = productRepository.Get(Id);
+            return (product == null) ? null : ConvertFromProductToProductViewModel(product);
         }
+        
+
         /// <summary>
         /// Добавление курса в репозиторий
         /// </summary>
@@ -144,7 +151,7 @@ namespace Courses.Buisness
             product.CreatedDate = product.UpdatedDate = DateTime.Now;
             if (product.AssignedUserId == 0)
                 product.AssignedUserId = null;
-            repository.Add(Convert(product));
+            productRepository.Add(ConvertFromProductViewModelToProduct(product));
         }
         /// <summary>
         /// Обновление курса
@@ -155,7 +162,7 @@ namespace Courses.Buisness
             product.UpdatedDate = DateTime.Now;
             if (product.AssignedUserId == 0)
                 product.AssignedUserId = null;
-            repository.Update(Convert(product));
+            productRepository.Update(ConvertFromProductViewModelToProduct(product));
         }
         /// <summary>
         /// Удаление курса
@@ -163,19 +170,61 @@ namespace Courses.Buisness
         /// <param name="product"></param>
         public void Delete(ProductViewModel product)
         {
-            repository.Delete(Convert(product));
+            productRepository.Delete(ConvertFromProductViewModelToProduct(product));
         }
+        /// <summary>
+        /// получение продукта со списком всех категорий
+        /// </summary>
+        /// <param name="Id">Id продукта для редактирования</param>
+        /// <returns></returns>
+        public ProductWithAllCategorysViewModel GetProductWithAllCategorys(int Id)
+        {
+            var product = productRepository.Get(Id);
+            return (product == null) ? null : ConvertFromProductToProductWithAllCategorysViewModel(product);
+        }
+        /// <summary>
+        /// Получает продукт со список категорий текущего продукта
+        /// </summary>
+        /// <param name="id"></param>
+        public ProductWithCategorysViewModel GetProductWithCurrentCategorys(int id)
+        {
+            var product = productRepository.Get(id);
+            return (product == null) ? null : ConvertFromProductToProductWithCategorysViewModel(product);
+        }
+
+        /// <summary>
+        /// Редактирование списка категорий продукта
+        /// </summary>
+        /// <param name="product"></param>
+        public void EditProductCategorys(ProductWithAllCategorysViewModel productView, int[] selectedCategorys)
+        {
+            Product product = productRepository.Get(productView.Id);
+            product.UpdatedDate = DateTime.Now;
+            product.Categories.Clear();
+            SaveChanges();
+
+            if(selectedCategorys != null)
+            {
+                foreach (int categoryId in selectedCategorys)
+                {
+                    categoryRepository.AddProducts(categoryId, product.Id);
+                }
+            }
+        }
+
+        
+
         /// <summary>
         /// Сохранение изменений
         /// </summary>
         public void SaveChanges()
         {
-            repository.SaveChanges();
+            productRepository.SaveChanges();
         }
         /// <summary>
         /// Конвертационные функции
         /// </summary>
-        private Product Convert(ProductViewModel c)
+        private Product ConvertFromProductViewModelToProduct(ProductViewModel c)
         {
             return new Product()
             {
@@ -194,7 +243,7 @@ namespace Courses.Buisness
                 imagePath = c.imagePath
             };
         }
-        private ProductViewModel ConvertToProductViewModel(Product c)
+        private ProductViewModel ConvertFromProductToProductViewModel(Product c)
         {
             return new ProductViewModel()
             {
@@ -214,7 +263,7 @@ namespace Courses.Buisness
             };
         }
 
-        private ProductViewModelForAddEditView ConvertToProductViewModelForAddEditView(Product c)
+        private ProductViewModelForAddEditView ConvertFromProductToProductViewModelForAddEditView(Product c)
         {
             return new ProductViewModelForAddEditView()
             {
@@ -232,6 +281,85 @@ namespace Courses.Buisness
                 Location = c.Location,
                 imagePath = c.imagePath
             };
+        }
+        private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
+        {
+            ProductWithCategorysViewModel productView = new ProductWithCategorysViewModel();
+            productView.Categorys = new List<CategoryViewModel>();
+
+
+            foreach (Category c in product.Categories)
+            {
+                productView.Categorys.Add(ConvertFromCategoryToCategoryViewModel(c));
+            }
+
+
+            productView.Id = product.Id;
+            productView.Name = product.Name;
+            productView.Description = product.Description;
+            productView.CreatedDate = product.CreatedDate;
+            productView.UpdatedDate = product.UpdatedDate;
+            productView.Active = product.Active;
+            productView.Type = product.Type;
+            productView.PartnerId = product.PartnerId;
+            productView.Teacher = product.Teacher;
+            productView.SeatsCount = product.SeatsCount ?? null;
+            productView.AssignedUserId = product.AssignedUserId ?? null;
+            productView.Location = product.Location;
+            productView.imagePath = product.imagePath;
+
+            return productView;
+        }
+        private Models.Category ConvertFromCategoryViewModelToCategory(CategoryViewModel c)
+        {
+            return new Models.Category()
+            {
+                CategoryId = c.Id,
+                Name = c.Name,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                Description = c.Description,
+                ParentCategoryId = c.ParentCategoryId
+            };
+        }
+        private CategoryViewModel ConvertFromCategoryToCategoryViewModel(Models.Category c)
+        {
+            return new CategoryViewModel()
+            {
+                Id = c.CategoryId,
+                Name = c.Name,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                ParentCategoryId = (c.ParentCategory == null) ? null : c.ParentCategoryId,
+                Description = c.Description
+            };
+        }
+        private ProductWithAllCategorysViewModel ConvertFromProductToProductWithAllCategorysViewModel(Product c)
+        {
+            ProductWithCategorysViewModel productWithCategorys = ConvertFromProductToProductWithCategorysViewModel(c);
+            ProductWithAllCategorysViewModel productWithAllCategorys = new ProductWithAllCategorysViewModel();
+
+            productWithAllCategorys.Categorys = productWithCategorys.Categorys;
+            productWithAllCategorys.Id = productWithCategorys.Id;
+            productWithAllCategorys.Name = productWithCategorys.Name;
+            productWithAllCategorys.Description = productWithCategorys.Description;
+            productWithAllCategorys.CreatedDate = productWithCategorys.CreatedDate;
+            productWithAllCategorys.UpdatedDate = productWithCategorys.UpdatedDate;
+            productWithAllCategorys.Active = productWithCategorys.Active;
+            productWithAllCategorys.Type = productWithCategorys.Type;
+            productWithAllCategorys.PartnerId = productWithCategorys.PartnerId;
+            productWithAllCategorys.Teacher = productWithCategorys.Teacher;
+            productWithAllCategorys.SeatsCount = productWithCategorys.SeatsCount ?? null;
+            productWithAllCategorys.AssignedUserId = productWithCategorys.AssignedUserId ?? null;
+            productWithAllCategorys.Location = productWithCategorys.Location;
+            productWithAllCategorys.imagePath = productWithCategorys.imagePath;
+
+            var categorysList = categoryRepository.Get().Select(ConvertFromCategoryToCategoryViewModel);
+            productWithAllCategorys.AllCategorys = categorysList.ToList();
+
+            return productWithAllCategorys;
         }
     }
 }

@@ -36,10 +36,10 @@ namespace Courses.Gui.Client.Controllers
         }
 
         // GET: api/Product/5
-        public ProductViewModel GetProduct(int id)
+        public JsonResult<ProductViewModel> GetProduct(int id)
         {
             var productView = productService.GetById(id);
-            return productView;
+            return Json(productView);
         }
 
     }
