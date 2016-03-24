@@ -21,8 +21,12 @@ namespace Courses.Models
         public DateTime UdpatedDate { get; set; }
         public string Name { get; set; }
         public bool Enabled { get; set; }
-        public List<EmailQueue> EmailQueues { get; set; }
+        public virtual ICollection<EmailQueue> EmailQueues { get; set; }
         public EmailTemplate EmailTemplate { get; set; }
+        public EmailNewsletter()
+        {
+            EmailQueues = new List<EmailQueue>();
+        }
         
     }
 }

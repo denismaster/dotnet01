@@ -85,8 +85,7 @@ namespace Courses.DAL
                 context.Products.Add(product);
                 context.Products.Attach(product);
 
-                if (category.Products == null)
-                    category.Products= new List<Product>();
+              
 
                 category.Products.Add(product);
                 context.SaveChanges();

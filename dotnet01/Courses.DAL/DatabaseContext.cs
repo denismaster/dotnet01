@@ -27,92 +27,109 @@ namespace Courses.DAL
         public DbSet<ProductRating> ProductRatings { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<User> Users { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+
+        #region TableLinks
+        private void CreateProductAppointmentLink(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            
-
             modelBuilder.Entity<Product>()
-             .HasMany(c => c.Appointments)
-              .WithRequired(o => o.Product).
-              HasForeignKey(o => o.ProductId);
-
+           .HasMany(c => c.Appointments)
+           .WithRequired(o => o.Product).
+           HasForeignKey(o => o.ProductId);
+        }
+        private void CreateAppointmentSchedulesLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Appointment>()
-                .HasMany(o => o.Schedules)
-                .WithRequired(o => o.Appointment)
-                .HasForeignKey(o => o.AppointmentId);
-
+               .HasMany(o => o.Schedules)
+               .WithRequired(o => o.Appointment)
+               .HasForeignKey(o => o.AppointmentId);
+        }
+        private void CreateAppointmentOrderItemLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Appointment>()
-                .HasMany(o => o.OrderItems)
-                .WithRequired(o => o.Appointment)
-                .HasForeignKey(o => o.AppointmentId);
-
+              .HasMany(o => o.OrderItems)
+              .WithRequired(o => o.Appointment)
+              .HasForeignKey(o => o.AppointmentId);
+        }
+        private void CreateOrderOrderItemLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Order>()
                 .HasMany(o => o.OrderItems)
                 .WithRequired(o => o.Order)
                 .HasForeignKey(o => o.OrderId);
-
+        }
+        private void CreateCustomerOrderLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Customer>()
-                .HasMany(o => o.Orders)
-                .WithRequired(o => o.Customer)
-                .HasForeignKey(o => o.CustomerId);
-
+               .HasMany(o => o.Orders)
+               .WithRequired(o => o.Customer)
+               .HasForeignKey(o => o.CustomerId);
+        }
+        private void CreateCustomerCommentsLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Customer>()
-                .HasMany(o => o.Comments)
-                .WithRequired(o => o.Customer)
-                .HasForeignKey(o => o.CustomerId);
-
+               .HasMany(o => o.Comments)
+               .WithRequired(o => o.Customer)
+               .HasForeignKey(o => o.CustomerId);
+        }
+        private void CreateProductCommentsLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Product>()
                 .HasMany(o => o.Comments)
                 .WithRequired(o => o.Product)
                 .HasForeignKey(o => o.ProductId);
-
+        }
+        private void CreatePartnerProductsLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Partner>()
                 .HasMany(o => o.Products)
                 .WithRequired(o => o.Partner)
                 .HasForeignKey(o => o.PartnerId);
-
+        }
+        private void CreateUserProductsLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<User>()
                 .HasMany(o => o.Products)
                 .WithOptional(o => o.User)
                 .HasForeignKey(o => o.AssignedUserId);
-
+        }
+        private void CreateEmailNewsLetterEmailQueueLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<EmailNewsletter>()
                 .HasMany(o => o.EmailQueues)
                 .WithOptional(o => o.EmailNewsLetter)
                 .HasForeignKey(o => o.NewsletterId);
-
+        }
+        private void CreateCustomerEmailQueueLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Customer>()
              .HasMany(o => o.EmailQueues)
              .WithRequired(o => o.Customer)
              .HasForeignKey(o => o.CustomerId);
-
+        }
+        private void CreateEmailTemplateEmailNewsLetterLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<EmailTemplate>()
                 .HasMany(o => o.EmailNewsLetters)
                 .WithOptional(o => o.EmailTemplate)
                 .HasForeignKey(o => o.TemplateId);
-
+        }
+        private void CreateUserPartnersLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<User>()
                .HasMany(o => o.Partners)
                .WithOptional(o => o.User)
                .HasForeignKey(o => o.UserId);
-
+        }
+        private void CreateUserEventsLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<User>()
                .HasMany(o => o.Events)
                .WithRequired(o => o.User)
                .HasForeignKey(o => o.UserId);
+        }
 
-            modelBuilder.Entity<Product>()
-                 .HasMany(o => o.CustomersWithFavouriteProducts)
-                 .WithMany(o => o.FavouriteProducts)
-                 .Map(m =>
-                 {
-                     m.ToTable("FavouriteProducts");
-                     m.MapLeftKey("ProductId");
-                     m.MapRightKey("CustomerId");
-
-                 });
-
+        private void CreateProductProductRatingsLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<ProductRating>().HasKey(e => new { e.ProductId, e.CustomerId });
 
             modelBuilder.Entity<Product>()
@@ -124,12 +141,68 @@ namespace Courses.DAL
                .HasMany(o => o.ProductRatings)
                .WithRequired(o => o.Customer)
                .HasForeignKey(o => o.CustomerId);
-               
-            modelBuilder.Entity<Schedule>()
-                .HasOptional(o => o._Schedule);
+        }
+        private void CreateProductCustomersWithFavouriteProductsLink(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasMany(o => o.CustomersWithFavouriteProducts)
+                .WithMany(o => o.FavouriteProducts)
+                .Map(m =>
+                {
+                    m.ToTable("FavouriteProducts");
+                    m.MapLeftKey("ProductId");
+                    m.MapRightKey("CustomerId");
 
+                });
+        }
+        private void CreateScheduleSelfLink(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Schedule>()
+               .HasOptional(o => o._Schedule);
+        }
+        private void CreateCategorySelfLink(DbModelBuilder modelBuilder)
+        {
             modelBuilder.Entity<Category>()
                 .HasOptional(o => o.ParentCategory);
+        }
+
+        private void CreateCategoryProductsLink(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>()
+           .HasMany(o => o.Products)
+           .WithMany(o => o.Categories)
+           .Map(m =>
+           {
+               m.ToTable("CategoryProducts");
+               m.MapLeftKey("CategoryId");
+               m.MapRightKey("ProductId");
+
+           });
+        }
+        #endregion
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+          {
+            base.OnModelCreating(modelBuilder);
+            CreateProductAppointmentLink(modelBuilder);
+            CreateAppointmentSchedulesLink(modelBuilder);
+            CreateAppointmentOrderItemLink(modelBuilder);
+            CreateOrderOrderItemLink(modelBuilder);
+            CreateCustomerOrderLink(modelBuilder);
+            CreateProductCommentsLink(modelBuilder);
+            CreatePartnerProductsLink(modelBuilder);
+            CreateUserProductsLink(modelBuilder);
+            CreateEmailNewsLetterEmailQueueLink(modelBuilder);
+            CreateCustomerEmailQueueLink(modelBuilder);
+            CreateEmailTemplateEmailNewsLetterLink(modelBuilder);
+            CreateUserPartnersLink(modelBuilder);
+            CreateUserEventsLink(modelBuilder);
+            CreateProductCustomersWithFavouriteProductsLink(modelBuilder);
+            CreateProductProductRatingsLink(modelBuilder);
+            CreateScheduleSelfLink(modelBuilder);
+            CreateCategorySelfLink(modelBuilder);
+            CreateCategoryProductsLink(modelBuilder);
+        
+
         }
 
     }

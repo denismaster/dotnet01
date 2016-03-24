@@ -10,6 +10,5 @@ namespace Courses.DAL
 {
     class OrderRepository:RepositoryBase<Order>,IOrderRepository
     {
-
     }
 }
