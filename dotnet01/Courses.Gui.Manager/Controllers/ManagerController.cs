@@ -132,7 +132,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            var productView = productService.GetProductWithAllCategorys(product.Id);
+            product = productService.GetProductWithAllCategorys(product.Id);
             return View(product);
         }
 

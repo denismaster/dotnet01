@@ -80,6 +80,33 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpGet]
+        public ActionResult EditPartnerCategorys(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var partnerView = partnerService.GetPartnerWithAllCategorys(id.Value);
+            if (partnerView.Id == 0)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            return View(partnerView);
+        }
+
+        [HttpPost]
+        public ActionResult EditPartnerCategorys(PartnerWithAllCategorysViewModel partner, IEnumerable<int> selectedCategorys)
+        {
+            try
+            {
+                partnerService.EditPartnerCategorys(partner, (selectedCategorys != null) ? selectedCategorys.ToArray() : null);
+                return RedirectToAction("Details", new { id = partner.Id });
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            partner = partnerService.GetPartnerWithAllCategorys(partner.Id);
+            return View(partner);
+        }
+
+        [HttpGet]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,10 +138,10 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var account = partnerService.GetByID(id.Value);
-            if (account == null)
+            var product = partnerService.GetPartnerWithCurrentCategorys(id.Value);
+            if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
-            return View(account);
+            return View(product);
         }
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)

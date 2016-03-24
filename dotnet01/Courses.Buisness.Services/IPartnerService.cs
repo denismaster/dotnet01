@@ -52,6 +52,25 @@ namespace Courses.Buisness.Services
         /// <summary>
         /// Сохранение изменений в репозитории
         /// </summary>
+
+        /// <summary>
+        /// получение продукта со списком всех категорий
+        /// </summary>
+        /// <param name="Id">Id продукта для редактирования</param>
+        /// <returns></returns>
+        PartnerWithAllCategorysViewModel GetPartnerWithAllCategorys(int Id);
+        /// <summary>
+        /// Получает продукт со список категорий текущего продукта
+        /// </summary>
+        /// <param name="id"></param>
+        PartnerWithCategorysViewModel GetPartnerWithCurrentCategorys(int id);
+
+        /// <summary>
+        /// Редактирование списка категорий продукта
+        /// </summary>
+        /// <param name="product"></param>
+        void EditPartnerCategorys(PartnerWithAllCategorysViewModel partnerView, int[] selectedCategorys);
+
         void SaveChanges();
     }
 }

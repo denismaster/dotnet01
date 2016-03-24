@@ -52,6 +52,8 @@
     <Compile Include="PartnerCollectionViewModel.cs" />
     <Compile Include="PartnerViewModel.cs" />
     <Compile Include="PartnerViewModelForAddEditView.cs" />
+    <Compile Include="PartnerWithAllCategorysViewModel.cs" />
+    <Compile Include="PartnerWithCategorysViewModel.cs" />
     <Compile Include="ProductWithAllCategorysViewModel.cs" />
     <Compile Include="ProductCollectionViewModel.cs" />
     <Compile Include="ProductViewModel.cs" />

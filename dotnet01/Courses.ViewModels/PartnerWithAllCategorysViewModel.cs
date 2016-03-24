@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Courses.ViewModels
 {
-    public class ProductWithAllCategorysViewModel: ProductWithCategorysViewModel
+    public class PartnerWithAllCategorysViewModel: PartnerWithCategorysViewModel
     {
         /// <summary>
         /// Формируем список всех категорий для передачи в представление
@@ -15,6 +16,5 @@ namespace Courses.ViewModels
             get;
             set;
         }
-
     }
 }

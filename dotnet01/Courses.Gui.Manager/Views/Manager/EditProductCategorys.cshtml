@@ -1,7 +1,7 @@
 ﻿@model Courses.ViewModels.ProductWithAllCategorysViewModel
 
 @{
-    ViewBag.Title = "EditProductCategorys";
+    ViewBag.Title = "Редактирование направлений продукта";
 }
 <br />
 <div class="panel panel-default">
@@ -13,14 +13,13 @@
         @Html.AntiForgeryToken()
         <div class="panel-body">
             @Html.HiddenFor(m => m.Id)
-            @Html.HiddenFor(m => m.Name)
-           
+               
             Категории: 
             <br><br>
             @foreach (Courses.ViewModels.CategoryViewModel c in Model.AllCategorys)
             {
                 <input type="checkbox" name="selectedCategorys" value="@c.Id" 
-                       @( (Model.SelectedCategorys != null && Model.SelectedCategorys.Contains(c)) ? "checked=\"checked\"" : "") />@c.Name <br />
+                       @( (Model.Categorys != null && Model.Categorys.Contains(c)) ? "checked=\"checked\"" : "") />@c.Name <br />
             }
        </div>
        <br>

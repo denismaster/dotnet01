@@ -55,7 +55,7 @@ namespace Courses.Buisness.Services
         /// </summary>
         /// <param name="Id">Id продукта для редактирования</param>
         /// <returns></returns>
-        ProductWithAllCategorysViewModel GetProductWithAllCategorys(int? Id);
+        ProductWithAllCategorysViewModel GetProductWithAllCategorys(int Id);
         /// <summary>
         /// Получает продукт со список категорий текущего продукта
         /// </summary>
