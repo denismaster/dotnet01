@@ -177,9 +177,9 @@ namespace Courses.Buisness
         /// </summary>
         /// <param name="Id">Id продукта для редактирования</param>
         /// <returns></returns>
-        public ProductCategoryViewModel GetProductCategory(int? Id)
+        public ProductWithAllCategorysViewModel GetProductWithAllCategorys(int? Id)
         {
-            ProductCategoryViewModel productView = new ProductCategoryViewModel();
+            ProductWithAllCategorysViewModel productView = new ProductWithAllCategorysViewModel();
             if (Id == null)
             {
                 productView.Id = 0;
@@ -198,7 +198,7 @@ namespace Courses.Buisness
         /// Редактирование списка категорий продукта
         /// </summary>
         /// <param name="product"></param>
-        public void EditProductCategorys(ProductCategoryViewModel productView, int[] selectedCategorys)
+        public void EditProductCategorys(ProductWithAllCategorysViewModel productView, int[] selectedCategorys)
         {
             Product product = productRepository.Get(productView.Id);
             product.UpdatedDate = DateTime.Now;
@@ -212,6 +212,16 @@ namespace Courses.Buisness
                     categoryRepository.AddProducts(categoryId, product.Id);
                 }
             }
+        }
+
+        /// <summary>
+        /// Получает продукт со список категорий текущего продукта
+        /// </summary>
+        /// <param name="id"></param>
+        public ProductWithCategorysViewModel GetProductWithCurrentCategorys(int id)
+        {
+            var product = productRepository.Get(id);
+            return (product == null) ? null : ConvertFromProductToProductWithCategorysViewModel(product);
         }
 
         /// <summary>
@@ -282,7 +292,35 @@ namespace Courses.Buisness
                 imagePath = c.imagePath
             };
         }
-            private Models.Category ConvertFromCategoryViewModelToCategory(CategoryViewModel c)
+        private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
+        {
+            ProductWithCategorysViewModel productView = new ProductWithCategorysViewModel();
+            productView.Categorys = new List<CategoryViewModel>();
+
+
+            foreach (Category c in product.Categories)
+            {
+                productView.Categorys.Add(ConvertToCategoryViewModelFromCategory(c));
+            }
+
+
+            productView.Id = product.Id;
+            productView.Name = product.Name;
+            productView.Description = product.Description;
+            productView.CreatedDate = product.CreatedDate;
+            productView.UpdatedDate = product.UpdatedDate;
+            productView.Active = product.Active;
+            productView.Type = product.Type;
+            productView.PartnerId = product.PartnerId;
+            productView.Teacher = product.Teacher;
+            productView.SeatsCount = product.SeatsCount ?? null;
+            productView.AssignedUserId = product.AssignedUserId ?? null;
+            productView.Location = product.Location;
+            productView.imagePath = product.imagePath;
+
+            return productView;
+        }
+        private Models.Category ConvertFromCategoryViewModelToCategory(CategoryViewModel c)
         {
             return new Models.Category()
             {
@@ -308,9 +346,9 @@ namespace Courses.Buisness
                 Description = c.Description
             };
         }
-        private ProductCategoryViewModel ConvertFromProductToProductCategoryViewModel(Product c)
+        private ProductWithAllCategorysViewModel ConvertFromProductToProductCategoryViewModel(Product c)
         {
-            ProductCategoryViewModel productView = new ProductCategoryViewModel();
+            ProductWithAllCategorysViewModel productView = new ProductWithAllCategorysViewModel();
             productView.Id = c.Id;
             productView.Name = c.Name;
             List<CategoryViewModel> categoryList = new List<CategoryViewModel>();

@@ -114,14 +114,14 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var productView = productService.GetProductCategory(id.Value);
+            var productView = productService.GetProductWithAllCategorys(id.Value);
             if (productView.Id == 0)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(productView);
         }
 
         [HttpPost]
-        public ActionResult EditProductCategorys(ProductCategoryViewModel product, IEnumerable<int> selectedCategorys)
+        public ActionResult EditProductCategorys(ProductWithAllCategorysViewModel product, IEnumerable<int> selectedCategorys)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            var productView = productService.GetProductCategory(product.Id);
+            var productView = productService.GetProductWithAllCategorys(product.Id);
             return View(product);
         }
 
@@ -170,7 +170,7 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetById(id.Value);
+            var product = productService.GetProductWithCurrentCategorys(id.Value);
             if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(product);

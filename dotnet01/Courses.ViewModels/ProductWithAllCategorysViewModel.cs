@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace Courses.ViewModels
 {
-    public class ProductCategoryViewModel
+    public class ProductWithAllCategorysViewModel
     {
         public int Id { get; set; }
 
