@@ -240,7 +240,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
                 Location = c.Location,
-                imagePath = c.imagePath
+                //imagePath = c.imagePath
             };
         }
         private ProductViewModel ConvertFromProductToProductViewModel(Product c)
@@ -259,7 +259,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                imagePath = c.imagePath
+               // imagePath = c.imagePath
             };
         }
 
@@ -279,7 +279,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                imagePath = c.imagePath
+             //   imagePath = c.imagePath
             };
         }
         private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
@@ -306,7 +306,7 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            productView.imagePath = product.imagePath;
+            //productView.imagePath = product.imagePath;
 
             return productView;
         }

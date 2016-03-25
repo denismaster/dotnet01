@@ -21,7 +21,8 @@ namespace Courses.Models
         public string Teacher { get; set; }
         public int? SeatsCount { get; set; }
         public int? AssignedUserId { get; set; }
-        public String imagePath { get; set; }
+    //    public String imagePath { get; set; }
+        public byte[] Image { get; set; }
         public string Location { get; set; }
         //навигационные свойства, не участвуют при инициализции, служат для обращения к связанным сущностям.
         public virtual ICollection<Appointment> Appointments { get; set; }

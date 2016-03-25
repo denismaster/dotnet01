@@ -10,6 +10,7 @@ namespace Courses.DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "Courses.DAL.DatabaseContext";
         }
 
         protected override void Seed(Courses.DAL.DatabaseContext context)
