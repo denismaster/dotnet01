@@ -1,48 +1,59 @@
 ﻿@model Courses.Gui.Client.Models.RegisterViewModel
-@{
-    ViewBag.Title = "Register";
-}
 
-<h2>@ViewBag.Title.</h2>
+<link href="~/Content/CSS/register.css" rel="stylesheet">
 
-@using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Hometown, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Hometown, new { @class = "form-control" })
-        </div>
-    </div>    
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
+<title>Регистрация</title>
+<body>
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+      
+            <div class="col-md-offset-1 registr">
+                <div class="col-md-1 col-sm-10">
+                    <img id="person-img" src="~/Content/images/person1.png">
+                </div>
+                <div class="col-md-offset-2 col-md-9">
 
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.Label("Логин*", new { @class = "col-md-3 control-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "reg-form" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Город", new { @class = "col-md-3 control-label " })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(m => m.Hometown, new { @class = "form-control", id = "reg-form" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Пароль*", new { @class = "col-md-3 control-label" })
+                        <div class="col-md-8">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "reg-form" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Повторите <br />  пароль</label>
+                        <div class="col-md-8">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", id = "reg-form" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-6">
+                            <button type="submit" id="reg" class="btn btn-template-main">
+                                <i class="fa fa-user-md"></i>
+                                Зарегистрироваться
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+    }
+</body>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

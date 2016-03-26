@@ -17,6 +17,17 @@
             });
         });
 
+         router.route("/home/register", function () {
+            require(['text!/home/register'], function (view) {
+                loadView(null, view);
+            });
+         });
+         router.route("/home/test", function () {
+             require(['text!/home/test'], function (view) {
+                 loadView(null, view);
+             });
+         });
+
         router.route("/home/contact", function () {
             require(['text!/home/contact'], function (view) {
                 loadView(null, view);
@@ -27,11 +38,8 @@
                 loadView(null, view) 
             });
         });
-        router.route("/account/register/home/contact", function () {
-            require(['text!account/register/home/contact'], function (view) {
-                loadView(null, view);
-            });
-        });
+
+
         var loadView = function (viewModel, view, delegate) {
             var kendoView = new kendo.View(view, { model: viewModel });
             kendo.fx($("#content")).slideInRight().reverse().then(function () {

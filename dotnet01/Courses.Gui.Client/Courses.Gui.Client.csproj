@@ -254,10 +254,26 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\images\advantages.png" />
-    <Content Include="Content\images\certificate.png" />
-    <Content Include="Content\images\partnership.png" />
+    <Content Include="Content\CSS\About.css" />
+    <Content Include="Content\CSS\animate.css" />
+    <Content Include="Content\CSS\contact.css" />
+    <Content Include="Content\CSS\font-awesome.css" />
+    <Content Include="Content\CSS\index.css" />
+    <Content Include="Content\CSS\register.css" />
+    <Content Include="Content\CSS\style.default.css" />
+    <Content Include="Content\images\fb.png" />
+    <Content Include="Content\images\logo2.png" />
+    <Content Include="Content\images\odn.png" />
+    <Content Include="Content\images\skype.png" />
+    <Content Include="Content\images\tw.png" />
+    <Content Include="Content\images\vk.png" />
+    <Content Include="Content\images\ytb.png" />
     <Content Include="Content\index.css" />
+    <Content Include="Content\js\front.js" />
+    <Content Include="Content\js\jquery.cookie.js" />
+    <Content Include="Content\js\jquery.counterup.min.js" />
+    <Content Include="Content\js\jquery.parallax-1.1.3.js" />
+    <Content Include="Content\js\waypoints.min.js" />
     <Content Include="Content\kendo.black.min.css" />
     <Content Include="Content\kendo.black.mobile.min.css" />
     <Content Include="Content\kendo.blueopal.min.css" />
@@ -347,6 +363,7 @@
     <Content Include="Scripts\app\viewModels\home\aboutViewModel.js" />
     <Content Include="Scripts\app\viewModels\home\contactViewModel.js" />
     <Content Include="Scripts\app\viewModels\home\indexViewModel.js" />
+    <Content Include="Scripts\app\viewModels\home\testViewModel.js" />
     <Content Include="Scripts\basket\basket.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -676,6 +693,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Spa.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
