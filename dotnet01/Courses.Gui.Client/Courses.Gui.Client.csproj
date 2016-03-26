@@ -697,7 +697,6 @@
     <Folder Include="Content\Silver\" />
     <Folder Include="Content\textures\" />
     <Folder Include="Content\Uniform\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Scripts\cultures\" />
     <Folder Include="Scripts\messages\" />
   </ItemGroup>
