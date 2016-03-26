@@ -32,13 +32,17 @@ namespace Courses.Gui.Manager.Controllers
             return View(product);
         }
         [HttpPost]
-        public ActionResult New(ProductViewModelForAddEditView productView, HttpPostedFileBase file)
+        public ActionResult New(ProductViewModelForAddEditView productView, HttpPostedFileBase file = null)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    productView.imagePath = SaveImageInFolder(file);
+                    if (file != null)
+                    {
+                        productView.Image = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.Image, 0, file.ContentLength);
+                    }
                     productService.Add(productView);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
@@ -49,32 +53,6 @@ namespace Courses.Gui.Manager.Controllers
                 ModelState.AddModelError("", "Unable to save changes");
             }
             return View(productView);
-        }
-
-        /// <summary>
-        /// Сохраняет картинку в папке CoursesImages. Если картинка в запросе полученна не была, 
-        /// то возвращает пустую строку, иначе возвращает путь к картинке
-        /// </summary>
-        /// <param name="file">Путь к картинке</param>
-        /// <returns></returns>
-        private String SaveImageInFolder(HttpPostedFileBase file)
-        {
-            string path = null;
-            try
-            {
-                if (file != null && file.ContentLength > 0)
-                {
-                    string filename = System.IO.Path.GetFileName(file.FileName);
-                    path = "~/CoursesImages/" + filename;
-                    // file is uploaded
-                    file.SaveAs(Server.MapPath(path));
-                }
-            }
-            catch (Exception c)
-            {
-                return null;
-            }
-            return path;
         }
 
         [HttpGet]
@@ -89,15 +67,18 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductViewModelForAddEditView product, HttpPostedFileBase file)
+        public ActionResult Edit(ProductViewModelForAddEditView productView, HttpPostedFileBase file = null)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if(file != null)
-                        product.imagePath = SaveImageInFolder(file);
-                    productService.Edit(product);
+                    if (file != null)
+                    {
+                        productView.Image = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.Image, 0, file.ContentLength);
+                    }
+                    productService.Edit(productView);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -106,7 +87,7 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
-            return View(product);
+            return View(productView);
         }
 
         [HttpGet]

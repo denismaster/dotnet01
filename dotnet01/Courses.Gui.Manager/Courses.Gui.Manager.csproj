@@ -228,7 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="CoursesImages\" />
     <Folder Include="Models\" />
     <Folder Include="Views\ProductCategory\" />
     <Folder Include="Views\Shared\EditorTemplates\" />

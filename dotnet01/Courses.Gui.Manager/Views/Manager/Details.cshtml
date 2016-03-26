@@ -11,18 +11,6 @@
     </div>
     <dl class="dl-horizontal">
         @Html.AntiForgeryToken()
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.imagePath)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.imagePath)
-        </dd>
-
-        <dd>
-            <img src="@Url.Content( (Model.imagePath != null) ? (Model.imagePath): ("~/CoursesImages/NoImageAvailable.jpg"))" alt="Изображение курса" height="150   " />
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -128,7 +116,26 @@
                 }
             </ul>
         </dd>
-    </dl>
+        <dt>
+            Изображение
+        </dt>
+
+        @if (Model.Image != null)
+        {
+            <dd>
+                <div class="pull-left" style="margin-right: 10px">
+                    @Html.Raw("<img class=\"img - thumbnail\" style='width:500px;' src=\"data:image/jpeg;base64,"
+                                + Convert.ToBase64String(Model.Image) + "\" />")
+                </div>
+            </dd>
+        }
+        else
+        {
+            <dd>
+                Отсутствует
+            </dd>
+        }
+</dl>
 </div>
 <p>
     @Html.ActionLink("Назад к списку", "Index", new { }, htmlAttributes: new { @class="btn btn-warning"})
