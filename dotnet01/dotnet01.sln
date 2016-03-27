@@ -32,6 +32,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Gui.Manager", "Cour
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.Gui.Client", "Courses.Gui.Client\Courses.Gui.Client.csproj", "{0B978A13-514F-45DE-BED2-9BD93BD059DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Courses.UnitTests", "Courses.UnitTests\Courses.UnitTests.csproj", "{050406A6-3CE5-46FF-87F4-4A54FDA62F3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{0B978A13-514F-45DE-BED2-9BD93BD059DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B978A13-514F-45DE-BED2-9BD93BD059DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B978A13-514F-45DE-BED2-9BD93BD059DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{050406A6-3CE5-46FF-87F4-4A54FDA62F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{050406A6-3CE5-46FF-87F4-4A54FDA62F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{050406A6-3CE5-46FF-87F4-4A54FDA62F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{050406A6-3CE5-46FF-87F4-4A54FDA62F3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +94,6 @@ Global
 		{7DDC3E7C-E381-4D21-BFAB-71D69626B9FB} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
 		{8E366223-9B4F-41C0-9D2D-5CC04FEF0988} = {CA264FC3-6998-46A4-A848-9A33C92AA808}
 		{0B978A13-514F-45DE-BED2-9BD93BD059DC} = {CA264FC3-6998-46A4-A848-9A33C92AA808}
+		{050406A6-3CE5-46FF-87F4-4A54FDA62F3E} = {1DB02EEE-E98A-4BF5-BD47-119FAAD13B23}
 	EndGlobalSection
 EndGlobal

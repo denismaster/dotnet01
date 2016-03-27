@@ -75,7 +75,7 @@ namespace Courses.UnitTests
             CategoryViewModel _categoryViewModel = GetCategoryViewModel();
             _categoryService.Add(_categoryViewModel);
             _categoryService.Delete(_categoryViewModel);
-            Assert.IsNotNull(_categoryService.GetByID(1));
+            Assert.IsNull(_categoryService.GetByID(1));
         }
 
         private CategoryViewModel GetCategoryViewModel()
@@ -87,7 +87,7 @@ namespace Courses.UnitTests
             _categoryViewModel.CreatedDate = new DateTime(1, 1, 1);
             _categoryViewModel.UpdatedDate = new DateTime(1, 1, 1);
             _categoryViewModel.Id = 1;
-            return _categoryViewModel
+            return _categoryViewModel;
         }
     }
 }
