@@ -1,11 +1,14 @@
 ﻿.about-page
 {
     background-color: #fff;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 5%;
+    margin-top: 1%;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 2%;
+    padding-top: 1%;
     padding-left: 5%;
     padding-right: 5%;
+    padding-bottom: 1%;
 }
 h2
 {

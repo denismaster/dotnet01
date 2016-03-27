@@ -240,7 +240,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
                 Location = c.Location,
-                Image = c.Image
+                Image = Convert.FromBase64String(c.Image)
             };
         }
         private ProductViewModel ConvertFromProductToProductViewModel(Product c)
@@ -259,7 +259,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                Image = c.Image
+                Image = Convert.ToBase64String(c.Image)
             };
         }
 
@@ -279,7 +279,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                Image = c.Image
+                Image = Convert.ToBase64String(c.Image)
             };
         }
         private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
@@ -306,7 +306,7 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            productView.Image = product.Image;
+            productView.Image = Convert.ToBase64String(product.Image);
 
             return productView;
         }

@@ -10,6 +10,11 @@
                 loadView(null, view);
             });
         });
+        router.route("/home/basket", function () {
+            require(['text!/home/basket'], function (view) {
+                loadView(null, view);
+            });
+        });
 
         router.route("/home/about", function () {
             require(['text!/home/about'], function (view) {
