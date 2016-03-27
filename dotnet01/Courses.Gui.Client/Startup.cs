@@ -5,6 +5,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using Microsoft.Owin.Security.Google;
+using Microsoft.Owin.Security.MicrosoftAccount;
 using Microsoft.Owin.Security.Twitter;
 using Microsoft.Owin.Host.SystemWeb;
 using Microsoft.Owin.Security.OAuth;
@@ -58,6 +59,27 @@ namespace Courses.Gui.Client
                appSecret: "CqMDX2wGJDCBzeLkyFjS", 
                scope: "email"
             );
+
+            app.UseGoogleAuthentication(
+                clientId: "1234",
+                clientSecret: "1234"
+            );
+
+            app.UseFacebookAuthentication(
+                appId: "1234",
+                appSecret: "1234"
+            );
+
+            app.UseMicrosoftAccountAuthentication(
+                clientId: "1234",
+                clientSecret: "1234"
+            );
+
+            app.UseTwitterAuthentication(
+                consumerKey: "1234",
+                consumerSecret: "1234"
+            );
+
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
         }
     }
