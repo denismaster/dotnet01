@@ -279,6 +279,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
+                
                 Image = Convert.ToBase64String(c.Image)
             };
         }
