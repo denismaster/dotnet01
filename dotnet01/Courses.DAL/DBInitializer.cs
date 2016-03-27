@@ -72,7 +72,7 @@ namespace Courses.DAL
                 PartnerId = partnersRep.GetOnlyOne().PartnerId,
                 
                 SeatsCount = 50,
-                imagePath = "IMG.png",
+                //imagePath = "IMG.png",
                 AssignedUserId = accRep.GetOnlyOne().Id,
                 
 
@@ -89,7 +89,7 @@ namespace Courses.DAL
                 PartnerId = partnersRep.GetOnlyOne().PartnerId,
                 AssignedUserId = accRep.GetOnlyOne().Id,
                 SeatsCount = 50,
-                imagePath = "IMG.png",
+                //imagePath = "IMG.png",
  
            });
            productRep.Add(new Product
@@ -103,7 +103,7 @@ namespace Courses.DAL
                Type = 1,
                AssignedUserId = accRep.GetOnlyOne().Id,
                SeatsCount = 50,
-               imagePath = "IMG.png",
+               //imagePath = "IMG.png",
                PartnerId = partnersRep.GetOnlyOne().PartnerId
 
            });

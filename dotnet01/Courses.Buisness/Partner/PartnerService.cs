@@ -16,11 +16,15 @@ namespace Courses.Buisness
         /// <summary>
         /// Репозиторий, используемый сервисом
         /// </summary>
-        private readonly IPartnerRepository repository;
+        private readonly IPartnerRepository partnerRepository;
         /// <summary>
         /// Репозиторий, используемый сервисом для получения аккаунтов (менеджеров)
         /// </summary>
-        private readonly IAccountRepository repositoryAccounts;
+        private readonly IAccountRepository accountRepository;
+        /// <summary>
+        /// Репозиторий, используемый сервисом для получения категорий
+        /// </summary>
+        private readonly ICategoryRepository categoryRepository;
         /// <summary>
         /// Фабрика фильтров
         /// </summary>
@@ -28,17 +32,18 @@ namespace Courses.Buisness
         /// <summary>
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
-        /// <param name="repository"></param>
-        public PatherService(Models.Repositories.IPartnerRepository repository, Models.Repositories.IAccountRepository repositoryAccounts,
+        /// <param name="partnerRepository"></param>
+        public PatherService(IPartnerRepository partnerRepository, IAccountRepository accountRepository, ICategoryRepository categoryRepository,
             Filtering.IFilterFactory<Models.Partner> filterFactory)
         {
             ///Guard Condition
-            if (repository == null)
+            if (partnerRepository == null)
                 throw new ArgumentNullException("Repository is null!");
             if (filterFactory == null)
                 throw new ArgumentNullException("Filtering Factory is null!");
-            this.repository = repository;
-            this.repositoryAccounts = repositoryAccounts;
+            this.partnerRepository = partnerRepository;
+            this.accountRepository = accountRepository;
+            this.categoryRepository = categoryRepository;
             this.filterFactory = filterFactory;
         }
         /// <summary>
@@ -59,13 +64,13 @@ namespace Courses.Buisness
             {
                 var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                partners = repository.Get(page, pageSize, expression, newSortFilter).Select(ConvertToPartnerViewModel);
-                total = repository.Count(expression);
+                partners = partnerRepository.Get(page, pageSize, expression, newSortFilter).Select(ConvertFromPartnerToPartnerViewModel);
+                total = partnerRepository.Count(expression);
             }
             else
             {
-                partners = repository.Get(page, pageSize, x => true).Select(ConvertToPartnerViewModel);
-                total = repository.Count(x => true);
+                partners = partnerRepository.Get(page, pageSize, x => true).Select(ConvertFromPartnerToPartnerViewModel);
+                total = partnerRepository.Count(x => true);
             }
             var pageInfo = new PageInfo()
             {
@@ -82,9 +87,9 @@ namespace Courses.Buisness
         /// <returns></returns>
         public IEnumerable<PartnerViewModel> GetIEnumerablePartnersCollection()
         {
-            IEnumerable<PartnerViewModel> products;
-            products = repository.Get().Select(ConvertToPartnerViewModel);
-            return products;
+            IEnumerable<PartnerViewModel> partners;
+            partners = partnerRepository.Get().Select(ConvertFromPartnerToPartnerViewModel);
+            return partners;
         }
 
         /// <summary>
@@ -99,25 +104,25 @@ namespace Courses.Buisness
             {
                 //для возможности не выбирать менеджера                                                              
                 User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                var listUser = repositoryAccounts.Get().ToList<User>();
+                var listUser = accountRepository.Get().ToList<User>();
                 listUser.Add(noManager);
                 partnerView.Managers = new SelectList(listUser, "Id", "Login", 0);
             }
             else
             {
-                var partner = repository.Get(Id.Value);
+                var partner = partnerRepository.Get(Id.Value);
                 if (partner != null)
                 {
-                    partnerView = ConvertToPartnerViewModelForAddEditView(partner);
+                    partnerView = ConvertFromPartnerToPartnerViewModelForAddEditView(partner);
                     if (partner.User == null)
                     {
                         User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                        var listUser = repositoryAccounts.Get().ToList<User>();
+                        var listUser = accountRepository.Get().ToList<User>();
                         listUser.Add(noManager);
                         partnerView.Managers = new SelectList(listUser, "Id", "Login", 0);
                     }
                     else
-                        partnerView.Managers = new SelectList(repositoryAccounts.Get(), "Id", "Login", partner.UserId);
+                        partnerView.Managers = new SelectList(accountRepository.Get(), "Id", "Login", partner.UserId);
                 }
             }
             return partnerView;
@@ -130,8 +135,8 @@ namespace Courses.Buisness
         /// <returns></returns>
         public PartnerViewModel GetByID(int id)
         {
-            var partner = repository.Get(id);
-            return (partner == null) ? null : ConvertToPartnerViewModel(partner);
+            var partner = partnerRepository.Get(id);
+            return (partner == null) ? null : ConvertFromPartnerToPartnerViewModel(partner);
         }
         /// <summary>
         /// Добавление партнера в репозиторий
@@ -142,7 +147,7 @@ namespace Courses.Buisness
             partner.CreatedDate = partner.UpdatedDate = DateTime.Now;
             if (partner.UserId == 0)
                 partner.UserId = null;
-            repository.Add(Convert(partner));
+            partnerRepository.Add(ConvertFromPartnerViewModelToPartner(partner));
         }
         /// <summary>
         /// Обновление партнера
@@ -153,7 +158,7 @@ namespace Courses.Buisness
             partner.UpdatedDate = DateTime.Now;
             if (partner.UserId == 0)
                 partner.UserId = null;
-            repository.Update(Convert(partner));
+            partnerRepository.Update(ConvertFromPartnerViewModelToPartner(partner));
         }
         /// <summary>
         /// Удаление партнера
@@ -161,19 +166,61 @@ namespace Courses.Buisness
         /// <param name="partner"></param>
         public void Delete(PartnerViewModel partner)
         {
-            repository.Delete(Convert(partner));
+            partnerRepository.Delete(ConvertFromPartnerViewModelToPartner(partner));
         }
+
+        /// <summary>
+        /// получение продукта со списком всех категорий
+        /// </summary>
+        /// <param name="Id">Id продукта для редактирования</param>
+        /// <returns></returns>
+        public PartnerWithAllCategorysViewModel GetPartnerWithAllCategorys(int Id)
+        {
+            var partner = partnerRepository.Get(Id);
+            return (partner == null) ? null : ConvertFromPartnerToPartnerWithAllCategorysViewModel(partner);
+        }
+        /// <summary>
+        /// Получает продукт со список категорий текущего продукта
+        /// </summary>
+        /// <param name="id"></param>
+        public PartnerWithCategorysViewModel GetPartnerWithCurrentCategorys(int id)
+        {
+            var partner = partnerRepository.Get(id);
+            return (partner == null) ? null : ConvertFromPartnerToPartnerWithCategorysViewModel(partner);
+        }
+
+        /// <summary>
+        /// Редактирование списка категорий продукта
+        /// </summary>
+        /// <param name="product"></param>
+        public void EditPartnerCategorys(PartnerWithAllCategorysViewModel partnerView, int[] selectedCategorys)
+        {
+            Partner partner = partnerRepository.Get(partnerView.Id);
+            partner.UpdatedDate = DateTime.Now;
+            partner.Categories.Clear();
+            SaveChanges();
+
+            if (selectedCategorys != null)
+            {
+                foreach (int categoryId in selectedCategorys)
+                {
+                    categoryRepository.AddPartners(categoryId, partner.PartnerId);
+                }
+            }
+        }
+
+
         /// <summary>
         /// Сохранение изменений
         /// </summary>
         public void SaveChanges()
         {
-            repository.SaveChanges();
+            partnerRepository.SaveChanges();
         }
         /// <summary>
         /// Конвертационные функции
         /// </summary>
-        private Partner Convert(PartnerViewModel c)
+        private Partner ConvertFromPartnerViewModelToPartner(PartnerViewModel c)
         {
             return new Models.Partner()
             {
@@ -189,7 +236,7 @@ namespace Courses.Buisness
                 
             };
         }
-        private PartnerViewModel ConvertToPartnerViewModel(Models.Partner c)
+        private PartnerViewModel ConvertFromPartnerToPartnerViewModel(Models.Partner c)
         {
             return new PartnerViewModel()
             {
@@ -204,7 +251,7 @@ namespace Courses.Buisness
                 Contact = c.Contact
             };
         }
-        private PartnerViewModelForAddEditView ConvertToPartnerViewModelForAddEditView(Models.Partner c)
+        private PartnerViewModelForAddEditView ConvertFromPartnerToPartnerViewModelForAddEditView(Models.Partner c)
         {
             return new PartnerViewModelForAddEditView()
             {
@@ -218,6 +265,76 @@ namespace Courses.Buisness
                 Email = c.Email,
                 Contact = c.Contact
             };
+        }
+       
+        private Category ConvertFromCategoryViewModelToCategory(CategoryViewModel c)
+        {
+            return new Models.Category()
+            {
+                CategoryId = c.Id,
+                Name = c.Name,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                Description = c.Description,
+                ParentCategoryId = c.ParentCategoryId
+            };
+        }
+        private CategoryViewModel ConvertFromCategoryToCategoryViewModel(Category c)
+        {
+            return new CategoryViewModel()
+            {
+                Id = c.CategoryId,
+                Name = c.Name,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                ParentCategoryId = (c.ParentCategory == null) ? null : c.ParentCategoryId,
+                Description = c.Description
+            };
+        }
+        private PartnerWithCategorysViewModel ConvertFromPartnerToPartnerWithCategorysViewModel(Partner partner)
+        {
+            PartnerWithCategorysViewModel partnerWithCategorys = new PartnerWithCategorysViewModel();
+            partnerWithCategorys.Categorys = new List<CategoryViewModel>();
+
+            foreach (Category c in partner.Categories)
+            {
+                partnerWithCategorys.Categorys.Add(ConvertFromCategoryToCategoryViewModel(c));
+            }
+
+            partnerWithCategorys.Id = partner.PartnerId;
+            partnerWithCategorys.Name = partner.Name;
+            partnerWithCategorys.CreatedDate = partner.CreatedDate;
+            partnerWithCategorys.UpdatedDate = partner.UpdatedDate;
+            partnerWithCategorys.UserId = partner.UserId ?? null;
+            partnerWithCategorys.Address = partner.Address;
+            partnerWithCategorys.Phone = partner.Phone;
+            partnerWithCategorys.Email = partner.Email;
+            partnerWithCategorys.Contact = partner.Contact;
+
+            return partnerWithCategorys;
+        }
+        private PartnerWithAllCategorysViewModel ConvertFromPartnerToPartnerWithAllCategorysViewModel(Partner c)
+        {
+            PartnerWithCategorysViewModel partnerWithCategorys = ConvertFromPartnerToPartnerWithCategorysViewModel(c);
+            PartnerWithAllCategorysViewModel partnerWithAllCategorys = new PartnerWithAllCategorysViewModel();
+
+            partnerWithAllCategorys.Categorys = partnerWithCategorys.Categorys;
+            partnerWithAllCategorys.Id = partnerWithCategorys.Id;
+            partnerWithAllCategorys.Name = partnerWithCategorys.Name;
+            partnerWithAllCategorys.CreatedDate = partnerWithCategorys.CreatedDate;
+            partnerWithAllCategorys.UpdatedDate = partnerWithCategorys.UpdatedDate;
+            partnerWithAllCategorys.UserId = partnerWithCategorys.UserId ?? null;
+            partnerWithAllCategorys.Address = partnerWithCategorys.Address;
+            partnerWithAllCategorys.Phone = partnerWithCategorys.Phone;
+            partnerWithAllCategorys.Email = partnerWithCategorys.Email;
+            partnerWithAllCategorys.Contact = partnerWithCategorys.Contact;
+
+            var categorysList = categoryRepository.Get().Select(ConvertFromCategoryToCategoryViewModel);
+            partnerWithAllCategorys.AllCategorys = categorysList.ToList();
+
+            return partnerWithAllCategorys;
         }
     }
 }

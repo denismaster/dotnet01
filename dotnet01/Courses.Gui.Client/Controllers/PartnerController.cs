@@ -29,10 +29,10 @@ namespace Courses.Gui.Client.Controllers
             this.partnerService = partnerService;
         }
 
-        public PartnerViewModel GetPartner(int id)
+        public JsonResult<PartnerViewModel> GetPartner(int id)
         {
             var partnerViewModel = partnerService.GetByID(id);
-            return partnerViewModel;
+            return Json(partnerViewModel);
         }
 
         public JsonResult<IEnumerable<PartnerViewModel>> GetPartners()
