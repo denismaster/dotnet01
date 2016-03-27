@@ -52,10 +52,14 @@
     <Compile Include="PartnerCollectionViewModel.cs" />
     <Compile Include="PartnerViewModel.cs" />
     <Compile Include="PartnerViewModelForAddEditView.cs" />
+    <Compile Include="PartnerWithAllCategorysViewModel.cs" />
+    <Compile Include="PartnerWithCategorysViewModel.cs" />
+    <Compile Include="ProductWithAllCategorysViewModel.cs" />
     <Compile Include="ProductCollectionViewModel.cs" />
     <Compile Include="ProductViewModel.cs" />
     <Compile Include="PageInfo.cs" />
     <Compile Include="ProductViewModelForAddEditView.cs" />
+    <Compile Include="ProductWithCategorysViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

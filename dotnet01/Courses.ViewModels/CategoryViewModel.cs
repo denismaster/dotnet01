@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Courses.ViewModels
 {
-    public class CategoryViewModel
+    public class CategoryViewModel : IEquatable<CategoryViewModel>
     {
         public int Id { get; set; }
 
@@ -33,6 +33,12 @@ namespace Courses.ViewModels
 
         [DisplayName("Описание")]
         public String Description { get; set; }
+
+        public bool Equals(CategoryViewModel other)
+        {
+            if (other == null) return false;
+            return (this.Id.Equals(other.Id));
+        }
     }
 }
 

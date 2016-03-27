@@ -72,7 +72,7 @@ namespace Courses.DAL
                 PartnerId = partnersRep.GetOnlyOne().PartnerId,
                 
                 SeatsCount = 50,
-                imagePath = "IMG.png",
+                //imagePath = "IMG.png",
                 AssignedUserId = accRep.GetOnlyOne().Id,
                 
 
@@ -89,7 +89,7 @@ namespace Courses.DAL
                 PartnerId = partnersRep.GetOnlyOne().PartnerId,
                 AssignedUserId = accRep.GetOnlyOne().Id,
                 SeatsCount = 50,
-                imagePath = "IMG.png",
+                //imagePath = "IMG.png",
  
            });
            productRep.Add(new Product
@@ -103,7 +103,7 @@ namespace Courses.DAL
                Type = 1,
                AssignedUserId = accRep.GetOnlyOne().Id,
                SeatsCount = 50,
-               imagePath = "IMG.png",
+               //imagePath = "IMG.png",
                PartnerId = partnersRep.GetOnlyOne().PartnerId
 
            });
@@ -122,11 +122,24 @@ namespace Courses.DAL
                LastName = "Сухоруких",
                Login = "KirillSuhorukih",
                PasswordHash = "asdasdasfhj1jg3123123123ghdsfdghkg123",
-               Role = "Admin",
+               Role = "Manager",
                Status = 1,
                UpdatedDate = new DateTime(2016, 12, 12)
            };
-           User user2 = new User
+            User user3 = new User
+            {
+                AuthKey = "1ADSDFS1231SL",
+                CreatedDate = new DateTime(2016, 10, 10),
+                Email = "email@mail.ru",
+                FirstName = "Кирилл",
+                LastName = "Сухоруких",
+                Login = "KirillSuhorukih",
+                PasswordHash = "asdasdasfhj1jg3123123123ghdsfdghkg123",
+                Role = "User",
+                Status = 1,
+                UpdatedDate = new DateTime(2016, 12, 12)
+            };
+            User user2 = new User
            {
                AuthKey = "1dfsdfsfsdfsdfsdfdsfdsf",
                CreatedDate = new DateTime(2016, 4, 3),
@@ -144,6 +157,7 @@ namespace Courses.DAL
           // db.Users.Attach(partner.User);
            accRep.Add(user);
            accRep.Add(user2);
+           accRep.Add(user3);
            accRep.SaveChanges();
 
 
@@ -236,14 +250,15 @@ namespace Courses.DAL
             categoryRep.SaveChanges();
             categoryRep.AddPartners(categoryRep.GetOnlyOne().CategoryId, partnersRep.GetOnlyOne().PartnerId);
             categoryRep.AddProducts(categoryRep.GetOnlyOne().CategoryId, productRep.GetOnlyOne().Id);
-         
-           Category category2 = new Category
-           {
-               Active = true,
-               CreatedDate = new DateTime(2015, 12, 12),
-               Description = "C#",
-               UpdatedDate = new DateTime(2016, 1, 1),
-               Name = "C# курсы",
+
+            Category category2 = new Category
+            {
+                Active = true,
+                CreatedDate = new DateTime(2015, 12, 12),
+                Description = "C#",
+                UpdatedDate = new DateTime(2016, 1, 1),
+                Name = "C# курсы",
+                ParentCategoryId = category.CategoryId,
                ParentCategory = category
        };
             categoryRep.Add(category2);

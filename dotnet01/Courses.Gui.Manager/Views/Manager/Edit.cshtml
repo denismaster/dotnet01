@@ -7,13 +7,13 @@
 
 <br />
 <div class="panel panel-default">
-    <div class=" panel-heading">
-        Редактирование курса 
+    <div class="panel-heading">
+        Редактирование курса  @Model.Id
     </div>
     @using (Html.BeginForm("Edit", "Manager", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
-        <div class=" panel-body">
+        <div class="panel-body">
             <br>
             @Html.ValidationSummary(true, "", new { @class = "alert-danger" })
             @Html.HiddenFor(m => m.Id)

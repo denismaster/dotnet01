@@ -1,4 +1,4 @@
-﻿@model Courses.ViewModels.ProductViewModel
+﻿@model Courses.ViewModels.ProductWithCategorysViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -112,11 +112,26 @@
             @Html.DisplayFor(model => model.Location)
         </dd>
 
-        
+        <dt>
+            Категории
+        </dt>   
+        <dd>
+            <ul style="padding-left: 10px;">
+                @if (Model.Categorys != null)
+                 {
 
+                foreach (Courses.ViewModels.CategoryViewModel c in Model.Categorys)
+                {
+                        <li>@c.Name</li>
+                    }
+
+                }
+            </ul>
+        </dd>
     </dl>
 </div>
 <p>
     @Html.ActionLink("Назад к списку", "Index", new { }, htmlAttributes: new { @class="btn btn-warning"})
     @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }, htmlAttributes: new { @class="btn btn-success"})
+    @Html.ActionLink("Категории продукта", "EditProductCategorys", new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-success" })
 </p>
