@@ -138,6 +138,26 @@ namespace Courses.Gui.Client.Controllers
         {
             return ExternalLogin("Vkontakte", Url.Action("Index","Home"));
         }
+
+        public ActionResult AuthorizeFacebook()
+        {
+            return ExternalLogin("Facebook", Url.Action("Index", "Home"));
+        }
+
+        public ActionResult AuthorizeTwitter()
+        {
+            return ExternalLogin("Twitter", Url.Action("Index", "Home"));
+        }
+
+        public ActionResult AuthorizeGoogle()
+        {
+            return ExternalLogin("Google", Url.Action("Index", "Home"));
+        }
+
+        public ActionResult AuthorizeMicrosoft()
+        {
+            return ExternalLogin("Microsoft", Url.Action("Index", "Home"));
+        }
         //
         // POST: /Account/Manage
         [HttpPost]
@@ -172,7 +192,7 @@ namespace Courses.Gui.Client.Controllers
 
             if (user == null)
             {
-                return RedirectToAction("LogOn", new
+                return RedirectToAction("Login", new
                 {
                     message = "Unable to log in with "+providerName+". "
                 });

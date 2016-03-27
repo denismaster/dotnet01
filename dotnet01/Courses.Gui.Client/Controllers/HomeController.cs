@@ -29,7 +29,10 @@ namespace Courses.Gui.Client.Controllers
         {
             return View();
         }
-
+        public ActionResult Basket()
+        {
+            return View();
+        }
         public ActionResult Contact()
         {
             return View();

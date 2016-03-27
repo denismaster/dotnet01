@@ -1,20 +1,18 @@
 ﻿
 function BasketButtonEventListener()
 {
-    var id = $(target).attr("data-id");
-    alert(id);
+    var button = $(event.target);
+    button.hide();
+    var id = button.attr("data-id");
+    AddToBasket(id);
 }
 
 function AddToBasket(item)
 {
     var basket = RestoreBasket();
-    basket.push(item);
+    var basketItem = { id:item,count:1}
+    basket.push(basketItem);
     SaveBasketState(basket);
-}
-
-function GetBasket()
-{
-    alert(GetBasketItems());
 }
 
 function RemoveFromBasket(item)
@@ -28,12 +26,6 @@ function RemoveFromBasket(item)
         }
     }
     basket.splice(index, 1);
-}
-
-function GetBasketItems()
-{
-    var basket = RestoreBasket();
-    return basket;
 }
 
 function SaveBasketState(basket)

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Courses.ViewModels
 {
-    public class CategoryViewModel
+    public class CategoryViewModel : IEquatable<CategoryViewModel>
     {
         public int Id { get; set; }
 
@@ -33,6 +29,12 @@ namespace Courses.ViewModels
 
         [DisplayName("Описание")]
         public String Description { get; set; }
+
+        public bool Equals(CategoryViewModel other)
+        {
+            if (other == null) return false;
+            return (this.Id.Equals(other.Id));
+        }
     }
 }
 

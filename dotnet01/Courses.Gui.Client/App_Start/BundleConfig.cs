@@ -21,6 +21,7 @@ namespace Courses.Gui.Client
                 "~/Scripts/knockout-{version}.js",
                 "~/Scripts/knockout.validation.js"));
             bundles.Add(new ScriptBundle("~/bundles/basket").Include(
+                "~/Scripts/basket/basketDrawer.js",
                 "~/Scripts/basket/basket.js"));
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 

@@ -1,16 +1,11 @@
-﻿using System;
+﻿using Courses.Buisness.Filtering;
+using Courses.Buisness.Services;
+using Courses.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Courses.Buisness;
-using Courses.Models;
-using Courses.Models.Repositories;
-using Courses.ViewModels;
-using Courses.Buisness.Filtering;
-using Courses.Buisness.Services;
-using System.IO;
-using System.Drawing;
 
 namespace Courses.Gui.Manager.Controllers
 {
@@ -32,13 +27,17 @@ namespace Courses.Gui.Manager.Controllers
             return View(product);
         }
         [HttpPost]
-        public ActionResult New(ProductViewModelForAddEditView productView, HttpPostedFileBase file)
+        public ActionResult New(ProductViewModelForAddEditView productView, HttpPostedFileBase file = null)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    productView.imagePath = SaveImageInFolder(file);
+                    if (file != null)
+                    {
+                        productView.ImageBuffer = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.ImageBuffer, 0, file.ContentLength);
+                    }
                     productService.Add(productView);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
@@ -49,32 +48,6 @@ namespace Courses.Gui.Manager.Controllers
                 ModelState.AddModelError("", "Unable to save changes");
             }
             return View(productView);
-        }
-
-        /// <summary>
-        /// Сохраняет картинку в папке CoursesImages. Если картинка в запросе полученна не была, 
-        /// то возвращает пустую строку, иначе возвращает путь к картинке
-        /// </summary>
-        /// <param name="file">Путь к картинке</param>
-        /// <returns></returns>
-        private String SaveImageInFolder(HttpPostedFileBase file)
-        {
-            string path = null;
-            try
-            {
-                if (file != null && file.ContentLength > 0)
-                {
-                    string filename = System.IO.Path.GetFileName(file.FileName);
-                    path = "~/CoursesImages/" + filename;
-                    // file is uploaded
-                    file.SaveAs(Server.MapPath(path));
-                }
-            }
-            catch (Exception c)
-            {
-                return null;
-            }
-            return path;
         }
 
         [HttpGet]
@@ -89,15 +62,18 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductViewModelForAddEditView product, HttpPostedFileBase file)
+        public ActionResult Edit(ProductViewModelForAddEditView productView, HttpPostedFileBase file = null)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    if(file != null)
-                        product.imagePath = SaveImageInFolder(file);
-                    productService.Edit(product);
+                    if (file != null)
+                    {
+                        productView.ImageBuffer = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.ImageBuffer, 0, file.ContentLength);
+                    }
+                    productService.Edit(productView);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -106,6 +82,33 @@ namespace Courses.Gui.Manager.Controllers
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
+            return View(productView);
+        }
+
+        [HttpGet]
+        public ActionResult EditProductCategorys(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var productView = productService.GetProductWithAllCategorys(id.Value);
+            if (productView.Id == 0)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
+            return View(productView);
+        }
+
+        [HttpPost]
+        public ActionResult EditProductCategorys(ProductWithAllCategorysViewModel product, IEnumerable<int> selectedCategorys)
+        {
+            try
+            {
+                productService.EditProductCategorys(product, (selectedCategorys != null) ? selectedCategorys.ToArray() : null);
+                return RedirectToAction("Details", new { id = product.Id });
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("", "Unable to save changes");
+            }
+            product = productService.GetProductWithAllCategorys(product.Id);
             return View(product);
         }
 
@@ -125,9 +128,9 @@ namespace Courses.Gui.Manager.Controllers
         {
             try
             {
-                    productService.Delete(product);
-                    productService.SaveChanges();
-                    return RedirectToAction("Index");
+                productService.Delete(product);
+                productService.SaveChanges();
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -135,18 +138,21 @@ namespace Courses.Gui.Manager.Controllers
             }
             return View(product);
         }
+
+
+
         [HttpGet]
         public ActionResult Details(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetById(id.Value);
+            var product = productService.GetProductWithCurrentCategorys(id.Value);
             if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(product);
         }
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string sortOrder, string CurrentNameFilter, string CurrentParentIdFilter, string SearchNameString, string SearchParentIdString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "Name") ? "NameDesc" : "Name";
@@ -156,21 +162,30 @@ namespace Courses.Gui.Manager.Controllers
 
             if (Request.HttpMethod == "GET")
             {
-                searchString = currentFilter;
+                SearchNameString = CurrentNameFilter;
+                SearchParentIdString = CurrentParentIdFilter;
             }
             else
             {
                 page = 1;
             }
-            ViewBag.CurrentFilter = searchString;
+            ViewBag.CurrentNameFilter = SearchNameString;
+            ViewBag.CurrentParentIdFilter = SearchParentIdString;
 
             var sortFilter = new Courses.Buisness.Filtering.SortFilter() { SortOrder = sortOrder };
+
             List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(SearchNameString))
             {
-                FieldFilter fieldFilter = new FieldFilter() { Name = "Name", Value = searchString.ToString() };
+                FieldFilter fieldFilter = new FieldFilter() { Name = "Name", Value = SearchNameString.ToString() };
                 fieldFilters.Add(fieldFilter);
             }
+            if (!String.IsNullOrEmpty(SearchParentIdString))
+            {
+                FieldFilter fieldFilter = new FieldFilter() { Name = "PartnerID", Value = SearchParentIdString.ToString() };
+                fieldFilters.Add(fieldFilter);
+            }
+
 
             int pageSize = 3;
             int currentPage = page ?? 1;

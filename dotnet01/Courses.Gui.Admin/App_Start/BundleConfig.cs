@@ -25,6 +25,8 @@ namespace Courses.Gui.Admin
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/style.default.css",
+                      "~/Content/custom.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(

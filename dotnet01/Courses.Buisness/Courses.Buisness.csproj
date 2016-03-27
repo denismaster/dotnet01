@@ -47,8 +47,11 @@
     <Compile Include="Authentication\IdentityExtensions.cs" />
     <Compile Include="Authentication\SHA256PasswordHasher.cs" />
     <Compile Include="Category\CategoryService.cs" />
+    <Compile Include="Comment\CommentService.cs" />
+    <Compile Include="Event\EventService.cs" />
     <Compile Include="Filtering\CategoryFilterFactory.cs" />
     <Compile Include="Filtering\PartnerFilterFactory.cs" />
+    <Compile Include="Order\OrderService.cs" />
     <Compile Include="Partner\PartnerService.cs" />
     <Compile Include="Product\ProductService.cs" />
     <Compile Include="Filtering\ProductFilterFactory.cs" />
@@ -73,7 +76,9 @@
       <Name>Courses.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
