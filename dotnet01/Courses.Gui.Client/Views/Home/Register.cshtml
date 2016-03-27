@@ -4,51 +4,51 @@
 
 <title>Регистрация</title>
 <body>
-    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-      
-            <div class="col-md-offset-1 registr">
-                <div class="col-md-1 col-sm-10">
-                    <img id="person-img" src="~/Content/images/person1.png">
-                </div>
-                <div class="col-md-offset-2 col-md-9">
 
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.Label("Логин*", new { @class = "col-md-3 control-label" })
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "reg-form" })
-                        </div>
+        <div class="col-md-offset-1 registr">
+            <div class="col-md-1 col-sm-10">
+                <img id="person-img" src="~/Content/images/person1.png">
+            </div>
+            <div class="col-md-offset-2 col-md-9">
+
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("Логин*", new { @class = "col-md-3 control-label" })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id = "reg-form" })
                     </div>
-                    <div class="form-group">
-                        @Html.Label("Город", new { @class = "col-md-3 control-label " })
-                        <div class="col-md-8">
-                            @Html.TextBoxFor(m => m.Hometown, new { @class = "form-control", id = "reg-form" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Город", new { @class = "col-md-3 control-label " })
+                    <div class="col-md-8">
+                        @Html.TextBoxFor(m => m.Hometown, new { @class = "form-control", id = "reg-form" })
                     </div>
-                    <div class="form-group">
-                        @Html.Label("Пароль*", new { @class = "col-md-3 control-label" })
-                        <div class="col-md-8">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "reg-form" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Пароль*", new { @class = "col-md-3 control-label" })
+                    <div class="col-md-8">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "reg-form" })
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Повторите <br />  пароль</label>
-                        <div class="col-md-8">
-                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", id = "reg-form" })
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Повторите <br />  пароль</label>
+                    <div class="col-md-8">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", id = "reg-form" })
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-6">
-                            <button type="submit" id="reg" class="btn btn-template-main">
-                                <i class="fa fa-user-md"></i>
-                                Зарегистрироваться
-                            </button>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-6">
+                        <button type="submit" id="reg" class="btn btn-template-main">
+                            <i class="fa fa-user-md"></i>
+                            Зарегистрироваться
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
 
 
 

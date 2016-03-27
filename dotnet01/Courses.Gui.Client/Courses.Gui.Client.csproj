@@ -264,6 +264,7 @@
     <Content Include="Content\images\fb.png" />
     <Content Include="Content\images\logo2.png" />
     <Content Include="Content\images\odn.png" />
+    <Content Include="Content\images\person1.png" />
     <Content Include="Content\images\skype.png" />
     <Content Include="Content\images\tw.png" />
     <Content Include="Content\images\vk.png" />
@@ -695,6 +696,8 @@
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Spa.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Account\_Account.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

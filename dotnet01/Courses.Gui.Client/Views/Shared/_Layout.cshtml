@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    @using Courses.Gui.Client.Models
+    @model LoginViewModel
     <meta charset="utf-8">
     <meta name="robots" content="all,follow">
     <meta name="googlebot" content="index,follow,snippet,archive">
@@ -77,14 +79,25 @@
                                 <li>
                                     <a href="#/home/contact">Контакты</a>
                                 </li>
+@*@if (!Request.IsAuthenticated)
+{*@
                                 <li>
-                                    @Html.ActionLink("Reg","Register","Account")
                                     <a href="#/home/register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Зарегистрироваться</span></a>
                                 </li>
                                 <li>
                                     <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Войти</span></a>
                                 </li>
+    @*//}*@
+@*else
+{
 
+    <li>
+        @Html.ActionLink(User.Identity.Name, "Manage", "Account", new { }, new { disabled = "disabled" })
+    </li>
+    <li>
+        @Html.ActionLink("Выйти", "LogOff", "Account", new { }, new { disabled = "disabled", @class= "hidden-xs text-uppercase" })
+    </li>
+}*@
                             </ul>
 
                         </div>
@@ -117,19 +130,35 @@
                     <h4 class="modal-title" id="Login">Войти</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="customer-orders.html" method="post">
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col-sm-offset-1 col-sm-10">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="email_modal" placeholder="email">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", id = "email_modal", placeholder = "e-mail", required = true })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password_modal" placeholder="пароль">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "password_modal", placeholder = "пароль", required = true })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            <div class="help-block text-center"><a href="">Забыли пароль ?</a></div>
+                            <div class="form-group">
+                                @Html.CheckBoxFor(m => m.RememberMe,new { @class= "checkbox" })
+                                @Html.Label("Запомнить пароль")
+                            </div>
+                    
+                            </div>
                         </div>
-
-                        <p class="text-center">
-                            <button class="btn btn-template-main"><i class="fa fa-sign-in"></i> Войти</button>
+                        <p class="text-center col-sm-offset-1 col-sm-10">
+                            <input type="submit" value="Войти" id="enterButton" class="btn btn-default btn-block" />
                         </p>
-
-                    </form>
+}
+                    <div id="socialLoginList">
+                        <p class="text-center col-sm-offset-1 col-sm-10">
+                            <input type="submit"  class="btn btn-default btn-block" id="Vkontakte" name="provider" value="Vkontakte" title="Log in using your Vkontakte account"/>
+                        </p>
+                    </div>
                     <p class="text-center text-muted">Еще не с нами?</p>
                     <p class="text-center text-muted"><a id="reg-link-modal" href="#/home/register" onclick="closeModal()"><strong>Создать аккаунт</strong></a></p>
                    
