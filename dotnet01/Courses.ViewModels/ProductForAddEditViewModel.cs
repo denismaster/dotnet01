@@ -2,7 +2,7 @@
 
 namespace Courses.ViewModels
 {
-    public class ProductViewModelForAddEdit : ProductViewModel
+    public class ProductForAddEditViewModel : ProductViewModel
     {
         /// <summary>
         /// Формируем список партнеров для передачи в представление

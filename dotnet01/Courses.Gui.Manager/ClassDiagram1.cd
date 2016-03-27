@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Courses.Gui.Manager.ManagerControllerFactory" Collapsed="true">
+    <Position X="1.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>ManagerControllerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Courses.Gui.Manager.Controllers.CategoryController">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABACAAAAAAAAAAAAEAAAACAAEQAAAAAAA=</HashCode>
+      <FileName>Controllers\CategoryController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Courses.Buisness.CategoryService">
+    <Position X="2.5" Y="1.75" Width="2" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Courses.ViewModels.CategoryViewModel" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="2.25" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Courses.ViewModels.CategoryViewModelForAddEditView" Collapsed="true">
+    <Position X="4.75" Y="2.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Courses.ViewModels.CategoryCollectionViewModel" Collapsed="true">
+    <Position X="4.75" Y="3.75" Width="2.5" />
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

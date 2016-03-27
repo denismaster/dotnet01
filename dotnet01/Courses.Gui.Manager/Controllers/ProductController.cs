@@ -27,7 +27,7 @@ namespace Courses.Gui.Manager.Controllers
             return View(product);
         }
         [HttpPost]
-        public ActionResult New(ProductViewModelForAddEdit productView, HttpPostedFileBase file = null)
+        public ActionResult New(ProductForAddEditViewModel productView, HttpPostedFileBase file = null)
         {
             try
             {
@@ -35,8 +35,9 @@ namespace Courses.Gui.Manager.Controllers
                 {
                     if (file != null)
                     {
-                        productView.Image = new byte[file.ContentLength];
-                        file.InputStream.Read(productView.Image, 0, file.ContentLength);
+                        byte[] newImage = new byte[file.ContentLength];
+                        file.InputStream.Read(newImage, 0, file.ContentLength);
+                        productView.Image = Convert.ToBase64String(newImage);
                     }
                     productService.Add(productView);
                     productService.SaveChanges();
@@ -62,7 +63,7 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductViewModelForAddEdit productView, HttpPostedFileBase file = null)
+        public ActionResult Edit(ProductForAddEditViewModel productView, HttpPostedFileBase file = null)
         {
             try
             {
@@ -70,15 +71,16 @@ namespace Courses.Gui.Manager.Controllers
                 {
                     if (file != null)
                     {
-                        productView.Image = new byte[file.ContentLength];
-                        file.InputStream.Read(productView.Image, 0, file.ContentLength);
+                        byte[] newImage = new byte[file.ContentLength];
+                        file.InputStream.Read(newImage, 0, file.ContentLength);
+                        productView.Image = Convert.ToBase64String(newImage);
                     }
                     productService.Edit(productView);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (Exception c)
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }

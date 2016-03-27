@@ -102,9 +102,9 @@ namespace Courses.Buisness
         /// </summary>
         /// <param name="Id">Id продукта для редактирования</param>
         /// <returns></returns>
-        public ProductViewModelForAddEdit GetProductWithAccauntsAndPartners(int? Id)
+        public ProductForAddEditViewModel GetProductWithAccauntsAndPartners(int? Id)
         {
-            ProductViewModelForAddEdit productView = new ProductViewModelForAddEdit();
+            ProductForAddEditViewModel productView = new ProductForAddEditViewModel();
             if (Id == null)
             {
                 //для возможности не выбирать менеджера                                                              
@@ -263,9 +263,9 @@ namespace Courses.Buisness
             };
         }
 
-        private ProductViewModelForAddEdit ConvertFromProductToProductViewModelForAddEditView(Product c)
+        private ProductForAddEditViewModel ConvertFromProductToProductViewModelForAddEditView(Product c)
         {
-            return new ProductViewModelForAddEdit()
+            return new ProductForAddEditViewModel()
             {
                 Id = c.Id,
                 Name = c.Name,

@@ -1,4 +1,4 @@
-﻿@model Courses.ViewModels.ProductViewModelForAddEditView
+﻿@model Courses.ViewModels.ProductForAddEditViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -10,7 +10,7 @@
     <div class="panel-heading">
         Редактирование курса  @Model.Id
     </div>
-    @using (Html.BeginForm("Edit", "Manager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="panel-body">
