@@ -67,7 +67,16 @@ namespace Courses.Buisness
             };
             return new CategoryCollectionViewModel() { Categorys = categorys, PageInfo = pageInfo };
         }
-
+        /// <summary>
+        /// Получение всех категорий без фильтров и сортировок
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<CategoryViewModel> GetIEnumerableCategorysCollection()
+        {
+            IEnumerable<CategoryViewModel> categorys;
+            categorys = repository.Get().Select(Convert);
+            return categorys;
+        }
         /// <summary>
         /// получение категории со списком категорий (для выбора родительской) , для передачи его в форму добавления/редактирования
         /// </summary>
