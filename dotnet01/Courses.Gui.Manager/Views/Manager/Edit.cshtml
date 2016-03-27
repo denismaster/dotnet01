@@ -19,6 +19,7 @@
             @Html.HiddenFor(m => m.Id)
             @Html.HiddenFor(m => m.CreatedDate)
             @Html.HiddenFor(m => m.UpdatedDate)
+            @Html.HiddenFor(m => m.Image)
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -113,12 +114,6 @@
                                 + Convert.ToBase64String(Model.Image) + "\" />")
                 }
             </div>
-            @*<img src="@Url.Content( (Model.imagePath != null) ? (Model.imagePath): ("~/CoursesImages/NoImageAvailable.jpg"))" alt="Изображение курса"  width="500" />
-            <br><br><br>
-            <div class="form-group">
-                @Html.Label("Выбрать новое изображение:", new { @class = "control-label col-md-2" })
-                <input class="col-md-10" type="file" name="file" id="file" style="width: 100%;" />
-            </div>*@
         </div>
         <br>
         <div class=" panel-footer">
