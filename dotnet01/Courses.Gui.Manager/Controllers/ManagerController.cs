@@ -1,16 +1,11 @@
-﻿using System;
+﻿using Courses.Buisness.Filtering;
+using Courses.Buisness.Services;
+using Courses.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Courses.Buisness;
-using Courses.Models;
-using Courses.Models.Repositories;
-using Courses.ViewModels;
-using Courses.Buisness.Filtering;
-using Courses.Buisness.Services;
-using System.IO;
-using System.Drawing;
 
 namespace Courses.Gui.Manager.Controllers
 {
@@ -106,10 +101,10 @@ namespace Courses.Gui.Manager.Controllers
         {
             try
             {
-                productService.EditProductCategorys(product, (selectedCategorys != null)?selectedCategorys.ToArray() : null);
-                return RedirectToAction("Details", new { id = product.Id});
+                productService.EditProductCategorys(product, (selectedCategorys != null) ? selectedCategorys.ToArray() : null);
+                return RedirectToAction("Details", new { id = product.Id });
             }
-            catch(Exception e) 
+            catch (Exception e)
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
@@ -133,9 +128,9 @@ namespace Courses.Gui.Manager.Controllers
         {
             try
             {
-                    productService.Delete(product);
-                    productService.SaveChanges();
-                    return RedirectToAction("Index");
+                productService.Delete(product);
+                productService.SaveChanges();
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -190,7 +185,7 @@ namespace Courses.Gui.Manager.Controllers
                 FieldFilter fieldFilter = new FieldFilter() { Name = "PartnerID", Value = SearchParentIdString.ToString() };
                 fieldFilters.Add(fieldFilter);
             }
-            
+
 
             int pageSize = 3;
             int currentPage = page ?? 1;
