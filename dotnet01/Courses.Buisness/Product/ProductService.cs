@@ -240,7 +240,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
                 Location = c.Location,
-                Image = Convert.FromBase64String(c.Image)
+                Image = c.ImageBuffer
             };
         }
         private ProductViewModel ConvertFromProductToProductViewModel(Product c)

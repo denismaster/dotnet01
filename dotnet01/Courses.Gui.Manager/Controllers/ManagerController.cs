@@ -35,8 +35,8 @@ namespace Courses.Gui.Manager.Controllers
                 {
                     if (file != null)
                     {
-                        productView.Image = new byte[file.ContentLength];
-                        file.InputStream.Read(productView.Image, 0, file.ContentLength);
+                        productView.ImageBuffer = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.ImageBuffer, 0, file.ContentLength);
                     }
                     productService.Add(productView);
                     productService.SaveChanges();
@@ -70,8 +70,8 @@ namespace Courses.Gui.Manager.Controllers
                 {
                     if (file != null)
                     {
-                        productView.Image = new byte[file.ContentLength];
-                        file.InputStream.Read(productView.Image, 0, file.ContentLength);
+                        productView.ImageBuffer = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.ImageBuffer, 0, file.ContentLength);
                     }
                     productService.Edit(productView);
                     productService.SaveChanges();
