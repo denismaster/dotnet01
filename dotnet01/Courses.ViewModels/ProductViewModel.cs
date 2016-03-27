@@ -62,6 +62,6 @@ namespace Courses.ViewModels
         public string Location { get; set; }
 
         [DisplayName("Изображение")]
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
     }
 }
