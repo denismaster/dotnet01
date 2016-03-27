@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Web.Mvc;
 
 namespace Courses.ViewModels
 {
-    public class ProductViewModelForAddEdit
+    public class ProductViewModelForAddEdit : ProductViewModel
     {
-        public ProductViewModel product;
-
-        public IEnumerable<PartnerViewModel> Partners
+        /// <summary>
+        /// Формируем список партнеров для передачи в представление
+        /// </summary>
+        public SelectList Partners
         {
             get;
             set;
         }
-
-        public IEnumerable<AccountViewModel> Accounts
+        /// <summary>
+        /// Формируем список аккаунтов для передачи в представление
+        /// </summary>
+        public SelectList Accounts
         {
             get;
             set;

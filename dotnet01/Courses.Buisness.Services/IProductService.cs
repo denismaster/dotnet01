@@ -27,7 +27,7 @@ namespace Courses.Buisness.Services
         /// </summary>
         /// <param name="Id">Id продукта для редактирования</param>
         /// <returns></returns>
-        ProductViewModelForAddEditView GetProductWithAccauntsAndPartners(int? Id);
+        ProductViewModelForAddEdit GetProductWithAccauntsAndPartners(int? Id);
         /// <summary>
         /// Получение одного курса
         /// </summary>
