@@ -1,4 +1,4 @@
-﻿@model Courses.ViewModels.ProductViewModelForAddEditView
+﻿@model Courses.ViewModels.ProductForAddEditViewModel
 @{
     ViewBag.Title = "New";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +8,7 @@
     <div class="panel-heading">
         Добавление нового мероприятия
     </div>
-    @using (Html.BeginForm("New", "Manager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("New", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         <div class="panel-body">
