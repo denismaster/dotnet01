@@ -29,3 +29,10 @@ function GetItemRows(table,basket)
         table.appendChild(GetItemRow(basket[i], i));
     }
 }
+
+function DrawBasket()
+{
+    var table = document.getElementById("basket-table");
+    var basket = RestoreBasket();
+    GetItemRows(table, basket);
+}

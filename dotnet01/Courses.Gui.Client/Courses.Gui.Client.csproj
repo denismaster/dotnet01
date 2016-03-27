@@ -676,6 +676,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Spa.cshtml" />
+    <Content Include="Views\Home\Basket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
