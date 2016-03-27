@@ -14,6 +14,18 @@
 	nameCell.innerText = "text" + index;
 	priceCell.innerText = 100 + "$";
 	
+	row.appendChild(indexCell);
+	row.appendChild(keyCell);
+	row.appendChild(nameCell);
+	row.appendChild(priceCell);
 
+	return row;
+}
 
+function GetItemRows(table,basket)
+{
+    for(i=0;i<basket.length;i++)
+    {
+        table.appendChild(GetItemRow(basket[i], i));
+    }
 }
