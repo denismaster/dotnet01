@@ -369,7 +369,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="Scripts\basket\BasketFormatter.js" />
+    <Content Include="Scripts\basket\basketDrawer.js" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -676,6 +676,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Spa.cshtml" />
+    <Content Include="Views\Home\Basket.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

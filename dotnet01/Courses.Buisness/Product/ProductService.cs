@@ -240,7 +240,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
                 Location = c.Location,
-                //imagePath = c.imagePath
+                Image = c.ImageBuffer
             };
         }
         private ProductViewModel ConvertFromProductToProductViewModel(Product c)
@@ -259,7 +259,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-               // imagePath = c.imagePath
+                Image = Convert.ToBase64String(c.Image)
             };
         }
 
@@ -279,7 +279,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-             //   imagePath = c.imagePath
+                Image = Convert.ToBase64String(c.Image)
             };
         }
         private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
@@ -306,7 +306,7 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            //productView.imagePath = product.imagePath;
+            productView.Image = Convert.ToBase64String(product.Image);
 
             return productView;
         }
@@ -354,7 +354,7 @@ namespace Courses.Buisness
             productWithAllCategorys.SeatsCount = productWithCategorys.SeatsCount ?? null;
             productWithAllCategorys.AssignedUserId = productWithCategorys.AssignedUserId ?? null;
             productWithAllCategorys.Location = productWithCategorys.Location;
-            productWithAllCategorys.imagePath = productWithCategorys.imagePath;
+            productWithAllCategorys.Image = productWithCategorys.Image;
 
             var categorysList = categoryRepository.Get().Select(ConvertFromCategoryToCategoryViewModel);
             productWithAllCategorys.AllCategorys = categorysList.ToList();

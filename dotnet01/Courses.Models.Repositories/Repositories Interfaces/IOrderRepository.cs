@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Courses.Models.Repositories
 {
-   public interface IOrderRepository : IRepository<Order>, IDisposable
+    public interface IOrderRepository : IRepository<Order>, IDisposable
     {
- 
+        IEnumerable<Models.Order> Get(int page, int pageSize, Func<Models.Order, bool> expression, SortFilter sortFilter);
+
     }
 }
