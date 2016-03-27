@@ -194,3 +194,7 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+dotnet01/Courses.Gui.Client/Courses.Gui.Client_BACKUP_6304.csproj
+dotnet01/Courses.Gui.Client/Courses.Gui.Client_BASE_6304.csproj
+dotnet01/Courses.Gui.Client/Courses.Gui.Client_LOCAL_6304.csproj
+dotnet01/Courses.Gui.Client/Courses.Gui.Client_REMOTE_6304.csproj

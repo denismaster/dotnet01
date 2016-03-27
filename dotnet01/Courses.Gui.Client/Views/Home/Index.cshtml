@@ -1,12 +1,7 @@
 ﻿@{
     ViewBag.Title = "Главная";
 }
-<h2>@ViewBag.Title.</h2>
-@if(Request.IsAuthenticated)
-{
-    <h2> @User.Identity.Name</h2>
-    <h2> @User.Identity.AuthenticationType.ToString()</h2>
-}
+
 <h3>@ViewBag.Message</h3>
 
 <script>
@@ -27,7 +22,7 @@
 
     <script type="text/x-kendo-template" id="template">
         <div class="product">
-            <img src="data:image/jpeg;base64,#: Image#" alt="#: Name #" />
+            <img src="" alt="#: Name # image" />
             <h3>#:Name#</h3>
             <p><br>Подробнее...</p>
             <button data-id="#: Id#" onclick="BasketButtonEventListener()">Купить </button>
