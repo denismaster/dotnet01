@@ -10,11 +10,11 @@ using System.Web.Mvc;
 namespace Courses.Gui.Manager.Controllers
 {
     //[Authorize(Roles = "Manager,Admin")]
-    public class ManagerController : Controller
+    public class ProductController : Controller
     {
         private readonly IProductService productService;
 
-        public ManagerController(IProductService productService)
+        public ProductController(IProductService productService)
         {
             if (productService == null)
                 throw new ArgumentNullException();
@@ -27,7 +27,7 @@ namespace Courses.Gui.Manager.Controllers
             return View(product);
         }
         [HttpPost]
-        public ActionResult New(ProductViewModelForAddEditView productView, HttpPostedFileBase file = null)
+        public ActionResult New(ProductForAddEditViewModel productView, HttpPostedFileBase file = null)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductViewModelForAddEditView productView, HttpPostedFileBase file = null)
+        public ActionResult Edit(ProductForAddEditViewModel productView, HttpPostedFileBase file = null)
         {
             try
             {

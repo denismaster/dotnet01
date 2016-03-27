@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Courses.Buisness.Services;
 using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.ViewModels;
-using Courses.Buisness.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Courses.Buisness
@@ -37,7 +35,7 @@ namespace Courses.Buisness
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public ProductService(IProductRepository repository, IAccountRepository repositoryAccounts, 
+        public ProductService(IProductRepository repository, IAccountRepository repositoryAccounts,
             IPartnerRepository repositoryPartners, ICategoryRepository categoryRepository, Filtering.IFilterFactory<Models.Product> filterFactory)
         {
             ///Guard Condition
@@ -115,7 +113,7 @@ namespace Courses.Buisness
                 productView.Partners = new SelectList(partnerRepository.Get(), "PartnerId", "Name");
             }
             else
-            {   
+            {
                 var product = productRepository.Get(Id.Value);
                 if (product != null)
                 {
@@ -125,7 +123,7 @@ namespace Courses.Buisness
                     listUser.Add(noManager);
                     productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
                     productView.Partners = new SelectList(partnerRepository.Get(), "PartnerId", "Name", product.PartnerId);
-                } 
+                }
             }
             return productView;
         }
@@ -140,7 +138,7 @@ namespace Courses.Buisness
             var product = productRepository.Get(Id);
             return (product == null) ? null : ConvertFromProductToProductViewModel(product);
         }
-        
+
 
         /// <summary>
         /// Добавление курса в репозиторий
@@ -203,7 +201,7 @@ namespace Courses.Buisness
             product.Categories.Clear();
             SaveChanges();
 
-            if(selectedCategorys != null)
+            if (selectedCategorys != null)
             {
                 foreach (int categoryId in selectedCategorys)
                 {
@@ -212,7 +210,7 @@ namespace Courses.Buisness
             }
         }
 
-        
+
 
         /// <summary>
         /// Сохранение изменений
@@ -259,7 +257,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                Image = Convert.ToBase64String(c.Image)
+                Image = (c.Image != null) ? Convert.ToBase64String(c.Image) : null
             };
         }
 
@@ -279,8 +277,8 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                
-                Image = Convert.ToBase64String(c.Image)
+
+                Image = (c.Image != null) ? Convert.ToBase64String(c.Image) : null
             };
         }
         private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
@@ -307,7 +305,7 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            productView.Image = Convert.ToBase64String(product.Image);
+            productView.Image = (product.Image != null) ? Convert.ToBase64String(product.Image) : null;
 
             return productView;
         }
