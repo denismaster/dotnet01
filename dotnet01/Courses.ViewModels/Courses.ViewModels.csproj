@@ -48,7 +48,13 @@
     <Compile Include="CategoryCollectionViewModel.cs" />
     <Compile Include="CategoryViewModel.cs" />
     <Compile Include="CategoryViewModelForAddEditView.cs" />
+    <Compile Include="CommentCollectionViewModel.cs" />
+    <Compile Include="CommentViewModel.cs" />
     <Compile Include="DateRangeAttribute.cs" />
+    <Compile Include="EventCollectionViewModel.cs" />
+    <Compile Include="EventViewModel.cs" />
+    <Compile Include="OrderCollectionViewModel.cs" />
+    <Compile Include="OrderViewModel.cs" />
     <Compile Include="PartnerCollectionViewModel.cs" />
     <Compile Include="PartnerViewModel.cs" />
     <Compile Include="PartnerViewModelForAddEditView.cs" />

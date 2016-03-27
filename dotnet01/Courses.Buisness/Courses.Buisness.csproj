@@ -47,8 +47,11 @@
     <Compile Include="Authentication\IdentityExtensions.cs" />
     <Compile Include="Authentication\SHA256PasswordHasher.cs" />
     <Compile Include="Category\CategoryService.cs" />
+    <Compile Include="Comment\CommentService.cs" />
+    <Compile Include="Event\EventService.cs" />
     <Compile Include="Filtering\CategoryFilterFactory.cs" />
     <Compile Include="Filtering\PartnerFilterFactory.cs" />
+    <Compile Include="Order\OrderService.cs" />
     <Compile Include="Partner\PartnerService.cs" />
     <Compile Include="Product\ProductService.cs" />
     <Compile Include="Filtering\ProductFilterFactory.cs" />

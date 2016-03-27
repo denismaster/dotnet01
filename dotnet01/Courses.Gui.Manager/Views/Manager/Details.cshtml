@@ -116,24 +116,14 @@
                 }
             </ul>
         </dd>
-        <dt>
-            Изображение
-        </dt>
+
 
         @if (Model.Image != null)
         {
-            <dd>
-                <div class="pull-left" style="margin-right: 10px">
-                    @Html.Raw("<img class=\"img - thumbnail\" style='width:500px;' src=\"data:image/jpeg;base64,"
-                                + Convert.ToBase64String(Model.Image) + "\" />")
+                <div id="myImageConteiner">
+                    @Html.Raw("<img id=\"myImage\" src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(Model.Image) + "\" />")
                 </div>
-            </dd>
-        }
-        else
-        {
-            <dd>
-                Отсутствует
-            </dd>
         }
 </dl>
 </div>
