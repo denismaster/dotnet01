@@ -63,5 +63,11 @@ namespace Courses.ViewModels
 
         [DisplayName("Изображение")]
         public string Image { get; set; }
+
+        public byte[] ImageBuffer
+        {
+            get;
+            set;
+        }
     }
 }

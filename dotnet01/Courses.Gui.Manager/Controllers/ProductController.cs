@@ -10,11 +10,11 @@ using System.Web.Mvc;
 namespace Courses.Gui.Manager.Controllers
 {
     //[Authorize(Roles = "Manager,Admin")]
-    public class ProductController : Controller
+    public class ManagerController : Controller
     {
         private readonly IProductService productService;
 
-        public ProductController(IProductService productService)
+        public ManagerController(IProductService productService)
         {
             if (productService == null)
                 throw new ArgumentNullException();
@@ -27,7 +27,7 @@ namespace Courses.Gui.Manager.Controllers
             return View(product);
         }
         [HttpPost]
-        public ActionResult New(ProductForAddEditViewModel productView, HttpPostedFileBase file = null)
+        public ActionResult New(ProductViewModelForAddEditView productView, HttpPostedFileBase file = null)
         {
             try
             {
@@ -35,9 +35,8 @@ namespace Courses.Gui.Manager.Controllers
                 {
                     if (file != null)
                     {
-                        byte[] newImage = new byte[file.ContentLength];
-                        file.InputStream.Read(newImage, 0, file.ContentLength);
-                        productView.Image = Convert.ToBase64String(newImage);
+                        productView.ImageBuffer = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.ImageBuffer, 0, file.ContentLength);
                     }
                     productService.Add(productView);
                     productService.SaveChanges();
@@ -63,7 +62,7 @@ namespace Courses.Gui.Manager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductForAddEditViewModel productView, HttpPostedFileBase file = null)
+        public ActionResult Edit(ProductViewModelForAddEditView productView, HttpPostedFileBase file = null)
         {
             try
             {
@@ -71,16 +70,15 @@ namespace Courses.Gui.Manager.Controllers
                 {
                     if (file != null)
                     {
-                        byte[] newImage = new byte[file.ContentLength];
-                        file.InputStream.Read(newImage, 0, file.ContentLength);
-                        productView.Image = Convert.ToBase64String(newImage);
+                        productView.ImageBuffer = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.ImageBuffer, 0, file.ContentLength);
                     }
                     productService.Edit(productView);
                     productService.SaveChanges();
                     return RedirectToAction("Index");
                 }
             }
-            catch (Exception c)
+            catch
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }

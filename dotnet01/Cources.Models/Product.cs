@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Courses.Models
 {
    public class Product : DomainObject
-    { 
+    {
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -40,6 +40,7 @@ namespace Courses.Models
             Categories = new List<Category>();
             Appointments = new List<Appointment>();
             Comments = new List<Comment>();
+            Image = new List<byte>().ToArray();
         }
        
     }
