@@ -78,6 +78,7 @@
                                     <a href="#/home/contact">Контакты</a>
                                 </li>
                                 <li>
+                                    @Html.ActionLink("Reg","Register","Account")
                                     <a href="#/home/register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Зарегистрироваться</span></a>
                                 </li>
                                 <li>
@@ -129,9 +130,8 @@
                         </p>
 
                     </form>
-
                     <p class="text-center text-muted">Еще не с нами?</p>
-                    <p class="text-center text-muted"><a href="#/home/register"><strong>Создать аккаунт</strong></a></p>
+                    <p class="text-center text-muted"><a id="reg-link-modal" href="#/home/register" onclick="closeModal()"><strong>Создать аккаунт</strong></a></p>
                    
 
                 </div>
@@ -262,7 +262,7 @@
     </div>
     <!-- /#all -->
     <!-- #### JAVASCRIPT FILES ### -->
- 
+     <script src="~/Scripts/view/layout.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>
         window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')

@@ -4,7 +4,7 @@
 
 <title>Регистрация</title>
 <body>
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
       
