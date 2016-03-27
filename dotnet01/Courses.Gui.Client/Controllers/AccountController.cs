@@ -302,13 +302,13 @@ namespace Courses.Gui.Client.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
+        //[HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Spa", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         //

@@ -79,25 +79,30 @@
                                 <li>
                                     <a href="#/home/contact">Контакты</a>
                                 </li>
-@*@if (!Request.IsAuthenticated)
-{*@
+                                <li>
+                                    <a href="#/home/basket">Корзина</a>
+                                </li>
+@if (!Request.IsAuthenticated)
+{
                                 <li>
                                     <a href="#/home/register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Зарегистрироваться</span></a>
                                 </li>
                                 <li>
                                     <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Войти</span></a>
                                 </li>
-    @*//}*@
-@*else
+}
+else
 {
 
-    <li>
-        @Html.ActionLink(User.Identity.Name, "Manage", "Account", new { }, new { disabled = "disabled" })
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a href="#">Мои курсы</a></li>
+            <li><a href="#">Настройки</a></li>
+            <li>@Html.ActionLink("Выйти","LogOff","Account")</li>
+        </ul>
     </li>
-    <li>
-        @Html.ActionLink("Выйти", "LogOff", "Account", new { }, new { disabled = "disabled", @class= "hidden-xs text-uppercase" })
-    </li>
-}*@
+}
                             </ul>
 
                         </div>
