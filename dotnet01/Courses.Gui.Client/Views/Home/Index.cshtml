@@ -7,13 +7,48 @@
 <script>
     $(document).ready(function () {
         $(".product-details").hide();
+        $(".category").hide();
     });
 </script>
 <script>
     var selectedItem;
 </script>
 
+
+
 <div class="index">
+    <button type="button" id="category-button">Категории</button>
+    <script>
+        $("#category-button").kendoButton({
+        click: onClick
+    });
+    function onClick() {
+        $(".category").show();
+    }
+    </script>
+
+    <div id="category">
+        <div class="demo-section k-content">
+            <div id="treeview"></div>
+        </div>
+        <script>
+            categoriesTree = new kendo.data.HierarchicalDataSource({
+                transport: {
+                    read: {
+                        url: "/api/Category",
+                        dataType: "json"
+                    }
+                },
+                
+            });
+
+        $("#treeview").kendoTreeView({
+            dataSource: categoriesTree,
+            //dataTextField: "FullName"
+        });
+        </script>
+    </div>
+
 
     <div class="demo-section k-content wide">
         <div id="listView"></div>
