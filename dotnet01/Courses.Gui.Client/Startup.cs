@@ -36,6 +36,7 @@ namespace Courses.Gui.Client
                 AllowInsecureHttp = true
             };
         }
+
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);

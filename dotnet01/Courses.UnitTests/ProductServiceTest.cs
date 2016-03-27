@@ -19,7 +19,8 @@ namespace Courses.UnitTests
         public void GetProductsTest()
         {
             IProductService _productService = new ProductService(new ProductRepository(), new AccountRepository(), 
-                                                                 new PartnerRepository(), new ProductFilterFactory());
+                                                                 new PartnerRepository(), new CategoryRepository(), 
+                                                                 new ProductFilterFactory());
             ProductCollectionViewModel actual = _productService.GetProducts(1, 5);
             Assert.IsNotNull(actual);
         }
@@ -28,7 +29,8 @@ namespace Courses.UnitTests
         public void GetIEnumerableProductsCollectionTest()
         {
             IProductService _productService = new ProductService(new ProductRepository(), new AccountRepository(),
-                                                                 new PartnerRepository(), new ProductFilterFactory());
+                                                                 new PartnerRepository(), new CategoryRepository(),
+                                                                 new ProductFilterFactory());
             IEnumerable<ProductViewModel> actual = _productService.GetIEnumerableProductsCollection();
             Assert.IsNotNull(actual);
         }
@@ -37,7 +39,8 @@ namespace Courses.UnitTests
         public void GetProductWithAccauntsAndPartnersTest()
         {
             IProductService _productService = new ProductService(new ProductRepository(), new AccountRepository(),
-                                                                 new PartnerRepository(), new ProductFilterFactory());
+                                                                 new PartnerRepository(), new CategoryRepository(),
+                                                                 new ProductFilterFactory());
             ProductViewModelForAddEditView actual = _productService.GetProductWithAccauntsAndPartners(null);
             Assert.IsNotNull(actual);
         }
@@ -46,7 +49,8 @@ namespace Courses.UnitTests
         public void GetByIdTest()
         {
             IProductService _productService = new ProductService(new ProductRepository(), new AccountRepository(),
-                                                                 new PartnerRepository(), new ProductFilterFactory());
+                                                                 new PartnerRepository(), new CategoryRepository(),
+                                                                 new ProductFilterFactory());
             ProductViewModel _productViewModel = GetProductViewModel();
             _productService.Add(_productViewModel);
             Assert.IsNotNull(_productService.GetById(1));
@@ -56,7 +60,8 @@ namespace Courses.UnitTests
         public void AddTest()
         {
             IProductService _productService = new ProductService(new ProductRepository(), new AccountRepository(),
-                                                                 new PartnerRepository(), new ProductFilterFactory());
+                                                                 new PartnerRepository(), new CategoryRepository(),
+                                                                 new ProductFilterFactory());
             ProductViewModel _productViewModel = GetProductViewModel();
             _productService.Add(_productViewModel);
             Assert.IsNotNull(_productService.GetById(1));
@@ -66,7 +71,8 @@ namespace Courses.UnitTests
         public void EditTest()
         {
             IProductService _productService = new ProductService(new ProductRepository(), new AccountRepository(),
-                                                                 new PartnerRepository(), new ProductFilterFactory());
+                                                                 new PartnerRepository(), new CategoryRepository(),
+                                                                 new ProductFilterFactory());
             ProductViewModel _productViewModel = GetProductViewModel();
             _productService.Add(_productViewModel);
             _productViewModel.Description = "otherDescription";
@@ -87,7 +93,8 @@ namespace Courses.UnitTests
         public void DeleteTest()
         {
             IProductService _productService = new ProductService(new ProductRepository(), new AccountRepository(),
-                                                                 new PartnerRepository(), new ProductFilterFactory());
+                                                                 new PartnerRepository(), new CategoryRepository(),
+                                                                 new ProductFilterFactory());
             ProductViewModel _productViewModel = GetProductViewModel();
             _productService.Add(_productViewModel);
             _productService.Delete(_productViewModel);
