@@ -43,6 +43,7 @@ namespace Courses.Gui.Client
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                  "~/Content/bootstrap.css",
+                 "~/Content/about.css",
                  "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
