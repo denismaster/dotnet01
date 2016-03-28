@@ -8,11 +8,11 @@ using System.Web.Http.Results;
 namespace Courses.Gui.Client.Controllers
 {
     //[Authorize(Roles = "Admin, Manager, Default")]
-    public class CategoryControllercs : ApiController
+    public class CategoryController : ApiController
     {
         private readonly ICategoryService categoryService;
 
-        public CategoryControllercs(ICategoryService _categoryService)
+        public CategoryController(ICategoryService _categoryService)
         {
             if (_categoryService == null)
                 throw new ArgumentNullException();
