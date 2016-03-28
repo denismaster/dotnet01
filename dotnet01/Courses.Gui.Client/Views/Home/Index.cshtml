@@ -4,47 +4,12 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<script>
-    $(document).ready(function () {
-        $(".product-details").hide();
-        $(".category").hide();
-    });
-    var selectedItem;
-</script>
+<link rel="stylesheet" href="~/Content/app/index-list-style.css">
+<script src="~/Scripts/app/index/index-listView.js"></script>
 
 
 
-<div class="index">
-    <button type="button" id="category-button">Категории</button>
-    <script>
-        $("#category-button").kendoButton({
-        click: onClick
-    });
-    function onClick() {
-        $(".category").show();
-    }
-    </script>
-    <div id="category">
-        <div class="demo-section k-content">
-            <div id="treeview"></div>
-        </div>
-        <script>
-            categoriesTree = new kendo.data.HierarchicalDataSource({
-                transport: {
-                    read: {
-                        url: "/api/Category",
-                        dataType: "json"
-                    }
-                },
-                
-            });
-
-        $("#treeview").kendoTreeView({
-            dataSource: categoriesTree,
-            //dataTextField: "FullName"
-        });
-        </script>
-    </div>
+<div class="index">    
     <div class="demo-section k-content wide">
         <div id="listView"></div>
         <div id="pager" class="k-pager-wrap"></div>
@@ -60,120 +25,7 @@
             </p>
             
         </div>
-    </script>
-    <script>
-        $(function () {
-            var dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        url: '/api/Product',
-                        dataType: 'json'
-                    }
-                },
-                pageSize: 9
-            });
-
-            $("#pager").kendoPager({
-                dataSource: dataSource
-            });
-
-            $("#listView").kendoListView({
-                dataSource: dataSource,
-                selectable: "single",
-                change: onChange,
-                template: kendo.template($("#template").html())
-            });
-            function onChange() {
-                var data = dataSource.view(),
-                    selected = $.map(this.select(), function (item) {
-                        return data[$(item).index()];
-                    });
-                selectedItem = selected[0];
-                var viewModel = kendo.observable({
-                    nameValue: selectedItem["Name"],
-                    descriptionValue: selectedItem["Description"],
-                    activeValue: selectedItem["Active"],
-                    typeValue: selectedItem["Type"],
-                    locationValue: selectedItem["Location"],
-                    seatsCountValue: selectedItem["SeatsCount"]
-                });
-                kendo.bind($(".product-details"), viewModel);
-                $(".index").hide();
-                $(".product-details").show();
-                
-            }
-        });
-    </script>
-    <style>
-        
-        #listView {
-            padding: 10% 5%, 6%, 5%;
-            margin-bottom: -1px;
-            min-height: 510px;
-        }
-
-        .product {
-            float: left;
-            position: relative;
-            width: 201px;
-            height: 360px;
-            
-            padding: 0;
-            margin-top: 5%;
-            margin-right: 4%;
-            margin-left: 5%;
-            margin-bottom: 0%;
-        }
-
-            .product img {
-                width: 200px;
-                height: 200px;
-            }
-
-            .product h3 {
-                margin: 0;
-                padding: 3px 5px 0 0;
-                max-width: 250px;
-                overflow: hidden;
-                line-height: 1.1em;
-                font-size: .9em;
-                font-weight: normal;
-                text-transform: uppercase;
-                color: #999;
-            }
-
-            .product p {
-                visibility: hidden;
-                font-size: 200%;
-            }
-
-            .product:hover p {
-                visibility: visible;
-                position: absolute;
-                width: 200px;
-                height: 200px;
-                top: 0;
-                margin: 0;
-                padding: 0;
-                line-height: 60px;
-                vertical-align: middle;
-                text-align: center;
-                color: #fff;
-                background-color: rgba(0,0,0,0.75);
-                transition: background .2s linear, color .2s linear;
-                -moz-transition: background .2s linear, color .2s linear;
-                -webkit-transition: background .2s linear, color .2s linear;
-                -o-transition: background .2s linear, color .2s linear;
-            }
-
-        .k-listview:after {
-            content: ".";
-            display: block;
-            height: 0;
-            clear: both;
-            visibility: hidden;
-        }
-    </style>
+    </script>    
 </div>
 
 
@@ -215,42 +67,4 @@
 </div>
 
 @Scripts.Render("~/bundles/basket")
-<script>
-    $("#textButton").kendoButton({
-        click: onClick
-    });
-    function onClick() {
-        $(".index").show();
-        $(".product-details").hide();
-        $("#listView").data("kendoListView").clearSelection();
-    }
-</script>
-<style>
-    .parent {
-    }
 
-    .block {
-        font-size: large;
-    }
-
-
-    .demo {
-        left: 50%;
-        right: 50%;
-        position: center;
-    }
-
-    .fieldlist {
-        margin: 0 3em 0 0;
-        padding: 0;
-    }
-
-        .fieldlist li {
-            list-style: none;
-            text-align: left;
-        }
-
-        .fieldlist h5 {
-            padding-top: 5px;
-        }
-</style>

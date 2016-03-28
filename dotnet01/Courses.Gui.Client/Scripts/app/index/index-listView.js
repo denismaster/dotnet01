@@ -1,6 +1,7 @@
 ﻿
 $(document).ready(function () {
     $(".product-details").hide();
+    $(".category").hide();
     var selectedItem;
     $(function () {
         var dataSource = new kendo.data.DataSource({
@@ -10,7 +11,7 @@ $(document).ready(function () {
                     dataType: 'json'
                 }
             },
-            pageSize: 9
+            pageSize: 12
         });
 
         $("#pager").kendoPager({
@@ -37,10 +38,9 @@ $(document).ready(function () {
                 locationValue: selectedItem["Location"],
                 seatsCountValue: selectedItem["SeatsCount"]
             });
-            console.log(viewModel["Name"]);
             kendo.bind($(".product-details"), viewModel);
             $(".index").hide();
-            $(".product-details").show();
+            $(".product-details").show();      
         }
     });
     $("#textButton").kendoButton({
@@ -49,5 +49,6 @@ $(document).ready(function () {
     function onClick() {
         $(".index").show();
         $(".product-details").hide();
+        $("#listView").data("kendoListView").clearSelection();
     }
 });
