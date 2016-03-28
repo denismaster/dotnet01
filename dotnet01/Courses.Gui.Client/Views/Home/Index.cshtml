@@ -9,8 +9,6 @@
         $(".product-details").hide();
         $(".category").hide();
     });
-</script>
-<script>
     var selectedItem;
 </script>
 
@@ -26,7 +24,6 @@
         $(".category").show();
     }
     </script>
-
     <div id="category">
         <div class="demo-section k-content">
             <div id="treeview"></div>
@@ -48,25 +45,22 @@
         });
         </script>
     </div>
-
-
     <div class="demo-section k-content wide">
         <div id="listView"></div>
         <div id="pager" class="k-pager-wrap"></div>
     </div>
-
     <script type="text/x-kendo-template" id="template">
         <div class="product">
-            <img src="" alt="#: Name # image" />
+            <img src="data:image/png;base64,${Image}" alt="#: Name # image" />
+            
             <h3>#:Name#</h3>
             <p>
                 <br>Подробнее... <br>
-                <button type="button" id="buyButton" data-id="#: Id#" onclick="BasketButtonEventListener"><h5>Купить</h5> </button>
+                <button class="btn btn-info" type="button" id="buyButton" data-id="#: Id#" onclick="BasketButtonEventListener">Купить</button>
             </p>
             
         </div>
     </script>
-
     <script>
         $(function () {
             var dataSource = new kendo.data.DataSource({
@@ -103,7 +97,6 @@
                     locationValue: selectedItem["Location"],
                     seatsCountValue: selectedItem["SeatsCount"]
                 });
-                console.log(viewModel["Name"]);
                 kendo.bind($(".product-details"), viewModel);
                 $(".index").hide();
                 $(".product-details").show();
@@ -111,14 +104,10 @@
             }
         });
     </script>
-
     <style>
-        #buyButton{
-            height: 15%;
-        }
         
         #listView {
-            padding: 10% 15%;
+            padding: 10% 5%, 6%, 5%;
             margin-bottom: -1px;
             min-height: 510px;
         }
@@ -126,21 +115,25 @@
         .product {
             float: left;
             position: relative;
-            width: 251px;
-            height: 310px;
-            margin: 3% 3%;
+            width: 201px;
+            height: 360px;
+            
             padding: 0;
+            margin-top: 5%;
+            margin-right: 4%;
+            margin-left: 5%;
+            margin-bottom: 0%;
         }
 
             .product img {
-                width: 250px;
-                height: 250px;
+                width: 200px;
+                height: 200px;
             }
 
             .product h3 {
                 margin: 0;
                 padding: 3px 5px 0 0;
-                max-width: 96px;
+                max-width: 250px;
                 overflow: hidden;
                 line-height: 1.1em;
                 font-size: .9em;
@@ -157,12 +150,12 @@
             .product:hover p {
                 visibility: visible;
                 position: absolute;
-                width: 250px;
-                height: 250px;
+                width: 200px;
+                height: 200px;
                 top: 0;
                 margin: 0;
                 padding: 0;
-                line-height: 75px;
+                line-height: 60px;
                 vertical-align: middle;
                 text-align: center;
                 color: #fff;
