@@ -39,7 +39,11 @@ namespace Courses.Gui.Client.Controllers
         }
         public ActionResult Register()
         {
-            return RedirectToAction("Register","Account");
+            return View();
+        }
+        public ActionResult Test()
+        {
+            return View();
         }
     }
 }
