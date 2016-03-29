@@ -41,10 +41,7 @@ namespace Courses.Gui.Client.Controllers
         {
             return View();
         }
-        public ActionResult Test()
-        {
-            return View();
-        }
+     
     }
 }
 
