@@ -12,17 +12,19 @@
 }
 h2
 {
-    text-align: center;
-    border-bottom: 3px solid #578F90;
+    text-align:center;
 }
 h4
 {
     text-indent: 5%;
 }
-img
+img.content-img
 {
     height:150px;
     width: 150px;
+    margin-left:20px;
+    margin-right:20px;
+    
 }
 p
 {

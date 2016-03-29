@@ -69,21 +69,27 @@
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
-                                    <a href="#">Главная</a>
+                                    <a href="../#">Главная</a>
                                 </li>
                                 <li>
-                                    <a href="#/home/about">О нас</a>
+                                    <a href="../#/home/about">О нас</a>
                                 </li>
                                 <li>
-                                    <a href="#/home/contact">Контакты</a>
+                                    <a href="../#/home/contact">Контакты</a>
+                                </li>
+@if (!Request.IsAuthenticated)
+{
+                                <li>
+                                    <a href="../#/home/register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Зарегистрироваться</span></a>
                                 </li>
                                 <li>
-                                    <a href="#/home/register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Зарегистрироваться</span></a>
+                                    <a href="../#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Войти</span></a>
                                 </li>
-                                <li>
-                                    <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Войти</span></a>
-                                </li>
+}
+else
+{
 
+}
                             </ul>
 
                         </div>
@@ -116,7 +122,7 @@
                     <h4 class="modal-title" id="Login">Войти</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="customer-orders.html" method="post">
+                    <form  method="post">
                         <div class="form-group">
                             <input type="text" class="form-control" id="email_modal" placeholder="email">
                         </div>
