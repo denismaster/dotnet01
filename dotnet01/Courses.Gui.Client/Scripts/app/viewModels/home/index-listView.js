@@ -37,24 +37,29 @@ $(document).ready(function () {
             var viewModel = kendo.observable({
                 nameValue: selectedItem["Name"],
                 descriptionValue: selectedItem["Description"],
-                activeValue: selectedItem["Active"],
+                activeValue: function(){
+                    if (selectedItem["Active"] === true) {
+                        $("#img-box span").removeClass().addClass("label label-success")
+                        return "Курсы активны";
+                    }
+                    else {
+                        $("#img-box span").removeClass().addClass("label label-danger")
+                        return "Курсы не активны";
+                    }
+                },
                 typeValue: selectedItem["Type"],
                 locationValue: selectedItem["Location"],
-                seatsCountValue: selectedItem["SeatsCount"]
+                seatsCountValue: selectedItem["SeatsCount"],
+                photoAsBase64: function () {
+                    return "data:image/jpeg;base64," + selectedItem["Image"];
+                },
+                teacherValue: selectedItem["Teacher"]
             });
             kendo.bind($(".product-details"), viewModel);
             $(".index").hide();
             $(".product-details").show();      
         }
     });
-    $("#textButton").kendoButton({
-        click: onClick
-    });
-    function onClick() {
-        $(".index").show();
-        $(".product-details").hide();
-        $("#listView").data("kendoListView").clearSelection();
-    }
 
 
     function applyFilter(){
@@ -71,6 +76,11 @@ $(document).ready(function () {
         dataSource.filter({});
     }
 
+    $(document).on('click', '#backButton', function () {
+        $(".index").show();
+        $(".product-details").hide();
+        $("#listView").data("kendoListView").clearSelection();
+    });
     $(document).on('input', '#search', '[data-action="text"]', function () {
         searchValue = $("#search").val();
         if (searchValue.length > 0) {
