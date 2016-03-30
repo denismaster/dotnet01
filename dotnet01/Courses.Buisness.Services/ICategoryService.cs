@@ -1,11 +1,5 @@
-﻿
-using System;
+﻿using Courses.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Courses.Models;
-using Courses.ViewModels;
 namespace Courses.Buisness.Services
 {
     public interface ICategoryService
@@ -21,6 +15,12 @@ namespace Courses.Buisness.Services
         /// <param name="Id">Id категории для редактирования</param>
         /// <returns></returns>
         CategoryViewModelForAddEditView GetCategoryWithCategorys(int? Id);
+
+        /// <summary>
+        /// Получение всех категорий без фильтров и сортировок
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<CategoryViewModel> GetIEnumerableCategorysCollection();
         /// <summary>
         /// Получение категории
         /// </summary>

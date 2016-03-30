@@ -1,13 +1,11 @@
-﻿using System;
-using Ninject;
-using Courses.Models;
-using Courses.Models.Repositories;
-using Courses.Buisness;
-using Courses.DAL;
+﻿using Courses.Buisness;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
-
-using System.Net;
+using Courses.DAL;
+using Courses.Models;
+using Courses.Models.Repositories;
+using Ninject;
+using System;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
