@@ -227,6 +227,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
@@ -249,32 +250,18 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
+    <Content Include="Content\app\index-list-style.css" />
     <Content Include="Content\bootstrap-social.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\CSS\About.css" />
-    <Content Include="Content\CSS\animate.css" />
-    <Content Include="Content\CSS\contact.css" />
-    <Content Include="Content\CSS\font-awesome.css" />
-    <Content Include="Content\CSS\index.css" />
-    <Content Include="Content\CSS\register.css" />
-    <Content Include="Content\CSS\style.default.css" />
-    <Content Include="Content\images\fb.png" />
-    <Content Include="Content\images\logo2.png" />
-    <Content Include="Content\images\odn.png" />
-    <Content Include="Content\images\person1.png" />
-    <Content Include="Content\images\skype.png" />
-    <Content Include="Content\images\tw.png" />
-    <Content Include="Content\images\vk.png" />
-    <Content Include="Content\images\ytb.png" />
+    <Content Include="Content\images\advantages.png" />
+    <Content Include="Content\images\certificate.png" />
+    <Content Include="Content\images\partnership.png" />
     <Content Include="Content\index.css" />
-    <Content Include="Content\js\front.js" />
-    <Content Include="Content\js\jquery.cookie.js" />
-    <Content Include="Content\js\jquery.counterup.min.js" />
-    <Content Include="Content\js\jquery.parallax-1.1.3.js" />
-    <Content Include="Content\js\waypoints.min.js" />
+    <Content Include="Content\IndexCSS\index-listView.css" />
+    <Content Include="Content\IndexCSS\index-product-details.css" />
     <Content Include="Content\kendo.black.min.css" />
     <Content Include="Content\kendo.black.mobile.min.css" />
     <Content Include="Content\kendo.blueopal.min.css" />
@@ -358,13 +345,13 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\index\index-listView.js" />
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\app\router.js" />
     <Content Include="Scripts\app\viewModels\account\registerViewModel.js" />
     <Content Include="Scripts\app\viewModels\home\aboutViewModel.js" />
     <Content Include="Scripts\app\viewModels\home\contactViewModel.js" />
     <Content Include="Scripts\app\viewModels\home\indexViewModel.js" />
-    <Content Include="Scripts\app\viewModels\home\testViewModel.js" />
     <Content Include="Scripts\basket\basket.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -524,7 +511,6 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sammy-0.7.4.js" />
     <Content Include="Scripts\sammy-0.7.4.min.js" />
-    <Content Include="Scripts\view\layout.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\app\_run.js" />
     <Content Include="Scripts\app\app.datamodel.js" />
@@ -696,9 +682,6 @@
     <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Home\Spa.cshtml" />
     <Content Include="Views\Home\Basket.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
-    <Content Include="Views\Account\_Account.cshtml" />
-    <Content Include="Views\Account\Manage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -720,6 +703,7 @@
     <Folder Include="Content\Silver\" />
     <Folder Include="Content\textures\" />
     <Folder Include="Content\Uniform\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Scripts\cultures\" />
     <Folder Include="Scripts\messages\" />
   </ItemGroup>
