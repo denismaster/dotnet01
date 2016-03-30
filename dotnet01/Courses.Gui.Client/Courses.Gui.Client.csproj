@@ -269,6 +269,7 @@
     <Content Include="Content\images\tw.png" />
     <Content Include="Content\images\vk.png" />
     <Content Include="Content\images\ytb.png" />
+    <Content Include="Content\index-list-style.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\js\front.js" />
     <Content Include="Content\js\jquery.cookie.js" />
@@ -389,6 +390,7 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="Scripts\basket\BasketFormatter.js" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\app\viewModels\home\index-listView.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery.min.js" />
