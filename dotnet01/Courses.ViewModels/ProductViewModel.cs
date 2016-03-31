@@ -95,12 +95,11 @@ namespace Courses.ViewModels
         [DisplayName("Изображение")]
         public byte[] Image { get; set; }
 
-
-
         [DisplayName("Тип курса *")]
         public String TypeName
         {
             get { return ProductTypes.Where(m => m.Value == Type.ToString()).First().Text; }
+            set { }
         }
 
         [DisplayName("Партнер *")]

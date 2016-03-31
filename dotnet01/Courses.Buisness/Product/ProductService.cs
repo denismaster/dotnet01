@@ -90,8 +90,7 @@ namespace Courses.Buisness
         /// <returns></returns>
         public IEnumerable<ProductViewModel> GetIEnumerableProductsCollection()
         {
-            IEnumerable<ProductViewModel> products;
-            products = productRepository.Get().Select(ConvertFromProductToProductViewModel);
+            IEnumerable<ProductViewModel> products = productRepository.Get().Select(ConvertFromProductToProductViewModel);
             return products;
         }
 
@@ -238,7 +237,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
                 Location = c.Location,
-                Image = c.Image
+                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image
             };
             return product;
         }
@@ -258,10 +257,38 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                Image = c.Image,
+                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image,
+                ManagerName = (c.User != null) ? c.User.Login : "Отсутствует",
+                PartnerName = (c.Partner != null) ? c.Partner.Name : "Отсутствует",
+            };
+        }
+
+        private ProductViewModel ConvertFromProductToProductViewModel_WebApi(Product c)
+        {
+            ProductViewModel productView = new ProductViewModel()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                CreatedDate = c.CreatedDate,
+                UpdatedDate = c.UpdatedDate,
+                Active = c.Active,
+                Type = c.Type,
+                PartnerId = c.PartnerId,
+                Teacher = c.Teacher,
+                SeatsCount = c.SeatsCount ?? null,
+                AssignedUserId = c.AssignedUserId ?? null,
+                Location = c.Location,
+                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image,
                 ManagerName = (c.User != null) ? c.User.Login : "Отсутствует",
                 PartnerName = (c.Partner != null) ? c.Partner.Name : "Отсутствует"
             };
+
+            String typeName = productView.TypeName;
+            productView.TypeName = typeName;
+
+
+            return productView;
         }
 
         private ProductForAddEditViewModel ConvertFromProductToProductViewModelForAddEditView(Product c)
@@ -280,7 +307,9 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                Image = c.Image
+                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image,
+                ManagerName = (c.User != null) ? c.User.Login : "Отсутствует",
+                PartnerName = (c.Partner != null) ? c.Partner.Name : "Отсутствует"
             };
         }
         private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
@@ -305,7 +334,9 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            productView.Image = product.Image;
+            productView.Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image;
+            productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
+            productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
             productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
             productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
 
@@ -355,7 +386,10 @@ namespace Courses.Buisness
             productWithAllCategorys.SeatsCount = productWithCategorys.SeatsCount ?? null;
             productWithAllCategorys.AssignedUserId = productWithCategorys.AssignedUserId ?? null;
             productWithAllCategorys.Location = productWithCategorys.Location;
-            productWithAllCategorys.Image = productWithCategorys.Image;
+            productWithAllCategorys.Image = (productWithCategorys.Image == null || productWithCategorys?.Image?.Length == 0) ? null : productWithCategorys.Image;
+
+            productWithAllCategorys.ManagerName = productWithCategorys.ManagerName;
+            productWithAllCategorys.PartnerName = productWithCategorys.PartnerName;
 
             var categorysList = categoryRepository.Get().Select(ConvertFromCategoryToCategoryViewModel);
             productWithAllCategorys.AllCategorys = categorysList.ToList();

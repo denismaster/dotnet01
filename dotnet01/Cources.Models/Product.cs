@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Courses.Models
 {
-   public class Product : DomainObject
+    public class Product : DomainObject
     {
         public int Id { get; set; }
         [Required]
@@ -21,14 +18,14 @@ namespace Courses.Models
         public string Teacher { get; set; }
         public int? SeatsCount { get; set; }
         public int? AssignedUserId { get; set; }
-    //    public String imagePath { get; set; }
+
         public byte[] Image { get; set; }
         public string Location { get; set; }
         //навигационные свойства, не участвуют при инициализции, служат для обращения к связанным сущностям.
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public  virtual Partner Partner { get; set; }
+        public virtual Partner Partner { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Customer> CustomersWithFavouriteProducts { get; set; }
@@ -42,6 +39,6 @@ namespace Courses.Models
             Comments = new List<Comment>();
             Image = new List<byte>().ToArray();
         }
-       
+
     }
 }
