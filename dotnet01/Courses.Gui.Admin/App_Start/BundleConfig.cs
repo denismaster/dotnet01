@@ -27,7 +27,7 @@ namespace Courses.Gui.Admin
                       "~/Content/bootstrap.css",
                       "~/Content/style.default.css",
                       "~/Content/custom.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/kendo").Include(
             "~/Scripts/kendo.all.min.js",

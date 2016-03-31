@@ -28,8 +28,8 @@ namespace Courses.Models
         public virtual ICollection<Appointment> Appointments { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 
-        public Partner Partner { get; set; }
-        public User User { get; set; }
+        public  virtual Partner Partner { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Customer> CustomersWithFavouriteProducts { get; set; }
         public virtual ICollection<ProductRating> ProductRatings { get; set; }

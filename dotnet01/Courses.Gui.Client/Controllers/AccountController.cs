@@ -57,7 +57,7 @@ namespace Courses.Gui.Client.Controllers
                     {
                         IsPersistent = true
                     }, claims);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Spa", "Home");
                 }
             }
             return View(model);
@@ -98,7 +98,7 @@ namespace Courses.Gui.Client.Controllers
                     {
                         IsPersistent = true
                     }, claims);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Spa", "Home");
                 }
                 else
                 {
@@ -136,7 +136,7 @@ namespace Courses.Gui.Client.Controllers
         }
         public ActionResult AuthorizeVk()
         {
-            return ExternalLogin("Vkontakte", Url.Action("Index","Home"));
+            return ExternalLogin("Vkontakte", Url.Action("Spa","Home"));
         }
 
         public ActionResult AuthorizeFacebook()
@@ -302,12 +302,13 @@ namespace Courses.Gui.Client.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Spa", "Home");
         }
 
         //

@@ -29,7 +29,7 @@ namespace Courses.Models
         public virtual ICollection<Partner> Partners { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public string Description { get; set; }
-        public Category ParentCategory { get; set; }
+        public virtual Category ParentCategory { get; set; }
 
         //инициализировать вручную данный айди
         public int? ParentCategoryId { get; set; }

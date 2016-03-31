@@ -7,30 +7,92 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Courses", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Admin", "About", "Home")</li>
-                </ul>
+<body class="bdy">
+    <header>
+
+        <div id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-offset-8 contact">
+                        <p class="hidden-sm hidden-xs">Свяжитесь с нами +7 (978) 664-48-26 или info@course_cloud.com</p>
+                        <p class="hidden-md hidden-lg">
+                            <a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>  <a href="#" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+
+
+        <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+            <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand home" href="index.html">
+                            <img src="~/Content/images/logo2.png" height="60px" alt="Universal logo" class="hidden-xs hidden-sm">
+                        </a>
+                        <div class="navbar-buttons">
+                            <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                                <span class="sr-only">Toggle navigation</span>
+                                <i class="fa fa-align-justify"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!--/.navbar-header -->
+
+                    <div class="navbar-collapse collapse" id="navigation">
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#">Главная</a>
+                            </li>
+                            <li>
+                                <a href="#/home/about">Аккаунты</a>
+                            </li>
+                            @if (!Request.IsAuthenticated)
+                            {
+                                <li>
+                                    <a href="#/home/register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Зарегистрироваться</span></a>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Войти</span></a>
+                                </li>
+                            }
+                            else
+                            {
+
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">@User.Identity.Name <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Мои курсы</a></li>
+                                        <li><a href="#">Настройки</a></li>
+                                        <li>@Html.ActionLink("Выйти", "LogOff", "Account")</li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+
+                    </div>
+                    <!--/.nav-collapse -->
+
+
+                </div>
+                <!--/.nav-collapse -->
+
+            </div>
+
+
+        </div>
+        <!-- /#navbar -->
+        </div>
+
+        <!-- *** NAVBAR END *** -->
+    </header>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Course Cloud</p>
         </footer>
     </div>
 

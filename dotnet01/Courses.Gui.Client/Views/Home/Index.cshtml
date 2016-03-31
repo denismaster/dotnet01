@@ -1,15 +1,14 @@
-﻿@{
-    ViewBag.Title = "Главная";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
+﻿
 <link rel="stylesheet" href="~/Content/app/index-list-style.css">
-<script src="~/Scripts/app/index/index-listView.js"></script>
+<script src="~/Scripts/app/viewModels/home/index-listView.js"></script>
 
 
+<div class="index"> 
+    <div class="input-group input-group-lg" id="search-input-group">
+        <span class="input-group-addon" id="basic-addon1" style="border-radius:0px"><span class="glyphicon glyphicon-search"></span></span>
+        <input id="search" type="text" style="border-radius:0px"  class="form-control" placeholder="Поиск по названию" aria-describedby="basic-addon1">
+    </div>
 
-<div class="index">    
     <div class="demo-section k-content wide">
         <div id="listView"></div>
         <div id="pager" class="k-pager-wrap"></div>
@@ -30,40 +29,61 @@
 
 
 <div class="product-details">
-    <div class="parent">
-        <br />
-        <div class="panel panel-info">
+        <div class="panel panel-primary">
             <div class="panel-heading">
-                Информация о курсе
+                <label data-bind="text:nameValue"></label>
+                <button type="button" class="btn btn-template-transparent-black btn-lg" id="backButton"><span class="glyphicon glyphicon-remove"></span></button>
             </div>
             <div class="panel-body">
-                <div class="form-group">
-                    <label> Название : </label>
-                    <label data-bind="text:nameValue"></label>
+                
+                    <div id="img-box">
+                        <div class="form-group">
+                            <img data-bind="attr: { src: photoAsBase64 }" />
+                        </div>
+                        <div class="form-group"id="activityLabel">
+                            <br /><label><span data-bind="text: activeValue" class="label label-danger"></span></label>
+                        </div>
+                    </div>
+                <div id="short-info">
+                    <div class="form-group">
+                        <blockquote>
+                            <h4><label> Тип мероприятия </label></h4>
+                            <p><label data-bind="text:typeValue"></label></p>
+                        </blockquote>
+                    </div>
+                    <div class="form-group">
+                        <blockquote>
+                            <h4><label> Доступных мест</label></h4>
+                            <p><label data-bind="text:seatsCountValue"></label></p>
+                        </blockquote>
+                    </div>
+                    <div class="form-group">
+                        <blockquote>
+                            <h4><label> Место проведения</label></h4>
+                            <p><label data-bind="text:locationValue"></label></p>
+                        </blockquote>
+                    </div>
+                    <div class="form-group">
+                        <blockquote>
+                            <h4><label> Преподаватель</label></h4>
+                            <p><label data-bind="text:teacherValue"></label></p>
+                        </blockquote>
+                    </div>
+                    
                 </div>
-                <div class="form-group">
-                    <label> Тип мероприятия : </label>
-                    <label data-bind="text:typeValue"></label>
+
+                <div class="form-group" id="description">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Описание</div>
+                        <div class="panel-body">
+                            <label data-bind="text:descriptionValue"></label>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label> Доступных мест : </label>
-                    <label data-bind="text:seatsCountValue"></label>
-                </div>
-                <div class="form-group">
-                    <label> Место проведения : </label>
-                    <label data-bind="text:locationValue"></label>
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" data-bind="checked: activeValue" disabled />
-                </div>
-                <div class="form-group">
-                    <label> Описание : </label>
-                    <label data-bind="text:descriptionValue"></label>
-                </div>
+
             </div>
         </div>
-    </div>
-    <button type="button" id="textButton">НАЗАД</button>
+    
 </div>
 
 @Scripts.Render("~/bundles/basket")

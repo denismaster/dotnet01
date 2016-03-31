@@ -23,7 +23,7 @@ namespace Courses.Models
         public int? ParentId { get; set; }
         public int AppointmentId { get; set; }
        
-        public Schedule _Schedule { get; set; }
-        public Appointment Appointment { get; set; }
+        public virtual Schedule _Schedule { get; set; }
+        public virtual Appointment Appointment { get; set; }
     }
 }

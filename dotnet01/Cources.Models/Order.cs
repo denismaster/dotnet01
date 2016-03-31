@@ -20,7 +20,7 @@ namespace Courses.Models
         public DateTime CreatedDate { get; set; }
         public DateTime UpdateDate { get; set;}
         public virtual ICollection<OrderItem> OrderItems { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
         public Order()
         {
             OrderItems = new List<OrderItem>();
