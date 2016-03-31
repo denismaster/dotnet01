@@ -41,10 +41,10 @@
                 @Html.ActionLink("Название", "Index", new { sortOrder = ViewBag.NameSortParam, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                @Html.ActionLink("Id партнера", "Index", new { sortOrder = ViewBag.PartnerIdSortParam, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Партнер", "Index", new { sortOrder = ViewBag.PartnerIdSortParam, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                @Html.ActionLink("Тип мероприятия", "Index", new { sortOrder = ViewBag.TypeSortParam, currentFilter = ViewBag.CurrentFilter })
+                @Html.ActionLink("Тип курса", "Index", new { sortOrder = ViewBag.TypeSortParam, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
                 @Html.ActionLink("Активность", "Index", new { sortOrder = ViewBag.ActiveSortParam, currentFilter = ViewBag.CurrentFilter })
@@ -58,8 +58,8 @@
             {
                 <tr>
                     <td width="35%">@item.Name</td>
-                    <td width="15%">@item.PartnerId</td>
-                    <td width="20%">@item.Type</td>
+                    <td width="15%">@item.PartnerName</td>
+                    <td width="20%">@item.TypeName</td>
                     <td width="15%">@item.Active</td>
                     <td width="20%">
                         <div class="btn-group">

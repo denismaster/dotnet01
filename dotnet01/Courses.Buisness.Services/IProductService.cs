@@ -1,10 +1,5 @@
-﻿using System;
+﻿using Courses.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Courses.ViewModels;
-using Courses.Models;
 namespace Courses.Buisness.Services
 {
     public interface IProductService
@@ -34,7 +29,7 @@ namespace Courses.Buisness.Services
         /// <param name="Id"></param>
         /// <returns></returns>
         ProductViewModel GetById(int Id);
-       
+
         /// <summary>
         /// Добавление курса. 
         /// </summary>

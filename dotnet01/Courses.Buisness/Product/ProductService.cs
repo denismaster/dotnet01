@@ -107,7 +107,7 @@ namespace Courses.Buisness
             {
                 //для возможности не выбирать менеджера                                                              
                 User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                var listUser = accountRepository.Get().ToList<User>();
+                var listUser = accountRepository.Get().Where(m => m.Role.Equals("Manager")).ToList<User>();
                 listUser.Add(noManager);
                 productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
                 productView.Partners = new SelectList(partnerRepository.Get(), "PartnerId", "Name");
@@ -119,7 +119,7 @@ namespace Courses.Buisness
                 {
                     productView = ConvertFromProductToProductViewModelForAddEditView(product);
                     User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                    var listUser = accountRepository.Get().ToList<User>();
+                    var listUser = accountRepository.Get().Where(m => m.Role.Equals("Manager")).ToList<User>();
                     listUser.Add(noManager);
                     productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
                     productView.Partners = new SelectList(partnerRepository.Get(), "PartnerId", "Name", product.PartnerId);
@@ -224,7 +224,7 @@ namespace Courses.Buisness
         /// </summary>
         private Product ConvertFromProductViewModelToProduct(ProductViewModel c)
         {
-            return new Product()
+            Product product = new Product()
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -238,8 +238,9 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
                 Location = c.Location,
-                Image = c.ImageBuffer
+                Image = c.Image
             };
+            return product;
         }
         private ProductViewModel ConvertFromProductToProductViewModel(Product c)
         {
@@ -257,7 +258,9 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                Image = (c.Image != null) ? Convert.ToBase64String(c.Image) : null
+                Image = c.Image,
+                ManagerName = (c.User != null) ? c.User.Login : "Отсутствует",
+                PartnerName = (c.Partner != null) ? c.Partner.Name : "Отсутствует"
             };
         }
 
@@ -277,8 +280,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-
-                Image = (c.Image != null) ? Convert.ToBase64String(c.Image) : null
+                Image = c.Image
             };
         }
         private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
@@ -286,12 +288,10 @@ namespace Courses.Buisness
             ProductWithCategorysViewModel productView = new ProductWithCategorysViewModel();
             productView.Categorys = new List<CategoryViewModel>();
 
-
             foreach (Category c in product.Categories)
             {
                 productView.Categorys.Add(ConvertFromCategoryToCategoryViewModel(c));
             }
-
 
             productView.Id = product.Id;
             productView.Name = product.Name;
@@ -305,7 +305,9 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            productView.Image = (product.Image != null) ? Convert.ToBase64String(product.Image) : null;
+            productView.Image = product.Image;
+            productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
+            productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
 
             return productView;
         }
