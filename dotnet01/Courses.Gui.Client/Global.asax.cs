@@ -1,8 +1,12 @@
-﻿using System.Web;
+﻿using Courses.DAL;
+using System.Data.Entity;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Courses.Models.Repositories;
+using Courses.Models;
 
 namespace Courses.Gui.Client
 {
@@ -18,7 +22,7 @@ namespace Courses.Gui.Client
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             ControllerBuilder.Current.SetControllerFactory(new ClientControllerFactory());
-            //DatabaseContext context = new DatabaseContext();
+            DatabaseContext context = new DatabaseContext();
             //if (context.Database.Exists())
             //{
             //    // set the database to SINGLE_USER so it can be dropped
@@ -29,6 +33,9 @@ namespace Courses.Gui.Client
             //}
             //Database.SetInitializer(new DBInitializer());
             //context.Database.Initialize(true);
+
+          
+
             //тест фильтрации 
             /* AccountFilterFactory factory = new AccountFilterFactory();
              FieldFilter filter = new FieldFilter();

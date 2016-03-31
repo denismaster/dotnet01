@@ -20,7 +20,7 @@ namespace Courses.Models
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public int Status { get; set; }
-        public EmailNewsletter  EmailNewsLetter { get; set; }
-        public Customer Customer { get; set; }
+        public virtual EmailNewsletter EmailNewsLetter { get; set; }
+        public virtual Customer Customer { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace Courses.Models
         public DateTime UpdatedDate { get; set; }
         public int OrderId { get; set; }
         public decimal SumTotal { get; set; }
-        public Appointment Appointment { get; set; }
-        public Order Order { get; set; }
+        public virtual Appointment Appointment { get; set; }
+        public virtual Order Order { get; set; }
     }
 }
