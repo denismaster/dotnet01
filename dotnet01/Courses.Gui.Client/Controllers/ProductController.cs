@@ -21,7 +21,7 @@ namespace Courses.Gui.Client.Controllers
         // GET: api/Product
         public JsonResult<IEnumerable<ProductViewModelForWebApi>> GetProducts()
         {
-            var products = productService.GetIEnumerableProductsCollection();
+            IEnumerable<ProductViewModelForWebApi> products = productService.GetIEnumerableProductsCollection();
             return Json(products);
         }
 
