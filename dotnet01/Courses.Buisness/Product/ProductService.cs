@@ -249,7 +249,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
                 Location = c.Location,
-                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image
+                Image = (c.Image == null || c.Image.Length == 0) ? null : c.Image
             };
             return product;
         }
@@ -269,7 +269,7 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image,
+                Image = (c.Image == null || c.Image.Length == 0) ? null : c.Image,
                 ManagerName = (c.User != null) ? c.User.Login : "Отсутствует",
                 PartnerName = (c.Partner != null) ? c.Partner.Name : "Отсутствует",
             };
@@ -290,10 +290,10 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            productView.Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image;
-            productView.ManagerName = (product?.User != null) ? product?.User?.Login : "Отсутствует";
-            productView.PartnerName = (product?.Partner != null) ? product?.Partner?.Name : "Отсутствует";
-            productView.ManagerName = (product?.User != null) ? product?.User?.Login : "Отсутствует";
+            productView.Image = (product.Image == null || product.Image.Length == 0) ? null : product.Image;
+           // productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
+           // productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
+          //  productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
 
             switch (productView.Type)
             {
@@ -323,7 +323,7 @@ namespace Courses.Buisness
                 SeatsCount = product.SeatsCount ?? null,
                 AssignedUserId = product.AssignedUserId ?? null,
                 Location = product.Location,
-                Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image,
+                Image = (product.Image == null || product.Image.Length == 0) ? null : product.Image,
                 ManagerName = (product.User != null) ? product.User.Login : "Отсутствует",
                 PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует"
             };
@@ -350,7 +350,7 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            productView.Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image;
+            productView.Image = (product.Image == null || product.Image.Length == 0) ? null : product.Image;
             productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
             productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
             productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
@@ -401,7 +401,7 @@ namespace Courses.Buisness
             productWithAllCategorys.SeatsCount = productWithCategorys.SeatsCount ?? null;
             productWithAllCategorys.AssignedUserId = productWithCategorys.AssignedUserId ?? null;
             productWithAllCategorys.Location = productWithCategorys.Location;
-            productWithAllCategorys.Image = (productWithCategorys.Image == null || productWithCategorys?.Image?.Length == 0) ? null : productWithCategorys.Image;
+            productWithAllCategorys.Image = (productWithCategorys.Image == null || productWithCategorys.Image.Length == 0) ? null : productWithCategorys.Image;
 
             productWithAllCategorys.ManagerName = productWithCategorys.ManagerName;
             productWithAllCategorys.PartnerName = productWithCategorys.PartnerName;
