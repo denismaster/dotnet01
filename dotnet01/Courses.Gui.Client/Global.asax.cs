@@ -1,4 +1,6 @@
-﻿using System.Web;
+﻿using Courses.DAL;
+using System.Data.Entity;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -29,6 +31,8 @@ namespace Courses.Gui.Client
             //}
             //Database.SetInitializer(new DBInitializer());
             //context.Database.Initialize(true);
+
+
             //тест фильтрации 
             /* AccountFilterFactory factory = new AccountFilterFactory();
              FieldFilter filter = new FieldFilter();

@@ -1,10 +1,5 @@
-﻿using System;
+﻿using Courses.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Courses.ViewModels;
-using Courses.Models;
 namespace Courses.Buisness.Services
 {
     public interface IProductService
@@ -20,7 +15,7 @@ namespace Courses.Buisness.Services
         /// Получение всех курсов без фильтров и сортировок
         /// </summary>
         /// <returns></returns>
-        IEnumerable<ProductViewModel> GetIEnumerableProductsCollection();
+        IEnumerable<ProductViewModelForWebApi> GetIEnumerableProductsCollection();
 
         /// <summary>
         /// получение курса со списком аккаунтов и партнеров, для передачи его в форму добавления/редактирования
@@ -34,7 +29,14 @@ namespace Courses.Buisness.Services
         /// <param name="Id"></param>
         /// <returns></returns>
         ProductViewModel GetById(int Id);
-       
+
+        /// <summary>
+        /// Получение информации о курсе по его идентификатору 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        ProductViewModelForWebApi GetByIdForWebApi(int Id);
+
         /// <summary>
         /// Добавление курса. 
         /// </summary>

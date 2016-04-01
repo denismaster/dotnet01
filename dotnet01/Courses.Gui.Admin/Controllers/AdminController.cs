@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Courses.Buisness;
-using Courses.Models;
-using Courses.Models.Repositories;
-using Courses.ViewModels;
+﻿using Courses.Buisness;
 using Courses.Buisness.Filtering;
 using Courses.Buisness.Services;
+using Courses.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 namespace Courses.Gui.Admin.Controllers
 {
     //[Authorize(Roles="Admin")]
@@ -48,7 +44,7 @@ namespace Courses.Gui.Admin.Controllers
             }
             catch (Exception e)
             {
-                ModelState.AddModelError("", "Unable to save changes:"+e.Message);
+                ModelState.AddModelError("", "Unable to save changes:" + e.Message);
             }
             return View(account);
         }
@@ -78,7 +74,7 @@ namespace Courses.Gui.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 ModelState.AddModelError("", "Unable to save changes");
             }
@@ -125,7 +121,7 @@ namespace Courses.Gui.Admin.Controllers
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewBag.CurrentSort = sortOrder; 
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.LoginSortParam = (String.IsNullOrEmpty(sortOrder) || sortOrder == "LogIn") ? "LogInDesc" : "LogIn";
             ViewBag.RoleSortParam = sortOrder == "Role" ? "RoleDesc" : "Role";
 
@@ -139,9 +135,9 @@ namespace Courses.Gui.Admin.Controllers
             }
             ViewBag.CurrentFilter = searchString;
 
-           var sortFilter = new Courses.Buisness.Filtering.SortFilter() { SortOrder = sortOrder };
+            var sortFilter = new Courses.Buisness.Filtering.SortFilter() { SortOrder = sortOrder };
             List<Buisness.Filtering.FieldFilter> fieldFilters = new List<FieldFilter>();
-            if(!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString))
             {
                 FieldFilter fieldFilter = new FieldFilter() { Name = "LogIn", Value = searchString };
                 fieldFilters.Add(fieldFilter);

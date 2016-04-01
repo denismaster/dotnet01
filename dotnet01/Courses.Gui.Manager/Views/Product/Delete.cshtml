@@ -1,10 +1,10 @@
-﻿@model Courses.ViewModels.ProductViewModel
+﻿@model Courses.ViewModels.ProductWithCategorysViewModel
 
 @{
     ViewBag.Title = "Delete";
 }
 
-<h2>Вы действительно ходите удалить эти курсы?</h2>
+<h2>Вы действительно ходите удалить этот курс?</h2>
 
 <h4>@Model.Name</h4>
 <div>
@@ -54,7 +54,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.TypeName)
         </dd>
 
         <dt>
@@ -62,7 +62,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PartnerId)
+            @Html.DisplayFor(model => model.PartnerName)
         </dd>
 
         <dt>
@@ -86,7 +86,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AssignedUserId)
+            @Html.DisplayFor(model => model.ManagerName)
         </dd>
 
         <dt>
@@ -96,6 +96,31 @@
         <dd>
             @Html.DisplayFor(model => model.Location)
         </dd>
+
+        <dt>
+            Категории
+        </dt>
+        <dd>
+            <ul style="padding-left: 10px;">
+                @if (Model.Categorys != null)
+                {
+
+                    foreach (Courses.ViewModels.CategoryViewModel c in Model.Categorys)
+                    {
+                        <li>@c.Name</li>
+                    }
+
+                }
+            </ul>
+        </dd>
+
+        @if (Model.Image != null)
+        {
+            <div id="myImageConteiner">
+                @Html.Raw("<img id=\"myImage\" src=\"data:image/jpeg;base64,"
+                                        + Convert.ToBase64String(Model.Image) + "\" />")
+            </div>
+        }
 
     </dl>
 

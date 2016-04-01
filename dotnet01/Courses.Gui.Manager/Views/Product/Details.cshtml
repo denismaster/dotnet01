@@ -4,13 +4,23 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <br />
 <div class="panel panel-default">
     <div class="panel-heading">
-        Детальная информация: курс № @Model.Id - @Model.Name
+        <h3>Детальная информация о курсе "@Model.Name"</h3>
+        
     </div>
     <dl class="dl-horizontal">
         @Html.AntiForgeryToken()
+
+        <dt>
+            @Html.Label("Id курса")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Name)
@@ -57,7 +67,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type)
+            @Html.DisplayFor(model => model.TypeName)
         </dd>
 
         <dt>
@@ -65,7 +75,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PartnerId)
+            @Html.DisplayFor(model => model.PartnerName)
         </dd>
 
         <dt>
@@ -89,7 +99,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AssignedUserId)
+            @Html.DisplayFor(model => model.ManagerName)
         </dd>
 
         <dt>
@@ -122,7 +132,7 @@
         {
                 <div id="myImageConteiner">
                     @Html.Raw("<img id=\"myImage\" src=\"data:image/jpeg;base64,"
-                                        + Model.Image + "\" />")
+                                        + Convert.ToBase64String(Model.Image) + "\" />")
                 </div>
         }
 </dl>

@@ -1,44 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Courses.ViewModels
 {
-    public class ProductViewModel
+    public class ProductViewModelForWebApi
     {
-        public ProductViewModel()
-        {
-            var type = new List<System.Web.Mvc.SelectListItem>();
-            type.Add(new System.Web.Mvc.SelectListItem()
-            {
-                Text = "Курс",
-                Value = "1"
-            });
-            type.Add(new System.Web.Mvc.SelectListItem()
-            {
-                Text = "Серия лекций",
-                Value = "2"
-            });
-            type.Add(new System.Web.Mvc.SelectListItem()
-            {
-                Text = "Мастер-класс",
-                Value = "3"
-            });
-            type.Add(new System.Web.Mvc.SelectListItem()
-            {
-                Text = "Подготовка к экзаменам",
-                Value = "4"
-            });
-            type.Add(new System.Web.Mvc.SelectListItem()
-            {
-                Text = "Практические занятия",
-                Value = "5"
-            });
-            ProductTypes = type;
-
-        }
         public int Id { get; set; }
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
@@ -65,8 +32,6 @@ namespace Courses.ViewModels
         [Required]
         [DisplayName("Активность мероприятия")]
         public bool Active { get; set; }
-
-        public IEnumerable<System.Web.Mvc.SelectListItem> ProductTypes { get; set; }
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
         [DisplayName("Тип курса *")]
@@ -96,11 +61,7 @@ namespace Courses.ViewModels
         public byte[] Image { get; set; }
 
         [DisplayName("Тип курса *")]
-        public String TypeName
-        {
-            get { return ProductTypes.Where(m => m.Value == Type.ToString()).First().Text; }
-            set { }
-        }
+        public String TypeName { get; set; }
 
         [DisplayName("Партнер *")]
         public String PartnerName { get; set; }

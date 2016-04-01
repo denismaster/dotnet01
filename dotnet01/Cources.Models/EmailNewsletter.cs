@@ -22,7 +22,7 @@ namespace Courses.Models
         public string Name { get; set; }
         public bool Enabled { get; set; }
         public virtual ICollection<EmailQueue> EmailQueues { get; set; }
-        public EmailTemplate EmailTemplate { get; set; }
+        public virtual EmailTemplate EmailTemplate { get; set; }
         public EmailNewsletter()
         {
             EmailQueues = new List<EmailQueue>();

@@ -23,6 +23,7 @@ namespace Courses.Gui.Manager.Controllers
         [HttpGet]
         public ActionResult New()
         {
+
             var product = productService.GetProductWithAccauntsAndPartners(null);
             return View(product);
         }
@@ -35,8 +36,8 @@ namespace Courses.Gui.Manager.Controllers
                 {
                     if (file != null)
                     {
-                        productView.ImageBuffer = new byte[file.ContentLength];
-                        file.InputStream.Read(productView.ImageBuffer, 0, file.ContentLength);
+                        productView.Image = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.Image, 0, file.ContentLength);
                     }
                     productService.Add(productView);
                     productService.SaveChanges();
@@ -70,8 +71,8 @@ namespace Courses.Gui.Manager.Controllers
                 {
                     if (file != null)
                     {
-                        productView.ImageBuffer = new byte[file.ContentLength];
-                        file.InputStream.Read(productView.ImageBuffer, 0, file.ContentLength);
+                        productView.Image = new byte[file.ContentLength];
+                        file.InputStream.Read(productView.Image, 0, file.ContentLength);
                     }
                     productService.Edit(productView);
                     productService.SaveChanges();
@@ -117,7 +118,7 @@ namespace Courses.Gui.Manager.Controllers
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            var product = productService.GetById(id.Value);
+            var product = productService.GetProductWithCurrentCategorys(id.Value);
             if (product == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.NotFound);
             return View(product);
@@ -138,8 +139,6 @@ namespace Courses.Gui.Manager.Controllers
             }
             return View(product);
         }
-
-
 
         [HttpGet]
         public ActionResult Details(int? id)

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Courses.Buisness.Services;
 using Courses.Models;
 using Courses.Models.Repositories;
 using Courses.ViewModels;
-using Courses.Buisness.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Courses.Buisness
@@ -37,7 +35,7 @@ namespace Courses.Buisness
         /// Внедрение конструктора. Пример использования паттернов Dependecy Injection
         /// </summary>
         /// <param name="repository"></param>
-        public ProductService(IProductRepository repository, IAccountRepository repositoryAccounts, 
+        public ProductService(IProductRepository repository, IAccountRepository repositoryAccounts,
             IPartnerRepository repositoryPartners, ICategoryRepository categoryRepository, Filtering.IFilterFactory<Models.Product> filterFactory)
         {
             ///Guard Condition
@@ -90,10 +88,10 @@ namespace Courses.Buisness
         /// Получение всех курсов без фильтров и сортировок
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ProductViewModel> GetIEnumerableProductsCollection()
+        public IEnumerable<ProductViewModelForWebApi> GetIEnumerableProductsCollection()
         {
-            IEnumerable<ProductViewModel> products;
-            products = productRepository.Get().Select(ConvertFromProductToProductViewModel);
+            IEnumerable<ProductViewModelForWebApi> products;
+            products = productRepository.Get().Select(ConvertFromProductToProductViewModel_WebApi);
             return products;
         }
 
@@ -109,23 +107,23 @@ namespace Courses.Buisness
             {
                 //для возможности не выбирать менеджера                                                              
                 User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                var listUser = accountRepository.Get().ToList<User>();
+                var listUser = accountRepository.Get().Where(m => m.Role.Equals("Manager")).ToList<User>();
                 listUser.Add(noManager);
                 productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
                 productView.Partners = new SelectList(partnerRepository.Get(), "PartnerId", "Name");
             }
             else
-            {   
+            {
                 var product = productRepository.Get(Id.Value);
                 if (product != null)
                 {
                     productView = ConvertFromProductToProductViewModelForAddEditView(product);
                     User noManager = new User { Id = 0, Login = "------------Отсутствует----------", Status = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                    var listUser = accountRepository.Get().ToList<User>();
+                    var listUser = accountRepository.Get().Where(m => m.Role.Equals("Manager")).ToList<User>();
                     listUser.Add(noManager);
                     productView.Accounts = new SelectList(listUser, "Id", "Login", 0);
                     productView.Partners = new SelectList(partnerRepository.Get(), "PartnerId", "Name", product.PartnerId);
-                } 
+                }
             }
             return productView;
         }
@@ -140,7 +138,18 @@ namespace Courses.Buisness
             var product = productRepository.Get(Id);
             return (product == null) ? null : ConvertFromProductToProductViewModel(product);
         }
-        
+
+        /// <summary>
+        /// Получение информации о курсе по его идентификатору 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public ProductViewModelForWebApi GetByIdForWebApi(int Id)
+        {
+            var product = productRepository.Get(Id);
+            return (product == null) ? null : ConvertFromProductToProductViewModel_WebApi(product);
+        }
+
 
         /// <summary>
         /// Добавление курса в репозиторий
@@ -203,7 +212,7 @@ namespace Courses.Buisness
             product.Categories.Clear();
             SaveChanges();
 
-            if(selectedCategorys != null)
+            if (selectedCategorys != null)
             {
                 foreach (int categoryId in selectedCategorys)
                 {
@@ -212,7 +221,7 @@ namespace Courses.Buisness
             }
         }
 
-        
+
 
         /// <summary>
         /// Сохранение изменений
@@ -226,7 +235,7 @@ namespace Courses.Buisness
         /// </summary>
         private Product ConvertFromProductViewModelToProduct(ProductViewModel c)
         {
-            return new Product()
+            Product product = new Product()
             {
                 Id = c.Id,
                 Name = c.Name,
@@ -240,8 +249,9 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount,
                 AssignedUserId = c.AssignedUserId,
                 Location = c.Location,
-                Image = c.ImageBuffer
+                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image
             };
+            return product;
         }
         private ProductViewModel ConvertFromProductToProductViewModel(Product c)
         {
@@ -259,28 +269,63 @@ namespace Courses.Buisness
                 SeatsCount = c.SeatsCount ?? null,
                 AssignedUserId = c.AssignedUserId ?? null,
                 Location = c.Location,
-                Image = (c.Image==null)?null:Convert.ToBase64String(c.Image)
+                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image,
+                ManagerName = (c.User != null) ? c.User.Login : "Отсутствует",
+                PartnerName = (c.Partner != null) ? c.Partner.Name : "Отсутствует",
             };
         }
 
-        private ProductForAddEditViewModel ConvertFromProductToProductViewModelForAddEditView(Product c)
+        private ProductViewModelForWebApi ConvertFromProductToProductViewModel_WebApi(Product product)
+        {
+            ProductViewModelForWebApi productView = new ProductViewModelForWebApi();
+            productView.Id = product.Id;
+            productView.Name = product.Name;
+            productView.Description = product.Description;
+            productView.CreatedDate = product.CreatedDate;
+            productView.UpdatedDate = product.UpdatedDate;
+            productView.Active = product.Active;
+            productView.Type = product.Type;
+            productView.PartnerId = product.PartnerId;
+            productView.Teacher = product.Teacher;
+            productView.SeatsCount = product.SeatsCount ?? null;
+            productView.AssignedUserId = product.AssignedUserId ?? null;
+            productView.Location = product.Location;
+            productView.Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image;
+            productView.ManagerName = (product?.User != null) ? product?.User?.Login : "Отсутствует";
+            productView.PartnerName = (product?.Partner != null) ? product?.Partner?.Name : "Отсутствует";
+            productView.ManagerName = (product?.User != null) ? product?.User?.Login : "Отсутствует";
+
+            switch (productView.Type)
+            {
+                case 1: productView.TypeName = "Курс"; break;
+                case 2: productView.TypeName = "Серия лекций"; break;
+                case 3: productView.TypeName = "Мастер-класс"; break;
+                case 4: productView.TypeName = "Подготовка к экзаменам"; break;
+                case 5: productView.TypeName = "Практические занятия"; break;
+            }
+
+            return productView;
+        }
+
+        private ProductForAddEditViewModel ConvertFromProductToProductViewModelForAddEditView(Product product)
         {
             return new ProductForAddEditViewModel()
             {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                CreatedDate = c.CreatedDate,
-                UpdatedDate = c.UpdatedDate,
-                Active = c.Active,
-                Type = c.Type,
-                PartnerId = c.PartnerId,
-                Teacher = c.Teacher,
-                SeatsCount = c.SeatsCount ?? null,
-                AssignedUserId = c.AssignedUserId ?? null,
-                Location = c.Location,
-                
-                Image = Convert.ToBase64String(c.Image)
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                CreatedDate = product.CreatedDate,
+                UpdatedDate = product.UpdatedDate,
+                Active = product.Active,
+                Type = product.Type,
+                PartnerId = product.PartnerId,
+                Teacher = product.Teacher,
+                SeatsCount = product.SeatsCount ?? null,
+                AssignedUserId = product.AssignedUserId ?? null,
+                Location = product.Location,
+                Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image,
+                ManagerName = (product.User != null) ? product.User.Login : "Отсутствует",
+                PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует"
             };
         }
         private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
@@ -288,12 +333,10 @@ namespace Courses.Buisness
             ProductWithCategorysViewModel productView = new ProductWithCategorysViewModel();
             productView.Categorys = new List<CategoryViewModel>();
 
-
             foreach (Category c in product.Categories)
             {
                 productView.Categorys.Add(ConvertFromCategoryToCategoryViewModel(c));
             }
-
 
             productView.Id = product.Id;
             productView.Name = product.Name;
@@ -307,7 +350,10 @@ namespace Courses.Buisness
             productView.SeatsCount = product.SeatsCount ?? null;
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
-            productView.Image = Convert.ToBase64String(product.Image);
+            productView.Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image;
+            productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
+            productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
+            productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
 
             return productView;
         }
@@ -355,7 +401,10 @@ namespace Courses.Buisness
             productWithAllCategorys.SeatsCount = productWithCategorys.SeatsCount ?? null;
             productWithAllCategorys.AssignedUserId = productWithCategorys.AssignedUserId ?? null;
             productWithAllCategorys.Location = productWithCategorys.Location;
-            productWithAllCategorys.Image = productWithCategorys.Image;
+            productWithAllCategorys.Image = (productWithCategorys.Image == null || productWithCategorys?.Image?.Length == 0) ? null : productWithCategorys.Image;
+
+            productWithAllCategorys.ManagerName = productWithCategorys.ManagerName;
+            productWithAllCategorys.PartnerName = productWithCategorys.PartnerName;
 
             var categorysList = categoryRepository.Get().Select(ConvertFromCategoryToCategoryViewModel);
             productWithAllCategorys.AllCategorys = categorysList.ToList();

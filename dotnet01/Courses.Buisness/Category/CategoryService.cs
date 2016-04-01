@@ -14,7 +14,7 @@ namespace Courses.Buisness
         /// <summary>
         /// Репозиторий, используемый сервисом
         /// </summary>
-        private readonly ICategoryRepository repository;
+        private readonly ICategoryRepository categoryRepository;
         /// <summary>
         /// Фабрика фильтров
         /// </summary>
@@ -30,7 +30,7 @@ namespace Courses.Buisness
                 throw new ArgumentNullException("Repository is null!");
             if (filterFactory == null)
                 throw new ArgumentNullException("Filtering Factory is null!");
-            this.repository = repository;
+            this.categoryRepository = repository;
             this.filterFactory = filterFactory;
         }
         /// <summary>
@@ -51,13 +51,13 @@ namespace Courses.Buisness
             {
                 var newSortFilter = new SortFilter() { SortOrder = sortFilter.SortOrder };
                 var expression = filterFactory.GetFilterExpression(fieldFilters);
-                categorys = repository.Get(page, pageSize, expression, newSortFilter).Select(Convert);
-                total = repository.Count(expression);
+                categorys = categoryRepository.Get(page, pageSize, expression, newSortFilter).Select(Convert);
+                total = categoryRepository.Count(expression);
             }
             else
             {
-                categorys = repository.Get(page, pageSize, x => true).Select(Convert);
-                total = repository.Count(x => true);
+                categorys = categoryRepository.Get(page, pageSize, x => true).Select(Convert);
+                total = categoryRepository.Count(x => true);
             }
             var pageInfo = new PageInfo()
             {
@@ -74,7 +74,7 @@ namespace Courses.Buisness
         public IEnumerable<CategoryViewModel> GetIEnumerableCategorysCollection()
         {
             IEnumerable<CategoryViewModel> categorys;
-            categorys = repository.Get().Select(Convert);
+            categorys = categoryRepository.Get().Select(Convert);
             return categorys;
         }
         /// <summary>
@@ -89,19 +89,19 @@ namespace Courses.Buisness
             {
                 //для возможности не выбирать категорию                                                            
                 Category noCategory = new Category { CategoryId = 0, Name = "------------Отсутствует----------", Active = true, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                var listCategorys = repository.Get().ToList<Category>();
+                var listCategorys = categoryRepository.Get().ToList<Category>();
                 listCategorys.Add(noCategory);
                 categoryView.Categorys = new SelectList(listCategorys, "CategoryId", "Name", 0);
             }
             else
             {
-                var category = repository.Get(Id.Value);
+                var category = categoryRepository.Get(Id.Value);
                 if (category != null)
                 {
                     categoryView = ConvertToCategoryViewModelForAddEditView(category);
                     //для возможности не выбирать категорию                                                            
                     Category noCategory = new Category { CategoryId = 0, Name = "------------Отсутствует----------", Active = true, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now };
-                    var listCategorys = repository.Get().ToList<Category>();
+                    var listCategorys = categoryRepository.Get().ToList<Category>();
                     listCategorys.Add(noCategory);
                     listCategorys.Remove(category);
                     categoryView.Categorys = new SelectList(listCategorys, "CategoryId", "Name", 0);
@@ -119,7 +119,7 @@ namespace Courses.Buisness
         /// <returns></returns>
         public CategoryViewModel GetByID(int id)
         {
-            var category = repository.Get(id);
+            var category = categoryRepository.Get(id);
             return (category == null) ? null : Convert(category);
         }
         /// <summary>
@@ -134,9 +134,9 @@ namespace Courses.Buisness
                 category.ParentCategory = null;
             else
             {
-                category.ParentCategory = repository.Get(categoryView.ParentCategoryId.Value);
+                category.ParentCategory = categoryRepository.Get(categoryView.ParentCategoryId.Value);
             }
-            repository.Add(category);
+            categoryRepository.Add(category);
         }
         /// <summary>
         /// Обновление категории
@@ -150,24 +150,33 @@ namespace Courses.Buisness
                 category.ParentCategory = null;
             else
             {
-                category.ParentCategory = repository.Get(categoryView.ParentCategoryId.Value);
+                category.ParentCategory = categoryRepository.Get(categoryView.ParentCategoryId.Value);
             }
-            repository.Update(category);
+            categoryRepository.Update(category);
         }
         /// <summary>
         /// Удаление категории
         /// </summary>
-        /// <param name="category"></param>
-        public void Delete(CategoryViewModel category)
+        /// <param name="categoryView"></param>
+        public void Delete(CategoryViewModel categoryView)
         {
-            repository.Delete(Convert(category));
+            Category categoryForDelete = categoryRepository.Get(categoryView.Id);
+            IEnumerable<Category> childCategory = categoryRepository.Get(1, categoryRepository.Count(m => true), m => m.ParentCategoryId == categoryView.Id);
+            foreach (Category c in childCategory)
+            {
+                c.ParentCategory = categoryForDelete.ParentCategory;
+                c.ParentCategoryId = categoryForDelete.ParentCategoryId;
+                categoryRepository.Update(c);
+            }
+
+            categoryRepository.Delete(categoryForDelete);
         }
         /// <summary>
         /// Сохранение изменений
         /// </summary>
         public void SaveChanges()
         {
-            repository.SaveChanges();
+            categoryRepository.SaveChanges();
         }
         /// <summary>
         /// Конвертационные функции
