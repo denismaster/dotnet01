@@ -33,7 +33,6 @@ namespace Courses.Gui.Client
             //context.Database.Initialize(true);
 
 
-
             //тест фильтрации 
             /* AccountFilterFactory factory = new AccountFilterFactory();
              FieldFilter filter = new FieldFilter();

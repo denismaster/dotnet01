@@ -88,9 +88,10 @@ namespace Courses.Buisness
         /// Получение всех курсов без фильтров и сортировок
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ProductViewModel> GetIEnumerableProductsCollection()
+        public IEnumerable<ProductViewModelForWebApi> GetIEnumerableProductsCollection()
         {
-            IEnumerable<ProductViewModel> products = productRepository.Get().Select(ConvertFromProductToProductViewModel);
+            IEnumerable<ProductViewModelForWebApi> products;
+            products = productRepository.Get().Select(ConvertFromProductToProductViewModel_WebApi);
             return products;
         }
 
@@ -136,6 +137,17 @@ namespace Courses.Buisness
         {
             var product = productRepository.Get(Id);
             return (product == null) ? null : ConvertFromProductToProductViewModel(product);
+        }
+
+        /// <summary>
+        /// Получение информации о курсе по его идентификатору 
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public ProductViewModelForWebApi GetByIdForWebApi(int Id)
+        {
+            var product = productRepository.Get(Id);
+            return (product == null) ? null : ConvertFromProductToProductViewModel_WebApi(product);
         }
 
 
@@ -263,53 +275,57 @@ namespace Courses.Buisness
             };
         }
 
-        private ProductViewModel ConvertFromProductToProductViewModel_WebApi(Product c)
+        private ProductViewModelForWebApi ConvertFromProductToProductViewModel_WebApi(Product product)
         {
-            ProductViewModel productView = new ProductViewModel()
+            ProductViewModelForWebApi productView = new ProductViewModelForWebApi();
+            productView.Id = product.Id;
+            productView.Name = product.Name;
+            productView.Description = product.Description;
+            productView.CreatedDate = product.CreatedDate;
+            productView.UpdatedDate = product.UpdatedDate;
+            productView.Active = product.Active;
+            productView.Type = product.Type;
+            productView.PartnerId = product.PartnerId;
+            productView.Teacher = product.Teacher;
+            productView.SeatsCount = product.SeatsCount ?? null;
+            productView.AssignedUserId = product.AssignedUserId ?? null;
+            productView.Location = product.Location;
+            productView.Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image;
+            productView.ManagerName = (product?.User != null) ? product?.User?.Login : "Отсутствует";
+            productView.PartnerName = (product?.Partner != null) ? product?.Partner?.Name : "Отсутствует";
+            productView.ManagerName = (product?.User != null) ? product?.User?.Login : "Отсутствует";
+
+            switch (productView.Type)
             {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                CreatedDate = c.CreatedDate,
-                UpdatedDate = c.UpdatedDate,
-                Active = c.Active,
-                Type = c.Type,
-                PartnerId = c.PartnerId,
-                Teacher = c.Teacher,
-                SeatsCount = c.SeatsCount ?? null,
-                AssignedUserId = c.AssignedUserId ?? null,
-                Location = c.Location,
-                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image,
-                ManagerName = (c.User != null) ? c.User.Login : "Отсутствует",
-                PartnerName = (c.Partner != null) ? c.Partner.Name : "Отсутствует"
-            };
-
-            String typeName = productView.TypeName;
-            productView.TypeName = typeName;
-
+                case 1: productView.TypeName = "Курс"; break;
+                case 2: productView.TypeName = "Серия лекций"; break;
+                case 3: productView.TypeName = "Мастер-класс"; break;
+                case 4: productView.TypeName = "Подготовка к экзаменам"; break;
+                case 5: productView.TypeName = "Практические занятия"; break;
+            }
 
             return productView;
         }
 
-        private ProductForAddEditViewModel ConvertFromProductToProductViewModelForAddEditView(Product c)
+        private ProductForAddEditViewModel ConvertFromProductToProductViewModelForAddEditView(Product product)
         {
             return new ProductForAddEditViewModel()
             {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                CreatedDate = c.CreatedDate,
-                UpdatedDate = c.UpdatedDate,
-                Active = c.Active,
-                Type = c.Type,
-                PartnerId = c.PartnerId,
-                Teacher = c.Teacher,
-                SeatsCount = c.SeatsCount ?? null,
-                AssignedUserId = c.AssignedUserId ?? null,
-                Location = c.Location,
-                Image = (c.Image == null || c?.Image?.Length == 0) ? null : c.Image,
-                ManagerName = (c.User != null) ? c.User.Login : "Отсутствует",
-                PartnerName = (c.Partner != null) ? c.Partner.Name : "Отсутствует"
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                CreatedDate = product.CreatedDate,
+                UpdatedDate = product.UpdatedDate,
+                Active = product.Active,
+                Type = product.Type,
+                PartnerId = product.PartnerId,
+                Teacher = product.Teacher,
+                SeatsCount = product.SeatsCount ?? null,
+                AssignedUserId = product.AssignedUserId ?? null,
+                Location = product.Location,
+                Image = (product.Image == null || product?.Image?.Length == 0) ? null : product.Image,
+                ManagerName = (product.User != null) ? product.User.Login : "Отсутствует",
+                PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует"
             };
         }
         private ProductWithCategorysViewModel ConvertFromProductToProductWithCategorysViewModel(Product product)
@@ -338,7 +354,6 @@ namespace Courses.Buisness
             productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
             productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
             productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
-            productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
 
             return productView;
         }

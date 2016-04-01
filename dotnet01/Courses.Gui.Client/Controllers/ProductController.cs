@@ -19,16 +19,16 @@ namespace Courses.Gui.Client.Controllers
             this.productService = productService;
         }
         // GET: api/Product
-        public JsonResult<IEnumerable<ProductViewModel>> GetProducts()
+        public JsonResult<IEnumerable<ProductViewModelForWebApi>> GetProducts()
         {
             var products = productService.GetIEnumerableProductsCollection();
             return Json(products);
         }
 
         // GET: api/Product/5
-        public JsonResult<ProductViewModel> GetProduct(int id)
+        public JsonResult<ProductViewModelForWebApi> GetProduct(int id)
         {
-            var productView = productService.GetById(id);
+            var productView = productService.GetByIdForWebApi(id);
             return Json(productView);
         }
 

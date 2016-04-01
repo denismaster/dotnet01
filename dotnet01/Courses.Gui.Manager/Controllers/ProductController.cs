@@ -23,6 +23,7 @@ namespace Courses.Gui.Manager.Controllers
         [HttpGet]
         public ActionResult New()
         {
+
             var product = productService.GetProductWithAccauntsAndPartners(null);
             return View(product);
         }
