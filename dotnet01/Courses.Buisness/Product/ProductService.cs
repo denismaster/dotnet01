@@ -90,8 +90,7 @@ namespace Courses.Buisness
         /// <returns></returns>
         public IEnumerable<ProductViewModelForWebApi> GetIEnumerableProductsCollection()
         {
-            IEnumerable<ProductViewModelForWebApi> products;
-            products = productRepository.Get().Select(ConvertFromProductToProductViewModel_WebApi);
+            var products = productRepository.Get().Select(ConvertFromProductToProductViewModel_WebApi);
             return products;
         }
 
@@ -291,9 +290,10 @@ namespace Courses.Buisness
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
             productView.Image = (product.Image == null || product.Image.Length == 0) ? null : product.Image;
-           // productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
-           // productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
-          //  productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
+            //эта тупая хрень не работает, запарила уже
+            //productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
+            //productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
+
 
             switch (productView.Type)
             {

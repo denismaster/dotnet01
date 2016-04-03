@@ -47,11 +47,9 @@ namespace Courses.ViewModels
         public string Teacher { get; set; }
 
         [DisplayName("Количество мест")]
-        //[RegularExpression(@"\d{1,}", ErrorMessage = "введите число")]
         public int? SeatsCount { get; set; }
 
         [DisplayName("Ответственный менеджер")]
-        //[RegularExpression(@"\d{1,}", ErrorMessage = "введите число")]
         public int? AssignedUserId { get; set; }
 
         [DisplayName("Место проведения")]
@@ -63,10 +61,11 @@ namespace Courses.ViewModels
         [DisplayName("Тип курса *")]
         public String TypeName { get; set; }
 
-        [DisplayName("Партнер *")]
-        public String PartnerName { get; set; }
+        //[DisplayName("Партнер *")]
+        //public String PartnerName { get; set; }
 
-        [DisplayName("Ответственный менеджер")]
-        public String ManagerName { get; set; }
+        //[DisplayName("Ответственный менеджер")]
+        //public String ManagerName { get; set; }
+
     }
 }
