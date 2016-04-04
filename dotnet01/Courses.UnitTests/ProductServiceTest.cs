@@ -29,7 +29,7 @@ namespace Courses.UnitTests
         {
             IProductService _productService = new ProductService(new ProductRepository(), new AccountRepository(),
                                                                  new PartnerRepository(), new ProductFilterFactory());
-            IEnumerable<ProductViewModel> actual = _productService.GetIEnumerableProductsCollection();
+            IEnumerable<ProductViewModel> actual = _productService.GetProductsCollectionForWebAPI();
             Assert.IsNotNull(actual);
         }
 

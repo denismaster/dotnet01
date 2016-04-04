@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -66,6 +67,15 @@ namespace Courses.ViewModels
 
         //[DisplayName("Ответственный менеджер")]
         //public String ManagerName { get; set; }
+
+        /// <summary>
+        /// Категории продукта
+        /// </summary>
+        public List<CategoryViewModel> Categorys
+        {
+            get;
+            set;
+        }
 
     }
 }

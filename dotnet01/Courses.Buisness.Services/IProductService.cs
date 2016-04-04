@@ -15,7 +15,7 @@ namespace Courses.Buisness.Services
         /// Получение всех курсов без фильтров и сортировок
         /// </summary>
         /// <returns></returns>
-        IEnumerable<ProductViewModelForWebApi> GetIEnumerableProductsCollection();
+        IEnumerable<ProductViewModelForWebApi> GetProductsCollectionForWebAPI();
 
         /// <summary>
         /// получение курса со списком аккаунтов и партнеров, для передачи его в форму добавления/редактирования

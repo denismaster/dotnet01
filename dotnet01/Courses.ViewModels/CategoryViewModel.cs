@@ -9,7 +9,7 @@ namespace Courses.ViewModels
         public int Id { get; set; }
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
-        [DisplayName("Название направления *")]
+        [DisplayName("Название категории *")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
@@ -21,10 +21,10 @@ namespace Courses.ViewModels
         public DateTime UpdatedDate { get; set; }
 
         [Required(ErrorMessage = "*поле должно быть заполнено")]
-        [DisplayName("Активность направления")]
+        [DisplayName("Активность категории *")]
         public bool Active { get; set; }
 
-        [DisplayName("Родительское направление")]
+        [DisplayName("Родительская категория")]
         public int? ParentCategoryId { get; set; }
 
         [DisplayName("Описание")]

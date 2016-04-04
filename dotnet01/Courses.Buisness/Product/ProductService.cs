@@ -88,10 +88,15 @@ namespace Courses.Buisness
         /// Получение всех курсов без фильтров и сортировок
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ProductViewModelForWebApi> GetIEnumerableProductsCollection()
+        public IEnumerable<ProductViewModelForWebApi> GetProductsCollectionForWebAPI()
         {
-            var products = productRepository.Get().Select(ConvertFromProductToProductViewModel_WebApi);
-            return products;
+            var products = productRepository.Get();
+            var productView = new List<ProductViewModelForWebApi>();
+            foreach (Product item in products)
+            {
+                productView.Add(ConvertFromProductToProductViewModel_WebApi(item));
+            }
+            return productView;
         }
 
         /// <summary>
@@ -277,6 +282,14 @@ namespace Courses.Buisness
         private ProductViewModelForWebApi ConvertFromProductToProductViewModel_WebApi(Product product)
         {
             ProductViewModelForWebApi productView = new ProductViewModelForWebApi();
+
+            productView.Categorys = new List<CategoryViewModel>();
+
+            foreach (Category c in product.Categories)
+            {
+                productView.Categorys.Add(ConvertFromCategoryToCategoryViewModel(c));
+            }
+
             productView.Id = product.Id;
             productView.Name = product.Name;
             productView.Description = product.Description;
@@ -290,7 +303,7 @@ namespace Courses.Buisness
             productView.AssignedUserId = product.AssignedUserId ?? null;
             productView.Location = product.Location;
             productView.Image = (product.Image == null || product.Image.Length == 0) ? null : product.Image;
-            //эта тупая хрень не работает, запарила уже
+
             //productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
             //productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
 
