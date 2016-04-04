@@ -24,7 +24,6 @@ namespace Courses.Gui.Manager.Controllers
         public ActionResult New()
         {
             var product = productService.GetProductWithAccauntsAndPartners(null);
-            var products1 = productService.GetProductsCollectionForWebAPI();
             return View(product);
         }
         [HttpPost]

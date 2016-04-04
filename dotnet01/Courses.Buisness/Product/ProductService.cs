@@ -90,13 +90,7 @@ namespace Courses.Buisness
         /// <returns></returns>
         public IEnumerable<ProductViewModelForWebApi> GetProductsCollectionForWebAPI()
         {
-            var products = productRepository.Get();
-            var productView = new List<ProductViewModelForWebApi>();
-            foreach (Product item in products)
-            {
-                productView.Add(ConvertFromProductToProductViewModel_WebApi(item));
-            }
-            return productView;
+            return productRepository.Get().Select(ConvertFromProductToProductViewModel_WebApi);
         }
 
         /// <summary>
@@ -304,8 +298,8 @@ namespace Courses.Buisness
             productView.Location = product.Location;
             productView.Image = (product.Image == null || product.Image.Length == 0) ? null : product.Image;
 
-            //productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
-            //productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
+            productView.PartnerName = (product.Partner != null) ? product.Partner.Name : "Отсутствует";
+            productView.ManagerName = (product.User != null) ? product.User.Login : "Отсутствует";
 
 
             switch (productView.Type)

@@ -18,6 +18,7 @@ namespace Courses.Gui.Client.Controllers
                 throw new ArgumentNullException();
             this.productService = productService;
         }
+
         // GET: api/Product
         public JsonResult<IEnumerable<ProductViewModelForWebApi>> GetProducts()
         {

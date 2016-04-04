@@ -62,11 +62,11 @@ namespace Courses.ViewModels
         [DisplayName("Тип курса *")]
         public String TypeName { get; set; }
 
-        //[DisplayName("Партнер *")]
-        //public String PartnerName { get; set; }
+        [DisplayName("Партнер *")]
+        public String PartnerName { get; set; }
 
-        //[DisplayName("Ответственный менеджер")]
-        //public String ManagerName { get; set; }
+        [DisplayName("Ответственный менеджер")]
+        public String ManagerName { get; set; }
 
         /// <summary>
         /// Категории продукта
