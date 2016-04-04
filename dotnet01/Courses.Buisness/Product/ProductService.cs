@@ -277,11 +277,11 @@ namespace Courses.Buisness
         {
             ProductViewModelForWebApi productView = new ProductViewModelForWebApi();
 
-            productView.Categorys = new List<CategoryViewModel>();
+            productView.CategoriesNames = new List<String>();
 
             foreach (Category c in product.Categories)
             {
-                productView.Categorys.Add(ConvertFromCategoryToCategoryViewModel(c));
+                productView.CategoriesNames.Add(c.Name);
             }
 
             productView.Id = product.Id;

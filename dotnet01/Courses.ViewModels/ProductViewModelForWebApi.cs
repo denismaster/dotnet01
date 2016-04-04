@@ -69,13 +69,9 @@ namespace Courses.ViewModels
         public String ManagerName { get; set; }
 
         /// <summary>
-        /// Категории продукта
+        /// Список названий категорий, к которым принадлежит данный курс
         /// </summary>
-        public List<CategoryViewModel> Categorys
-        {
-            get;
-            set;
-        }
+        public List<String> CategoriesNames { get; set; }
 
     }
 }
