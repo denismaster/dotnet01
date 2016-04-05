@@ -2,6 +2,7 @@
 $(document).ready(function () {
     $(".product-details").hide();
     $(".category").hide();
+    //$("#treelist").hide();
     var dataSource;
     var selectedItem;
     var searchValue = "";
@@ -43,7 +44,7 @@ $(document).ready(function () {
     $("#treelist").kendoTreeList({
         dataSource: categoryDataSource,
         columns: [
-            { field: "Name" }
+            { field: "Name", title: "Категория" }
         ],
         selectable: 'row',
         change: function(e) {

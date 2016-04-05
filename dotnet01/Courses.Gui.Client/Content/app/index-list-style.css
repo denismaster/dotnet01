@@ -1,7 +1,9 @@
 ﻿#listView {
 	padding: 10% 5%, 6%, 5%;
 	margin-bottom: -1px;
-	min-height: 510px;
+
+	min-height: 1100px;
+	width: 100%;
 }
 
 .product {
@@ -12,8 +14,8 @@
 	
 	padding: 0;
 	margin-top: 5%;
-	margin-right: 4%;
-	margin-left: 5%;
+	margin-right: 5%;
+	margin-left: 6%;
 }
 
 .product img {
@@ -148,5 +150,25 @@
 	margin-top: 10%;
 	width: 100%;
 	font-size: 150%;
+}
+
+#treelist{
+	width: 105%;
+	min-height: 100%;
+	margin-bottom: 2%;
+}
+
+#category-button{
+	margin-bottom: 2%;
+}
+
+#search-input-group{
+	margin-left: 1%;
+	margin-right: 1%;
+
+}
+
+#treelist{
+	min-height: 1140px;
 }
 

@@ -6,26 +6,30 @@
 <div class="index"> 
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" id="search-row">
             <div class="input-group input-group-lg" id="search-input-group">
                 <span class="input-group-addon" id="basic-addon1" style="border-radius:0px"><span class="glyphicon glyphicon-search"></span></span>
                 <input id="search" type="text" style="border-radius:0px" class="form-control" placeholder="Поиск по названию" aria-describedby="basic-addon1">
             </div>
-            <div id="example">
-                <div class="demo-section k-content wide">
-                    <div id="toolbar"></div>
-                </div>
-            </div>
+            
         </div>
         <div class="row">
-            <div class="col">
-                <div id="treelist">
-                    <script id="tree-template" type="text/x-kendo-template">
-                        <div class="employee-name">#: Name #</div>
-                    </script>
+            <div class="col-lg-3">
+                <div id="categories-wrapper">
+                    <div id="treelist">
+                        <script id="tree-template" type="text/x-kendo-template">
+                            <div class="employee-name">#: Name #</div>
+                        </script>
+                    </div>
                 </div>
+                
             </div>
-            <div class="col">
+            <div class="col-lg-9">
+                <div id="example">
+                    <div class="demo-section k-content wide">
+                        <div id="toolbar"></div>
+                    </div>
+                </div>
                 <div class="demo-section k-content wide">
                     <div id="listView"></div>
                     <div id="pager" class="k-pager-wrap"></div>
