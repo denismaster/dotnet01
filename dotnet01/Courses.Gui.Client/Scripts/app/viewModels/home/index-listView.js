@@ -5,6 +5,56 @@ $(document).ready(function () {
     var dataSource;
     var selectedItem;
     var searchValue="";
+
+        $(function () {
+        categoryDataSource = new kendo.data.TreeListDataSource({
+            transport: {
+                read: {
+                    url: "/api/Category",
+                    dataType: "json"
+                }
+            },
+            schema: {
+                model: {
+                    id: "Id",
+                    fields:{
+                        Id: {type: "number", nullable:false},
+                        parentId: { field: "ParentCategoryId", nullable: true },
+                        Name: {field: "Name"}
+                    },
+                    expanded: true
+
+                }
+            }
+        });
+
+
+        $("#treelist").kendoTreeList({
+            dataSource: categoryDataSource,
+            columns: [
+                { field: "Name" }
+            ],
+            selectable: 'row',
+            change: 'onTreeNodeSelection'
+        });
+
+        function onTreeNodeSelection(e) {
+            var selectedRow = this.select();
+            var dataItem = this.dataItem(selectedRows[0]);
+            dataSource.filter([
+            {
+                field: '',
+                operator: 'isEqualTo',
+                value: dataItem["Name"]
+            }
+            ]);
+        };
+
+    });
+
+
+
+
     $(function () {
         dataSource = new kendo.data.DataSource({
             transport: {
