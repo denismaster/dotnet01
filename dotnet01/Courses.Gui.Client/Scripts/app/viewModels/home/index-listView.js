@@ -23,7 +23,6 @@ $(document).ready(function () {
                         Name: {field: "Name"}
                     },
                     expanded: true
-
                 }
             }
         });
@@ -35,21 +34,26 @@ $(document).ready(function () {
                 { field: "Name" }
             ],
             selectable: 'row',
-            change: 'onTreeNodeSelection'
+            change: function(e) {
+                var selectedRows = this.select();
+                var selectedDataItems = [];
+                for (var i = 0; i < selectedRows.length; i++) {
+                    var dataItem = this.dataItem(selectedRows[i]);
+                    selectedDataItems.push(dataItem);
+                }
+                console.log(selectedDataItems[0]);
+                dataSource.filter([
+                    {
+                        field: 'CategoriesNamesString',
+                        operator: 'contains',
+                        value: selectedDataItems[0]["Name"]
+                    }
+                ]);
+            }
+
         });
 
-        function onTreeNodeSelection(e) {
-            var selectedRow = this.select();
-            var dataItem = this.dataItem(selectedRows[0]);
-
-            dataSource.filter([
-            {
-                field: "",
-                operator: 'isEqualTo',
-                value: dataItem["Name"]
-            }
-            ]);
-        };
+        
 
     });
 
