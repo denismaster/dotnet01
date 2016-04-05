@@ -20,43 +20,6 @@
         <div class="demo-section k-content wide">
             <div id="toolbar"></div>
         </div>
-        <script>
-                $(document).ready(function() {
-                    $("#toolbar").kendoToolBar({
-                        items: [
-                            {
-                                type: "buttonGroup",
-                                buttons: [
-                                    { text: "Все", togglable: true, group: "text-align" },
-                                    { text: "Активные", togglable: true, group: "text-align" },
-                                    { text: "Неактивные", togglable: true, group: "text-align" }
-                                ]
-                            },
-                            { type: "separator" },
-                            { template: "<label>Тип мероприятия:</label>" },
-                            {
-                                template: "<input id='dropdown' style='width: 150px;' />",
-                                overflow: "never"
-                            },
-                            { type: "separator" }
-                        ]
-                    });
-
-                    $("#dropdown").kendoDropDownList({
-                        optionLabel: "Любые",
-                        dataTextField: "text",
-                        dataValueField: 0,
-                        dataSource: [
-                            { text: "Курсы", value: 1 },
-                            { text: "Лекции", value: 2 },
-                            { text: "Мастер-класс", value: 3 },
-                            { text: "Подготовка к экзаменам", value: 4 },
-                            { text: "Практические занятия", value: 5 }
-                        ]
-                    });
-                });
-        </script>
-
     </div>
 
     <div class="demo-section k-content wide">

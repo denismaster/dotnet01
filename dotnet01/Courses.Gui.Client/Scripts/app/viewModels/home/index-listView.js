@@ -4,60 +4,125 @@ $(document).ready(function () {
     $(".category").hide();
     var dataSource;
     var selectedItem;
-    var searchValue="";
+    var searchValue = "";
+    var mainFilter = { logic: "and", filters: [] };
 
-        $(function () {
-        categoryDataSource = new kendo.data.TreeListDataSource({
-            transport: {
-                read: {
-                    url: "/api/Category",
-                    dataType: "json"
-                }
-            },
-            schema: {
-                model: {
-                    id: "Id",
-                    fields:{
-                        Id: {type: "number", nullable:false},
-                        parentId: { field: "ParentCategoryId", nullable: true },
-                        Name: {field: "Name"}
-                    },
-                    expanded: true
-                }
+    function clearFilter() {
+        dataSource.filter({});
+        mainFilter.filters = [];
+    }
+    function applyFilter() {
+        dataSource.filter(mainFilter);
+    };
+    function addFilter(newFilter)
+    {
+        mainFilter.filters.push(newFilter);
+        applyFilter();
+    }
+
+    $(function () {
+    categoryDataSource = new kendo.data.TreeListDataSource({
+        transport: {
+            read: {
+                url: "/api/Category",
+                dataType: "json"
             }
-        });
-
-
-        $("#treelist").kendoTreeList({
-            dataSource: categoryDataSource,
-            columns: [
-                { field: "Name" }
-            ],
-            selectable: 'row',
-            change: function(e) {
-                var selectedRows = this.select();
-                var selectedDataItems = [];
-                for (var i = 0; i < selectedRows.length; i++) {
-                    var dataItem = this.dataItem(selectedRows[i]);
-                    selectedDataItems.push(dataItem);
-                }
-                console.log(selectedDataItems[0]);
-                dataSource.filter([
-                    {
-                        field: 'CategoriesNamesString',
-                        operator: 'contains',
-                        value: selectedDataItems[0]["Name"]
-                    }
-                ]);
+        },
+        schema: {
+            model: {
+                id: "Id",
+                fields:{
+                    Id: {type: "number", nullable:false},
+                    parentId: { field: "ParentCategoryId", nullable: true },
+                    Name: {field: "Name"}
+                },
+                expanded: true
             }
-
-        });
-
-        
+        }
+    });
+    $("#treelist").kendoTreeList({
+        dataSource: categoryDataSource,
+        columns: [
+            { field: "Name" }
+        ],
+        selectable: 'row',
+        change: function(e) {
+            var selectedRows = this.select();
+            var selectedDataItems = [];
+            for (var i = 0; i < selectedRows.length; i++) {
+                var dataItem = this.dataItem(selectedRows[i]);
+                selectedDataItems.push(dataItem);
+            }
+            console.log(selectedDataItems[0]);
+            dataSource.filter([
+                {
+                    field: 'CategoriesNamesString',
+                    operator: 'contains',
+                    value: selectedDataItems[0]["Name"]
+                }
+            ]);
+        }
 
     });
+    });
+
+    $(function () {
+        $("#toolbar").kendoToolBar({
+            items: [
+                {
+                    type: "buttonGroup",
+                    buttons: [
+                        { type: "button", id: "button1", text: "Все", group: "activity", click: function (e) { clearFilter();} },
+                        {
+                            type: "button", id: "button2", text: "Активные", group: "activity", click: function (e) {
+                                addFilter({ field: 'Active', operator: 'eq', value: true });
+                            }
+                        },
+                        {
+                            type: "button", id: "button3", text: "Неактивные", group: "activity", click: function (e) {
+                                addFilter({ field: 'Active', operator: 'eq', value: false });
+                            }
+                        }
+                    ]
+                },
+                { type: "separator" },
+                { template: "<label>Тип мероприятия:</label>" },
+                {
+                    template: "<input id='dropdown' style='width: 150px;' />",
+                    overflow: "never"
+                },
+                { type: "separator" }
+            ]
+        });
+
+        $("#dropdown").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: 0,
+            dataSource: [
+                { text: "Любые", value: 0},
+                { text: "Курсы", value: 1 },
+                { text: "Лекции", value: 2 },
+                { text: "Мастер-класс", value: 3 },
+                { text: "Подготовка к экзаменам", value: 4 },
+                { text: "Практические занятия", value: 5 }
+            ],
+            select: function (e) {
+                var selectedDataItem = this.dataItem(e.item);
+                console.log(selectedDataItem.value);
+                if (selectedDataItem.value === 0) {
+                    clearFilter();
+                    return;
+                }
+                addFilter({ field: 'Type', operator: 'eq', value: selectedDataItem.value })
+            }
+        });
 
 
+
+
+
+
+    });
 
 
     $(function () {
@@ -117,19 +182,6 @@ $(document).ready(function () {
     });
 
 
-    function applyFilter(){
-        dataSource.filter([
-            {
-                field: 'Name',
-                operator: 'contains',
-                value: searchValue
-            }
-        ]);
-    }
-
-    function clearFilter() {
-        dataSource.filter({});
-    }
 
     $(document).on('click', '#backButton', function () {
         $(".index").show();
@@ -139,7 +191,7 @@ $(document).ready(function () {
     $(document).on('input', '#search', '[data-action="text"]', function () {
         searchValue = $("#search").val();
         if (searchValue.length > 0) {
-            applyFilter();
+            addFilter({ field: 'Name', operator: 'contains', value: searchValue })
         } else {
             clearFilter();
         }
