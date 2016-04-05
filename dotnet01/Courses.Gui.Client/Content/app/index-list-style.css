@@ -102,14 +102,14 @@
 .panel-body #img-box{
 	float: left;
 	margin-right: 10%;
-	margin-left: 10%;
+	margin-left: 7%;
 }
 .panel-body{
 	padding-top: 5%;
 }
 .panel-body #img-box img{
-	width: 400px;
-	height: 400px;
+	width: 500px;
+	height: 500px;
 }
 
 .panel-body label{
@@ -117,10 +117,10 @@
 }
 #activityLabel{
 	font-size: 150%;
+	margin-top: 12%;
 }
 .panel-body #img-box label{
-	margin-left: 20%;
-	
+	margin-left: 30%;
 }
 
 .panel-heading label{
@@ -143,10 +143,10 @@
 }
 #description .panel{
 	width: 100%;
-	
 }
-#infoBuyButton{
-	margin-top: 5%;
-	width: 25%;
+#short-info #buyButton{
+	margin-top: 10%;
+	width: 100%;
+	font-size: 150%;
 }
 

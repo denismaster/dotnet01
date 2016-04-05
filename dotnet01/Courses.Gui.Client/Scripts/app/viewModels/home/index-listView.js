@@ -54,13 +54,12 @@ $(document).ready(function () {
                 selectedDataItems.push(dataItem);
             }
             console.log(selectedDataItems[0]);
-            dataSource.filter([
-                {
-                    field: 'CategoriesNamesString',
-                    operator: 'contains',
-                    value: selectedDataItems[0]["Name"]
-                }
-            ]);
+            clearFilter();
+            addFilter({
+                field: 'CategoriesNamesString',
+                operator: 'contains',
+                value: selectedDataItems[0]["Name"]
+            })
         }
 
     });
@@ -173,7 +172,8 @@ $(document).ready(function () {
                 photoAsBase64: function () {
                     return "data:image/jpeg;base64," + selectedItem["Image"];
                 },
-                teacherValue: selectedItem["Teacher"]
+                teacherValue: selectedItem["Teacher"],
+                managerValue: selectedItem["ManagerName"]
             });
             kendo.bind($(".product-details"), viewModel);
             $(".index").hide();
