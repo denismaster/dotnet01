@@ -203,7 +203,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentCategoryId = (c.ParentCategoryId == null) ? null : c.ParentCategoryId,
+                ParentCategoryId = c.ParentCategoryId,
                 Description = c.Description
             };
         }
@@ -216,7 +216,7 @@ namespace Courses.Buisness
                 CreatedDate = c.CreatedDate,
                 UpdatedDate = c.UpdatedDate,
                 Active = c.Active,
-                ParentCategoryId = (c.ParentCategoryId == null) ? null : c.ParentCategoryId,
+                ParentCategoryId = c.ParentCategoryId,
                 Description = c.Description
             };
         }
