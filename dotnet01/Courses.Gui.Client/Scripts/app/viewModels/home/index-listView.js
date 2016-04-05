@@ -41,9 +41,10 @@ $(document).ready(function () {
         function onTreeNodeSelection(e) {
             var selectedRow = this.select();
             var dataItem = this.dataItem(selectedRows[0]);
+
             dataSource.filter([
             {
-                field: '',
+                field: "",
                 operator: 'isEqualTo',
                 value: dataItem["Name"]
             }
