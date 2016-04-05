@@ -282,6 +282,7 @@ namespace Courses.Buisness
             foreach (Category c in product.Categories)
             {
                 productView.CategoriesNames.Add(c.Name);
+                productView.CategoriesNamesString += c.Name + " ; ";
             }
 
             productView.Id = product.Id;

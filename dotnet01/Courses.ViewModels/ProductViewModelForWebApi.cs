@@ -73,5 +73,10 @@ namespace Courses.ViewModels
         /// </summary>
         public List<String> CategoriesNames { get; set; }
 
+        /// <summary>
+        /// Список всех категорий в виде одной строки ( c# ; java ; 
+        /// </summary>
+        public String CategoriesNamesString { get; set; }
+
     }
 }
